@@ -138,7 +138,7 @@ const SignIn = () => {
 											</FormGroup>
 
 											<Link className={classes.signin__link} href="/forgot-password">
-												Forgot Password?
+												<Typography>Forgot Password?</Typography>
 											</Link>
 										</Box>
 
