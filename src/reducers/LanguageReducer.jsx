@@ -1,19 +1,14 @@
-/* eslint-disable no-param-reassign */
-/* eslint-disable no-unused-vars */
 /* eslint-disable no-return-assign */
-import { useReducer } from 'react';
-import LanguageContext from '../contexts/LanguageContext';
-
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-param-reassign */
 /* eslint-disable default-param-last */
-const initialState = localStorage.getItem('language') || 'ENGLISH';
-
-// action types
 export const types = {
 	TOGGLE_LANGUAGE: 'TOGGLE_LANGUAGE',
 };
 
-// action reducer
-const reducer = (state = initialState, action) => {
+export const initialState = localStorage.getItem('language') || 'ENGLISH';
+
+export const reducer = (state = initialState, action) => {
 	switch (action.type) {
 		case types.TOGGLE_LANGUAGE:
 			return (state = action.payload);
@@ -24,14 +19,4 @@ const reducer = (state = initialState, action) => {
 	}
 };
 
-// action type
 export const changeLanguage = (payload = 'ENGLISH') => ({ type: types.TOGGLE_LANGUAGE, payload });
-
-// context provider
-export const LanguageProvider = ({ children = null }) => {
-	const [state, dispatch] = useReducer(reducer, initialState);
-	// eslint-disable-next-line react/jsx-no-constructed-context-values
-	const value = { state, dispatch };
-
-	return <LanguageContext.Provider value={value}>{children}</LanguageContext.Provider>;
-};

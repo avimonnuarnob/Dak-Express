@@ -1,6 +1,7 @@
 import { Box, Grid, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import Language from '../modecules/Language';
+import { FOOTER_HEIGHT, SMALL_DEVICE_FOOTER_HEIGHT } from './constants';
 import FooterLinks from './FooterLinks';
 
 const useStyles = makeStyles((theme) => ({
@@ -9,14 +10,21 @@ const useStyles = makeStyles((theme) => ({
 		width: '100%',
 	},
 	footer__main: {
-		height: 64,
+		height: FOOTER_HEIGHT,
 		padding: '0 100px',
 		display: 'flex',
 		justifyContent: 'space-between',
 		alignItems: 'center',
 		[theme.breakpoints.down('md')]: {
-			padding: '10px 30px',
-			height: 120,
+			padding: '50px 30px',
+			minHeight: SMALL_DEVICE_FOOTER_HEIGHT,
+			flexDirection: 'column',
+			justifyContent: 'center',
+			alignItems: 'center',
+		},
+		[theme.breakpoints.down('sm')]: {
+			padding: '100px 20px',
+			minHeight: SMALL_DEVICE_FOOTER_HEIGHT,
 			flexDirection: 'column',
 			justifyContent: 'center',
 			alignItems: 'center',

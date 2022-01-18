@@ -53,7 +53,7 @@ const Header = () => {
 
 					<Box className={classes.header__elements}>
 						<Box className={classes.header__language}>
-							<Language />
+							<Language lightText />
 						</Box>
 						<Box>
 							<Button variant="contained" color="secondary" className={classes.header__button}>

@@ -4,8 +4,11 @@ const freightForwardingColors = {
 	root: {},
 	primary: {
 		main: '#122617',
-		secondary: '#F3F6F9',
+		sec: '#F3F6F9',
 		light: '#688228',
+		white: '#FFFFFF',
+		disable: '#ECF0E6',
+		bluish: '#F8FDFF',
 	},
 	secondary: {
 		main: '#688128',
@@ -13,10 +16,11 @@ const freightForwardingColors = {
 		light: '#688228',
 	},
 	typography: {
-		main: '#282B2',
+		main: '#282B2B',
 		sec: '#688128',
-		light: '#EFEFE',
+		light: '#EFEFEF',
 		nav: '#9AC32B',
+		white: '#FFFFFF',
 	},
 	status: {
 		success: '#3BB900',

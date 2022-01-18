@@ -27,7 +27,7 @@ const FooterLinks = () => {
 		<>
 			{footerLinks.map((item) => (
 				<Link key={item?.link} href={`/${item?.link}`}>
-					<Typography variant="caption" color="white" className={classes.footer_links_item}>
+					<Typography variant="body2" color="white" className={classes.footer_links_item}>
 						{item?.title}
 					</Typography>
 				</Link>

@@ -1,6 +1,8 @@
 import Button from '@mui/material/Button';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import PropTypes from 'prop-types';
 import { useState } from 'react';
 import useLanguage from '../../hooks/useLanguage';
 import { changeLanguage } from '../../reducers/LanguageReducer';
@@ -11,7 +13,7 @@ const languages = [
 	{ key: 'bangla', value: 'BANGLA' },
 ];
 
-const Language = () => {
+const Language = ({ lightText = true }) => {
 	const [anchorEl, setAnchorEl] = useState(null);
 	const { state: language, dispatch } = useLanguage();
 
@@ -34,7 +36,7 @@ const Language = () => {
 				aria-expanded={open ? 'true' : undefined}
 				onClick={handleClick}
 			>
-				<LanguageItem language={language} lightText navItem />
+				<LanguageItem language={language} lightText={lightText} navItem />
 			</Button>
 			<Menu
 				id="basic-menu"
@@ -52,6 +54,16 @@ const Language = () => {
 			</Menu>
 		</>
 	);
+};
+
+Language.propTypes = {
+	// eslint-disable-next-line react/require-default-props
+	lightText: PropTypes.bool.isRequired,
+};
+
+Language.defaultProps = {
+	// eslint-disable-next-line react/default-props-match-prop-types
+	lightText: true,
 };
 
 export default Language;
