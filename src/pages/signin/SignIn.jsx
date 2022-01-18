@@ -15,18 +15,27 @@ import validate from './validation/validate';
 
 const Item = styled(Paper)(({ theme }) => ({
 	...theme.typography.body2,
-	padding: theme.spacing(1),
 	textAlign: 'center',
 	color: theme.palette.text.secondary,
 }));
 
 const useStyles = makeStyles((theme) => ({
+	container: {
+		textAlign: 'center',
+		color: theme.palette.text.secondary,
+	},
 	signin: {
-		minHeight: '100%',
 		position: 'absolute',
 		left: '50%',
 		top: '50%',
 		transform: 'translate(-50%, -50%)',
+		width: `33%`,
+		[theme.breakpoints.down('md')]: {
+			width: `67%`,
+		},
+		[theme.breakpoints.down('sm')]: {
+			width: `100%`,
+		},
 	},
 	signin__header: {
 		fontWeight: 'bolder !important',
@@ -72,81 +81,83 @@ const SignIn = () => {
 	};
 
 	return (
-		<Grid container alignItems="center" justifyContent="center" justify="center" className={classes.signin}>
-			<Grid item lg={4} md={4} sm={10} xs={12}>
-				<Item sx={{ padding: '50px 30px' }}>
-					<Typography variant="h4" className={classes.signin__header}>
-						Sign In
-					</Typography>
+		<Grid container className={classes.container}>
+			<Grid item xl={4} lg={4} md={4} sm={10} xs={12}>
+				<Item>
+					<Paper elevation={3} sx={{ padding: '50px 30px' }} className={classes.signin}>
+						<Typography variant="h4" className={classes.signin__header}>
+							Sign In
+						</Typography>
 
-					<Typography variant="body2" className={classes.signin__text}>
-						Fill in the fields below to sign in into your account.
-					</Typography>
+						<Typography variant="body2" className={classes.signin__text}>
+							Fill in the fields below to sign in into your account.
+						</Typography>
 
-					<Formik initialValues={initialValues} validate={validate} onSubmit={handleSubmitSignin}>
-						{({ errors, values, touched, handleBlur, handleChange, isSubmitting }) => (
-							<Form>
-								<fieldset disabled={isSubmitting} style={{ border: 'none' }}>
-									<InputElement
-										fullWidth
-										label="Username or Email"
-										name="email"
-										boxStyles={{ padding: '30px 0' }}
-										value={values.email}
-										onChange={handleChange}
-										onBlur={handleBlur}
-										error={touched.email && Boolean(errors.email)}
-										helperText={touched.email && errors.email}
-									/>
+						<Formik initialValues={initialValues} validate={validate} onSubmit={handleSubmitSignin}>
+							{({ errors, values, touched, handleBlur, handleChange, isSubmitting }) => (
+								<Form>
+									<fieldset disabled={isSubmitting} style={{ border: 'none' }}>
+										<InputElement
+											fullWidth
+											label="Username or Email"
+											name="email"
+											boxStyles={{ padding: '30px 0' }}
+											value={values.email}
+											onChange={handleChange}
+											onBlur={handleBlur}
+											error={touched.email && Boolean(errors.email)}
+											helperText={touched.email && errors.email}
+										/>
 
-									<PasswordInputElement
-										label="Password"
-										name="password"
-										fullWidth
-										value={values.password}
-										onChange={handleChange}
-										onBlur={handleBlur}
-										error={touched.password && Boolean(errors.password)}
-										helperText={touched.password && errors.password}
-									/>
+										<PasswordInputElement
+											label="Password"
+											name="password"
+											fullWidth
+											value={values.password}
+											onChange={handleChange}
+											onBlur={handleBlur}
+											error={touched.password && Boolean(errors.password)}
+											helperText={touched.password && errors.password}
+										/>
 
-									<Box className={classes.signin__others}>
-										<FormGroup>
-											<FormControlLabel
-												className={classes.signin__rememberme}
-												control={
-													<Checkbox
-														name="rememberMe"
-														className={classes.signin__rememberme}
-														value={values.rememberMe}
-														onChange={handleChange}
-														onBlur={handleBlur}
-													/>
-												}
-												label="Remember Me"
-											/>
-										</FormGroup>
+										<Box className={classes.signin__others}>
+											<FormGroup>
+												<FormControlLabel
+													className={classes.signin__rememberme}
+													control={
+														<Checkbox
+															name="rememberMe"
+															className={classes.signin__rememberme}
+															value={values.rememberMe}
+															onChange={handleChange}
+															onBlur={handleBlur}
+														/>
+													}
+													label="Remember Me"
+												/>
+											</FormGroup>
 
-										<Link className={classes.signin__link} href="/forgot-password">
-											Forgot Password?
-										</Link>
-									</Box>
+											<Link className={classes.signin__link} href="/forgot-password">
+												Forgot Password?
+											</Link>
+										</Box>
 
-									<Button type="submit" variant="contained" fullWidth className={classes.signin__button}>
-										Sign In
-									</Button>
-								</fieldset>
-							</Form>
-						)}
-					</Formik>
+										<Button type="submit" variant="contained" fullWidth className={classes.signin__button}>
+											Sign In
+										</Button>
+									</fieldset>
+								</Form>
+							)}
+						</Formik>
 
-					<Typography variant="body2" color="initial">
-						{/* eslint-disable-next-line react/no-unescaped-entities */}
-						Don't have account?{' '}
-						<Link className={classes.signin__link} href="/signup">
-							Create An Account
-						</Link>
-					</Typography>
+						<Typography variant="body2" color="initial">
+							{/* eslint-disable-next-line react/no-unescaped-entities */}
+							Don't have account?{' '}
+							<Link className={classes.signin__link} href="/signup">
+								Create An Account
+							</Link>
+						</Typography>
+					</Paper>
 				</Item>
 			</Grid>
 		</Grid>

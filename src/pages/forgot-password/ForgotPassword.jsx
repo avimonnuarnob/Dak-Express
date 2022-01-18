@@ -11,18 +11,27 @@ import validate from './validation/validate';
 
 const Item = styled(Paper)(({ theme }) => ({
 	...theme.typography.body2,
-	padding: theme.spacing(1),
 	textAlign: 'center',
 	color: theme.palette.text.secondary,
 }));
 
 const useStyles = makeStyles((theme) => ({
+	container: {
+		textAlign: 'center',
+		color: theme.palette.text.secondary,
+	},
 	forgot__password: {
-		minHeight: '100%',
 		position: 'absolute',
 		left: '50%',
 		top: '50%',
 		transform: 'translate(-50%, -50%)',
+		width: `33%`,
+		[theme.breakpoints.down('md')]: {
+			width: `67%`,
+		},
+		[theme.breakpoints.down('sm')]: {
+			width: `100%`,
+		},
 	},
 	forgot__password__header: {
 		fontWeight: 'bolder !important',
@@ -66,50 +75,52 @@ const ForgotPassword = () => {
 	};
 
 	return (
-		<Grid container alignItems="center" justifyContent="center" justify="center" className={classes.forgot__password}>
-			<Grid item lg={4} md={4} sm={10} xs={12}>
-				<Item sx={{ padding: '50px 30px' }}>
-					<Typography variant="h4" className={classes.forgot__password__header}>
-						Forgot Password?
-					</Typography>
+		<Grid container className={classes.container}>
+			<Grid item xl={4} lg={4} md={4} sm={10} xs={12}>
+				<Item>
+					<Paper elevation={3} sx={{ padding: '50px 30px' }} className={classes.forgot__password}>
+						<Typography variant="h4" className={classes.forgot__password__header}>
+							Forgot Password?
+						</Typography>
 
-					<Typography variant="body2" className={classes.forgot__password__text}>
-						{/* eslint-disable-next-line react/no-unescaped-entities */}
-						Don't worry! Just fill in your email and we'll send you a link to reset your password.
-					</Typography>
+						<Typography variant="body2" className={classes.forgot__password__text}>
+							{/* eslint-disable-next-line react/no-unescaped-entities */}
+							Don't worry! Just fill in your email and we'll send you a link to reset your password.
+						</Typography>
 
-					<Formik initialValues={initialValues} validate={validate} onSubmit={handleSubmitForgotPassword}>
-						{({ errors, values, touched, handleBlur, handleChange, isSubmitting }) => (
-							<Form>
-								<fieldset disabled={isSubmitting} style={{ border: 'none' }}>
-									<InputElement
-										fullWidth
-										label="Email*"
-										name="email"
-										type="email"
-										boxStyles={{ padding: '20px 0' }}
-										value={values.email}
-										onChange={handleChange}
-										onBlur={handleBlur}
-										error={touched.email && Boolean(errors.email)}
-										helperText={touched.email && errors.email}
-									/>
+						<Formik initialValues={initialValues} validate={validate} onSubmit={handleSubmitForgotPassword}>
+							{({ errors, values, touched, handleBlur, handleChange, isSubmitting }) => (
+								<Form>
+									<fieldset disabled={isSubmitting} style={{ border: 'none' }}>
+										<InputElement
+											fullWidth
+											label="Email*"
+											name="email"
+											type="email"
+											boxStyles={{ padding: '20px 0' }}
+											value={values.email}
+											onChange={handleChange}
+											onBlur={handleBlur}
+											error={touched.email && Boolean(errors.email)}
+											helperText={touched.email && errors.email}
+										/>
 
-									<Button type="submit" variant="contained" fullWidth className={classes.forgot__password__button}>
-										Reset Password
-									</Button>
-								</fieldset>
-							</Form>
-						)}
-					</Formik>
+										<Button type="submit" variant="contained" fullWidth className={classes.forgot__password__button}>
+											Reset Password
+										</Button>
+									</fieldset>
+								</Form>
+							)}
+						</Formik>
 
-					<Typography variant="body2" color="initial">
-						{/* eslint-disable-next-line react/no-unescaped-entities */}
-						Alreay have an account?{' '}
-						<Link className={classes.forgot__password__link} to="/">
-							Sign In
-						</Link>
-					</Typography>
+						<Typography variant="body2" color="initial">
+							{/* eslint-disable-next-line react/no-unescaped-entities */}
+							Alreay have an account?{' '}
+							<Link className={classes.forgot__password__link} to="/">
+								Sign In
+							</Link>
+						</Typography>
+					</Paper>
 				</Item>
 			</Grid>
 		</Grid>
