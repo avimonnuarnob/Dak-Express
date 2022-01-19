@@ -1,0 +1,63 @@
+image: node:latest
+
+# stages
+stages:
+  - lint
+  - test
+  - build
+  - stage
+  - production
+
+# caching for reuse
+cache:
+  key: ${CI_COMMIT_REF_SLUG}
+  paths:
+  - node_modules/
+  - build/
+
+before_script:
+  - npm install --legacy-peer-deps
+  
+# #lint 
+lint:
+  stage: lint  
+  script:
+    - npm run lint
+
+# #test 
+test:
+  stage: test  
+  script:
+    - npm run test
+
+# # Job One for making build
+build: 
+  stage: build
+  script:
+  - npm run build --prod
+
+stage:
+  image: python:latest  
+  stage: stage
+  before_script:
+    - pip install awscli 
+  script:
+    #- aws s3 sync ./build/ s3://${STAGE_DAK_EXPRESS_BUCKET}/ --acl=public-read --delete
+    - echo "OK"
+  except:
+    - master  
+
+# Job Two for deploy build to S3
+# deploy-stage:
+#   image: python:latest  
+#   stage: deploy
+#   before_script:
+#     - pip install awscli 
+#   script:
+#     - aws s3 rm s3://${STAGE_DAK_EXPRESS_BUCKET}/static/js --recursive
+#     # - aws cloudfront create-invalidation --distribution-id ${OILCO_DISTRIBUTION_ID} --paths \"/*\"
+#     - aws s3 sync ./build/ s3://${STAGE_DAK_EXPRESS_BUCKET}/ --acl=public-read --delete
+#     - aws s3 rm s3://${STAGE_DAK_EXPRESS_BUCKET}/static/js --recursive
+#     - aws s3 sync ./build/ s3://${STAGE_DAK_EXPRESS_BUCKET}/ --acl=public-read --delete
+#   only: ['master']
+
