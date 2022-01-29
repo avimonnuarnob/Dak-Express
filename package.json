@@ -19,9 +19,11 @@
     "react-router-dom": "^6.2.1",
     "react-scripts": "5.0.0",
     "recharts": "^2.1.8",
+    "serve": "^13.0.2",
     "web-vitals": "^2.1.2"
   },
   "scripts": {
+    "lint": "eslint ./src",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
