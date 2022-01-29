@@ -49,9 +49,9 @@ const Header = () => {
 			<Grid className={classes.header}>
 				<Box className={classes.header__main}>
 					<Box>
-					  <Link exact to="/" styles={{ textDecoration: 'none' }}>
-						  <img src={brandIconLogo} alt="Cityscape Global Limited" className={classes.header__logo} />
-					  </Link>
+						<Link exact to="/" styles={{ textDecoration: 'none' }}>
+							<img src={brandIconLogo} alt="Cityscape Global Limited" className={classes.header__logo} />
+						</Link>
 					</Box>
 
 					<Box className={classes.header__elements}>
