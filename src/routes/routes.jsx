@@ -8,7 +8,12 @@ import React from 'react';
 //   retry(() => import('../pages/CategoryPage'))
 // );
 
-const LoginPage = React.lazy(() => import('../pages/signin/SignIn'));
+const SignIn = React.lazy(() => import('../pages/signin/SignIn'));
+const SignUp = React.lazy(() => import('../pages/signup/SignUp'));
+const IndividualSignUp = React.lazy(() => import('../pages/signup/individual/IndividualSignup'));
+const BusinessSignUp = React.lazy(() => import('../pages/signup/business/BusinessSignup'));
+const ForgotPassword = React.lazy(() => import('../pages/forgot-password/ForgotPassword'));
+const ResetPassword = React.lazy(() => import('../pages/reset-password/ResetPassword'));
 
 // static pages
 const NotFoundPage = React.lazy(() => import('../pages/NotFoundPage'));
@@ -17,19 +22,46 @@ const routes = [
 	{
 		path: '/',
 		exact: true,
-		component: LoginPage,
-		name: 'Login',
+		component: SignIn,
+		name: 'SignIn',
 		icon: NotesIcon,
 		protected: false,
 	},
-	// {
-	// 	path: '/login',
-	// 	exact: true,
-	// 	component: LoginPage,
-	// 	name: 'Login',
-	// 	icon: NotesIcon,
-	// 	protected: false,
-	// },
+	{
+		path: '/forgot-password',
+		exact: true,
+		component: ForgotPassword,
+		name: 'ForgotPassword',
+		protected: false,
+	},
+	{
+		path: '/reset-password',
+		exact: true,
+		component: ResetPassword,
+		name: 'ResetPassword',
+		protected: false,
+	},
+	{
+		path: '/signup',
+		exact: true,
+		component: SignUp,
+		name: 'SignUp',
+		protected: false,
+	},
+	{
+		path: '/signup/individual',
+		exact: true,
+		component: IndividualSignUp,
+		name: 'IndividualSignUp',
+		protected: false,
+	},
+	{
+		path: '/signup/business',
+		exact: true,
+		component: BusinessSignUp,
+		name: 'BusinessSignUp',
+		protected: false,
+	},
 	// static pages
 	{
 		path: '*',
