@@ -93,9 +93,10 @@ const ResetPassword = () => {
 								<Form>
 									<fieldset disabled={isSubmitting} style={{ border: 'none' }}>
 										<PasswordInputElement
-											label="Password*"
-											name="password"
 											fullWidth
+											isRequired
+											label="Password"
+											name="password"
 											boxStyles={{ padding: '30px 0' }}
 											value={values.password}
 											onChange={handleChange}
@@ -105,9 +106,10 @@ const ResetPassword = () => {
 										/>
 
 										<PasswordInputElement
-											label="Confirm Password*"
-											name="confirmPassword"
 											fullWidth
+											isRequired
+											label="Confirm Password"
+											name="confirmPassword"
 											value={values.confirmPassword}
 											onChange={handleChange}
 											onBlur={handleBlur}

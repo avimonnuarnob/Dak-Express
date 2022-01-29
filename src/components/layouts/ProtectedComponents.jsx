@@ -7,12 +7,16 @@ import { makeStyles } from '@mui/styles';
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { Outlet } from 'react-router-dom';
+<<<<<<< HEAD
 import {
 	DRAWER_WIDTH,
 	FOOTER_HEIGHT,
 	HEADER_HEIGHT,
 	SMALL_DEVICE_FOOTER_HEIGHT,
 } from './constants';
+=======
+import { DRAWER_WIDTH, FOOTER_HEIGHT, HEADER_HEIGHT, SMALL_DEVICE_FOOTER_HEIGHT } from './constants';
+>>>>>>> 21dd5c8 (Signup ticket in progress)
 import DashboardFooter from './DashboardFooter';
 import DashboardHeader from './DashboardHeader';
 import DashboardSidebar from './DashboardSidebar';
@@ -58,7 +62,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 	justifyContent: 'flex-start',
 }));
 
-const ProtectedComponents = ({ children = null, title = '' }) => {
+const ProtectedComponents = ({ title = '' }) => {
 	const [open, setOpen] = useState(true);
 	const toggleDrawer = () => setOpen((prevState) => !prevState);
 	const classes = useStyles();
@@ -80,7 +84,6 @@ const ProtectedComponents = ({ children = null, title = '' }) => {
 };
 
 ProtectedComponents.propTypes = {
-	children: PropTypes.elementType.isRequired,
 	title: PropTypes.string.isRequired,
 };
 

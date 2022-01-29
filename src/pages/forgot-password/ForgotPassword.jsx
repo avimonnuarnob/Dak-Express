@@ -94,7 +94,8 @@ const ForgotPassword = () => {
 									<fieldset disabled={isSubmitting} style={{ border: 'none' }}>
 										<InputElement
 											fullWidth
-											label="Email*"
+											isRequired
+											label="Email"
 											name="email"
 											type="email"
 											boxStyles={{ padding: '20px 0' }}
