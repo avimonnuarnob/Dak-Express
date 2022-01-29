@@ -104,6 +104,7 @@ const ShipmentTable = () => {
 				sx={{
 					mt: 3,
 					borderRadius: 3,
+					overflow: 'scroll',
 				}}
 			>
 				<AppTable
