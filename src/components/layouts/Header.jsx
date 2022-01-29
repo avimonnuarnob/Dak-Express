@@ -1,6 +1,7 @@
 import { Box, Button, Grid } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import brandIconLogo from '../../assets/brand-icon.png';
+import { Link } from 'react-router-dom';
+import brandIconLogo from '../../assets/dak_express.svg';
 import Language from '../modecules/Language';
 
 const useStyles = makeStyles((theme) => ({
@@ -19,8 +20,7 @@ const useStyles = makeStyles((theme) => ({
 		},
 	},
 	header__logo: {
-		width: 148,
-		height: 40,
+		height: 60,
 		[theme.breakpoints.down('md')]: {
 			width: 136,
 			height: 36,
@@ -49,7 +49,9 @@ const Header = () => {
 			<Grid className={classes.header}>
 				<Box className={classes.header__main}>
 					<Box>
-						<img src={brandIconLogo} alt="Cityscape Global Limited" className={classes.header__logo} />
+					  <Link exact to="/" styles={{ textDecoration: 'none' }}>
+						  <img src={brandIconLogo} alt="Cityscape Global Limited" className={classes.header__logo} />
+					  </Link>
 					</Box>
 
 					<Box className={classes.header__elements}>
