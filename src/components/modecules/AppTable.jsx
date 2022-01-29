@@ -107,8 +107,10 @@ const AppTable = ({ rows, columns }) => {
 				component={Paper}
 				sx={{
 					borderRadius: 3,
-					overflowX: 'scroll',
+					// border: (theme) => `1px solid ${theme.palette.primary.sec}`,
+					minWidth: '1000px',
 				}}
+				// elevation={3}
 			>
 				<Table aria-label="customized table">
 					<TableHead>
