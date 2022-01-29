@@ -45,6 +45,7 @@ const useStyles = makeStyles((theme) => ({
 		},
 	},
 	footer__language: {
+		width: '200px',
 		padding: '0px 30px',
 		[theme.breakpoints.down('md')]: {
 			padding: 0,

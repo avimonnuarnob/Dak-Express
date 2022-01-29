@@ -4,7 +4,7 @@ import { makeStyles } from '@mui/styles';
 const useStyles = makeStyles((theme) => ({
 	footer_links_item: {
 		color: theme.palette.typography.light,
-		padding: '0px 10px',
+		padding: '0px 20px',
 		'&:hover': { color: theme.palette.status.pending },
 		[theme.breakpoints.down('md')]: {
 			padding: '5px 10px',

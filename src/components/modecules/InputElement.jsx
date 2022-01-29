@@ -11,6 +11,7 @@ const InputElement = ({
 	fullWidth = false,
 	helperText = '',
 	rows = 1,
+	isRequired = false,
 	...rest
 }) => {
 	const convertLabelStringToTestidPrefix = convertStringToKebabCase(label);
@@ -27,7 +28,10 @@ const InputElement = ({
 					htmlFor={`outlined-adornment-${label}`}
 					data-testid={`${convertLabelStringToTestidPrefix}-input-label`}
 				>
-					{label}
+					<span>
+						{label}
+						{isRequired && <span style={{ color: 'red' }}>*</span>}
+					</span>
 				</InputLabel>
 
 				<OutlinedInput

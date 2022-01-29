@@ -1,4 +1,4 @@
-import { Box, Grid, Link } from '@mui/material/';
+import { Box, Grid } from '@mui/material';
 import Button from '@mui/material/Button';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -9,6 +9,7 @@ import Typography from '@mui/material/Typography';
 import { makeStyles } from '@mui/styles';
 import { Form, Formik } from 'formik';
 import * as React from 'react';
+import { Link } from 'react-router-dom';
 import InputElement from '../../components/modecules/InputElement';
 import PasswordInputElement from '../../components/modecules/PasswordInputElement';
 import validate from './validation/validate';
@@ -99,6 +100,7 @@ const SignIn = () => {
 									<fieldset disabled={isSubmitting} style={{ border: 'none' }}>
 										<InputElement
 											fullWidth
+											isRequired
 											label="Username or Email"
 											name="email"
 											boxStyles={{ padding: '30px 0' }}
@@ -110,9 +112,10 @@ const SignIn = () => {
 										/>
 
 										<PasswordInputElement
+											fullWidth
+											isRequired
 											label="Password"
 											name="password"
-											fullWidth
 											value={values.password}
 											onChange={handleChange}
 											onBlur={handleBlur}
@@ -137,7 +140,7 @@ const SignIn = () => {
 												/>
 											</FormGroup>
 
-											<Link className={classes.signin__link} href="/forgot-password">
+											<Link className={classes.signin__link} to="/forgot-password">
 												<Typography>Forgot Password?</Typography>
 											</Link>
 										</Box>
@@ -153,7 +156,7 @@ const SignIn = () => {
 						<Typography variant="body2" color="initial">
 							{/* eslint-disable-next-line react/no-unescaped-entities */}
 							Don't have account?{' '}
-							<Link className={classes.signin__link} href="/signup">
+							<Link className={classes.signin__link} to="/signup">
 								Create An Account
 							</Link>
 						</Typography>

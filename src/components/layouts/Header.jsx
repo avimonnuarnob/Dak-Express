@@ -32,6 +32,7 @@ const useStyles = makeStyles((theme) => ({
 		alignItems: 'center',
 	},
 	header__language: {
+		width: '200px',
 		padding: '0px 30px',
 	},
 	header__button: {
