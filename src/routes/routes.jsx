@@ -1,20 +1,13 @@
 import NotesIcon from '@mui/icons-material/Notes';
 import React from 'react';
-// import SearchIcon from '@mui/icons-material/Search';
+import ForgotPassword from '../pages/forgot-password/ForgotPassword';
+import ResetPassword from '../pages/reset-password/ResetPassword';
+import SignIn from '../pages/signin/SignIn';
+import BusinessSignUp from '../pages/signup/business/BusinessSignup';
+import IndividualSignUp from '../pages/signup/individual/IndividualSignup';
+import SignUp from '../pages/signup/SignUp';
 
-// Pages
-// const HomePage = React.lazy(() => retry(() => import('../pages/Home')));
-// const CategoryPage = React.lazy(() =>
-//   retry(() => import('../pages/CategoryPage'))
-// );
-
-const SignIn = React.lazy(() => import('../pages/signin/SignIn'));
-const SignUp = React.lazy(() => import('../pages/signup/SignUp'));
-const IndividualSignUp = React.lazy(() => import('../pages/signup/individual/IndividualSignup'));
-const BusinessSignUp = React.lazy(() => import('../pages/signup/business/BusinessSignup'));
-const ForgotPassword = React.lazy(() => import('../pages/forgot-password/ForgotPassword'));
-const ResetPassword = React.lazy(() => import('../pages/reset-password/ResetPassword'));
-
+const DashboardPage = React.lazy(() => import('../pages/dashboard'));
 // static pages
 const NotFoundPage = React.lazy(() => import('../pages/NotFoundPage'));
 
@@ -26,6 +19,14 @@ const routes = [
 		name: 'SignIn',
 		icon: NotesIcon,
 		protected: false,
+	},
+	{
+		path: '/dashboard',
+		exact: true,
+		component: DashboardPage,
+		name: 'DashboardPage',
+		icon: NotesIcon,
+		protected: true,
 	},
 	{
 		path: '/forgot-password',

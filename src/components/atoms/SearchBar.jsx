@@ -1,10 +1,10 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react/function-component-definition */
 
-import { styled } from '@mui/material/styles';
+import SearchIcon from '@mui/icons-material/Search';
 import Box from '@mui/material/Box';
 import InputBase from '@mui/material/InputBase';
-import SearchIcon from '@mui/icons-material/Search';
+import { styled } from '@mui/material/styles';
 
 const Search = styled('div')(({ theme }) => ({
 	position: 'relative',

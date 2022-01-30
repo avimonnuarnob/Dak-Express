@@ -4,7 +4,7 @@ import { Route, Routes } from 'react-router-dom';
 const routeConfig = (routes) => {
 	if (!routes) return <div />;
 
-	window.scrollTo(0, 0);
+	// window.scrollTo(0, 0);
 
 	return (
 		<Routes>
