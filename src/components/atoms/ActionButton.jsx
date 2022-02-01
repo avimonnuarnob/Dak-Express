@@ -1,15 +1,17 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable arrow-body-style */
-import PropTypes from 'prop-types';
 import { Button, Typography } from '@mui/material';
+import PropTypes from 'prop-types';
 
-const TableActionButton = ({ Icon, color, label }) => {
+const ActionButton = ({ Icon, color, label, sx }) => {
 	return (
 		<Button
 			variant="outlined"
 			sx={{
 				borderColor: color,
+				bgcolor: (theme) => theme.palette.primary.white,
 				py: 1,
+				...sx,
 			}}
 		>
 			<Icon
@@ -20,6 +22,7 @@ const TableActionButton = ({ Icon, color, label }) => {
 			/>
 			<Typography
 				fontSize="10px"
+				letterSpacing={1}
 				sx={{
 					fontWeight: 'bold',
 					ml: 1,
@@ -32,10 +35,15 @@ const TableActionButton = ({ Icon, color, label }) => {
 	);
 };
 
-TableActionButton.propTypes = {
-	Icon: PropTypes.element.isRequired,
+ActionButton.propTypes = {
+	Icon: PropTypes.elementType.isRequired,
 	color: PropTypes.string.isRequired,
 	label: PropTypes.string.isRequired,
+	sx: PropTypes.objectOf(PropTypes.any),
 };
 
-export default TableActionButton;
+ActionButton.defaultProps = {
+	sx: {},
+};
+
+export default ActionButton;

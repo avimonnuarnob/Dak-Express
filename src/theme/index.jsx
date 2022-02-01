@@ -9,11 +9,15 @@ const freightForwardingColors = {
 		white: '#FFFFFF',
 		disable: '#ECF0E6',
 		bluish: '#F8FDFF',
+		greenish: '#EFF5DE',
+		orangish: '#FDF9F2',
+		redish: '#FEF4F4',
 	},
 	secondary: {
 		main: '#688128',
 		sec: '#789C26',
 		light: '#688228',
+		lighter: '#64753A',
 	},
 	typography: {
 		main: '#282B2B',

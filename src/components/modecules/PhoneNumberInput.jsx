@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { FormControl } from '@mui/material';
 import Box from '@mui/material/Box';
 import PhoneInput from 'react-phone-input-2';
@@ -32,7 +33,7 @@ const PhoneNumberInput = ({
 				<PhoneInput
 					// eslint-disable-next-line react/jsx-props-no-spreading
 					{...rest}
-					// label="Phone"
+					specialLabel={label}
 					inputProps={{ name, id: `input-adornment-${label}` }}
 					country="bd"
 					enableSearch
@@ -42,7 +43,10 @@ const PhoneNumberInput = ({
 					name={name}
 					autoFormat={false}
 				/>
-				<InputHelperText error={helperText} data-testid={`${convertLabelStringToTestidPrefix}-input-error-text`} />
+				<InputHelperText
+					error={helperText}
+					data-testid={`${convertLabelStringToTestidPrefix}-input-error-text`}
+				/>
 			</FormControl>
 		</Box>
 	);
