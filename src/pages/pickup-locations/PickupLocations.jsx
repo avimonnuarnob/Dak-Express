@@ -3,7 +3,7 @@ import { Box } from '@mui/material';
 import LocationHeader from './components/LocationHeader';
 import LocationTable from './components/LocationTable';
 
-const PickupLocation = () => {
+const PickupLocations = () => {
 	return (
 		<Box
 			sx={{
@@ -12,9 +12,17 @@ const PickupLocation = () => {
 			}}
 		>
 			<LocationHeader />
-			<LocationTable />
+			<Box
+				sx={{
+					mt: 5,
+					borderRadius: 3,
+					overflow: 'scroll',
+				}}
+			>
+				<LocationTable />
+			</Box>
 		</Box>
 	);
 };
 
-export default PickupLocation;
+export default PickupLocations;

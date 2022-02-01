@@ -34,18 +34,13 @@ const SearchIconWrapper = styled('div')(({ theme }) => ({
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
 	color: 'inherit',
+	width: '100%',
 	'& .MuiInputBase-input': {
-		padding: theme.spacing(2, 8, 2, 8),
+		padding: theme.spacing(2, 2, 2, 2),
 		// vertical padding + font size from searchIcon
 		paddingLeft: `calc(1em + ${theme.spacing(4)})`,
 		transition: theme.transitions.create('width'),
 		width: '100%',
-		[theme.breakpoints.up('sm')]: {
-			width: '12ch',
-			'&:focus': {
-				width: '20ch',
-			},
-		},
 	},
 }));
 
@@ -56,7 +51,10 @@ export default function SearchBar() {
 				<SearchIconWrapper>
 					<SearchIcon color="disabled" />
 				</SearchIconWrapper>
-				<StyledInputBase placeholder="Search Here…" inputProps={{ 'aria-label': 'search' }} />
+				<StyledInputBase
+					placeholder="Search Here…"
+					inputProps={{ 'aria-label': 'search' }}
+				/>
 			</Search>
 		</Box>
 	);

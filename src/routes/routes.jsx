@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import NotesIcon from '@mui/icons-material/Notes';
 import React from 'react';
 import ForgotPassword from '../pages/forgot-password/ForgotPassword';
@@ -7,7 +8,28 @@ import BusinessSignUp from '../pages/signup/business/BusinessSignup';
 import IndividualSignUp from '../pages/signup/individual/IndividualSignup';
 import SignUp from '../pages/signup/SignUp';
 
-const DashboardPage = React.lazy(() => import('../pages/dashboard'));
+// dashboard
+const DashboardPage = React.lazy(() => import('../pages/dashboard/Dashboard'));
+// pickup-location
+const PickupLocationPage = React.lazy(() =>
+	import('../pages/pickup-locations/PickupLocations')
+);
+const AddPickupLocation = React.lazy(() =>
+	import('../pages/create-pickup-location/CreatePickupLocation')
+);
+const PickupLocationDetails = React.lazy(() =>
+	import('../pages/pickup-location-details/PickupLocationDetails')
+);
+// receiver-location
+const ReceiverLocationPage = React.lazy(() =>
+	import('../pages/reciever-locations/ReceiverLocations')
+);
+const AddReceiverLocation = React.lazy(() =>
+	import('../pages/create-receiver-location/CreateReceiverLocation')
+);
+const ReceiverLocationDetails = React.lazy(() =>
+	import('../pages/receiver-location-details/ReceiverLocationDetails')
+);
 // static pages
 const NotFoundPage = React.lazy(() => import('../pages/NotFoundPage'));
 
@@ -26,6 +48,54 @@ const routes = [
 		component: DashboardPage,
 		name: 'DashboardPage',
 		icon: NotesIcon,
+		protected: true,
+	},
+	{
+		path: '/receiver-location',
+		exact: true,
+		component: ReceiverLocationPage,
+		name: 'ReceiverLocationPage',
+		// icon: NotesIcon,
+		protected: true,
+	},
+	{
+		path: '/receiver-location/add',
+		exact: true,
+		component: AddReceiverLocation,
+		name: 'AddReceiverLocation',
+		// icon: NotesIcon,
+		protected: true,
+	},
+	{
+		path: '/receiver-location/:id',
+		exact: true,
+		component: ReceiverLocationDetails,
+		name: 'ReceiverLocationDetails',
+		// icon: NotesIcon,
+		protected: true,
+	},
+	{
+		path: '/pickup-location',
+		exact: true,
+		component: PickupLocationPage,
+		name: 'PickupLocationPage',
+		// icon: NotesIcon,
+		protected: true,
+	},
+	{
+		path: '/pickup-location/add',
+		exact: true,
+		component: AddPickupLocation,
+		name: 'AddPickupLocation',
+		// icon: NotesIcon,
+		protected: true,
+	},
+	{
+		path: '/pickup-location/:id',
+		exact: true,
+		component: PickupLocationDetails,
+		name: 'PickupLocationDetails',
+		// icon: NotesIcon,
 		protected: true,
 	},
 	{
