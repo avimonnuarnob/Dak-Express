@@ -4,12 +4,12 @@
 import { Box, Button, Grid, Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Form, Formik } from 'formik';
-import InputElement from '../../../components/modecules/InputElement';
-import PhoneNumberInput from '../../../components/modecules/PhoneNumberInput';
-import SelectElement from '../../../components/modecules/SelectInput';
-import { sleep } from '../../../utils/functions';
-import validateAddPickupLocation from '../validation/AddReceiverLocationValidation';
-import AddPickupLocationInitialValues from '../validation/AddReceiverLocationValues';
+import InputElement from '../../../../components/modecules/InputElement';
+import PhoneNumberInput from '../../../../components/modecules/PhoneNumberInput';
+import SelectElement from '../../../../components/modecules/SelectInput';
+import { sleep } from '../../../../utils/functions';
+import validateAddPickupLocation from '../validation/AddpickupLocationValidation';
+import AddPickupLocationInitialValues from '../validation/AddPickupLocationValues';
 
 const roleItems = [
 	{ id: 1, label: 'Admin', value: 'admin' },
@@ -17,15 +17,15 @@ const roleItems = [
 ];
 
 const useStyles = makeStyles((theme) => ({
-	receiver: {},
-	receiver__back__button: {
+	pickup: {},
+	pickup__back__button: {
 		color: `${theme.palette.secondary.main} !important`,
 		borderColor: `${theme.palette.secondary.main} !important`,
 		height: '55px',
 		margin: '10px 0 !important',
 		padding: '0 3rem !important',
 	},
-	receiver__button: {
+	pickup__button: {
 		background: `${theme.palette.secondary.main} !important`,
 		height: '55px',
 		padding: '0 7rem !important',
@@ -35,14 +35,14 @@ const useStyles = makeStyles((theme) => ({
 			color: 'white !important',
 		},
 	},
-	receiver__actions: {
+	pickup__actions: {
 		margin: '10px auto !important',
 		display: 'flex',
 		gap: '15px',
 	},
 }));
 
-const AddReceiverLocationForm = () => {
+const AddPickupLocationForm = () => {
 	const classes = useStyles();
 
 	const submitForm = async (values, actions) => {
@@ -95,7 +95,7 @@ const AddReceiverLocationForm = () => {
 									mb: 3,
 								}}
 							>
-								Receiver Location
+								Pickup Location
 							</Typography>
 						</Box>
 
@@ -237,14 +237,14 @@ const AddReceiverLocationForm = () => {
 							</Grid>
 						</fieldset>
 					</Paper>
-					<div className={classes.receiver__actions}>
+					<div className={classes.pickup__actions}>
 						<Button
 							type="button"
 							variant="outlined"
 							disabled={false}
 							onClick={() => {}}
 							sx={{ ml: 'auto !important' }}
-							className={classes.receiver__back__button}
+							className={classes.pickup__back__button}
 						>
 							Back
 						</Button>
@@ -253,7 +253,7 @@ const AddReceiverLocationForm = () => {
 							disabled={false}
 							type="submit"
 							variant="contained"
-							className={classes.receiver__button}
+							className={classes.pickup__button}
 						>
 							Submit
 						</Button>
@@ -264,4 +264,4 @@ const AddReceiverLocationForm = () => {
 	);
 };
 
-export default AddReceiverLocationForm;
+export default AddPickupLocationForm;

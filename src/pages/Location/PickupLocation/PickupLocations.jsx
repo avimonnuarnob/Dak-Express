@@ -1,7 +1,7 @@
 /* eslint-disable arrow-body-style */
 import { Box } from '@mui/material';
-import LocationHeader from './components/LocationHeader';
-import LocationTable from './components/LocationTable';
+import LocationHeader from './parts/LocationHeader';
+import LocationTable from './parts/LocationTable';
 
 const PickupLocations = () => {
 	return (

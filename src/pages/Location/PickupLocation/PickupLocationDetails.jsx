@@ -1,7 +1,7 @@
 /* eslint-disable arrow-body-style */
 import { Box } from '@mui/material';
-import LocationDetails from './components/LocationDetails';
-import LocationDetailsHeader from './components/LocationDetailsHeader';
+import LocationDetails from './parts/LocationDetails';
+import LocationDetailsHeader from './parts/LocationDetailsHeader';
 
 const PickupLocationDetails = () => {
 	return (

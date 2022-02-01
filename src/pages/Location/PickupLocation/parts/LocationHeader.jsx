@@ -2,9 +2,9 @@
 /* eslint-disable arrow-body-style */
 import AddIcon from '@mui/icons-material/Add';
 import { Box } from '@mui/material';
-import ActionButton from '../../../components/atoms/ActionButton';
-import BackButton from '../../../components/atoms/BackButton';
-import HeaderTitle from '../../../components/atoms/HeaderTitle';
+import ActionButton from '../../../../components/atoms/ActionButton';
+import BackButton from '../../../../components/atoms/BackButton';
+import HeaderTitle from '../../../../components/atoms/HeaderTitle';
 
 const LocationHeader = () => {
 	return (

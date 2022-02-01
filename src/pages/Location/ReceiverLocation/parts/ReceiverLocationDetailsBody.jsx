@@ -3,7 +3,7 @@
 import EditIcon from '@mui/icons-material/Edit';
 import { Box, Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import ActionButton from '../../../components/atoms/ActionButton';
+import ActionButton from '../../../../components/atoms/ActionButton';
 
 const useStyles = makeStyles((theme) => ({
 	card: {

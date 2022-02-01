@@ -21,7 +21,7 @@ import {
 } from '@mui/material';
 import { styled, useTheme } from '@mui/material/styles';
 import { useState } from 'react';
-import TableActionButton from '../../../components/atoms/ActionButton';
+import TableActionButton from '../../../../components/atoms/ActionButton';
 
 const FAKE_DATA = [
 	{
