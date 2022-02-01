@@ -1,8 +1,8 @@
 /* eslint-disable arrow-body-style */
 import AddIcon from '@mui/icons-material/Add';
 import { Box, Typography } from '@mui/material';
-import ActionButton from '../../../components/atoms/ActionButton';
-import BackButton from '../../../components/atoms/BackButton';
+import ActionButton from '../../../../components/atoms/ActionButton';
+import BackButton from '../../../../components/atoms/BackButton';
 
 const ReceiverLocationHeader = () => {
 	return (

@@ -1,7 +1,7 @@
 /* eslint-disable arrow-body-style */
 import { Box } from '@mui/material';
-import ReceiverLocationDetailsBody from './components/ReceiverLocationDetailsBody';
-import ReceiverLocationDetailsHeader from './components/ReceiverLocationDetailsHeader';
+import ReceiverLocationDetailsBody from './parts/ReceiverLocationDetailsBody';
+import ReceiverLocationDetailsHeader from './parts/ReceiverLocationDetailsHeader';
 
 const ReceiverLocationDetails = () => {
 	return (

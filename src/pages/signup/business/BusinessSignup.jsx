@@ -10,8 +10,8 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import RegistrationSuccessModal from '../../../components/modecules/RegistrationSuccessModal';
 import { sleep } from '../../../utils/functions';
-import BusinessInfoForm from './components/BusinessInfoForm';
-import PersonalInfoForm from './components/PersonalnfoForm';
+import BusinessInfoForm from './parts/BusinessInfoForm';
+import PersonalInfoForm from './parts/PersonalnfoForm';
 import initialValues from './validation/initialValues';
 import validation from './validation/validate';
 
@@ -139,7 +139,7 @@ const BusinessSignup = () => {
 									<StepLabel
 										{...labelProps}
 										// eslint-disable-next-line prettier/prettier
-								StepIconProps={{ classes: { active: classes.icon, completed: classes.icon, text: classes.text }}}
+										StepIconProps={{ classes: { active: classes.icon, completed: classes.icon, text: classes.text } }}
 									>
 										{label}
 									</StepLabel>

@@ -1,10 +1,10 @@
 import { Box } from '@mui/material';
-import BackButton from '../../components/atoms/BackButton';
-import HeaderTitle from '../../components/atoms/HeaderTitle';
-import AddReceiverLocationForm from './components/AddReceiverLocationForm';
+import BackButton from '../../../components/atoms/BackButton';
+import HeaderTitle from '../../../components/atoms/HeaderTitle';
+import AddPickupLocationForm from './parts/AddPickupLocationForm';
 
 /* eslint-disable arrow-body-style */
-const CreateReceiverLocation = () => {
+const CreatePickupLocation = () => {
 	return (
 		<Box
 			sx={{
@@ -24,9 +24,9 @@ const CreateReceiverLocation = () => {
 				<HeaderTitle label="ADD NEW LOCATION" />
 				<BackButton />
 			</Box>
-			<AddReceiverLocationForm />
+			<AddPickupLocationForm />
 		</Box>
 	);
 };
 
-export default CreateReceiverLocation;
+export default CreatePickupLocation;

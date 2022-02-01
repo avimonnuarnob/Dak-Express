@@ -1,7 +1,7 @@
 /* eslint-disable arrow-body-style */
 import { Box } from '@mui/material';
-import ReceiverLocationHeader from './components/ReceiverLocationHeader';
-import ReceiverLocationTable from './components/ReceiverLocationTable';
+import ReceiverLocationHeader from './parts/ReceiverLocationHeader';
+import ReceiverLocationTable from './parts/ReceiverLocationTable';
 
 const ReceiverLocations = () => {
 	return (

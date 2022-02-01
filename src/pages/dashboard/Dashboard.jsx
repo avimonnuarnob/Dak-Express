@@ -1,9 +1,9 @@
 import { Box, Typography } from '@mui/material';
 import SearchBar from '../../components/atoms/SearchBar';
-import QuickLinks from './components/QuickLinks';
-import ShipmentChartStats from './components/ShipmentChartStats';
-import ShipmentStatus from './components/ShipmentStatus';
-import ShipmentTable from './components/ShipmentTable';
+import QuickLinks from './parts/QuickLinks';
+import ShipmentChartStats from './parts/ShipmentChartStats';
+import ShipmentStatus from './parts/ShipmentStatus';
+import ShipmentTable from './parts/ShipmentTable';
 
 const Dashboard = () => (
 	<>

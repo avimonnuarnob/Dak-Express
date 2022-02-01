@@ -1,9 +1,9 @@
 /* eslint-disable arrow-body-style */
 import { Box, Chip } from '@mui/material';
-import BackButton from '../../../components/atoms/BackButton';
-import HeaderTitle from '../../../components/atoms/HeaderTitle';
+import BackButton from '../../../../components/atoms/BackButton';
+import HeaderTitle from '../../../../components/atoms/HeaderTitle';
 
-const RecieverLocationDetailsHeader = () => {
+const LocationDetailsHeader = () => {
 	return (
 		<Box
 			sx={{
@@ -16,7 +16,7 @@ const RecieverLocationDetailsHeader = () => {
 		>
 			<HeaderTitle label="Location" />
 			<Chip
-				label="RECEIVER LOCATION"
+				label="PICKUP LOCATION"
 				sx={{
 					ml: 2,
 					fontSize: '10px',
@@ -29,4 +29,4 @@ const RecieverLocationDetailsHeader = () => {
 	);
 };
 
-export default RecieverLocationDetailsHeader;
+export default LocationDetailsHeader;

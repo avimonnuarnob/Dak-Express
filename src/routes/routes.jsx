@@ -1,37 +1,20 @@
-/* eslint-disable prettier/prettier */
 import NotesIcon from '@mui/icons-material/Notes';
 import React from 'react';
-import ForgotPassword from '../pages/forgot-password/ForgotPassword';
-import ResetPassword from '../pages/reset-password/ResetPassword';
-import SignIn from '../pages/signin/SignIn';
-import BusinessSignUp from '../pages/signup/business/BusinessSignup';
-import IndividualSignUp from '../pages/signup/individual/IndividualSignup';
-import SignUp from '../pages/signup/SignUp';
+import NotFoundPage from '../pages/404/NotFoundPage';
+import ForgotPassword from '../pages/ForgotPassword/ForgotPassword';
+import ResetPassword from '../pages/ResetPassword/ResetPassword';
+import SignIn from '../pages/Signin/SignIn';
+import BusinessSignUp from '../pages/Signup/business/BusinessSignup';
+import IndividualSignUp from '../pages/Signup/individual/IndividualSignup';
+import SignUp from '../pages/Signup/SignUp';
 
-// dashboard
-const DashboardPage = React.lazy(() => import('../pages/dashboard/Dashboard'));
-// pickup-location
-const PickupLocationPage = React.lazy(() =>
-	import('../pages/pickup-locations/PickupLocations')
-);
-const AddPickupLocation = React.lazy(() =>
-	import('../pages/create-pickup-location/CreatePickupLocation')
-);
-const PickupLocationDetails = React.lazy(() =>
-	import('../pages/pickup-location-details/PickupLocationDetails')
-);
-// receiver-location
-const ReceiverLocationPage = React.lazy(() =>
-	import('../pages/reciever-locations/ReceiverLocations')
-);
-const AddReceiverLocation = React.lazy(() =>
-	import('../pages/create-receiver-location/CreateReceiverLocation')
-);
-const ReceiverLocationDetails = React.lazy(() =>
-	import('../pages/receiver-location-details/ReceiverLocationDetails')
-);
-// static pages
-const NotFoundPage = React.lazy(() => import('../pages/NotFoundPage'));
+const DashboardPage = React.lazy(() => import('../pages/Dashboard/Dashboard'));
+const PickupLocationPage = React.lazy(() => import('../pages/Location/PickupLocation/PickupLocations'));
+const AddPickupLocation = React.lazy(() => import('../pages/Location/PickupLocation/CreatePickupLocation'));
+const PickupLocationDetails = React.lazy(() => import('../pages/Location/PickupLocation/PickupLocationDetails'));
+const ReceiverLocationPage = React.lazy(() => import('../pages/Location/ReceiverLocation/ReceiverLocations'));
+const AddReceiverLocation = React.lazy(() => import('../pages/Location/ReceiverLocation/CreateReceiverLocation'));
+const ReceiverLocationDetails = React.lazy(() => import('../pages/Location/ReceiverLocation/ReceiverLocationDetails'));
 
 const routes = [
 	{
@@ -55,7 +38,6 @@ const routes = [
 		exact: true,
 		component: ReceiverLocationPage,
 		name: 'ReceiverLocationPage',
-		// icon: NotesIcon,
 		protected: true,
 	},
 	{
@@ -63,7 +45,6 @@ const routes = [
 		exact: true,
 		component: AddReceiverLocation,
 		name: 'AddReceiverLocation',
-		// icon: NotesIcon,
 		protected: true,
 	},
 	{
@@ -71,7 +52,6 @@ const routes = [
 		exact: true,
 		component: ReceiverLocationDetails,
 		name: 'ReceiverLocationDetails',
-		// icon: NotesIcon,
 		protected: true,
 	},
 	{
@@ -79,7 +59,6 @@ const routes = [
 		exact: true,
 		component: PickupLocationPage,
 		name: 'PickupLocationPage',
-		// icon: NotesIcon,
 		protected: true,
 	},
 	{
@@ -87,7 +66,6 @@ const routes = [
 		exact: true,
 		component: AddPickupLocation,
 		name: 'AddPickupLocation',
-		// icon: NotesIcon,
 		protected: true,
 	},
 	{
@@ -95,7 +73,6 @@ const routes = [
 		exact: true,
 		component: PickupLocationDetails,
 		name: 'PickupLocationDetails',
-		// icon: NotesIcon,
 		protected: true,
 	},
 	{
