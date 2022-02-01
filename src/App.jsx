@@ -1,15 +1,17 @@
 import { ThemeProvider } from '@mui/material/styles';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { BrowserRouter } from 'react-router-dom';
+import { createBrowserHistory } from 'history';
 import BaseLayout from './components/layout/BaseLayout';
 import { LanguageProvider } from './contexts/LanguageContext';
 import theme from './theme';
 
+const browserHistory = createBrowserHistory();
 const App = () => (
 	<ThemeProvider theme={theme}>
 		<LanguageProvider>
-			<Router>
+			<BrowserRouter history={browserHistory}>
 				<BaseLayout />
-			</Router>
+			</BrowserRouter>
 		</LanguageProvider>
 	</ThemeProvider>
 );
