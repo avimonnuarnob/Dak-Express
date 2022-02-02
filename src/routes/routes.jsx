@@ -1,5 +1,5 @@
 import NotesIcon from '@mui/icons-material/Notes';
-import React from 'react';
+import { lazy } from 'react';
 import NotFoundPage from '../pages/404/NotFoundPage';
 import ForgotPassword from '../pages/ForgotPassword/ForgotPassword';
 import ResetPassword from '../pages/ResetPassword/ResetPassword';
@@ -8,13 +8,14 @@ import BusinessSignUp from '../pages/Signup/business/BusinessSignup';
 import IndividualSignUp from '../pages/Signup/individual/IndividualSignup';
 import SignUp from '../pages/Signup/SignUp';
 
-const DashboardPage = React.lazy(() => import('../pages/Dashboard/Dashboard'));
-const PickupLocationPage = React.lazy(() => import('../pages/Location/PickupLocation/PickupLocations'));
-const AddPickupLocation = React.lazy(() => import('../pages/Location/PickupLocation/CreatePickupLocation'));
-const PickupLocationDetails = React.lazy(() => import('../pages/Location/PickupLocation/PickupLocationDetails'));
-const ReceiverLocationPage = React.lazy(() => import('../pages/Location/ReceiverLocation/ReceiverLocations'));
-const AddReceiverLocation = React.lazy(() => import('../pages/Location/ReceiverLocation/CreateReceiverLocation'));
-const ReceiverLocationDetails = React.lazy(() => import('../pages/Location/ReceiverLocation/ReceiverLocationDetails'));
+const DashboardPage = lazy(() => import('../pages/Dashboard/Dashboard'));
+const AllShipments = lazy(() => import('../pages/Shipments/AllShipments'));
+const PickupLocationPage = lazy(() => import('../pages/Location/PickupLocation/PickupLocations'));
+const AddPickupLocation = lazy(() => import('../pages/Location/PickupLocation/CreatePickupLocation'));
+const PickupLocationDetails = lazy(() => import('../pages/Location/PickupLocation/PickupLocationDetails'));
+const ReceiverLocationPage = lazy(() => import('../pages/Location/ReceiverLocation/ReceiverLocations'));
+const AddReceiverLocation = lazy(() => import('../pages/Location/ReceiverLocation/CreateReceiverLocation'));
+const ReceiverLocationDetails = lazy(() => import('../pages/Location/ReceiverLocation/ReceiverLocationDetails'));
 
 const routes = [
 	{
@@ -25,14 +26,7 @@ const routes = [
 		icon: NotesIcon,
 		protected: false,
 	},
-	{
-		path: '/dashboard',
-		exact: true,
-		component: DashboardPage,
-		name: 'DashboardPage',
-		icon: NotesIcon,
-		protected: true,
-	},
+
 	{
 		path: '/receiver-location',
 		exact: true,
@@ -109,6 +103,23 @@ const routes = [
 		component: BusinessSignUp,
 		name: 'BusinessSignUp',
 		protected: false,
+	},
+	// Dashboard pages
+	{
+		path: '/dashboard',
+		exact: true,
+		component: DashboardPage,
+		name: 'DashboardPage',
+		icon: NotesIcon,
+		protected: true,
+	},
+	{
+		path: '/all-shipments',
+		exact: true,
+		component: AllShipments,
+		name: 'AllShipments',
+		icon: NotesIcon,
+		protected: true,
 	},
 	// static pages
 	{

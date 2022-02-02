@@ -18,7 +18,7 @@ import {
 	TableHead,
 	TablePagination,
 	TableRow,
-	Typography,
+	Typography
 } from '@mui/material';
 import { styled, useTheme } from '@mui/material/styles';
 import { useState } from 'react';
@@ -159,6 +159,7 @@ const ShipmentTable = () => {
 		page > 0 ? Math.max(0, (1 + page) * rowsPerPage - FAKE_DATA.length) : 0;
 
 	const handleChangePage = (event, newPage) => {
+		// TODO: Make Api call and cache data 
 		setPage(newPage);
 	};
 
