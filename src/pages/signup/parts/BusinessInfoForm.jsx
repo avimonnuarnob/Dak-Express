@@ -1,6 +1,6 @@
 import { Grid } from '@mui/material';
-import FileUploadElement from '../../../../components/modecules/FileUploadElement';
-import InputElement from '../../../../components/modecules/InputElement';
+import FileUploadElement from '../../../components/modecules/FileUploadElement';
+import InputElement from '../../../components/modecules/InputElement';
 
 const BusinessInfoForm = ({
 	isSubmitting = false,

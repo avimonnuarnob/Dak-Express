@@ -1,19 +1,16 @@
 /* eslint-disable react/jsx-props-no-spreading */
-/* eslint-disable react-hooks/rules-of-hooks */
 /* eslint-disable react/no-unescaped-entities */
-import { Box, Button, Grid, Step, StepLabel, Stepper } from '@mui/material';
-import Paper from '@mui/material/Paper';
-import Typography from '@mui/material/Typography';
+import { Box, Button, Grid, Paper, Step, StepLabel, Stepper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Form, Formik } from 'formik';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import RegistrationSuccessModal from '../../../components/modecules/RegistrationSuccessModal';
-import { sleep } from '../../../utils/functions';
-import BusinessInfoForm from './parts/BusinessInfoForm';
+import RegistrationSuccessModal from '../../components/modecules/RegistrationSuccessModal';
+import { sleep } from '../../utils/functions';
+import IndividualBusinessInfoForm from './parts/IndividualBusinessInfoForm';
 import PersonalInfoForm from './parts/PersonalnfoForm';
-import initialValues from './validation/initialValues';
-import validation from './validation/validate';
+import initialValues from './validation/individualFormInitialValues';
+import validation from './validation/individualFormValidation';
 
 const useStyles = makeStyles((theme) => ({
 	icon: {
@@ -77,13 +74,14 @@ const useStyles = makeStyles((theme) => ({
 
 const steps = ['Business Info', 'Contact Person Info'];
 
-const BusinessSignup = () => {
+const IndividualSignup = () => {
 	const [activeStep, setActiveStep] = useState(0);
 	const [successModal, setSuccessModal] = useState(false);
 
+	const classes = useStyles();
+
 	const validationRules = validation[activeStep];
 	const initialValue = initialValues[activeStep];
-	const classes = useStyles();
 
 	const isLastStep = activeStep === steps.length - 1;
 
@@ -153,7 +151,7 @@ const BusinessSignup = () => {
 							{({ isSubmitting, values, errors, handleChange, handleBlur, touched, setFieldValue }) => (
 								<Form>
 									{activeStep === 0 && (
-										<BusinessInfoForm
+										<IndividualBusinessInfoForm
 											initialValues={initialValue}
 											values={values}
 											errors={errors}
@@ -232,4 +230,4 @@ const BusinessSignup = () => {
 	);
 };
 
-export default BusinessSignup;
+export default IndividualSignup;
