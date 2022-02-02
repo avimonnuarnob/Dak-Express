@@ -1,16 +1,62 @@
-/* eslint-disable no-useless-escape */
-/* eslint-disable no-param-reassign */
+// eslint-disable-next-line no-useless-escape
+const websiteRegex = /(http|ftp|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/;
+// const tradeLicenceRegex = /\d{12}/;
+const postcodeOrPostalcodeRegex = /(?!([089])\1{4})\d{4}/;
 
 const emailRegex =
 	/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i;
-
 const passwordRegex = /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!#$@^%&? "])[a-zA-Z0-9!#$@^%&?]{8,20}$/;
-
+// eslint-disable-next-line no-useless-escape
 const phoneRegex = /([0-9\s\-]{7,})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$/;
-
 const nidRegex = /^([0-9]{9})(X|V)$|^([0-9]{11})/;
 
-const validate = (values) => {
+const validateBusinessInfo = (values) => {
+	const errors = {};
+
+	if (!values?.businessName) {
+		errors.businessName = 'Business name is required';
+	} else if (values?.businessName?.length <= 3) {
+		errors.businessName = 'Business name must be a minimum of 3 characters';
+	} else if (values?.businessName?.length >= 100) {
+		errors.businessName = 'Business name can be a maximum of 100 characters';
+	}
+
+	if (!values?.website) {
+		errors.website = 'Website or Social is required';
+	} else if (!websiteRegex.test(values?.website)) {
+		errors.website = 'Invalid Website URL';
+	}
+
+	if (!values?.districtOrState) {
+		errors.districtOrState = 'District or State is required';
+	} else if (values?.districtOrState?.length <= 3) {
+		errors.districtOrState = 'District or State must be a minimum of 3 characters';
+	}
+
+	if (!values?.cityOrTown) {
+		errors.cityOrTown = 'City or Town is required';
+	} else if (values?.cityOrTown?.length <= 3) {
+		errors.cityOrTown = 'City or Town must be a minimum of 3 characters';
+	}
+
+	if (!values?.postcodeOrPostalcode) {
+		errors.postcodeOrPostalcode = 'Post or Postal Code is required';
+	} else if (!postcodeOrPostalcodeRegex.test(values?.postcodeOrPostalcode)) {
+		errors.postcodeOrPostalcode = 'Invalid Post or Postal Code';
+	}
+
+	if (!values?.address) {
+		errors.address = 'Address is required';
+	} else if (values?.address?.length <= 3) {
+		errors.address = 'Address must be a minimum of 3 characters';
+	} else if (values?.address?.length >= 255) {
+		errors.address = 'Address can be a maximum of 255 characters';
+	}
+
+	return errors;
+};
+
+const validatePersonalInfo = (values) => {
 	const errors = {};
 
 	if (!values?.firstName) {
@@ -68,4 +114,6 @@ const validate = (values) => {
 	return errors;
 };
 
-export default validate;
+const validation = [validateBusinessInfo, validatePersonalInfo];
+
+export default validation;

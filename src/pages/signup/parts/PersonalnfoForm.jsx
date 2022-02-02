@@ -1,10 +1,10 @@
 import { Box, Checkbox, FormControlLabel, FormGroup, Grid } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Link } from 'react-router-dom';
-import InputElement from '../../../../components/modecules/InputElement';
-import PasswordInputElement from '../../../../components/modecules/PasswordInputElement';
-import PhoneNumberInput from '../../../../components/modecules/PhoneNumberInput';
-import SelectElement from '../../../../components/modecules/SelectInput';
+import InputElement from '../../../components/modecules/InputElement';
+import PasswordInputElement from '../../../components/modecules/PasswordInputElement';
+import PhoneNumberInput from '../../../components/modecules/PhoneNumberInput';
+import SelectElement from '../../../components/modecules/SelectInput';
 
 const useStyles = makeStyles((theme) => ({
 	signup: {
