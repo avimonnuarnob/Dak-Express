@@ -4,8 +4,8 @@ import NotFoundPage from '../pages/404/NotFoundPage';
 import ForgotPassword from '../pages/ForgotPassword/ForgotPassword';
 import ResetPassword from '../pages/ResetPassword/ResetPassword';
 import SignIn from '../pages/Signin/SignIn';
-import BusinessSignUp from '../pages/Signup/business/BusinessSignup';
-import IndividualSignUp from '../pages/Signup/individual/IndividualSignup';
+import BusinessSignUp from '../pages/Signup/Business/BusinessSignup';
+import IndividualSignUp from '../pages/Signup/Individual/IndividualSignup';
 import SignUp from '../pages/Signup/SignUp';
 
 const DashboardPage = lazy(() => import('../pages/Dashboard/Dashboard'));
