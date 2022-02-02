@@ -1,6 +1,6 @@
 import { ThemeProvider } from '@mui/material/styles';
-import { BrowserRouter } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
+import { BrowserRouter } from 'react-router-dom';
 import BaseLayout from './components/layout/BaseLayout';
 import { LanguageProvider } from './contexts/LanguageContext';
 import theme from './theme';

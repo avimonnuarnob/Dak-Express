@@ -14,7 +14,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { styled } from '@mui/material/styles';
 import { makeStyles } from '@mui/styles';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import brandIconLogo from '../../assets/dak_express.svg';
 import { DRAWER_WIDTH } from './constants';
 
@@ -84,8 +84,21 @@ const useSidebarMenuItemStyles = makeStyles((theme) => ({
 		opacity: '0.2',
 	},
 	link__item: {
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+		margin: '0 auto',
 		textDecoration: 'none',
 		color: 'inherit',
+	},
+	link__active: {
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+		margin: '0 auto',
+		textDecoration: 'none',
+		color: 'inherit',
+		background: theme.palette.secondary.main,
 	},
 	link__title: {
 		color: `${theme.palette.typography.nav} !important`,
@@ -109,14 +122,14 @@ const SidebarMenuItems = () => {
 				<Divider className={classes.divider} variant="middle" />
 
 				<List>
-					<Link to="/dashboard" className={classes.link__item}>
+					<NavLink to="/dashboard" className={({ isActive }) => (isActive ? classes.link__active : classes.link__item)}>
 						<ListItem button>
 							<ListItemIcon className={classes.link__icon}>
 								<DashboardOutlinedIcon />
 							</ListItemIcon>
 							<ListItemText>Dashboard</ListItemText>
 						</ListItem>
-					</Link>
+					</NavLink>
 				</List>
 			</Box>
 
@@ -128,19 +141,29 @@ const SidebarMenuItems = () => {
 				<Divider className={classes.divider} variant="middle" />
 
 				<List>
-					<ListItem button>
-						<ListItemIcon className={classes.link__icon}>
-							<ListAltOutlinedIcon />
-						</ListItemIcon>
-						<ListItemText>All Shipments</ListItemText>
-					</ListItem>
+					<NavLink
+						to="/all-shipments"
+						className={({ isActive }) => (isActive ? classes.link__active : classes.link__item)}
+					>
+						<ListItem button>
+							<ListItemIcon className={classes.link__icon}>
+								<ListAltOutlinedIcon />
+							</ListItemIcon>
+							<ListItemText>All Shipments</ListItemText>
+						</ListItem>
+					</NavLink>
 
-					<ListItem button>
-						<ListItemIcon className={classes.link__icon}>
-							<AddToPhotosOutlinedIcon />
-						</ListItemIcon>
-						<ListItemText>Create A Shipment</ListItemText>
-					</ListItem>
+					<NavLink
+						to="/create-new-shipment"
+						className={({ isActive }) => (isActive ? classes.link__active : classes.link__item)}
+					>
+						<ListItem button>
+							<ListItemIcon className={classes.link__icon}>
+								<AddToPhotosOutlinedIcon />
+							</ListItemIcon>
+							<ListItemText>Create A Shipment</ListItemText>
+						</ListItem>
+					</NavLink>
 				</List>
 			</Box>
 
@@ -152,19 +175,29 @@ const SidebarMenuItems = () => {
 				<Divider className={classes.divider} variant="middle" />
 
 				<List>
-					<ListItem button>
-						<ListItemIcon className={classes.link__icon}>
-							<AddLocationOutlinedIcon />
-						</ListItemIcon>
-						<ListItemText>Pickup Location</ListItemText>
-					</ListItem>
+					<NavLink
+						to="/pickup-location"
+						className={({ isActive }) => (isActive ? classes.link__active : classes.link__item)}
+					>
+						<ListItem button>
+							<ListItemIcon className={classes.link__icon}>
+								<AddLocationOutlinedIcon />
+							</ListItemIcon>
+							<ListItemText>Pickup Location</ListItemText>
+						</ListItem>
+					</NavLink>
 
-					<ListItem button>
-						<ListItemIcon className={classes.link__icon}>
-							<AddLocationAltOutlinedIcon />
-						</ListItemIcon>
-						<ListItemText>Receiver Location</ListItemText>
-					</ListItem>
+					<NavLink
+						to="/receiver-location"
+						className={({ isActive }) => (isActive ? classes.link__active : classes.link__item)}
+					>
+						<ListItem button>
+							<ListItemIcon className={classes.link__icon}>
+								<AddLocationAltOutlinedIcon />
+							</ListItemIcon>
+							<ListItemText>Receiver Location</ListItemText>
+						</ListItem>
+					</NavLink>
 				</List>
 			</Box>
 
@@ -176,12 +209,17 @@ const SidebarMenuItems = () => {
 				<Divider className={classes.divider} variant="middle" />
 
 				<List>
-					<ListItem button>
-						<ListItemIcon className={classes.link__icon}>
-							<HistoryOutlinedIcon />
-						</ListItemIcon>
-						<ListItemText>Transaction History</ListItemText>
-					</ListItem>
+					<NavLink
+						to="/transaction-history"
+						className={({ isActive }) => (isActive ? classes.link__active : classes.link__item)}
+					>
+						<ListItem button>
+							<ListItemIcon className={classes.link__icon}>
+								<HistoryOutlinedIcon />
+							</ListItemIcon>
+							<ListItemText>Transaction History</ListItemText>
+						</ListItem>
+					</NavLink>
 				</List>
 			</Box>
 
@@ -193,12 +231,14 @@ const SidebarMenuItems = () => {
 				<Divider className={classes.divider} variant="middle" />
 
 				<List>
-					<ListItem button>
-						<ListItemIcon className={classes.link__icon}>
-							<QuizOutlinedIcon />
-						</ListItemIcon>
-						<ListItemText>Support</ListItemText>
-					</ListItem>
+					<NavLink to="/support" className={({ isActive }) => (isActive ? classes.link__active : classes.link__item)}>
+						<ListItem button>
+							<ListItemIcon className={classes.link__icon}>
+								<QuizOutlinedIcon />
+							</ListItemIcon>
+							<ListItemText>Support</ListItemText>
+						</ListItem>
+					</NavLink>
 				</List>
 			</Box>
 		</Box>

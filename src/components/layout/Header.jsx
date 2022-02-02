@@ -17,7 +17,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import brandIconLogo from '../../assets/dak_express.svg';
 import Language from '../modecules/Language';
-import { DRAWER_WIDTH } from './constants';
+import { DRAWER_WIDTH, HEADER_HEIGHT } from './constants';
 
 // ====================== Unauthenticated Header ======================
 const useUnauthenticateHeaderStyles = makeStyles((theme) => ({
@@ -26,7 +26,7 @@ const useUnauthenticateHeaderStyles = makeStyles((theme) => ({
 		width: '100%',
 	},
 	header__main: {
-		height: 64,
+		height: HEADER_HEIGHT,
 		padding: '0px 64px',
 		display: 'flex',
 		justifyContent: 'space-between',
@@ -318,7 +318,7 @@ const AuthenticatedHeader = ({ toggleDrawer = null, open = true, title = 'Dashbo
 					<MenuIcon />
 				</IconButton>
 
-				<Typography variant="h6" noWrap className={classes.header__title}>
+				<Typography variant="body1" noWrap className={classes.header__title}>
 					{title}
 				</Typography>
 

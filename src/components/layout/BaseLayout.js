@@ -37,24 +37,6 @@ const DrawerHeader = styled('div')(({ theme }) => ({
 	justifyContent: 'flex-start',
 }));
 
-const useStyles = makeStyles((theme) => ({
-	root: {
-		minHeight: `calc(100vh - ${HEADER_HEIGHT + FOOTER_HEIGHT}px) !important`,
-		background: theme.palette.primary.sec,
-		[theme.breakpoints.down('md')]: {
-			minHeight: `100vh`,
-		},
-	},
-
-	// dashboard: {
-	// 	minHeight: `calc(100vh - ${HEADER_HEIGHT + FOOTER_HEIGHT}px) !important`,
-	// 	background: theme.palette.primary.sec,
-	// 	[theme.breakpoints.down('md')]: {
-	// 		minHeight: `calc(100vh - ${HEADER_HEIGHT + SMALL_DEVICE_FOOTER_HEIGHT}px)`,
-	// 	},
-	// },
-}));
-
 const MainContent = ({ children = null, open = true, auth = false }) => {
 	if (auth) {
 		return (
@@ -72,6 +54,24 @@ MainContent.propTypes = {
 	open: PropTypes.bool.isRequired,
 	auth: PropTypes.bool.isRequired,
 };
+
+const useStyles = makeStyles((theme) => ({
+	root: {
+		minHeight: `calc(100vh - ${HEADER_HEIGHT + FOOTER_HEIGHT}px) !important`,
+		background: theme.palette.primary.sec,
+		[theme.breakpoints.down('md')]: {
+			minHeight: `100vh`,
+		},
+	},
+
+	// dashboard: {
+	// 	minHeight: `calc(100vh - ${HEADER_HEIGHT + FOOTER_HEIGHT}px) !important`,
+	// 	background: theme.palette.primary.sec,
+	// 	[theme.breakpoints.down('md')]: {
+	// 		minHeight: `calc(100vh - ${HEADER_HEIGHT + SMALL_DEVICE_FOOTER_HEIGHT}px)`,
+	// 	},
+	// },
+}));
 
 const BaseLayout = () => {
 	const [open, setOpen] = useState(true);
