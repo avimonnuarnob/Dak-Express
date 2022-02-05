@@ -1,31 +1,43 @@
+/* eslint-disable prettier/prettier */
 import NotesIcon from '@mui/icons-material/Notes';
 import { lazy } from 'react';
 import NotFoundPage from '../pages/404/NotFoundPage';
 import ForgotPassword from '../pages/ForgotPassword/ForgotPassword';
 import ResetPassword from '../pages/ResetPassword/ResetPassword';
-import SignIn from '../pages/Signin/SignIn';
 import BusinessSignUp from '../pages/Signup/BusinessSignup';
 import IndividualSignUp from '../pages/Signup/IndividualSignup';
 import SignUp from '../pages/Signup/SignUp';
 
 const DashboardPage = lazy(() => import('../pages/Dashboard/Dashboard'));
 const AllShipments = lazy(() => import('../pages/Shipments/AllShipments'));
-const PickupLocationPage = lazy(() => import('../pages/Location/PickupLocation/PickupLocations'));
-const AddPickupLocation = lazy(() => import('../pages/Location/PickupLocation/CreatePickupLocation'));
-const PickupLocationDetails = lazy(() => import('../pages/Location/PickupLocation/PickupLocationDetails'));
-const ReceiverLocationPage = lazy(() => import('../pages/Location/ReceiverLocation/ReceiverLocations'));
-const AddReceiverLocation = lazy(() => import('../pages/Location/ReceiverLocation/CreateReceiverLocation'));
-const ReceiverLocationDetails = lazy(() => import('../pages/Location/ReceiverLocation/ReceiverLocationDetails'));
+const PickupLocationPage = lazy(() =>
+	import('../pages/Location/PickupLocation/PickupLocations')
+);
+const AddPickupLocation = lazy(() =>
+	import('../pages/Location/PickupLocation/CreatePickupLocation')
+);
+const PickupLocationDetails = lazy(() =>
+	import('../pages/Location/PickupLocation/PickupLocationDetails')
+);
+const ReceiverLocationPage = lazy(() =>
+	import('../pages/Location/ReceiverLocation/ReceiverLocations')
+);
+const AddReceiverLocation = lazy(() =>
+	import('../pages/Location/ReceiverLocation/CreateReceiverLocation')
+);
+const ReceiverLocationDetails = lazy(() =>
+	import('../pages/Location/ReceiverLocation/ReceiverLocationDetails')
+);
 
 const routes = [
-	{
-		path: '/',
-		exact: true,
-		component: SignIn,
-		name: 'SignIn',
-		icon: NotesIcon,
-		protected: false,
-	},
+	// {
+	// 	path: '/',
+	// 	exact: true,
+	// 	component: TransactionHistoryDetails,
+	// 	name: 'TransactionHistory',
+	// 	icon: NotesIcon,
+	// 	protected: false,
+	// },
 
 	{
 		path: '/receiver-location',

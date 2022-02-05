@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable react/jsx-props-no-spreading */
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import DatePicker from '@mui/lab/DatePicker';
@@ -19,7 +20,11 @@ const DateInput = ({
 	const convertLabelStringToTestidPrefix = convertStringToKebabCase(label);
 
 	return (
-		<Box sx={boxStyles} autoComplete="off" data-testid={`${convertLabelStringToTestidPrefix}-input-box`}>
+		<Box
+			sx={boxStyles}
+			autoComplete="off"
+			data-testid={`${convertLabelStringToTestidPrefix}-input-box`}
+		>
 			<FormControl
 				variant="outlined"
 				fullWidth={fullWidth}
@@ -27,10 +32,20 @@ const DateInput = ({
 				data-testid={`${convertLabelStringToTestidPrefix}-input-control`}
 			>
 				<LocalizationProvider dateAdapter={AdapterDateFns}>
-					<DatePicker label={label} sx={elementStyles} {...rest} renderInput={(params) => <TextField {...params} />} />
+					<DatePicker
+						label={label}
+						sx={elementStyles}
+						{...rest}
+						renderInput={(params) => <TextField {...params} />}
+					/>
 				</LocalizationProvider>
 
-				<InputHelperText error={helperText} data-testid={`${convertLabelStringToTestidPrefix}-input-error-text`} />
+				{helperText && (
+					<InputHelperText
+						error={helperText}
+						data-testid={`${convertLabelStringToTestidPrefix}-input-error-text`}
+					/>
+				)}
 			</FormControl>
 		</Box>
 	);
