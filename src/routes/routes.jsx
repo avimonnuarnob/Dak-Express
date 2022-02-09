@@ -28,16 +28,17 @@ const AddReceiverLocation = lazy(() =>
 const ReceiverLocationDetails = lazy(() =>
 	import('../pages/Location/ReceiverLocation/ReceiverLocationDetails')
 );
+const UserProfile = lazy(() => import('../pages/Profile/UserProfile'));
 
 const routes = [
-	// {
-	// 	path: '/',
-	// 	exact: true,
-	// 	component: TransactionHistoryDetails,
-	// 	name: 'TransactionHistory',
-	// 	icon: NotesIcon,
-	// 	protected: false,
-	// },
+	{
+		path: '/',
+		exact: true,
+		component: UserProfile,
+		name: 'TransactionHistory',
+		icon: NotesIcon,
+		protected: false,
+	},
 
 	{
 		path: '/receiver-location',
