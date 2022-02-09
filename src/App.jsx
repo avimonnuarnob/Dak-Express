@@ -6,6 +6,7 @@ import { LanguageProvider } from './contexts/LanguageContext';
 import theme from './theme';
 
 const browserHistory = createBrowserHistory();
+
 const App = () => (
 	<ThemeProvider theme={theme}>
 		<LanguageProvider>
