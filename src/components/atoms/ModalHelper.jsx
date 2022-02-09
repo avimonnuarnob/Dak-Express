@@ -13,7 +13,7 @@ const style = {
 	width: 500,
 };
 
-const AlertModal = ({ showModal = false, closeModal = null, children = null }) => {
+const ModalHelper = ({ showModal = false, closeModal = null, children = null }) => {
 	const handleClose = () => closeModal(!showModal);
 
 	return (
@@ -30,4 +30,4 @@ const AlertModal = ({ showModal = false, closeModal = null, children = null }) =
 	);
 };
 
-export default AlertModal;
+export default ModalHelper;

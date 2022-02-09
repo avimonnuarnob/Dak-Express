@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import NotesIcon from '@mui/icons-material/Notes';
 import { lazy } from 'react';
 import NotFoundPage from '../pages/404/NotFoundPage';
@@ -10,24 +9,13 @@ import SignUp from '../pages/Signup/SignUp';
 
 const DashboardPage = lazy(() => import('../pages/Dashboard/Dashboard'));
 const AllShipments = lazy(() => import('../pages/Shipments/AllShipments'));
-const PickupLocationPage = lazy(() =>
-	import('../pages/Location/PickupLocation/PickupLocations')
-);
-const AddPickupLocation = lazy(() =>
-	import('../pages/Location/PickupLocation/CreatePickupLocation')
-);
-const PickupLocationDetails = lazy(() =>
-	import('../pages/Location/PickupLocation/PickupLocationDetails')
-);
-const ReceiverLocationPage = lazy(() =>
-	import('../pages/Location/ReceiverLocation/ReceiverLocations')
-);
-const AddReceiverLocation = lazy(() =>
-	import('../pages/Location/ReceiverLocation/CreateReceiverLocation')
-);
-const ReceiverLocationDetails = lazy(() =>
-	import('../pages/Location/ReceiverLocation/ReceiverLocationDetails')
-);
+const CreateNewShipment = lazy(() => import('../pages/Shipments/CreateNewShipment'));
+const PickupLocationPage = lazy(() => import('../pages/Location/PickupLocation/PickupLocations'));
+const AddPickupLocation = lazy(() => import('../pages/Location/PickupLocation/CreatePickupLocation'));
+const PickupLocationDetails = lazy(() => import('../pages/Location/PickupLocation/PickupLocationDetails'));
+const ReceiverLocationPage = lazy(() => import('../pages/Location/ReceiverLocation/ReceiverLocations'));
+const AddReceiverLocation = lazy(() => import('../pages/Location/ReceiverLocation/CreateReceiverLocation'));
+const ReceiverLocationDetails = lazy(() => import('../pages/Location/ReceiverLocation/ReceiverLocationDetails'));
 const UserProfile = lazy(() => import('../pages/Profile/UserProfile'));
 
 const routes = [
@@ -131,6 +119,14 @@ const routes = [
 		exact: true,
 		component: AllShipments,
 		name: 'AllShipments',
+		icon: NotesIcon,
+		protected: true,
+	},
+	{
+		path: '/create-new-shipment',
+		exact: true,
+		component: CreateNewShipment,
+		name: 'CreateNewShipment',
 		icon: NotesIcon,
 		protected: true,
 	},

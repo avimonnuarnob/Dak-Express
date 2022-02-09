@@ -28,7 +28,7 @@ const AllShipments = () => {
 				<PageTitlebar title="All Shipments" />
 			</Grid>
 
-			<Grid item xs={12}>
+			<Grid item xs={12} mx={2}>
 				<Box sx={{ display: 'flex', justifyContent: 'end', alignItems: 'end' }}>
 					<Button
 						variant="contained"

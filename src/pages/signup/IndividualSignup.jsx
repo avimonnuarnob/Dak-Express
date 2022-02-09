@@ -5,7 +5,7 @@ import { makeStyles } from '@mui/styles';
 import { Form, Formik } from 'formik';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import RegistrationSuccessModal from '../../components/modecules/RegistrationSuccessModal';
+import AlertModal from '../../components/modecules/AlertModal';
 import { sleep } from '../../utils/functions';
 import IndividualBusinessInfoForm from './parts/IndividualBusinessInfoForm';
 import PersonalInfoForm from './parts/PersonalnfoForm';
@@ -225,7 +225,7 @@ const IndividualSignup = () => {
 				</Typography>
 			</Paper>
 
-			{successModal && <RegistrationSuccessModal showModal={successModal} closeModal={setSuccessModal} />}
+			{successModal && <AlertModal showModal={successModal} closeModal={setSuccessModal} />}
 		</>
 	);
 };

@@ -6,10 +6,10 @@ import PropTypes from 'prop-types';
 import { Suspense, useState } from 'react';
 import routeConfig from '../../routes';
 import routes from '../../routes/routes';
-import ProgressBar from '../atoms/ProgressBar';
 import { DRAWER_WIDTH, FOOTER_HEIGHT, HEADER_HEIGHT } from './constants';
 import Footer from './Footer';
 import Header from './Header';
+import ProgressBar from './ProgressBar';
 import Sidebar from './Sidebar';
 
 const MainContentLayout = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(({ theme, open }) => ({
