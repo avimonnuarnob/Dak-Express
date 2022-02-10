@@ -141,10 +141,7 @@ const SidebarMenuItems = () => {
 				<Divider className={classes.divider} variant="middle" />
 
 				<List>
-					<NavLink
-						to="/all-shipments"
-						className={({ isActive }) => (isActive ? classes.link__active : classes.link__item)}
-					>
+					<NavLink to="/shipments" className={({ isActive }) => (isActive ? classes.link__active : classes.link__item)}>
 						<ListItem button>
 							<ListItemIcon className={classes.link__icon}>
 								<ListAltOutlinedIcon />
@@ -154,7 +151,7 @@ const SidebarMenuItems = () => {
 					</NavLink>
 
 					<NavLink
-						to="/create-new-shipment"
+						to="/new-shipment"
 						className={({ isActive }) => (isActive ? classes.link__active : classes.link__item)}
 					>
 						<ListItem button>
@@ -176,7 +173,7 @@ const SidebarMenuItems = () => {
 
 				<List>
 					<NavLink
-						to="/pickup-location"
+						to="/locations/pickup"
 						className={({ isActive }) => (isActive ? classes.link__active : classes.link__item)}
 					>
 						<ListItem button>
@@ -188,7 +185,7 @@ const SidebarMenuItems = () => {
 					</NavLink>
 
 					<NavLink
-						to="/receiver-location"
+						to="/locations/receiver"
 						className={({ isActive }) => (isActive ? classes.link__active : classes.link__item)}
 					>
 						<ListItem button>
@@ -210,7 +207,7 @@ const SidebarMenuItems = () => {
 
 				<List>
 					<NavLink
-						to="/transaction-history"
+						to="/transactions"
 						className={({ isActive }) => (isActive ? classes.link__active : classes.link__item)}
 					>
 						<ListItem button>
@@ -231,7 +228,7 @@ const SidebarMenuItems = () => {
 				<Divider className={classes.divider} variant="middle" />
 
 				<List>
-					<NavLink to="/support" className={({ isActive }) => (isActive ? classes.link__active : classes.link__item)}>
+					<NavLink to="/supports" className={({ isActive }) => (isActive ? classes.link__active : classes.link__item)}>
 						<ListItem button>
 							<ListItemIcon className={classes.link__icon}>
 								<QuizOutlinedIcon />

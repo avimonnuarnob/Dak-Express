@@ -225,7 +225,16 @@ const IndividualSignup = () => {
 				</Typography>
 			</Paper>
 
-			{successModal && <AlertModal showModal={successModal} closeModal={setSuccessModal} />}
+			{successModal && (
+				<AlertModal
+					redirectTo="/"
+					title="Registration Successful"
+					description="Your account has been successfully registered you can now login"
+					button="Go to login"
+					showModal={successModal}
+					closeModal={setSuccessModal}
+				/>
+			)}
 		</>
 	);
 };

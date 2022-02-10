@@ -3,6 +3,7 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import { Box, Button, Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { Link } from 'react-router-dom';
 import UserAccountInfo from './UserAccountInfo';
 import UserCompanyInfo from './UserCompanyInfo';
 
@@ -75,14 +76,17 @@ const UserProfileBody = () => {
 						BUSINESS
 					</Typography>
 				</Box>
-				<Button
-					size="small"
-					variant="outlined"
-					className={classes['user__button--edit']}
-					startIcon={<EditOutlinedIcon />}
-				>
-					Edit
-				</Button>
+
+				<Link to='/profile/edit' style={{ textDecoration: 'none', color: 'inherit' }}>
+					<Button
+						size="small"
+						variant="outlined"
+						className={classes['user__button--edit']}
+						startIcon={<EditOutlinedIcon />}
+					>
+						Edit
+					</Button>
+				</Link>
 			</Box>
 
 			<Box className={classes.box__header}>

@@ -3,21 +3,19 @@
 import EditIcon from '@mui/icons-material/Edit';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import {
-	Box,
-	Button,
-	Paper,
+	Box, Paper,
 	Table,
 	TableBody,
 	TableCell,
 	tableCellClasses,
 	TableContainer,
-	TableHead,
-	TableRow,
-	Typography,
+	TableHead, TableRow, Typography
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { makeStyles } from '@mui/styles';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import TableActionButton from '../../../../components/atoms/ActionButton';
 import Pagination from '../../../../components/modecules/Pagination';
 
 const FAKE_DATA = [
@@ -85,6 +83,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const LocationTable = () => {
+	// eslint-disable-next-line no-unused-vars
 	const classes = useStyles();
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(5);
@@ -135,25 +134,30 @@ const LocationTable = () => {
 								</StyledTableCell>
 								<StyledTableCell align="left">{row.address}</StyledTableCell>
 								<StyledTableCell align="left">
-									<Box className={classes.table__buttons}>
-										<Button
-											size="small"
-											variant="outlined"
-											color="secondary"
-											startIcon={<VisibilityOutlinedIcon />}
-										>
-											View
-										</Button>
+									<Box
+										sx={{
+											display: 'flex',
+											flexDirection: 'column',
+											gap: 0.5,
+										}}
+									>
+									<Link to={`/locations/pickup/${index+1}`} style={{ textDecoration: 'none'}}>
+										<TableActionButton
+											Icon={VisibilityOutlinedIcon}
+											color="typography.sec"
+											label="View"
+											sx={{ width: '100%'}}
+										/>
+										</Link>
 
-										<Button
-											size="small"
-											variant="outlined"
-											color="secondary"
-											className={classes['table__buttons--edit']}
-											startIcon={<EditIcon />}
-										>
-											Edit
-										</Button>
+										<Link to="/locations/pickup/new" style={{ textDecoration: 'none'}}>
+										<TableActionButton
+											Icon={EditIcon}
+											color="status.pending"
+											label="Edit"
+											sx={{ width: '100%'}}
+										/>
+										</Link>
 									</Box>
 								</StyledTableCell>
 							</StyledTableRow>

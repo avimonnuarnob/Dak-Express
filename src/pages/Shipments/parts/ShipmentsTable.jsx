@@ -11,6 +11,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { makeStyles } from '@mui/styles';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Pagination from '../../../components/modecules/Pagination';
 import ShipmentStatus from '../../../components/modecules/ShipmentStatus';
 import shipments from './shipmentsData.json';
@@ -126,17 +127,29 @@ const ShipmentsTable = ({ category = '' }) => {
 								</StyledTableCell>
 								<StyledTableCell align="left">
 									<Box className={classes.table__buttons}>
-										<Button size="small" variant="outlined" color="secondary" startIcon={<VisibilityOutlinedIcon />}>
-											View
-										</Button>
-										<Button
-											size="small"
-											variant="outlined"
-											className={classes['table__buttons--edit']}
-											startIcon={<EditOutlinedIcon />}
-										>
-											Edit
-										</Button>
+										<Link to={`/shipments/${shipment?.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+											<Button
+												sx={{ width: '100%' }}
+												size="small"
+												variant="outlined"
+												color="secondary"
+												startIcon={<VisibilityOutlinedIcon />}
+											>
+												View
+											</Button>
+										</Link>
+
+										<Link to="/new-shipment" style={{ textDecoration: 'none', color: 'inherit' }}>
+											<Button
+												sx={{ width: '100%' }}
+												size="small"
+												variant="outlined"
+												className={classes['table__buttons--edit']}
+												startIcon={<EditOutlinedIcon />}
+											>
+												Edit
+											</Button>
+										</Link>
 									</Box>
 								</StyledTableCell>
 							</StyledTableRow>

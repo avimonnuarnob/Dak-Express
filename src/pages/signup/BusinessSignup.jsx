@@ -5,7 +5,7 @@ import { makeStyles } from '@mui/styles';
 import { Form, Formik } from 'formik';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import RegistrationSuccessModal from '../../components/modecules/RegistrationSuccessModal';
+import AlertModal from '../../components/modecules/AlertModal';
 import { sleep } from '../../utils/functions';
 import BusinessInfoForm from './parts/BusinessInfoForm';
 import PersonalInfoForm from './parts/PersonalnfoForm';
@@ -225,7 +225,16 @@ const BusinessSignup = () => {
 				</Typography>
 			</Paper>
 
-			{successModal && <RegistrationSuccessModal showModal={successModal} closeModal={setSuccessModal} />}
+			{successModal && (
+				<AlertModal
+					redirectTo="/"
+					title="Registration Successful"
+					description="Your account has been successfully registered you can now login"
+					button="Go to login"
+					showModal={successModal}
+					closeModal={setSuccessModal}
+				/>
+			)}
 		</>
 	);
 };

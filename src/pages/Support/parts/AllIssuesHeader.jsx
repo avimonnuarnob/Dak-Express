@@ -1,5 +1,6 @@
 /* eslint-disable prettier/prettier */
 import { Box, Button } from '@mui/material';
+import { Link } from 'react-router-dom';
 import BackButton from '../../../components/atoms/BackButton';
 import HeaderTitle from '../../../components/atoms/HeaderTitle';
 import SearchBar from '../../../components/atoms/SearchBar';
@@ -11,18 +12,20 @@ const AllIssuesHeader = () => (
 			<BackButton />
 		</Box>
 
-		<Box sx={{ mt: 5, display: 'flex', alignItems: 'center' }}>
+		<Box sx={{ mt: 5, display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
 			<Box sx={{ width: { sm: '250px' } }}>
 				<SearchBar />
 			</Box>
 
-			<Button
-				variant="contained"
-				color="secondary"
-				sx={{ ml: 'auto !important', px: 5, py: 2 }}
-			>
-				Get Support
-			</Button>
+			<Link to='/supports/new' style={{ textDecoration: 'none', color: 'inherit'}}>
+				<Button
+					variant="contained"
+					color="secondary"
+					sx={{  px: 5, py: 2, }}
+				>
+					Get Support
+				</Button>
+			</Link>
 		</Box>
 	</>
 );

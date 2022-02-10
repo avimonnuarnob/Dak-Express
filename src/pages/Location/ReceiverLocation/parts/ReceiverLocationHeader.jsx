@@ -1,6 +1,7 @@
 /* eslint-disable arrow-body-style */
 import AddIcon from '@mui/icons-material/Add';
 import { Box, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
 import ActionButton from '../../../../components/atoms/ActionButton';
 import BackButton from '../../../../components/atoms/BackButton';
 
@@ -24,15 +25,17 @@ const ReceiverLocationHeader = () => {
 			>
 				Receiver Location
 			</Typography>
-			<ActionButton
-				label="ADD NEW LOCATION"
-				Icon={AddIcon}
-				color="typography.sec"
-				sx={{
-					p: 2,
-					ml: 2,
-				}}
-			/>
+			<Link to="/locations/receiver/new" style={{ textDecoration: 'none' }}>
+				<ActionButton
+					label="ADD NEW LOCATION"
+					Icon={AddIcon}
+					color="typography.sec"
+					sx={{
+						p: 2,
+						ml: 2,
+					}}
+				/>
+			</Link>
 			<BackButton />
 		</Box>
 	);
