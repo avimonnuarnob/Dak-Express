@@ -68,8 +68,8 @@ const SignUp = () => {
 				Choose Account Type
 			</Typography>
 
-			<Grid container spacing={3} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
-				<Grid item md={6} sm={10} xs={12}>
+			<Grid container style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }} spacing={3}>
+				<Grid item spacing={2} md={6} sm={10} xs={12}>
 					<Paper elevation={3} className={classes.signup__individual__card}>
 						<AccountCircleIcon className={classes.signup__individual__icon} />
 
@@ -89,7 +89,7 @@ const SignUp = () => {
 					</Paper>
 				</Grid>
 
-				<Grid item md={6} sm={10} xs={12}>
+				<Grid item spacing={2} md={6} sm={10} xs={12}>
 					<Paper elevation={3} className={classes.signup__business__card}>
 						<StorefrontIcon className={classes.signup__business__icon} />
 
