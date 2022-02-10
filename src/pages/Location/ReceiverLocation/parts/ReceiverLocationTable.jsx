@@ -17,10 +17,11 @@ import {
 	TableContainer,
 	TableHead,
 	TablePagination,
-	TableRow,
+	TableRow
 } from '@mui/material';
 import { styled, useTheme } from '@mui/material/styles';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import TableActionButton from '../../../../components/atoms/ActionButton';
 
 const FAKE_DATA = [
@@ -194,16 +195,23 @@ const ReceiverLocationTable = () => {
 											gap: 0.5,
 										}}
 									>
+									<Link to={`/locations/receiver/${index+1}`} style={{ textDecoration: 'none'}}>
 										<TableActionButton
 											Icon={VisibilityIcon}
 											color="typography.sec"
 											label="View"
+											sx={{ width: '100%'}}
 										/>
+										</Link>
+										
+										<Link to="/locations/receiver/new" style={{ textDecoration: 'none'}}>
 										<TableActionButton
 											Icon={EditIcon}
 											color="status.pending"
 											label="Edit"
+											sx={{ width: '100%'}}
 										/>
+										</Link>
 									</Box>
 								</StyledTableCell>
 							</StyledTableRow>

@@ -39,7 +39,7 @@ const AllShipments = () => {
 						Download
 					</Button>
 
-					<Link to="/create-new-shipment" style={{ textDecoration: 'none', color: 'inherit' }}>
+					<Link to="/new-shipment" style={{ textDecoration: 'none', color: 'inherit' }}>
 						<Button variant="outlined" color="secondary" sx={{ px: 2, py: 1, m: 1 }} startIcon={<AddOutlinedIcon />}>
 							Add New Shipment
 						</Button>

@@ -4,6 +4,7 @@ import { makeStyles } from '@mui/styles';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import PropTypes from 'prop-types';
 import { Suspense, useState } from 'react';
+// import { Outlet } from 'react-router-dom';
 import routeConfig from '../../routes';
 import routes from '../../routes/routes';
 import { DRAWER_WIDTH, FOOTER_HEIGHT, HEADER_HEIGHT } from './constants';

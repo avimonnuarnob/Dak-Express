@@ -3,7 +3,7 @@
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import { Box, Button, Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import TransactionDetailsTable from '../../Payment/parts/TransactionDetailsTable';
+import TransactionDetailsTable from '../../Transaction/parts/TransactionDetailsTable';
 
 const TABLE_FAKE_DATA = [
 	{

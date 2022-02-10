@@ -11,6 +11,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { makeStyles } from '@mui/styles';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Pagination from '../../../components/modecules/Pagination';
 import ShipmentStatus from '../../../components/modecules/ShipmentStatus';
 import FAKE_DATA from './FAKE_ISSUESDATA.json';
@@ -88,9 +89,9 @@ const IssuesTable = () => {
 					<TableBody>
 						{(rowsPerPage > 0
 							? FAKE_DATA?.slice(
-									page * rowsPerPage,
-									page * rowsPerPage + rowsPerPage
-							  )
+								page * rowsPerPage,
+								page * rowsPerPage + rowsPerPage
+							)
 							: FAKE_DATA
 						)?.map((row, index) => (
 							<StyledTableRow key={`Issue-${index + 1}`}>
@@ -110,14 +111,17 @@ const IssuesTable = () => {
 								</StyledTableCell>
 								<StyledTableCell align="left">
 									<Box className={classes.table__buttons}>
-										<Button
-											size="small"
-											variant="outlined"
-											color="secondary"
-											startIcon={<VisibilityOutlinedIcon />}
-										>
-											View
-										</Button>
+										<Link to={`/supports/${row?.i_id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+											<Button
+												sx={{ width: '100%' }}
+												size="small"
+												variant="outlined"
+												color="secondary"
+												startIcon={<VisibilityOutlinedIcon />}
+											>
+												View
+											</Button>
+										</Link>
 									</Box>
 								</StyledTableCell>
 							</StyledTableRow>

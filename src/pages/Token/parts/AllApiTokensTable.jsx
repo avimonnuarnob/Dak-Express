@@ -12,6 +12,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { makeStyles } from '@mui/styles';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Pagination from '../../../components/modecules/Pagination';
 import ShipmentStatus from '../../../components/modecules/ShipmentStatus';
 import apiTokens from './apiTokens.json';
@@ -94,9 +95,9 @@ const AllApiToknesTable = () => {
 					<TableBody>
 						{(rowsPerPage > 0
 							? apiTokens?.slice(
-									page * rowsPerPage,
-									page * rowsPerPage + rowsPerPage
-							  )
+								page * rowsPerPage,
+								page * rowsPerPage + rowsPerPage
+							)
 							: apiTokens
 						)?.map((token, index) => (
 							<StyledTableRow key={token?.access_key}>
@@ -123,22 +124,29 @@ const AllApiToknesTable = () => {
 								</StyledTableCell>
 								<StyledTableCell align="left">
 									<Box className={classes.table__buttons}>
-										<Button
-											size="small"
-											variant="outlined"
-											color="secondary"
-											startIcon={<VisibilityOutlinedIcon />}
-										>
-											View
-										</Button>
-										<Button
-											size="small"
-											variant="outlined"
-											className={classes['table__buttons--edit']}
-											startIcon={<EditOutlinedIcon />}
-										>
-											Edit
-										</Button>
+										<Link to={`/tokens/${index + 1}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+											<Button
+												sx={{ width: '100%' }}
+												size="small"
+												variant="outlined"
+												color="secondary"
+												startIcon={<VisibilityOutlinedIcon />}
+											>
+												View
+											</Button>
+										</Link>
+
+										<Link to="/tokens/new" style={{ textDecoration: 'none', color: 'inherit' }}>
+											<Button
+												sx={{ width: '100%' }}
+												size="small"
+												variant="outlined"
+												className={classes['table__buttons--edit']}
+												startIcon={<EditOutlinedIcon />}
+											>
+												Edit
+											</Button>
+										</Link>
 									</Box>
 								</StyledTableCell>
 							</StyledTableRow>

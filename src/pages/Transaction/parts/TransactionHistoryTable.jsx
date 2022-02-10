@@ -18,10 +18,11 @@ import {
 	TableHead,
 	TablePagination,
 	TableRow,
-	Typography,
+	Typography
 } from '@mui/material';
 import { styled, useTheme } from '@mui/material/styles';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import TableActionButton from '../../../components/atoms/ActionButton';
 import ShipmentStatus from '../../../components/modecules/ShipmentStatus';
 
@@ -181,9 +182,9 @@ const TransactionHistoryTable = () => {
 					<TableBody>
 						{(rowsPerPage > 0
 							? FAKE_DATA.slice(
-									page * rowsPerPage,
-									page * rowsPerPage + rowsPerPage
-							  )
+								page * rowsPerPage,
+								page * rowsPerPage + rowsPerPage
+							)
 							: FAKE_DATA
 						).map((row, index) => (
 							<StyledTableRow key={row.name}>
@@ -210,11 +211,14 @@ const TransactionHistoryTable = () => {
 								</StyledTableCell>
 
 								<StyledTableCell align="left">
-									<TableActionButton
-										Icon={RemoveRedEyeOutlinedIcon}
-										color="typography.sec"
-										label="View"
-									/>
+									<Link to={`/transactions/${row?.t_id}`} style={{ textDecoration: 'none' }}>
+										<TableActionButton
+											sx={{ width: '100%' }}
+											Icon={RemoveRedEyeOutlinedIcon}
+											color="typography.sec"
+											label="View"
+										/>
+									</Link>
 								</StyledTableCell>
 							</StyledTableRow>
 						))}

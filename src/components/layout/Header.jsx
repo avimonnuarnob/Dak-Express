@@ -212,57 +212,67 @@ const ProfileMenuItem = () => {
 					},
 				}}
 			>
-				<MenuItem className={classes.account__info}>
-					<Box>
-						<Avatar variant="rounded">
-							<PermIdentityOutlinedIcon />
-						</Avatar>
-					</Box>
-
-					<Box>
+				<Link to="/profile" style={{ textDecoration: 'none', color: 'inherit' }}>
+					<MenuItem className={classes.account__info}>
 						<Box>
-							<Typography variant="body1" className={classes.account__info__name}>
-								Mr. Shakil Ahmed
-							</Typography>
+							<Avatar variant="rounded">
+								<PermIdentityOutlinedIcon />
+							</Avatar>
 						</Box>
 
-						<Box className={classes.d_flex}>
-							<Typography variant="caption" className={classes.account__info__type}>
-								Business
-							</Typography>
-							<Typography variant="caption" className={classes.account__info__text}>
-								Free
-							</Typography>
+						<Box>
+							<Box>
+								<Typography variant="body1" className={classes.account__info__name}>
+									Mr. Shakil Ahmed
+								</Typography>
+							</Box>
+
+							<Box className={classes.d_flex}>
+								<Typography variant="caption" className={classes.account__info__type}>
+									Business
+								</Typography>
+								<Typography variant="caption" className={classes.account__info__text}>
+									Free
+								</Typography>
+							</Box>
 						</Box>
-					</Box>
-				</MenuItem>
+					</MenuItem>
+				</Link>
 
-				<MenuItem>
-					<Typography variant="body2" className={classes.account__item}>
-						Profile
-					</Typography>
-				</MenuItem>
+				<Link to="/profile" style={{ textDecoration: 'none', color: 'inherit' }}>
+					<MenuItem>
+						<Typography variant="body2" className={classes.account__item}>
+							Profile
+						</Typography>
+					</MenuItem>
+				</Link>
 
-				<MenuItem>
-					<Typography variant="body2" className={classes.account__item}>
-						Change Password
-					</Typography>
-				</MenuItem>
+				<Link to="/change-password" style={{ textDecoration: 'none', color: 'inherit' }}>
+					<MenuItem>
+						<Typography variant="body2" className={classes.account__item}>
+							Change Password
+						</Typography>
+					</MenuItem>
+				</Link>
 
-				<MenuItem>
-					<Typography variant="body2" className={classes.account__item}>
-						My API Token
-					</Typography>
-				</MenuItem>
+				<Link to="/tokens" style={{ textDecoration: 'none', color: 'inherit' }}>
+					<MenuItem>
+						<Typography variant="body2" className={classes.account__item}>
+							My API Token
+						</Typography>
+					</MenuItem>
+				</Link>
 
 				<Divider />
 
-				<MenuItem className={classes.account__last__item}>
-					<LockOpenOutlinedIcon fontSize="small" />
-					<Typography variant="body2" sx={{ marginLeft: '10px' }}>
-						Sign Out
-					</Typography>
-				</MenuItem>
+				<Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+					<MenuItem className={classes.account__last__item}>
+						<LockOpenOutlinedIcon fontSize="small" />
+						<Typography variant="body2" sx={{ marginLeft: '10px' }}>
+							Sign Out
+						</Typography>
+					</MenuItem>
+				</Link>
 			</Menu>
 		</>
 	);
@@ -329,9 +339,11 @@ const AuthenticatedHeader = ({ toggleDrawer = null, open = true, title = 'Dashbo
 
 					<Box className={classes.header__notification}>
 						<Tooltip title="Notifications">
-							<IconButton>
-								<NotificationsActiveOutlinedIcon />
-							</IconButton>
+							<Link to="/notifications" style={{ textDecoration: 'none', color: 'inherit' }}>
+								<IconButton>
+									<NotificationsActiveOutlinedIcon />
+								</IconButton>
+							</Link>
 						</Tooltip>
 					</Box>
 
