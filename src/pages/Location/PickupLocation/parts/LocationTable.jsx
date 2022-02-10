@@ -1,14 +1,10 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable arrow-body-style */
 import EditIcon from '@mui/icons-material/Edit';
-import FirstPageIcon from '@mui/icons-material/FirstPage';
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import LastPageIcon from '@mui/icons-material/LastPage';
-import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import {
 	Box,
-	IconButton,
+	Button,
 	Paper,
 	Table,
 	TableBody,
@@ -16,12 +12,13 @@ import {
 	tableCellClasses,
 	TableContainer,
 	TableHead,
-	TablePagination,
 	TableRow,
+	Typography,
 } from '@mui/material';
-import { styled, useTheme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
+import { makeStyles } from '@mui/styles';
 import { useState } from 'react';
-import TableActionButton from '../../../../components/atoms/ActionButton';
+import Pagination from '../../../../components/modecules/Pagination';
 
 const FAKE_DATA = [
 	{
@@ -70,69 +67,25 @@ const StyledTableRow = styled(TableRow)(() => ({
 	},
 }));
 
-const TablePaginationActions = (props) => {
-	const theme = useTheme();
-	const { count, page, rowsPerPage, onPageChange } = props;
-
-	const handleFirstPageButtonClick = (event) => {
-		onPageChange(event, 0);
-	};
-
-	const handleBackButtonClick = (event) => {
-		onPageChange(event, page - 1);
-	};
-
-	const handleNextButtonClick = (event) => {
-		onPageChange(event, page + 1);
-	};
-
-	const handleLastPageButtonClick = (event) => {
-		onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
-	};
-
-	return (
-		<Box sx={{ flexShrink: 0, ml: 2.5 }}>
-			<IconButton
-				onClick={handleFirstPageButtonClick}
-				disabled={page === 0}
-				aria-label="first page"
-			>
-				{theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
-			</IconButton>
-			<IconButton
-				onClick={handleBackButtonClick}
-				disabled={page === 0}
-				aria-label="previous page"
-			>
-				{theme.direction === 'rtl' ? (
-					<KeyboardArrowRight />
-				) : (
-					<KeyboardArrowLeft />
-				)}
-			</IconButton>
-			<IconButton
-				onClick={handleNextButtonClick}
-				disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-				aria-label="next page"
-			>
-				{theme.direction === 'rtl' ? (
-					<KeyboardArrowLeft />
-				) : (
-					<KeyboardArrowRight />
-				)}
-			</IconButton>
-			<IconButton
-				onClick={handleLastPageButtonClick}
-				disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-				aria-label="last page"
-			>
-				{theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
-			</IconButton>
-		</Box>
-	);
-};
+const useStyles = makeStyles((theme) => ({
+	table: {},
+	table__buttons: {
+		display: 'flex',
+		flexDirection: 'column',
+		gap: '5px',
+		justifyContent: 'center',
+	},
+	'table__buttons--edit': {
+		color: `${theme.palette.status.pending} !important`,
+		borderColor: `${theme.palette.status.pending} !important`,
+		'&:hover': {
+			borderColor: `${theme.palette.status.pending} !important`,
+		},
+	},
+}));
 
 const LocationTable = () => {
+	const classes = useStyles();
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(5);
 
@@ -140,25 +93,18 @@ const LocationTable = () => {
 	const emptyRows =
 		page > 0 ? Math.max(0, (1 + page) * rowsPerPage - FAKE_DATA.length) : 0;
 
-	const handleChangePage = (event, newPage) => {
+	const handlePageChange = (event, newPage) => {
+		// TODO:  Make API call while page changes
 		setPage(newPage);
 	};
 
-	const handleChangeRowsPerPage = (event) => {
+	const handlePageRowsChange = (event) => {
 		setRowsPerPage(parseInt(event.target.value, 10));
 		setPage(0);
 	};
 	return (
 		<>
-			<TableContainer
-				component={Paper}
-				sx={{
-					borderRadius: 3,
-					// border: () => `1px solid ##E5EBF0`,
-					minWidth: '1000px',
-				}}
-				// elevation={3}
-			>
+			<TableContainer component={Paper}>
 				<Table aria-label="customized table">
 					<TableHead>
 						<TableRow>
@@ -179,7 +125,9 @@ const LocationTable = () => {
 							: FAKE_DATA
 						).map((row, index) => (
 							<StyledTableRow key={row.name}>
-								<StyledTableCell align="left">{index + 1}</StyledTableCell>
+								<StyledTableCell align="left">
+									<Typography fontWeight={600}>{index + 1}</Typography>
+								</StyledTableCell>
 								<StyledTableCell align="left">{row.name}</StyledTableCell>
 								<StyledTableCell align="left">{row.mobile_no}</StyledTableCell>
 								<StyledTableCell align="left">
@@ -187,23 +135,25 @@ const LocationTable = () => {
 								</StyledTableCell>
 								<StyledTableCell align="left">{row.address}</StyledTableCell>
 								<StyledTableCell align="left">
-									<Box
-										sx={{
-											display: 'flex',
-											flexDirection: 'column',
-											gap: 0.5,
-										}}
-									>
-										<TableActionButton
-											Icon={VisibilityIcon}
-											color="typography.sec"
-											label="View"
-										/>
-										<TableActionButton
-											Icon={EditIcon}
-											color="status.pending"
-											label="Edit"
-										/>
+									<Box className={classes.table__buttons}>
+										<Button
+											size="small"
+											variant="outlined"
+											color="secondary"
+											startIcon={<VisibilityOutlinedIcon />}
+										>
+											View
+										</Button>
+
+										<Button
+											size="small"
+											variant="outlined"
+											color="secondary"
+											className={classes['table__buttons--edit']}
+											startIcon={<EditIcon />}
+										>
+											Edit
+										</Button>
 									</Box>
 								</StyledTableCell>
 							</StyledTableRow>
@@ -217,26 +167,15 @@ const LocationTable = () => {
 					</TableBody>
 				</Table>
 			</TableContainer>
-			<TablePagination
-				rowsPerPageOptions={[1, 2, 5, { label: 'All', value: -1 }]}
-				colSpan={3}
-				count={FAKE_DATA.length}
-				rowsPerPage={rowsPerPage}
-				page={page}
-				SelectProps={{
-					inputProps: {
-						'aria-label': 'rows per page',
-					},
-					native: true,
-				}}
-				onPageChange={handleChangePage}
-				onRowsPerPageChange={handleChangeRowsPerPage}
-				ActionsComponent={TablePaginationActions}
-				sx={{
-					display: 'block',
-					borderBottom: 0,
-				}}
-			/>
+			<Box sx={{ py: '10px' }}>
+				<Pagination
+					data={FAKE_DATA}
+					page={page}
+					rowsPerPage={rowsPerPage}
+					handlePageChange={handlePageChange}
+					handlePageRowsChange={handlePageRowsChange}
+				/>
+			</Box>
 		</>
 	);
 };
