@@ -22,6 +22,7 @@ import {
 } from '@mui/material';
 import { styled, useTheme } from '@mui/material/styles';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import TableActionButton from '../../../components/atoms/ActionButton';
 import TableChip from '../../../components/atoms/TableChip';
 
@@ -192,9 +193,9 @@ const ShipmentTable = () => {
 					<TableBody>
 						{(rowsPerPage > 0
 							? FAKE_DATA.slice(
-									page * rowsPerPage,
-									page * rowsPerPage + rowsPerPage
-							  )
+								page * rowsPerPage,
+								page * rowsPerPage + rowsPerPage
+							)
 							: FAKE_DATA
 						).map((row, index) => (
 							<StyledTableRow key={row.name}>
@@ -234,11 +235,13 @@ const ShipmentTable = () => {
 								</StyledTableCell>
 
 								<StyledTableCell align="left">
-									<TableActionButton
-										Icon={VisibilityIcon}
-										color="typography.sec"
-										label="View"
-									/>
+									<Link to={`/shipments/${row?.s_id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+										<TableActionButton
+											Icon={VisibilityIcon}
+											color="typography.sec"
+											label="View"
+										/>
+									</Link>
 								</StyledTableCell>
 							</StyledTableRow>
 						))}

@@ -1,29 +1,21 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable arrow-body-style */
-import { Box, Button, Grid, Typography } from '@mui/material';
+import AddLocationOutlinedIcon from '@mui/icons-material/AddLocationOutlined';
 import AddToPhotosOutlinedIcon from '@mui/icons-material/AddToPhotosOutlined';
 import HistoryOutlinedIcon from '@mui/icons-material/HistoryOutlined';
-import AddLocationOutlinedIcon from '@mui/icons-material/AddLocationOutlined';
 import QuizOutlinedIcon from '@mui/icons-material/QuizOutlined';
+import { Box, Button, Grid, Typography } from '@mui/material';
+import { Link } from 'react-router-dom';
 
-const QuickLinks = () => {
-	return (
+const QuickLinks = () => (
+	<Box sx={{ mt: 3, color: (theme) => theme.palette.typography.main }}>
+		<Typography sx={{ typography: { sm: 'h5', xs: 'h6' }, fontWeight: '600 !important' }}>Quick Links</Typography>
 		<Box
 			sx={{
 				mt: 3,
-				color: (theme) => theme.palette.typography.main,
 			}}
 		>
-			<Typography sx={{ typography: { sm: 'h5', xs: 'h6' }, fontWeight: '600 !important' }}>
-				Quick Links
-			</Typography>
-			<Box
-				sx={{
-					mt: 3,
-				}}
-			>
-				<Grid container spacing={2}>
-					<Grid item xs={6} sm={6} md={3}>
+			<Grid container spacing={2}>
+				<Grid item xs={6} sm={6} md={3}>
+					<Link to="/new-shipment" style={{ textDecoration: 'none', color: 'inherit' }}>
 						<Button
 							fullWidth
 							variant="contained"
@@ -62,14 +54,14 @@ const QuickLinks = () => {
 										}}
 									/>
 								</Box>
-								<Typography sx={{ my: 2, fontWeight: '600 !important' }}>
-									Create A Shipment
-								</Typography>
+								<Typography sx={{ my: 2, fontWeight: '600 !important' }}>Create A Shipment</Typography>
 							</Box>
 						</Button>
-					</Grid>
+					</Link>
+				</Grid>
 
-					<Grid item xs={6} sm={6} md={3}>
+				<Grid item xs={6} sm={6} md={3}>
+					<Link to="/transactions" style={{ textDecoration: 'none', color: 'inherit' }}>
 						<Button
 							fullWidth
 							variant="contained"
@@ -107,14 +99,14 @@ const QuickLinks = () => {
 										}}
 									/>
 								</Box>
-								<Typography sx={{ my: 2, fontWeight: '600 !important' }}>
-									Transaction History
-								</Typography>
+								<Typography sx={{ my: 2, fontWeight: '600 !important' }}>Transaction History</Typography>
 							</Box>
 						</Button>
-					</Grid>
+					</Link>
+				</Grid>
 
-					<Grid item xs={6} sm={6} md={3}>
+				<Grid item xs={6} sm={6} md={3}>
+					<Link to="/locations/pickup" style={{ textDecoration: 'none', color: 'inherit' }}>
 						<Button
 							fullWidth
 							variant="contained"
@@ -156,9 +148,11 @@ const QuickLinks = () => {
 								<Typography sx={{ my: 2, fontWeight: '600 !important' }}>Location</Typography>
 							</Box>
 						</Button>
-					</Grid>
+					</Link>
+				</Grid>
 
-					<Grid item xs={6} sm={6} md={3}>
+				<Grid item xs={6} sm={6} md={3}>
+					<Link to="/supports" style={{ textDecoration: 'none', color: 'inherit' }}>
 						<Button
 							fullWidth
 							variant="contained"
@@ -201,11 +195,11 @@ const QuickLinks = () => {
 								<Typography sx={{ my: 2, fontWeight: '600 !important' }}>Support</Typography>
 							</Box>
 						</Button>
-					</Grid>
+					</Link>
 				</Grid>
-			</Box>
+			</Grid>
 		</Box>
-	);
-};
+	</Box>
+);
 
 export default QuickLinks;
