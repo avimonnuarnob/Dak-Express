@@ -18,7 +18,7 @@ const validateBusinessInfo = (values) => {
 	} else if (values?.businessName?.length <= 3) {
 		errors.businessName = 'Business name must be a minimum of 3 characters';
 	} else if (values?.businessName?.length >= 100) {
-		errors.businessName = 'Business name can be a maximum of 100 characters';
+		errors.businessName = 'Business name can not be a maximum of 100 characters';
 	}
 
 	if (!values?.website) {
