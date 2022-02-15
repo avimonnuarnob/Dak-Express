@@ -4,17 +4,22 @@
 import { Box, Button, Grid, Paper, TextField, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Form, Formik } from 'formik';
+import { useNavigate } from 'react-router';
 import FileUploadElement from '../../../components/modecules/FileUploadElement';
+import FileUploadInputField from '../../../components/modecules/FileUploadInputField';
 import InputElement from '../../../components/modecules/InputElement';
 import PhoneNumberInput from '../../../components/modecules/PhoneNumberInput';
+import PhoneNumberInputField from '../../../components/modecules/PhoneNumberInputField';
 import SelectElement from '../../../components/modecules/SelectInput';
+import SelectInputField from '../../../components/modecules/SelectInputField';
+import TextInputField from '../../../components/modecules/TextInputField';
 import { sleep } from '../../../utils/functions';
 import createIssueInitialValues from '../validation/createIssueInitialValues';
 import createIssueValidation from '../validation/createIssueValidation';
 
 const issueItems = [
-	{ id: 1, label: 'blah', value: 'blah' },
-	{ id: 2, label: 'blah blah', value: 'blah blah' },
+	{ id: '1', label: 'blah', value: 'blah' },
+	{ id: '2', label: 'blah blah', value: 'blah blah' },
 ];
 
 const useStyles = makeStyles((theme) => ({
@@ -59,6 +64,7 @@ const useStyles = makeStyles((theme) => ({
 
 const CreateIssueForm = () => {
 	const classes = useStyles();
+	const navigate = useNavigate();
 
 	const submitForm = async (values, actions) => {
 		await sleep(2000);
@@ -97,77 +103,50 @@ const CreateIssueForm = () => {
 						<fieldset disabled={isSubmitting} style={{ border: 'none' }}>
 							<Grid container spacing={2}>
 								<Grid item md={6} sm={6} xs={12}>
-									<InputElement
+									<TextInputField
 										fullWidth
 										isRequired
 										label="Full Name"
 										name="fullName"
-										boxStyles={{ paddingTop: '10px' }}
-										value={values.fullName}
-										onChange={handleChange}
-										onBlur={handleBlur}
-										error={touched.fullName && Boolean(errors.fullName)}
-										helperText={touched.fullName && errors.fullName}
 									/>
 								</Grid>
 
 								<Grid item md={6} sm={6} xs={12}>
-									<Box sx={{ paddingTop: '10px' }}>
-										<PhoneNumberInput
-											fullWidth
-											isRequired
-											label="Mobile Number"
-											name="phone"
-											value={values.phone}
-											handleChange={handleChange}
-											handleBlur={handleBlur}
-											error={touched.phone && Boolean(errors.phone)}
-											helperText={touched.phone && errors.phone}
-											setFieldValue={setFieldValue}
-										/>
-									</Box>
+									<PhoneNumberInputField
+										fullWidth
+										isRequired
+										label="Mobile Number"
+										name="phone"
+									/>
 								</Grid>
 
 								<Grid item md={6} sm={6} xs={12}>
-									<InputElement
+									<TextInputField
 										fullWidth
 										isRequired
 										label="Email"
 										name="email"
-										boxStyles={{ paddingTop: '10px' }}
-										value={values.email}
-										onChange={handleChange}
-										onBlur={handleBlur}
-										error={touched.email && Boolean(errors.email)}
-										helperText={touched.email && errors.email}
 									/>
 								</Grid>
 
 								<Grid item md={6} sm={6} xs={12}>
-									<SelectElement
+									<SelectInputField
+										items={issueItems}
 										fullWidth
 										isRequired
-										items={issueItems}
 										label="Subject"
 										name="subject"
-										boxStyles={{ paddingTop: '10px' }}
-										value={values.districtOrState}
-										onChange={handleChange}
-										onBlur={handleBlur}
-										error={touched.subject && Boolean(errors.subject)}
-										helperText={touched.subject && errors.subject}
 									/>
 								</Grid>
 
 								<Grid item md={6} sm={6} xs={12}>
 									<FileUploadElement
 										fullWidth
-										isRequired
+										// isrequired
 										type="file"
 										label=""
 										name="attachment"
-										defaultValue={null}
-										boxStyles={{ paddingTop: '10px' }}
+										// defaultValue={null}
 										value={values.attachment}
 										onChange={handleChange}
 										onBlur={handleBlur}
@@ -177,34 +156,22 @@ const CreateIssueForm = () => {
 								</Grid>
 
 								<Grid item md={6} sm={6} xs={12}>
-									<InputElement
+									<TextInputField
 										fullWidth
 										isRequired
 										label="Shipment Reference ID"
 										name="ship_id"
-										boxStyles={{ paddingTop: '10px' }}
-										value={values.ship_id}
-										onChange={handleChange}
-										onBlur={handleBlur}
-										error={touched.ship_id && Boolean(errors.ship_id)}
-										helperText={touched.ship_id && errors.ship_id}
 									/>
 								</Grid>
 
 								<Grid item md={12} sm={12} xs={12}>
-									<TextField
-										multiline
-										minRows={4}
+									<TextInputField
 										fullWidth
 										isRequired
+										multiline
+										minRows={4}
 										label="Message"
 										name="message"
-										boxStyles={{ paddingTop: '10px' }}
-										value={values.message}
-										onChange={handleChange}
-										onBlur={handleBlur}
-										error={touched.message && Boolean(errors.message)}
-										helperText={touched.message && errors.message}
 									/>
 								</Grid>
 							</Grid>
@@ -215,11 +182,11 @@ const CreateIssueForm = () => {
 							type="button"
 							variant="outlined"
 							disabled={false}
-							onClick={() => {}}
+							onClick={() => navigate(-1)}
 							sx={{ ml: 'auto !important' }}
 							className={classes.issue__back__button}
 						>
-							Back
+							Cancel
 						</Button>
 
 						<Button

@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable arrow-body-style */
 import { Box, Chip, Paper, Typography } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import TransactionDetailsCard from './TransactionDetailsCard';
 import TransactionDetailsTable from './TransactionDetailsTable';
 
@@ -32,97 +33,55 @@ const TABLE_FAKE_DATA = [
 	},
 ];
 
+const useStyles = makeStyles((theme) => ({
+	card: {},
+	card__header: {
+		padding: theme.spacing(3, 0),
+		display: 'flex',
+		alignItems: 'center',
+		borderBottom: `1px solid ${theme.palette.secondary.main}`,
+	},
+}));
+
 const TransactionHistoryDetailsBody = () => {
+	const classes = useStyles();
 	return (
 		<>
-			<Paper
-				sx={{
-					p: 2,
-					my: 3,
-				}}
-			>
-				<Box
-					sx={{
-						py: 3,
-						display: 'flex',
-						alignItems: 'center',
-						borderBottom: (theme) =>
-							`1px solid ${theme.palette.secondary.main}`,
-					}}
-				>
+			<Paper sx={{ p: 2, mt: 3 }}>
+				<Box className={classes.card__header}>
 					<Typography
 						fontSize="24px"
 						fontWeight="bold"
-						sx={{
-							color: 'status.pending',
-						}}
+						sx={{ color: 'status.pending' }}
 					>
 						Transaction Details
 					</Typography>
-					<Box
-						sx={{
-							ml: 'auto',
-						}}
-					>
+					<Box sx={{ ml: 'auto' }}>
 						<Chip
 							label="SUCCESS"
 							sx={{
 								backgroundColor: 'status.success',
 								color: (theme) => theme.palette.primary.white,
-								px: {
-									xs: 2,
-									sm: 5,
-								},
+								px: { xs: 2, sm: 5 },
 							}}
 						/>
 					</Box>
 				</Box>
-
-				<Box
-					sx={{
-						border: '1px solid #E5EBF0',
-						mt: 3,
-						borderRadius: 2,
-						overflow: 'scroll',
-					}}
-				>
-					<TransactionDetailsCard data={FAKE_DATA} />
-				</Box>
+				<TransactionDetailsCard data={FAKE_DATA} />
 			</Paper>
 
-			<Paper
-				sx={{
-					p: 2,
-					my: 3,
-				}}
-			>
-				<Box
-					sx={{
-						py: 3,
-						display: 'flex',
-						borderBottom: (theme) =>
-							`1px solid ${theme.palette.secondary.main}`,
-					}}
-				>
+			<Paper sx={{ p: 2, mt: 3 }}>
+				<Box className={classes.card__header}>
 					<Typography
 						fontSize="24px"
 						fontWeight="bold"
-						sx={{
-							color: 'status.pending',
-						}}
+						sx={{ color: 'status.pending' }}
 					>
 						Parcel Details
 					</Typography>
 				</Box>
 
-				<Box
-					sx={{
-						border: '1px solid #E5EBF0',
-						mt: 3,
-						borderRadius: 2,
-						overflow: 'scroll',
-					}}
-				>
+				<Box sx={{ mt: 3 }}>
 					<TransactionDetailsTable data={TABLE_FAKE_DATA} />
 				</Box>
 			</Paper>

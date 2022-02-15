@@ -1,12 +1,27 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable arrow-body-style */
-import EditIcon from '@mui/icons-material/Edit';
-import { Box, Paper, Typography } from '@mui/material';
+import { Box, Button, Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import ActionButton from '../../../../components/atoms/ActionButton';
+import { Link } from 'react-router-dom';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 
 const useStyles = makeStyles((theme) => ({
-	card: {
+	button: {},
+	button__edit: {
+		color: `${theme.palette.status.pending} !important`,
+		borderColor: `${theme.palette.status.pending} !important`,
+		'&:hover': {
+			borderColor: `${theme.palette.status.pending} !important`,
+		},
+	},
+
+	card: {},
+	card__header: {
+		padding: theme.spacing(3, 0),
+		display: 'flex',
+		borderBottom: `1px solid ${theme.palette.secondary.main}`,
+	},
+	card__body: {
 		display: 'grid',
 		gridTemplateColumns: '1fr',
 
@@ -19,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 			gridTemplateColumns: 'repeat(4, 1fr)',
 		},
 	},
-	card__item: {
+	card__body__item: {
 		borderBottom: '1px solid #E5EBF0',
 		'&:nth-last-child(-n+2)': {
 			borderBottom: 0,
@@ -30,44 +45,40 @@ const useStyles = makeStyles((theme) => ({
 const ReceiverLocationDetailsBody = () => {
 	const classes = useStyles();
 	return (
-		<Paper
-			sx={{
-				p: 2,
-				mt: 3,
-			}}
-		>
-			<Box
-				sx={{
-					py: 3,
-					display: 'flex',
-					borderBottom: (theme) => `1px solid ${theme.palette.secondary.main}`,
-				}}
-			>
+		<Paper sx={{ p: 2, mt: 3 }}>
+			<Box className={classes.card__header}>
 				<Typography
 					fontSize="24px"
 					fontWeight="bold"
-					sx={{
-						color: 'status.pending',
-					}}
+					sx={{ color: 'status.pending' }}
 				>
 					Receiver Details
 				</Typography>
-				<Box
-					sx={{
-						ml: 'auto',
-					}}
-				>
-					<ActionButton label="EDIT" color="status.pending" Icon={EditIcon} />
+				<Box sx={{ ml: 'auto' }}>
+					<Link
+						to="/locations/receiver/new"
+						style={{ textDecoration: 'none', color: 'inherit' }}
+					>
+						<Button
+							sx={{ width: '100%' }}
+							size="small"
+							variant="outlined"
+							className={classes.button__edit}
+							startIcon={<EditOutlinedIcon />}
+						>
+							Edit
+						</Button>
+					</Link>
 				</Box>
 			</Box>
 
-			<div className={classes.card}>
+			<div className={classes.card__body}>
 				<Typography
 					variant="body2"
 					fontWeight="bold"
 					display="inline"
 					padding={2}
-					className={classes.card__item}
+					className={classes.card__body__item}
 				>
 					Full Name
 				</Typography>
@@ -76,10 +87,8 @@ const ReceiverLocationDetailsBody = () => {
 					variant="body2"
 					display="inline"
 					padding={2}
-					className={classes.card__item}
-					sx={{
-						gridColumn: '2 / -1',
-					}}
+					className={classes.card__body__item}
+					sx={{ gridColumn: '2 / -1' }}
 				>
 					Md Rafez Hossain
 				</Typography>
@@ -89,7 +98,7 @@ const ReceiverLocationDetailsBody = () => {
 					fontWeight="bold"
 					display="inline"
 					padding={2}
-					className={classes.card__item}
+					className={classes.card__body__item}
 				>
 					Business Name
 				</Typography>
@@ -98,13 +107,8 @@ const ReceiverLocationDetailsBody = () => {
 					variant="body2"
 					display="inline"
 					padding={2}
-					className={classes.card__item}
-					sx={{
-						borderRight: {
-							md: '1px solid #E5EBF0',
-							sm: 0,
-						},
-					}}
+					className={classes.card__body__item}
+					sx={{ borderRight: { md: '1px solid #E5EBF0', sm: 0 } }}
 				>
 					Cityscape Global Ltd
 				</Typography>
@@ -114,7 +118,7 @@ const ReceiverLocationDetailsBody = () => {
 					fontWeight="bold"
 					display="inline"
 					padding={2}
-					className={classes.card__item}
+					className={classes.card__body__item}
 				>
 					Mobile Number
 				</Typography>
@@ -123,7 +127,7 @@ const ReceiverLocationDetailsBody = () => {
 					variant="body2"
 					display="inline"
 					padding={2}
-					className={classes.card__item}
+					className={classes.card__body__item}
 				>
 					+880 1324 249011
 				</Typography>
@@ -133,7 +137,7 @@ const ReceiverLocationDetailsBody = () => {
 					fontWeight="bold"
 					display="inline"
 					padding={2}
-					className={classes.card__item}
+					className={classes.card__body__item}
 				>
 					Address
 				</Typography>
@@ -141,10 +145,8 @@ const ReceiverLocationDetailsBody = () => {
 					variant="body2"
 					display="inline"
 					padding={2}
-					className={classes.card__item}
-					sx={{
-						gridColumn: '2 / -1',
-					}}
+					className={classes.card__body__item}
+					sx={{ gridColumn: '2 / -1' }}
 				>
 					Cityscape Tower, 8th Floor, 53 Gulshan Avenue, Gulshan-1, Dhaka-1212,
 					Bangladesh.

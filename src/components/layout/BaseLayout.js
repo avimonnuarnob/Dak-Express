@@ -1,3 +1,5 @@
+/* eslint-disable no-self-compare */
+/* eslint-disable prettier/prettier */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
@@ -15,7 +17,9 @@ import Header from './Header';
 import ProgressBar from './ProgressBar';
 import Sidebar from './Sidebar';
 
-const MainContentLayout = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(({ theme, open }) => ({
+const MainContentLayout = styled('main', {
+	shouldForwardProp: (prop) => prop !== 'open',
+})(({ theme, open }) => ({
 	flexGrow: 1,
 	transition: theme.transitions.create('margin', {
 		easing: theme.transitions.easing.sharp,
@@ -77,12 +81,22 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const BaseLayout = () => {
-	const [open, setOpen] = useState(true);
+	const [open, setOpen] = useState(
+		() => localStorage.getItem('sidebar') === 'true'
+	);
 	const { state: authenticated } = useAuthToken();
 
-	const toggleDrawer = () => setOpen((prevState) => !prevState);
+	const toggleDrawer = () => {
+		setOpen((prevState) => {
+			localStorage.setItem('sidebar', !prevState);
+			return !prevState;
+		});
+	};
 
 	const classes = useStyles();
+
+	console.log('hello', !!localStorage.getItem('sidebar'));
+	console.log(open);
 
 	return (
 		<>

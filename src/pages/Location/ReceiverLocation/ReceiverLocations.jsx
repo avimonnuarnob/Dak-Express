@@ -22,7 +22,8 @@ const ReceiverLocations = () => {
 	return (
 		<Box sx={{ py: 2, px: 3 }}>
 			<ReceiverLocationHeader />
-			<Box sx={{ mt: 5, borderRadius: 3, overflow: 'scroll' }}>
+
+			<Box sx={{ mt: 3 }}>
 				<ReceiverLocationTable />
 			</Box>
 		</Box>

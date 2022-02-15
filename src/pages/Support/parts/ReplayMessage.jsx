@@ -3,12 +3,13 @@ import ReplyAllIcon from '@mui/icons-material/ReplyAll';
 import { alpha, Box, Button, Grid, Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import ReplyMessageForm from './ReplyMessageForm';
 
 const useStyles = makeStyles((theme) => ({
 	button: {},
 	box: {
-		padding: theme.spacing(4, 4),
+		padding: theme.spacing(2, 2),
 		margin: theme.spacing(3, 0, 0, 0),
 	},
 	box__header: {
@@ -78,10 +79,14 @@ const ReplayMessage = () => {
 					>
 						Reply
 					</Button>
-
-					<Button variant="contained" className={classes.button__support}>
-						Get Another Support
-					</Button>
+					<Link
+						to="/supports/new"
+						style={{ textDecoration: 'none', color: 'inherit' }}
+					>
+						<Button variant="contained" className={classes.button__support}>
+							Get Another Support
+						</Button>
+					</Link>
 				</Box>
 			) : (
 				<ReplyMessageForm toggleMessageForm={toggleMessageForm} />

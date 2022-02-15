@@ -32,12 +32,7 @@ const StyledTableRow = styled(TableRow)(() => ({
 }));
 
 const TransactionDetailsTable = ({ data }) => (
-	<TableContainer
-		component={Paper}
-		sx={{
-			minWidth: '1000px',
-		}}
-	>
+	<TableContainer component={Paper}>
 		<Table aria-label="customized table">
 			<TableHead>
 				<TableRow>

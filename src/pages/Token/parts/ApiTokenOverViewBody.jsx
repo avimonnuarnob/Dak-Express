@@ -1,12 +1,21 @@
 /* eslint-disable prettier/prettier */
-import ToggleOnOutlinedIcon from '@mui/icons-material/ToggleOnOutlined';
-import { Box, Button, Chip, Paper, Typography } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+// import ToggleOnOutlinedIcon from '@mui/icons-material/ToggleOnOutlined';
+import {
+	Box,
+	// Button,
+	Chip,
+	// FormControlLabel,
+	Paper,
+	Switch,
+	Typography,
+} from '@mui/material';
+import { makeStyles, styled } from '@mui/styles';
+import { useState } from 'react';
 import ApiTokenOverviewCard from './ApiTokenOverviewCard';
 
 const useStyles = makeStyles((theme) => ({
 	box: {
-		padding: theme.spacing(4, 4),
+		padding: theme.spacing(3, 3),
 		margin: theme.spacing(3, 0, 0, 0),
 	},
 	box__header: {
@@ -20,10 +29,15 @@ const useStyles = makeStyles((theme) => ({
 		},
 	},
 	box__header__chip: {
-		backgroundColor: `${theme.palette.status.success} !important`,
 		color: `${theme.palette.primary.white} !important`,
 		padding: `${theme.spacing(0, 5)} !important`,
 		fontWeight: '600',
+	},
+	'box__header__chip--active': {
+		backgroundColor: `${theme.palette.status.success} !important`,
+	},
+	'box__header__chip--deactive': {
+		backgroundColor: `${theme.palette.status.failed} !important`,
 	},
 	box__header__button: {
 		marginRight: '15px !important',
@@ -36,8 +50,23 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
+const StyledSwitch = styled(Switch)(({ theme }) => ({
+	'& .MuiSwitch-switchBase.Mui-checked': {
+		color: theme.palette.status.success,
+	},
+	'& .MuiSwitch-switchBase.Mui-checked + .MuiSwitch-track': {
+		backgroundColor: theme.palette.status.success,
+	},
+}));
+
 const ApiTokenOverViewBody = () => {
 	const classes = useStyles();
+
+	const [checked, setChecked] = useState(true);
+
+	const handleChange = () => {
+		setChecked((c) => !c);
+	};
 	return (
 		<Paper className={classes.box}>
 			<Box className={classes.box__header}>
@@ -45,18 +74,25 @@ const ApiTokenOverViewBody = () => {
 					API Token
 				</Typography>
 				<Box sx={{ ml: 'auto' }}>
-					<Button
-						size="small"
-						variant="outlined"
-						startIcon={<ToggleOnOutlinedIcon />}
-						className={classes.box__header__button}
-					>
-						Revoke
-					</Button>
-					<Chip label="Active" className={classes.box__header__chip} />
+					<StyledSwitch
+						checked={checked}
+						onChange={handleChange}
+						inputProps={{ 'aria-label': 'controlled' }}
+					/>
+					<Chip
+						label={checked ? 'Active' : 'Deactive'}
+						className={[
+							classes.box__header__chip,
+							`${
+								checked
+									? classes['box__header__chip--active']
+									: classes['box__header__chip--deactive']
+							}`,
+						].join(' ')}
+					/>
 				</Box>
 			</Box>
-			<ApiTokenOverviewCard />
+			<ApiTokenOverviewCard checked={checked} />
 		</Paper>
 	);
 };

@@ -1,21 +1,22 @@
 /* eslint-disable prettier/prettier */
 import DownloadIcon from '@mui/icons-material/Download';
-import { Box, Button, Typography } from '@mui/material';
+import { Box, Button } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import BackButton from '../../../components/atoms/BackButton';
 import SearchBar from '../../../components/atoms/SearchBar';
 import DateInput from '../../../components/modecules/DateInput';
+import HeaderTitle from '../../../components/atoms/HeaderTitle';
 
 const useStyles = makeStyles((theme) => ({
 	button: {},
 	button__download: {
+		padding: `${theme.spacing(2, 3)} !important`,
 		color: `${theme.palette.primary.white} !important`,
 		borderColor: `${theme.palette.secondary.main} !important`,
 		backgroundColor: `${theme.palette.secondary.main} !important`,
 		'&:hover': {
 			borderColor: `${theme.palette.status.pending} !important`,
 		},
-		padding: '0 20px !important',
 	},
 }));
 
@@ -25,50 +26,28 @@ const TransactionHistoryHeader = () => {
 		<>
 			<Box
 				sx={{
-					display: {
-						xs: 'block',
-						sm: 'flex',
-					},
+					display: { xs: 'block', sm: 'flex' },
 					alignItems: 'center',
 				}}
 			>
-				<Typography
-					variant="h4"
-					fontWeight="bold"
-					sx={{
-						color: 'typography.main',
-					}}
-				>
-					Transaction History
-				</Typography>
+				<HeaderTitle label="Transaction History" />
 
 				<BackButton />
 			</Box>
+
 			<Box
 				sx={{
 					mt: 3,
 					display: 'flex',
-					flexDirection: {
-						xs: 'column',
-						sm: 'row',
-					},
+					flexDirection: { xs: 'column', sm: 'row' },
 				}}
 			>
-				<Box
-					sx={{
-						width: {
-							sm: '250px',
-						},
-					}}
-				>
+				<Box sx={{ width: { sm: '250px' } }}>
 					<SearchBar />
 				</Box>
 				<Box
 					sx={{
-						ml: {
-							xs: 0,
-							sm: 'auto',
-						},
+						ml: { xs: 0, sm: 'auto' },
 						display: 'flex',
 						gap: 2,
 					}}

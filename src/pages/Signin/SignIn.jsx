@@ -1,17 +1,29 @@
-import { Box, Grid } from '@mui/material';
-import Button from '@mui/material/Button';
-import Checkbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import FormGroup from '@mui/material/FormGroup';
-import Paper from '@mui/material/Paper';
+/* eslint-disable prettier/prettier */
+import {
+	Box,
+	Button,
+	CircularProgress,
+	Grid,
+	Paper,
+	Typography,
+} from '@mui/material';
 import { styled } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
 import { makeStyles } from '@mui/styles';
 import { Form, Formik } from 'formik';
-import * as React from 'react';
-import { Link } from 'react-router-dom';
-import InputElement from '../../components/modecules/InputElement';
-import PasswordInputElement from '../../components/modecules/PasswordInputElement';
+import { useEffect, useReducer } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import CheckboxInputField from '../../components/modecules/CheckboxInputField';
+import PasswordInputField from '../../components/modecules/PasswordInputField';
+import TextInputField from '../../components/modecules/TextInputField';
+import useAuthToken from '../../hooks/useAuthToken';
+import { setAuthToken } from '../../reducers/AuthReducer';
+import {
+	initialState,
+	loadingReducer,
+	startLoading,
+	stopLoading,
+} from '../../reducers/LoadingReducer';
+import { sleep } from '../../utils/functions';
 import validate from './validation/validate';
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -59,6 +71,10 @@ const useStyles = makeStyles((theme) => ({
 		background: `${theme.palette.secondary.main} !important`,
 		height: '55px',
 		margin: '20px 0 !important',
+		'&:disabled': {
+			color: `${theme.palette.primary.disable} !important`,
+			background: `${theme.palette.secondary.sec} !important`,
+		},
 	},
 	signin__link: {
 		color: `${theme.palette.secondary.main} !important`,
@@ -66,7 +82,19 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
+const rememberMeSelectionItems = [
+	{
+		id: 'dd63a554-8bd2-11ec-a8a3-0242ac120002',
+		value: false,
+		label: 'Remember Me',
+	},
+];
+
 const SignIn = () => {
+	const [loading, dispatch] = useReducer(loadingReducer, initialState);
+	const { state: authToken, dispatch: authDispatcher } = useAuthToken();
+
+	const navigateTo = useNavigate();
 	const classes = useStyles();
 
 	const initialValues = {
@@ -75,17 +103,44 @@ const SignIn = () => {
 		rememberMe: false,
 	};
 
-	// TODO: Make API call for sign in to account
-	const handleSubmitSignin = (data, others) => {
-		console.log(data, others);
-		others.setSubmitting(false);
+	const handleSubmitSignin = async (data, fn) => {
+		try {
+			dispatch(startLoading());
+			const token = data.email + data.password + data.rememberMe;
+
+			sleep(5000)
+				.then(() => {
+					authDispatcher(setAuthToken(token));
+					fn.resetForm();
+					dispatch(stopLoading());
+				})
+				.then(() => {
+					if (localStorage.getItem('token')) {
+						navigateTo('/dashboard');
+					}
+				});
+		} catch (error) {
+			console.log(error);
+		}
 	};
+
+	useEffect(() => {
+		if (authToken) {
+			return navigateTo('/dashboard');
+		}
+
+		return () => null;
+	}, [authToken, navigateTo]);
 
 	return (
 		<Grid container className={classes.container}>
 			<Grid item xl={4} lg={4} md={4} sm={10} xs={12}>
 				<Item>
-					<Paper elevation={3} sx={{ padding: '50px 30px' }} className={classes.signin}>
+					<Paper
+						elevation={3}
+						sx={{ padding: '50px 30px' }}
+						className={classes.signin}
+					>
 						<Typography variant="h4" className={classes.signin__header}>
 							Sign In
 						</Typography>
@@ -94,59 +149,58 @@ const SignIn = () => {
 							Fill in the fields below to sign in into your account.
 						</Typography>
 
-						<Formik initialValues={initialValues} validate={validate} onSubmit={handleSubmitSignin}>
-							{({ errors, values, touched, handleBlur, handleChange, isSubmitting }) => (
+						<Formik
+							initialValues={initialValues}
+							validate={validate}
+							onSubmit={handleSubmitSignin}
+						>
+							{() => (
 								<Form>
-									<fieldset disabled={isSubmitting} style={{ border: 'none' }}>
-										<InputElement
+									<fieldset disabled={loading} style={{ border: 'none' }}>
+										<TextInputField
 											fullWidth
 											isRequired
 											label="Username or Email"
 											name="email"
 											boxStyles={{ padding: '30px 0' }}
-											value={values.email}
-											onChange={handleChange}
-											onBlur={handleBlur}
-											error={touched.email && Boolean(errors.email)}
-											helperText={touched.email && errors.email}
 										/>
 
-										<PasswordInputElement
+										<PasswordInputField
 											fullWidth
 											isRequired
 											label="Password"
 											name="password"
-											value={values.password}
-											onChange={handleChange}
-											onBlur={handleBlur}
-											error={touched.password && Boolean(errors.password)}
-											helperText={touched.password && errors.password}
+											boxStyles={{ paddingBottom: '10px' }}
 										/>
 
 										<Box className={classes.signin__others}>
-											<FormGroup>
-												<FormControlLabel
-													className={classes.signin__rememberme}
-													control={
-														<Checkbox
-															name="rememberMe"
-															className={classes.signin__rememberme}
-															value={values.rememberMe}
-															onChange={handleChange}
-															onBlur={handleBlur}
-														/>
-													}
-													label="Remember Me"
-												/>
-											</FormGroup>
+											<CheckboxInputField
+												items={rememberMeSelectionItems}
+												name="rememberMe"
+												coloredLabel
+											/>
 
-											<Link className={classes.signin__link} to="/forgot-password">
+											<Link
+												className={classes.signin__link}
+												to="/forgot-password"
+											>
 												<Typography>Forgot Password?</Typography>
 											</Link>
 										</Box>
 
-										<Button type="submit" variant="contained" fullWidth className={classes.signin__button}>
-											Sign In
+										<Button
+											type="submit"
+											variant="contained"
+											disabled={loading}
+											endIcon={
+												loading && (
+													<CircularProgress size={20} color="inherit" />
+												)
+											}
+											fullWidth
+											className={classes.signin__button}
+										>
+											{loading ? 'Signing In...' : 'Sign In'}
 										</Button>
 									</fieldset>
 								</Form>
@@ -154,8 +208,7 @@ const SignIn = () => {
 						</Formik>
 
 						<Typography variant="body2" color="initial">
-							{/* eslint-disable-next-line react/no-unescaped-entities */}
-							Don't have account?{' '}
+							Don&apos;t have account?{' '}
 							<Link className={classes.signin__link} to="/signup">
 								Create An Account
 							</Link>

@@ -1,14 +1,10 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable arrow-body-style */
-import EditIcon from '@mui/icons-material/Edit';
-import FirstPageIcon from '@mui/icons-material/FirstPage';
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import LastPageIcon from '@mui/icons-material/LastPage';
-import VisibilityIcon from '@mui/icons-material/Visibility';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import {
 	Box,
-	IconButton,
+	Button,
 	Paper,
 	Table,
 	TableBody,
@@ -16,48 +12,27 @@ import {
 	tableCellClasses,
 	TableContainer,
 	TableHead,
-	TablePagination,
-	TableRow
+	TableRow,
+	Typography,
 } from '@mui/material';
-import { styled, useTheme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
+import { makeStyles } from '@mui/styles';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import TableActionButton from '../../../../components/atoms/ActionButton';
-
-const FAKE_DATA = [
-	{
-		name: 'Shamir Hossain Sorkar',
-		mobile_no: '+880 1324 249011',
-		business_name: 'Cityscape Global Ltd',
-		address: 'H#96/A, R#13, B#D, Banani 1212',
-	},
-	{
-		name: 'Shamir Hossain Sorkar',
-		mobile_no: '+880 1324 249011',
-		business_name: 'Cityscape Global Ltd',
-		address: 'H#96/A, R#13, B#D, Banani 1212',
-	},
-	{
-		name: 'Shamir Hossain Sorkar',
-		mobile_no: '+880 1324 249011',
-		business_name: 'Cityscape Global Ltd',
-		address: 'H#96/A, R#13, B#D, Banani 1212',
-	},
-	{
-		name: 'Shamir Hossain Sorkar',
-		mobile_no: '+880 1324 249011',
-		business_name: 'Cityscape Global Ltd',
-		address: 'H#96/A, R#13, B#D, Banani 1212',
-	},
-];
+import Pagination from '../../../../components/modecules/Pagination';
+import locationData from './locationData.json';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
 	[`&.${tableCellClasses.head}`]: {
 		backgroundColor: theme.palette.primary.main,
 		color: theme.palette.common.white,
+		paddingLeft: '2rem',
+		paddingRight: '2rem',
 	},
 	[`&.${tableCellClasses.body}`]: {
 		fontSize: 14,
+		paddingLeft: '2rem',
+		paddingRight: '2rem',
 	},
 }));
 
@@ -71,95 +46,45 @@ const StyledTableRow = styled(TableRow)(() => ({
 	},
 }));
 
-const TablePaginationActions = (props) => {
-	const theme = useTheme();
-	const { count, page, rowsPerPage, onPageChange } = props;
-
-	const handleFirstPageButtonClick = (event) => {
-		onPageChange(event, 0);
-	};
-
-	const handleBackButtonClick = (event) => {
-		onPageChange(event, page - 1);
-	};
-
-	const handleNextButtonClick = (event) => {
-		onPageChange(event, page + 1);
-	};
-
-	const handleLastPageButtonClick = (event) => {
-		onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
-	};
-
-	return (
-		<Box sx={{ flexShrink: 0, ml: 2.5 }}>
-			<IconButton
-				onClick={handleFirstPageButtonClick}
-				disabled={page === 0}
-				aria-label="first page"
-			>
-				{theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
-			</IconButton>
-			<IconButton
-				onClick={handleBackButtonClick}
-				disabled={page === 0}
-				aria-label="previous page"
-			>
-				{theme.direction === 'rtl' ? (
-					<KeyboardArrowRight />
-				) : (
-					<KeyboardArrowLeft />
-				)}
-			</IconButton>
-			<IconButton
-				onClick={handleNextButtonClick}
-				disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-				aria-label="next page"
-			>
-				{theme.direction === 'rtl' ? (
-					<KeyboardArrowLeft />
-				) : (
-					<KeyboardArrowRight />
-				)}
-			</IconButton>
-			<IconButton
-				onClick={handleLastPageButtonClick}
-				disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-				aria-label="last page"
-			>
-				{theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
-			</IconButton>
-		</Box>
-	);
-};
+const useStyles = makeStyles((theme) => ({
+	table: {},
+	table__buttons: {
+		display: 'flex',
+		flexDirection: 'column',
+		gap: '5px',
+		justifyContent: 'center',
+	},
+	'table__buttons--edit': {
+		color: `${theme.palette.status.pending} !important`,
+		borderColor: `${theme.palette.status.pending} !important`,
+		'&:hover': {
+			borderColor: `${theme.palette.status.pending} !important`,
+		},
+	},
+}));
 
 const ReceiverLocationTable = () => {
+	// eslint-disable-next-line no-unused-vars
+	const classes = useStyles();
 	const [page, setPage] = useState(0);
-	const [rowsPerPage, setRowsPerPage] = useState(5);
+	const [rowsPerPage, setRowsPerPage] = useState(20);
 
 	// Avoid a layout jump when reaching the last page with empty rows.
 	const emptyRows =
-		page > 0 ? Math.max(0, (1 + page) * rowsPerPage - FAKE_DATA.length) : 0;
+		page > 0 ? Math.max(0, (1 + page) * rowsPerPage - locationData.length) : 0;
 
-	const handleChangePage = (event, newPage) => {
+	const handlePageChange = (event, newPage) => {
+		// TODO:  Make API call while page changes
 		setPage(newPage);
 	};
 
-	const handleChangeRowsPerPage = (event) => {
+	const handlePageRowsChange = (event) => {
 		setRowsPerPage(parseInt(event.target.value, 10));
 		setPage(0);
 	};
 	return (
 		<>
-			<TableContainer
-				component={Paper}
-				sx={{
-					borderRadius: 3,
-					// border: (theme) => `1px solid ${theme.palette.primary.sec}`,
-					minWidth: '1000px',
-				}}
-				// elevation={3}
-			>
+			<TableContainer component={Paper}>
 				<Table aria-label="customized table">
 					<TableHead>
 						<TableRow>
@@ -173,44 +98,54 @@ const ReceiverLocationTable = () => {
 					</TableHead>
 					<TableBody>
 						{(rowsPerPage > 0
-							? FAKE_DATA.slice(
+							? locationData.slice(
 									page * rowsPerPage,
 									page * rowsPerPage + rowsPerPage
 							  )
-							: FAKE_DATA
+							: locationData
 						).map((row, index) => (
 							<StyledTableRow key={row.name}>
-								<StyledTableCell align="left">{index + 1}</StyledTableCell>
+								<StyledTableCell align="left">
+									<Typography fontWeight={600}>
+										{(index + 1)?.toString().padStart(2, '0')}
+									</Typography>
+								</StyledTableCell>
 								<StyledTableCell align="left">{row.name}</StyledTableCell>
-								<StyledTableCell align="left">{row.mobile_no}</StyledTableCell>
+								<StyledTableCell align="left">{row.phone}</StyledTableCell>
 								<StyledTableCell align="left">
 									{row.business_name}
 								</StyledTableCell>
 								<StyledTableCell align="left">{row.address}</StyledTableCell>
 								<StyledTableCell align="left">
-									<Box
-										sx={{
-											display: 'flex',
-											flexDirection: 'column',
-											gap: 0.5,
-										}}
-									>
-									<Link to={`/locations/receiver/${index+1}`} style={{ textDecoration: 'none'}}>
-										<TableActionButton
-											Icon={VisibilityIcon}
-											color="typography.sec"
-											label="View"
-											sx={{ width: '100%'}}
-										/>
+									<Box className={classes.table__buttons}>
+										<Link
+											to={`/locations/receiver/${row?.id}`}
+											style={{ textDecoration: 'none' }}
+										>
+											<Button
+												sx={{ width: '100%' }}
+												size="small"
+												variant="outlined"
+												color="secondary"
+												startIcon={<VisibilityOutlinedIcon />}
+											>
+												View
+											</Button>
 										</Link>
-										
-										<Link to="/locations/receiver/new" style={{ textDecoration: 'none'}}>
-										<TableActionButton
-											Icon={EditIcon}
-											color="status.pending"
-											label="Edit"
-											sx={{ width: '100%'}}
-										/>
+
+										<Link
+											to="/locations/receiver/new"
+											style={{ textDecoration: 'none', color: 'inherit' }}
+										>
+											<Button
+												sx={{ width: '100%' }}
+												size="small"
+												variant="outlined"
+												className={classes['table__buttons--edit']}
+												startIcon={<EditOutlinedIcon />}
+											>
+												Edit
+											</Button>
 										</Link>
 									</Box>
 								</StyledTableCell>
@@ -225,26 +160,16 @@ const ReceiverLocationTable = () => {
 					</TableBody>
 				</Table>
 			</TableContainer>
-			<TablePagination
-				rowsPerPageOptions={[1, 2, 5, { label: 'All', value: -1 }]}
-				colSpan={3}
-				count={FAKE_DATA.length}
-				rowsPerPage={rowsPerPage}
-				page={page}
-				SelectProps={{
-					inputProps: {
-						'aria-label': 'rows per page',
-					},
-					native: true,
-				}}
-				onPageChange={handleChangePage}
-				onRowsPerPageChange={handleChangeRowsPerPage}
-				ActionsComponent={TablePaginationActions}
-				sx={{
-					display: 'block',
-					borderBottom: 0,
-				}}
-			/>
+
+			<Box sx={{ py: '10px' }}>
+				<Pagination
+					data={locationData}
+					page={page}
+					rowsPerPage={rowsPerPage}
+					handlePageChange={handlePageChange}
+					handlePageRowsChange={handlePageRowsChange}
+				/>
+			</Box>
 		</>
 	);
 };

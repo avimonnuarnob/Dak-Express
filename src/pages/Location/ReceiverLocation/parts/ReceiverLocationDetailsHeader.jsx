@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable arrow-body-style */
 import { Box, Chip } from '@mui/material';
 import BackButton from '../../../../components/atoms/BackButton';
@@ -7,24 +8,16 @@ const RecieverLocationDetailsHeader = () => {
 	return (
 		<Box
 			sx={{
-				display: {
-					xs: 'block',
-					sm: 'flex',
-				},
+				display: { xs: 'block', sm: 'flex' },
 				alignItems: 'center',
 			}}
 		>
 			<HeaderTitle label="Location" />
-			<Chip
-				label="RECEIVER LOCATION"
-				sx={{
-					ml: 2,
-					fontSize: '10px',
-					color: 'primary.white',
-					bgcolor: 'secondary.main',
-				}}
+			<Chip label="RECEIVER LOCATION" color="secondary" sx={{ ml: 2, px: 2 }} />
+			<BackButton
+				redirectTo="/locations/receiver"
+				label="Back To Receiver Locations"
 			/>
-			<BackButton />
 		</Box>
 	);
 };

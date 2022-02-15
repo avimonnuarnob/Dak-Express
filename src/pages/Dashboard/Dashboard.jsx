@@ -5,8 +5,8 @@ import useBreadcrumb from '../../hooks/useBreadcrumb';
 import { setBreadcrumb } from '../../reducers/BreadcrumbReducer';
 import QuickLinks from './parts/QuickLinks';
 import ShipmentChartStats from './parts/ShipmentChartStats';
+import ShipmentsTable from './parts/ShipmentsTable';
 import ShipmentStatus from './parts/ShipmentStatus';
-import ShipmentTable from './parts/ShipmentTable';
 
 const breadcrumbs = [{ title: 'Dashboard', link: 'dashboard', current: true }];
 
@@ -71,7 +71,7 @@ const Dashboard = () => {
 							overflow: 'scroll',
 						}}
 					>
-						<ShipmentTable />
+						<ShipmentsTable />
 					</Box>
 				</Box>
 			</Box>

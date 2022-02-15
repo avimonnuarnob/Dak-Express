@@ -1,11 +1,19 @@
-/* eslint-disable no-nested-ternary */
-/* eslint-disable react/function-component-definition */
 /* eslint-disable no-unused-vars */
+
 /* eslint-disable react/jsx-props-no-spreading */
+/* eslint-disable no-nested-ternary */
 /* eslint-disable prettier/prettier */
-/* eslint-disable arrow-body-style */
 import { useState } from 'react';
-import { Box, FormControl, MenuItem, Paper, Select, Tab, Tabs, Typography } from '@mui/material';
+import {
+	Box,
+	FormControl,
+	MenuItem,
+	Paper,
+	Select,
+	Tab,
+	Tabs,
+	Typography,
+} from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import Chart from './Chart';
 
@@ -93,88 +101,83 @@ const useStyles = makeStyles((theme) => ({
 			width: '6.25rem',
 		},
 	},
+
+	status: {},
+	status__header: {
+		display: 'flex',
+		justifyContent: 'space-between',
+		alignItems: 'center',
+		gap: theme.spacing(4),
+		padding: theme.spacing(3, 1),
+	},
+	status__tab: {
+		backgroundColor: '#F5F5F5',
+	},
 }));
 
-function TabPanel(props) {
+const tabProps = (index, tab) => ({
+	id: `tab-${index}`,
+	'aria-controls': `tabpanel-${index}`,
+	sx: {
+		color: (theme) => theme.palette.typography.main,
+		p: 3,
+		'&.Mui-selected': {
+			color: (theme) => theme.palette.primary.white,
+			backgroundColor: (theme) =>
+				tab === 0
+					? theme.palette.status.success
+					: tab === 1
+					? theme.palette.status.pending
+					: theme.palette.status.failed,
+		},
+	},
+});
+
+const TabPanel = (props) => {
 	const { children, value, index, ...other } = props;
 
 	return (
 		<div
 			role="tabpanel"
 			hidden={value !== index}
-			id={`full-width-tabpanel-${index}`}
-			aria-labelledby={`full-width-tab-${index}`}
+			id={`shipmentStatus-tab-${index}`}
+			aria-labelledby={`shipmentStatus-tab-${index}`}
 			{...other}
 		>
 			{value === index && (
-				<Box sx={{ p: 3, bgcolor: '#ffffff', overflow: 'auto' }}>
-					<Typography>{children}</Typography>
+				<Box sx={{ pr: 3, py: 3, bgcolor: '#ffffff', overflow: 'auto' }}>
+					{children}
 				</Box>
 			)}
 		</div>
 	);
-}
+};
 
 const ShipmentChartStats = () => {
 	const classes = useStyles();
 	const [year, setYear] = useState('2021');
-	const [value, setValue] = useState(0);
+	const [tab, setTab] = useState(0);
 
-	function tabProps(index) {
-		return {
-			id: `tab-${index}`,
-			'aria-controls': `tabpanel-${index}`,
-			sx: {
-				color: (theme) => theme.palette.typography.main,
-				p: 3,
-				'&.Mui-selected': {
-					color: (theme) => theme.palette.primary.white,
-					backgroundColor: (theme) =>
-						value === 0
-							? theme.palette.status.success
-							: value === 1
-							? theme.palette.status.pending
-							: theme.palette.status.failed,
-				},
-			},
-		};
-	}
-
-	const handleChange = (event) => {
+	const handleYearChange = (event) => {
 		setYear(event.target.value);
 	};
 
-	const handleTabChange = (event, newValue) => {
-		setValue(newValue);
+	const handleTabChange = (_, newValue) => {
+		setTab(newValue);
 	};
 
 	return (
-		<Paper
-			elevation={3}
-			sx={{
-				borderRadius: 2,
-				// overflow: 'hidden',
-			}}
-		>
-			<Box
-				sx={{
-					display: 'flex',
-					justifyContent: 'space-between',
-					alignItems: 'center',
-					gap: 4,
-
-					px: 1,
-					py: 3,
-				}}
-			>
-				<Typography sx={{ typography: { sm: 'h5', xs: 'h6' }, px: 2 }}>Shipment Status</Typography>
+		<Paper>
+			<Box className={classes.status__header}>
+				<Typography sx={{ typography: { sm: 'h5', xs: 'h6' }, px: 2 }}>
+					Shipment Status
+				</Typography>
 				<FormControl>
 					<Select
-						labelId="demo-simple-select-label"
-						id="demo-simple-select"
-						s
+						labelId="shipmentYear-select-label"
+						id="shipmentYear"
 						value={year}
-						onChange={handleChange}
+						onChange={handleYearChange}
 						className={classes.select}
 					>
 						<MenuItem value={2021}>2021</MenuItem>
@@ -183,40 +186,30 @@ const ShipmentChartStats = () => {
 					</Select>
 				</FormControl>
 			</Box>
-			<Box
-				sx={{
-					// px: 5,
-					px: {
-						xs: 1,
-						sm: 3,
-					},
-					bgcolor: '#F5F5F5',
-				}}
-			>
-				<Tabs
-					value={value}
-					// variant="fullWidth"
-					// variant="scrollable"
-					// scrollButtons="auto"
-					onChange={handleTabChange}
-					// aria-label="shipment status tabs"
-					indicatorColor="transparent"
-				>
-					<Tab label="Complete" {...tabProps(0)} />
-					<Tab label="In Transit" {...tabProps(1)} />
-					<Tab label="Failed" {...tabProps(2)} />
-				</Tabs>
-			</Box>
 
-			<TabPanel value={value} index={0}>
-				<Chart data={FAKE_DATA} color="#3BB900" />
-			</TabPanel>
-			<TabPanel value={value} index={1}>
-				<Chart data={FAKE_DATA} color="#F29339" />
-			</TabPanel>
-			<TabPanel value={value} index={2}>
-				<Chart data={FAKE_DATA} color="#FF333F" />
-			</TabPanel>
+			<Box>
+				<Box sx={{ px: { xs: 1, sm: 3 } }} className={classes.status__tab}>
+					<Tabs
+						value={tab}
+						onChange={handleTabChange}
+						TabIndicatorProps={{ style: { display: 'none' } }}
+					>
+						<Tab label="Complete" {...tabProps(0, tab)} />
+						<Tab label="In Transit" {...tabProps(1, tab)} />
+						<Tab label="Failed" {...tabProps(2, tab)} />
+					</Tabs>
+				</Box>
+
+				<TabPanel value={tab} index={0}>
+					<Chart data={FAKE_DATA} color="#3BB900" />
+				</TabPanel>
+				<TabPanel value={tab} index={1}>
+					<Chart data={FAKE_DATA} color="#F29339" />
+				</TabPanel>
+				<TabPanel value={tab} index={2}>
+					<Chart data={FAKE_DATA} color="#FF333F" />
+				</TabPanel>
+			</Box>
 		</Paper>
 	);
 };

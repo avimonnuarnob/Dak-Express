@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { Box } from '@mui/material';
 import { useEffect } from 'react';
 import BackButton from '../../../components/atoms/BackButton';
@@ -9,7 +10,11 @@ import AddReceiverLocationForm from './parts/AddReceiverLocationForm';
 const breadcrumbs = [
 	{ title: 'Dashboard', link: 'dashboard' },
 	{ title: 'Receiver Locations', link: 'locations/receiver' },
-	{ title: 'Add New Receiver Location', link: 'locations/receiver/new', current: true },
+	{
+		title: 'Add New Receiver Location',
+		link: 'locations/receiver/new',
+		current: true,
+	},
 ];
 
 const CreateReceiverLocation = () => {
@@ -26,7 +31,10 @@ const CreateReceiverLocation = () => {
 		<Box sx={{ py: 2, px: 5 }}>
 			<Box sx={{ display: { xs: 'block', sm: 'flex' }, alignItems: 'center' }}>
 				<HeaderTitle label="ADD NEW LOCATION" />
-				<BackButton />
+				<BackButton
+					redirectTo="/locations/receiver"
+					label="Back To Receiver Locations"
+				/>
 			</Box>
 			<AddReceiverLocationForm />
 		</Box>

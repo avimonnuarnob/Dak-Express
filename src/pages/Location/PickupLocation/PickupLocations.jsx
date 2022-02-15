@@ -22,7 +22,8 @@ const PickupLocations = () => {
 	return (
 		<Box sx={{ py: 2, px: 3 }}>
 			<LocationHeader />
-			<Box sx={{ mt: 5, borderRadius: 3 }}>
+
+			<Box sx={{ mt: 3 }}>
 				<LocationTable />
 			</Box>
 		</Box>

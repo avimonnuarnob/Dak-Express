@@ -1,23 +1,109 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable prettier/prettier */
 /* eslint-disable arrow-body-style */
 import { Box, Button, Grid, Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Form, Formik } from 'formik';
-import InputElement from '../../../../components/modecules/InputElement';
-import PhoneNumberInput from '../../../../components/modecules/PhoneNumberInput';
-import SelectElement from '../../../../components/modecules/SelectInput';
+import { useNavigate } from 'react-router';
+import PhoneNumberInputField from '../../../../components/modecules/PhoneNumberInputField';
+import SelectInputField from '../../../../components/modecules/SelectInputField';
+import TextInputField from '../../../../components/modecules/TextInputField';
 import { sleep } from '../../../../utils/functions';
 import validateAddPickupLocation from '../validation/AddpickupLocationValidation';
 import AddPickupLocationInitialValues from '../validation/AddPickupLocationValues';
 
-const roleItems = [
-	{ id: 1, label: 'Admin', value: 'admin' },
-	{ id: 2, label: 'Super Admin', value: 'super admin' },
-];
+const distItems = [];
+
+const distDivArray = {
+	Barisal: [
+		'Barguna',
+		'Barisal',
+		'Bhola',
+		'Jhalokati',
+		'Patuakhali',
+		'Pirojpur',
+	],
+	Chittagong: [
+		'Bandarban',
+		'Brahmanbaria',
+		'Chandpur',
+		'Chittagong',
+		'Comilla',
+		"Cox's Bazar",
+		'Feni',
+		'Khagrachhari',
+		'Lakshmipur',
+		'Noakhali',
+		'Rangamati',
+	],
+	Dhaka: [
+		'Dhaka',
+		'Faridpur',
+		'Gazipur',
+		'Gopalganj',
+		'Kishoreganj',
+		'Madaripur',
+		'Manikganj',
+		'Munshiganj',
+		'Narayanganj',
+		'Narsingdi',
+		'Rajbari',
+		'Shariatpur',
+		'Tangail',
+	],
+	Khulna: [
+		'Bagerhat',
+		'Chuadanga',
+		'Jessore',
+		'Jhenaidah',
+		'Khulna',
+		'Kushtia',
+		'Magura',
+		'Meherpur',
+		'Narail',
+		'Satkhira',
+	],
+	Mymensingh: ['Jamalpur', 'Mymensingh', 'Netrakona', 'Sherpur'],
+	Rajshahi: [
+		'Bogra',
+		'Chapainawabganj',
+		'Joypurhat',
+		'Naogaon',
+		'Natore',
+		'Pabna',
+		'Rajshahi',
+		'Sirajganj',
+	],
+	Rangpur: [
+		'Dinajpur',
+		'Gaibandha',
+		'Kurigram',
+		'Lalmonirhat',
+		'Nilphamari',
+		'Panchagarh',
+		'Rangpur',
+		'Thakurgaon',
+	],
+	Sylhet: ['Habiganj', 'Moulvibazar', 'Sunamganj', 'Sylhet'],
+};
+
+Object.keys(distDivArray).map((divison, divisionIndex) =>
+	distDivArray[divison].forEach((dist, distIndex) =>
+		distItems.push({
+			id: `${divisionIndex}${distIndex}-${dist}`,
+			label: dist,
+			value: dist.toLowerCase(),
+		})
+	)
+);
 
 const useStyles = makeStyles((theme) => ({
 	pickup: {},
+	form: {},
+	form__header: {
+		marginBottom: theme.spacing(3),
+		display: 'flex',
+		borderBottom: `1px solid ${theme.palette.secondary.main}`,
+	},
 	pickup__back__button: {
 		color: `${theme.palette.secondary.main} !important`,
 		borderColor: `${theme.palette.secondary.main} !important`,
@@ -44,6 +130,7 @@ const useStyles = makeStyles((theme) => ({
 
 const AddPickupLocationForm = () => {
 	const classes = useStyles();
+	const navigate = useNavigate();
 
 	const submitForm = async (values, actions) => {
 		await sleep(2000);
@@ -62,38 +149,14 @@ const AddPickupLocationForm = () => {
 			validate={validateAddPickupLocation}
 			onSubmit={handleSubmit}
 		>
-			{({
-				isSubmitting,
-				values,
-				errors,
-				handleChange,
-				handleBlur,
-				touched,
-				setFieldValue,
-			}) => (
+			{({ isSubmitting }) => (
 				<Form>
-					<Paper
-						sx={{
-							py: 4,
-							px: 6,
-							mt: 3,
-						}}
-					>
-						<Box
-							sx={{
-								mb: 3,
-								display: 'flex',
-								borderBottom: (theme) =>
-									`1px solid ${theme.palette.secondary.main}`,
-							}}
-						>
+					<Paper sx={{ py: 4, px: 6, mt: 3 }}>
+						<Box className={classes.form__header}>
 							<Typography
 								fontSize="24px"
 								fontWeight="bold"
-								sx={{
-									color: 'status.pending',
-									mb: 3,
-								}}
+								sx={{ color: 'status.pending', mb: 3 }}
 							>
 								Pickup Location
 							</Typography>
@@ -102,151 +165,92 @@ const AddPickupLocationForm = () => {
 						<fieldset disabled={isSubmitting} style={{ border: 'none' }}>
 							<Grid container spacing={2}>
 								<Grid item md={6} sm={6} xs={12}>
-									<InputElement
+									<TextInputField
 										fullWidth
 										isRequired
 										label="First Name"
 										name="firstName"
-										boxStyles={{ paddingTop: '10px' }}
-										value={values.firstName}
-										onChange={handleChange}
-										onBlur={handleBlur}
-										error={touched.firstName && Boolean(errors.firstName)}
-										helperText={touched.firstName && errors.firstName}
 									/>
 								</Grid>
 
 								<Grid item md={6} sm={6} xs={12}>
-									<InputElement
+									<TextInputField
 										fullWidth
 										isRequired
 										label="Last Name"
 										name="lastName"
-										boxStyles={{ paddingTop: '10px' }}
-										value={values.lastName}
-										onChange={handleChange}
-										onBlur={handleBlur}
-										error={touched.lastName && Boolean(errors.lastName)}
-										helperText={touched.lastName && errors.lastName}
 									/>
 								</Grid>
 
 								<Grid item md={12} sm={12} xs={12}>
-									<InputElement
+									<TextInputField
 										fullWidth
 										isRequired
 										label="Business Name"
 										name="businessName"
-										boxStyles={{ paddingTop: '10px' }}
-										value={values.businessName}
-										onChange={handleChange}
-										onBlur={handleBlur}
-										error={touched.businessName && Boolean(errors.businessName)}
-										helperText={touched.businessName && errors.businessName}
 									/>
 								</Grid>
 
 								<Grid item md={6} sm={6} xs={12}>
-									<Box sx={{ paddingTop: '10px' }}>
-										<PhoneNumberInput
-											fullWidth
-											isRequired
-											label="Mobile Number"
-											name="phone"
-											value={values.phone}
-											handleChange={handleChange}
-											handleBlur={handleBlur}
-											error={touched.phone && Boolean(errors.phone)}
-											helperText={touched.phone && errors.phone}
-											setFieldValue={setFieldValue}
-										/>
-									</Box>
+									<PhoneNumberInputField
+										fullWidth
+										isRequired
+										label="Phone"
+										name="phone"
+									/>
 								</Grid>
 
 								<Grid item md={6} sm={6} xs={12}>
-									<SelectElement
+									<SelectInputField
+										items={distItems}
 										fullWidth
 										isRequired
-										items={roleItems}
 										label="District / State"
 										name="districtOrState"
-										boxStyles={{ paddingTop: '10px' }}
-										value={values.districtOrState}
-										onChange={handleChange}
-										onBlur={handleBlur}
-										error={
-											touched.districtOrState && Boolean(errors.districtOrState)
-										}
-										helperText={
-											touched.districtOrState && errors.districtOrState
-										}
 									/>
 								</Grid>
 
 								<Grid item md={6} sm={6} xs={12}>
-									<SelectElement
+									<SelectInputField
+										items={distItems}
 										fullWidth
 										isRequired
-										items={roleItems}
 										label="City / Town"
 										name="cityOrTown"
-										boxStyles={{ paddingTop: '10px' }}
-										value={values.cityOrTown}
-										onChange={handleChange}
-										onBlur={handleBlur}
-										error={touched.cityOrTown && Boolean(errors.cityOrTown)}
-										helperText={touched.cityOrTown && errors.cityOrTown}
 									/>
 								</Grid>
 
 								<Grid item md={6} sm={6} xs={12}>
-									<InputElement
+									<TextInputField
 										fullWidth
 										isRequired
 										label="Post Code / Postal Code"
 										name="postcodeOrPostalcode"
-										boxStyles={{ paddingTop: '10px' }}
-										value={values.postcodeOrPostalcode}
-										onChange={handleChange}
-										onBlur={handleBlur}
-										error={
-											touched.postcodeOrPostalcode &&
-											Boolean(errors.postcodeOrPostalcode)
-										}
-										helperText={
-											touched.postcodeOrPostalcode &&
-											errors.postcodeOrPostalcode
-										}
 									/>
 								</Grid>
 
 								<Grid item md={12} sm={12} xs={12}>
-									<InputElement
+									<TextInputField
 										fullWidth
 										isRequired
 										label="Address"
 										name="address"
-										boxStyles={{ paddingTop: '10px' }}
-										value={values.address}
-										onChange={handleChange}
-										onBlur={handleBlur}
-										error={touched.address && Boolean(errors.address)}
-										helperText={touched.address && errors.address}
 									/>
 								</Grid>
 							</Grid>
 						</fieldset>
 					</Paper>
+
 					<div className={classes.pickup__actions}>
 						<Button
 							type="button"
 							variant="outlined"
 							disabled={false}
-							onClick={() => {}}
+							onClick={() => navigate(-1)}
 							sx={{ ml: 'auto !important' }}
 							className={classes.pickup__back__button}
 						>
-							Back
+							Cancel
 						</Button>
 
 						<Button

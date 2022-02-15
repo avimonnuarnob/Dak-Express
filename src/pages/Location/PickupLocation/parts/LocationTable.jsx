@@ -1,57 +1,38 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable arrow-body-style */
-import EditIcon from '@mui/icons-material/Edit';
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import {
-	Box, Paper,
+	Box,
+	Button,
+	Paper,
 	Table,
 	TableBody,
 	TableCell,
 	tableCellClasses,
 	TableContainer,
-	TableHead, TableRow, Typography
+	TableHead,
+	TableRow,
+	Typography,
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { makeStyles } from '@mui/styles';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import TableActionButton from '../../../../components/atoms/ActionButton';
 import Pagination from '../../../../components/modecules/Pagination';
-
-const FAKE_DATA = [
-	{
-		name: 'Shamir Hossain Sorkar',
-		mobile_no: '+880 1324 249011',
-		business_name: 'Cityscape Global Ltd',
-		address: 'H#96/A, R#13, B#D, Banani 1212',
-	},
-	{
-		name: 'Shamir Hossain Sorkar',
-		mobile_no: '+880 1324 249011',
-		business_name: 'Cityscape Global Ltd',
-		address: 'H#96/A, R#13, B#D, Banani 1212',
-	},
-	{
-		name: 'Shamir Hossain Sorkar',
-		mobile_no: '+880 1324 249011',
-		business_name: 'Cityscape Global Ltd',
-		address: 'H#96/A, R#13, B#D, Banani 1212',
-	},
-	{
-		name: 'Shamir Hossain Sorkar',
-		mobile_no: '+880 1324 249011',
-		business_name: 'Cityscape Global Ltd',
-		address: 'H#96/A, R#13, B#D, Banani 1212',
-	},
-];
+import locationData from './locationData.json';
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
 	[`&.${tableCellClasses.head}`]: {
 		backgroundColor: theme.palette.primary.main,
 		color: theme.palette.common.white,
+		paddingLeft: '2rem',
+		paddingRight: '2rem',
 	},
 	[`&.${tableCellClasses.body}`]: {
 		fontSize: 14,
+		paddingLeft: '2rem',
+		paddingRight: '2rem',
 	},
 }));
 
@@ -86,11 +67,11 @@ const LocationTable = () => {
 	// eslint-disable-next-line no-unused-vars
 	const classes = useStyles();
 	const [page, setPage] = useState(0);
-	const [rowsPerPage, setRowsPerPage] = useState(5);
+	const [rowsPerPage, setRowsPerPage] = useState(20);
 
 	// Avoid a layout jump when reaching the last page with empty rows.
 	const emptyRows =
-		page > 0 ? Math.max(0, (1 + page) * rowsPerPage - FAKE_DATA.length) : 0;
+		page > 0 ? Math.max(0, (1 + page) * rowsPerPage - locationData.length) : 0;
 
 	const handlePageChange = (event, newPage) => {
 		// TODO:  Make API call while page changes
@@ -117,46 +98,54 @@ const LocationTable = () => {
 					</TableHead>
 					<TableBody>
 						{(rowsPerPage > 0
-							? FAKE_DATA.slice(
+							? locationData.slice(
 									page * rowsPerPage,
 									page * rowsPerPage + rowsPerPage
 							  )
-							: FAKE_DATA
+							: locationData
 						).map((row, index) => (
 							<StyledTableRow key={row.name}>
 								<StyledTableCell align="left">
-									<Typography fontWeight={600}>{index + 1}</Typography>
+									<Typography fontWeight={600}>
+										{(index + 1)?.toString().padStart(2, '0')}
+									</Typography>
 								</StyledTableCell>
 								<StyledTableCell align="left">{row.name}</StyledTableCell>
-								<StyledTableCell align="left">{row.mobile_no}</StyledTableCell>
+								<StyledTableCell align="left">{row.phone}</StyledTableCell>
 								<StyledTableCell align="left">
 									{row.business_name}
 								</StyledTableCell>
 								<StyledTableCell align="left">{row.address}</StyledTableCell>
 								<StyledTableCell align="left">
-									<Box
-										sx={{
-											display: 'flex',
-											flexDirection: 'column',
-											gap: 0.5,
-										}}
-									>
-									<Link to={`/locations/pickup/${index+1}`} style={{ textDecoration: 'none'}}>
-										<TableActionButton
-											Icon={VisibilityOutlinedIcon}
-											color="typography.sec"
-											label="View"
-											sx={{ width: '100%'}}
-										/>
+									<Box className={classes.table__buttons}>
+										<Link
+											to={`/locations/pickup/${row?.id}`}
+											style={{ textDecoration: 'none' }}
+										>
+											<Button
+												sx={{ width: '100%' }}
+												size="small"
+												variant="outlined"
+												color="secondary"
+												startIcon={<VisibilityOutlinedIcon />}
+											>
+												View
+											</Button>
 										</Link>
 
-										<Link to="/locations/pickup/new" style={{ textDecoration: 'none'}}>
-										<TableActionButton
-											Icon={EditIcon}
-											color="status.pending"
-											label="Edit"
-											sx={{ width: '100%'}}
-										/>
+										<Link
+											to="/locations/pickup/new"
+											style={{ textDecoration: 'none', color: 'inherit' }}
+										>
+											<Button
+												sx={{ width: '100%' }}
+												size="small"
+												variant="outlined"
+												className={classes['table__buttons--edit']}
+												startIcon={<EditOutlinedIcon />}
+											>
+												Edit
+											</Button>
 										</Link>
 									</Box>
 								</StyledTableCell>
@@ -171,9 +160,10 @@ const LocationTable = () => {
 					</TableBody>
 				</Table>
 			</TableContainer>
+
 			<Box sx={{ py: '10px' }}>
 				<Pagination
-					data={FAKE_DATA}
+					data={locationData}
 					page={page}
 					rowsPerPage={rowsPerPage}
 					handlePageChange={handlePageChange}
