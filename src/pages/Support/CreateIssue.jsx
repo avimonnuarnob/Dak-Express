@@ -26,7 +26,7 @@ const CreateIssue = () => {
 		<Box sx={{ py: 2, px: 3 }}>
 			<Box sx={{ display: { xs: 'block', sm: 'flex' }, alignItems: 'center' }}>
 				<HeaderTitle label="Get Support" />
-				<BackButton />
+				<BackButton redirectTo="/supports" label="Back to supports" />
 			</Box>
 			<CreateIssueForm />
 		</Box>

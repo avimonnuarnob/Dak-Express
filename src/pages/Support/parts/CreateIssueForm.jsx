@@ -1,16 +1,11 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable prettier/prettier */
 /* eslint-disable arrow-body-style */
-import { Box, Button, Grid, Paper, TextField, Typography } from '@mui/material';
+import { Box, Button, Grid, Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Form, Formik } from 'formik';
 import { useNavigate } from 'react-router';
 import FileUploadElement from '../../../components/modecules/FileUploadElement';
-import FileUploadInputField from '../../../components/modecules/FileUploadInputField';
-import InputElement from '../../../components/modecules/InputElement';
-import PhoneNumberInput from '../../../components/modecules/PhoneNumberInput';
 import PhoneNumberInputField from '../../../components/modecules/PhoneNumberInputField';
-import SelectElement from '../../../components/modecules/SelectInput';
 import SelectInputField from '../../../components/modecules/SelectInputField';
 import TextInputField from '../../../components/modecules/TextInputField';
 import { sleep } from '../../../utils/functions';
@@ -90,7 +85,6 @@ const CreateIssueForm = () => {
 				handleChange,
 				handleBlur,
 				touched,
-				setFieldValue,
 			}) => (
 				<Form>
 					<Paper className={classes.box}>

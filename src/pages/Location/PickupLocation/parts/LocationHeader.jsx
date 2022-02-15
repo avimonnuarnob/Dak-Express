@@ -15,7 +15,7 @@ const LocationHeader = () => {
 				<Button
 					variant="outlined"
 					color="secondary"
-					sx={{ px: 3, py: 2, ml: 2, bgcolor: 'primary.white' }}
+					sx={{ px: 2, py: 1, ml: 2 }}
 					startIcon={<AddOutlinedIcon />}
 				>
 					Add New Location

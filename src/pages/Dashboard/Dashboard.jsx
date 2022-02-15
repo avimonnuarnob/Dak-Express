@@ -28,12 +28,7 @@ const Dashboard = () => {
 
 				<QuickLinks />
 
-				<Box
-					sx={{
-						mt: 3,
-						color: (theme) => theme.palette.typography.main,
-					}}
-				>
+				<Box sx={{ mt: 3, color: (theme) => theme.palette.typography.main }}>
 					<Box
 						sx={{
 							display: {
@@ -64,13 +59,7 @@ const Dashboard = () => {
 						</Box>
 					</Box>
 
-					<Box
-						sx={{
-							mt: 3,
-							borderRadius: 3,
-							overflow: 'scroll',
-						}}
-					>
+					<Box sx={{ mt: 3 }}>
 						<ShipmentsTable />
 					</Box>
 				</Box>

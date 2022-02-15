@@ -3,8 +3,8 @@ import { Box, Button, Grid, Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Form, Formik } from 'formik';
 import { useNavigate } from 'react-router';
-import InputElement from '../../../components/modecules/InputElement';
-import SelectElement from '../../../components/modecules/SelectInput';
+import TextInputField from '../../../components/modecules/TextInputField';
+import SelectInputField from '../../../components/modecules/SelectInputField';
 import { sleep } from '../../../utils/functions';
 
 const roleItems = [
@@ -103,14 +103,7 @@ const CreateApiTokenBody = () => {
 			}}
 			onSubmit={handleSubmit}
 		>
-			{({
-				isSubmitting,
-				values,
-				errors,
-				handleChange,
-				handleBlur,
-				touched,
-			}) => (
+			{({ isSubmitting }) => (
 				<Form>
 					<Paper className={classes.box}>
 						<Box className={classes.box__header}>
@@ -121,33 +114,23 @@ const CreateApiTokenBody = () => {
 						<fieldset disabled={isSubmitting} style={{ border: 'none' }}>
 							<Grid container spacing={2}>
 								<Grid item md={6} sm={6} xs={12}>
-									<InputElement
+									<TextInputField
 										fullWidth
 										isRequired
 										label="Name"
 										name="name"
 										boxStyles={{ paddingTop: '10px' }}
-										value={values.name}
-										onChange={handleChange}
-										onBlur={handleBlur}
-										error={touched.name && Boolean(errors.name)}
-										helperText={touched.name && errors.name}
 									/>
 								</Grid>
 
 								<Grid item md={6} sm={6} xs={12}>
-									<SelectElement
+									<SelectInputField
 										fullWidth
 										isRequired
 										items={roleItems}
 										label="Type"
 										name="type"
 										boxStyles={{ paddingTop: '10px' }}
-										value={values.type}
-										onChange={handleChange}
-										onBlur={handleBlur}
-										error={touched.type && Boolean(errors.type)}
-										helperText={touched.type && errors.type}
 									/>
 								</Grid>
 							</Grid>
