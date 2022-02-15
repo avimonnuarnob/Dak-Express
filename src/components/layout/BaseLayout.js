@@ -1,12 +1,11 @@
 /* eslint-disable no-self-compare */
-/* eslint-disable prettier/prettier */
 /* eslint-disable react-hooks/exhaustive-deps */
 import { Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { makeStyles } from '@mui/styles';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import PropTypes from 'prop-types';
-import { Suspense, useState } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import useAuthToken from '../../hooks/useAuthToken';
 // import { Outlet } from 'react-router-dom';
 import routeConfig from '../../routes';
@@ -81,9 +80,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const BaseLayout = () => {
-	const [open, setOpen] = useState(
-		() => localStorage.getItem('sidebar') === 'true'
-	);
+	const [open, setOpen] = useState(() => localStorage.getItem('sidebar') === 'true');
 	const { state: authenticated } = useAuthToken();
 
 	const toggleDrawer = () => {
@@ -95,8 +92,9 @@ const BaseLayout = () => {
 
 	const classes = useStyles();
 
-	console.log('hello', !!localStorage.getItem('sidebar'));
-	console.log(open);
+	useEffect(() => {
+		localStorage.setItem('sidebar', 'true');
+	}, []);
 
 	return (
 		<>

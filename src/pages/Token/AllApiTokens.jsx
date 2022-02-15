@@ -21,10 +21,10 @@ const AllApiTokens = () => {
 	}, []);
 
 	return (
-		<Box sx={{ py: 1, px: 1 }}>
+		<Box sx={{ py: 2, px: 3 }}>
 			<AllApiTokensHeader />
 
-			<Box sx={{ mt: 2, borderRadius: 3, overflow: 'scroll' }}>
+			<Box sx={{ mt: 3 }}>
 				<AllApiToknesTable />
 			</Box>
 		</Box>

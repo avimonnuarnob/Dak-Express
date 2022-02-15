@@ -1,9 +1,9 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/no-unescaped-entities */
-import { Box, Button, Grid, Paper, Step, StepLabel, Stepper, Typography } from '@mui/material';
+import { Box, Button, Grid, Paper, Step, StepLabel, Stepper, Typography, CircularProgress } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Form, Formik } from 'formik';
-import { useState } from 'react';
+import { useReducer, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import AlertModal from '../../components/modecules/AlertModal';
 import { sleep } from '../../utils/functions';
@@ -11,6 +11,7 @@ import IndividualBusinessInfoForm from './parts/IndividualBusinessInfoForm';
 import PersonalInfoForm from './parts/PersonalnfoForm';
 import initialValues from './validation/individualFormInitialValues';
 import validation from './validation/individualFormValidation';
+import { initialState, loadingReducer, startLoading, stopLoading } from '../../reducers/LoadingReducer';
 
 const useStyles = makeStyles((theme) => ({
 	icon: {
@@ -77,6 +78,7 @@ const steps = ['Business Info', 'Contact Person Info'];
 const IndividualSignup = () => {
 	const [activeStep, setActiveStep] = useState(0);
 	const [successModal, setSuccessModal] = useState(false);
+	const [loading, dispatch] = useReducer(loadingReducer, initialState);
 
 	const redirectTo = useNavigate();
 	const classes = useStyles();
@@ -96,9 +98,11 @@ const IndividualSignup = () => {
 
 	const submitForm = async (values, fn) => {
 		console.log({ values });
+		dispatch(startLoading());
 
 		await sleep(2000);
 		setSuccessModal(true);
+		dispatch(stopLoading());
 
 		sleep(4000).then(() => {
 			fn.resetForm();
@@ -214,8 +218,10 @@ const IndividualSignup = () => {
 												variant="contained"
 												fullWidth
 												className={classes.signup__button}
+												endIcon={loading && <CircularProgress size={20} color="inherit" />}
 											>
-												{activeStep === steps.length - 1 ? 'Submit' : 'Next'}
+												{/* eslint-disable-next-line no-nested-ternary */}
+												{activeStep === steps.length - 1 ? (loading ? 'Signing Up...' : 'Submit') : 'Next'}
 											</Button>
 										</Grid>
 									</Grid>
