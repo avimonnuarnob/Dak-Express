@@ -1,6 +1,9 @@
 import { Box, Button } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import React, { useEffect } from 'react';
 import PageTitlebar from '../../components/modecules/PageTitlebar';
+import useBreadcrumb from '../../hooks/useBreadcrumb';
+import { setBreadcrumb } from '../../reducers/BreadcrumbReducer';
 import ParcelDetails from './parts/ParcelDetails';
 import PickupDetails from './parts/PickupDetails';
 import ReceiverDetails from './parts/ReceiverDetails';
@@ -34,8 +37,22 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
+const breadcrumbs = [
+	{ title: 'Dashboard', link: 'dashboard' },
+	{ title: 'Create New Shipment', link: 'new-shipment' },
+	{ title: 'Preview & Proceed', link: 'new-shipment/preview', current: true },
+];
+
 const PreviewFormData = () => {
+	// eslint-disable-next-line no-unused-vars
+	const { _, dispatch } = useBreadcrumb();
 	const classes = useStyles();
+
+	useEffect(() => {
+		window.scrollTo(0, 0);
+		dispatch(setBreadcrumb(breadcrumbs));
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	return (
 		<Box sx={{ py: 2, px: 2 }}>

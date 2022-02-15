@@ -1,4 +1,8 @@
 import { Box } from '@mui/material';
+import { useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+import useBreadcrumb from '../../hooks/useBreadcrumb';
+import { setBreadcrumb } from '../../reducers/BreadcrumbReducer';
 import IssueDetailsBody from './parts/IssueDetailsBody';
 import IssueDetailsHeader from './parts/IssueDetailsHeader';
 
@@ -13,11 +17,29 @@ const FAKE__DATA = {
 	date: '12 Dec 2021',
 };
 
-const Issue = () => (
-	<Box sx={{ py: 2, px: 3 }}>
-		<IssueDetailsHeader />
-		<IssueDetailsBody data={FAKE__DATA} />
-	</Box>
-);
+const Issue = () => {
+	// eslint-disable-next-line no-unused-vars
+	const { _, dispatch } = useBreadcrumb();
+	const { id } = useParams();
+
+	const breadcrumbs = [
+		{ title: 'Dashboard', link: 'dashboard' },
+		{ title: 'Supports', link: 'supports' },
+		{ title: id, link: `supports/${id}`, current: true },
+	];
+
+	useEffect(() => {
+		window.scrollTo(0, 0);
+		dispatch(setBreadcrumb(breadcrumbs));
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
+	return (
+		<Box sx={{ py: 2, px: 3 }}>
+			<IssueDetailsHeader />
+			<IssueDetailsBody data={FAKE__DATA} />
+		</Box>
+	);
+};
 
 export default Issue;

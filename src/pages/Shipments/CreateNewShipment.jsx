@@ -3,9 +3,11 @@
 import CachedOutlinedIcon from '@mui/icons-material/CachedOutlined';
 import { Box, Button, Grid } from '@mui/material';
 import { Form, Formik } from 'formik';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PageTitlebar from '../../components/modecules/PageTitlebar';
 import RadioInputField from '../../components/modecules/RadioInputField';
+import useBreadcrumb from '../../hooks/useBreadcrumb';
+import { setBreadcrumb } from '../../reducers/BreadcrumbReducer';
 import isEmpty from '../../utils/isEmpty';
 import CouriersListTable from './parts/CouriersListTable';
 import DangerousGoodsDeclaration from './parts/DangerousGoodsDeclaration';
@@ -20,9 +22,16 @@ const packageSelectionItems = [
 	{ id: '40129af6-84d1-11ec-a8a3-0242ac120002', value: 'Receive', label: 'Receive A Package' },
 ];
 
+const breadcrumbs = [
+	{ title: 'Dashboard', link: 'dashboard' },
+	{ title: 'Create New Shipment', link: 'new-shipment', current: true },
+];
+
 const CreateNewShipment = () => {
 	const [packageSelection, setPackageSelection] = useState(packageSelectionItems[0]?.value);
 	const [showCouriersAndPreviewButton, setShowCouriersAndPreviewButton] = useState(false);
+	// eslint-disable-next-line no-unused-vars
+	const { _, dispatch } = useBreadcrumb();
 
 	const onChange = (event) => setPackageSelection(event.target.value);
 
@@ -48,6 +57,12 @@ const CreateNewShipment = () => {
 			localStorage.removeItem('previewShipmentData');
 		}
 	};
+
+	useEffect(() => {
+		window.scrollTo(0, 0);
+		dispatch(setBreadcrumb(breadcrumbs));
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	return (
 		<Grid container>

@@ -2,12 +2,14 @@ import { Button, CircularProgress, Grid, Paper, Typography } from '@mui/material
 import { styled } from '@mui/material/styles';
 import { makeStyles } from '@mui/styles';
 import { Form, Formik } from 'formik';
-import { useReducer, useState } from 'react';
+import React, { useEffect, useReducer, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AlertModal from '../../components/modecules/AlertModal';
 import PasswordInputField from '../../components/modecules/PasswordInputField';
 import useAuthToken from '../../hooks/useAuthToken';
+import useBreadcrumb from '../../hooks/useBreadcrumb';
 import { setAuthToken } from '../../reducers/AuthReducer';
+import { setBreadcrumb } from '../../reducers/BreadcrumbReducer';
 import { initialState, loadingReducer, startLoading, stopLoading } from '../../reducers/LoadingReducer';
 import { sleep } from '../../utils/functions';
 import validate from './validation/validate';
@@ -68,11 +70,26 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
+const breadcrumbs = [
+	{ title: 'Dashboard', link: 'dashboard' },
+	{ title: 'Profile', link: 'profile' },
+	{ title: 'Change Password', link: 'change-password', current: true },
+];
+
 const ChangePassword = () => {
 	const [loading, dispatch] = useReducer(loadingReducer, initialState);
 	const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
+
 	// eslint-disable-next-line no-unused-vars
 	const { state: authToken, dispatch: authDispatcher } = useAuthToken();
+	// eslint-disable-next-line no-unused-vars
+	const { _, dispatch: breadcrumbDispatcher } = useBreadcrumb();
+
+	useEffect(() => {
+		window.scrollTo(0, 0);
+		breadcrumbDispatcher(setBreadcrumb(breadcrumbs));
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	const redirectTo = useNavigate();
 	const classes = useStyles();
