@@ -2,7 +2,6 @@ import { Box } from '@mui/material';
 import React, { useEffect } from 'react';
 import useBreadcrumb from '../../hooks/useBreadcrumb';
 import { setBreadcrumb } from '../../reducers/BreadcrumbReducer';
-import ProfileHeader from './parts/ProfileHeader';
 import UserProfileBody from './parts/UserProfileBody';
 
 const breadcrumbs = [
@@ -22,7 +21,7 @@ const UserProfile = () => {
 
 	return (
 		<Box sx={{ py: 2, px: 3 }}>
-			<ProfileHeader label="Profile" />
+			{/* <ProfileHeader label="Profile" /> */}
 			<UserProfileBody />
 		</Box>
 	);

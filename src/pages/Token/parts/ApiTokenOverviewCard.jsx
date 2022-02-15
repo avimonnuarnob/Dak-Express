@@ -2,6 +2,7 @@
 /* eslint-disable arrow-body-style */
 import { Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import CopyToClipboard from '../../../components/modecules/CopyToClipboard';
 
 const useStyles = makeStyles((theme) => ({
 	card: {
@@ -18,15 +19,30 @@ const useStyles = makeStyles((theme) => ({
 			gridTemplateColumns: 'repeat(4, 1fr)',
 		},
 	},
+
+	'card--active': {
+		color: theme.palette.typography.main,
+	},
+	'card--deactive': {
+		color: 'grey',
+		cursor: 'not-allowed',
+		userSelect: 'none',
+	},
 	card__item: {
 		borderBottom: '1px solid #E5EBF0',
 	},
 }));
 
-const ApiTokenOverviewCard = () => {
+const ApiTokenOverviewCard = ({ checked }) => {
 	const classes = useStyles();
+
 	return (
-		<div className={classes.card}>
+		<div
+			className={[
+				classes.card,
+				`${checked ? classes['card--active'] : classes['card--deactive']}`,
+			].join(' ')}
+		>
 			<Typography
 				variant="body2"
 				fontWeight="bold"
@@ -41,9 +57,7 @@ const ApiTokenOverviewCard = () => {
 				display="inline"
 				padding={2}
 				className={classes.card__item}
-				sx={{
-					borderRight: { md: '1px solid #E5EBF0', sm: 0 },
-				}}
+				sx={{ borderRight: { md: '1px solid #E5EBF0', sm: 0 } }}
 			>
 				Android Key
 			</Typography>
@@ -79,11 +93,14 @@ const ApiTokenOverviewCard = () => {
 				display="inline"
 				padding={2}
 				className={classes.card__item}
-				sx={{
-					gridColumn: '2 / -1',
-				}}
+				sx={{ gridColumn: '2 / -1' }}
 			>
-				KGHD14587857FHdsfdhsfjdsKGHD14587857FHdsfdhsfjdsKGHD14587857FHdsfdhsfjds
+				<CopyToClipboard
+					copyText="KGHD14587857FHdsfdhsfjdsKGHD14587857FHdsfdhsfjdsKGHD14587857FHdsfdhsfjds"
+					disabled={!checked}
+				>
+					KGHD14587857FHdsfdhsfjdsKGHD14587857FHdsfdhsfjdsKGHD14587857FHdsfdhsfjds
+				</CopyToClipboard>
 			</Typography>
 
 			<Typography
@@ -100,11 +117,14 @@ const ApiTokenOverviewCard = () => {
 				display="inline"
 				padding={2}
 				className={classes.card__item}
-				sx={{
-					gridColumn: '2 / -1',
-				}}
+				sx={{ gridColumn: '2 / -1' }}
 			>
-				KGHD14587857FHdsfdhsfjdsKGHD14587857FHdsfdhsfjdsKGHD14587857FHdsfdhsfjds{' '}
+				<CopyToClipboard
+					copyText="KGHD14587857FHdsfdhsfjdsKGHD14587857FHdsfdhsfjdsKGHD14587857FHdsfdhsfjds"
+					disabled={!checked}
+				>
+					KGHD14587857FHdsfdhsfjdsKGHD14587857FHdsfdhsfjdsKGHD14587857FHdsfdhsfjds
+				</CopyToClipboard>
 			</Typography>
 
 			<Typography
@@ -121,9 +141,7 @@ const ApiTokenOverviewCard = () => {
 				display="inline"
 				padding={2}
 				className={classes.card__item}
-				sx={{
-					borderRight: { md: '1px solid #E5EBF0', sm: 0 },
-				}}
+				sx={{ borderRight: { md: '1px solid #E5EBF0', sm: 0 } }}
 			>
 				12 Dec 2021
 			</Typography>

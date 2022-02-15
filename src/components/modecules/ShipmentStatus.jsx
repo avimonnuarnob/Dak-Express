@@ -84,6 +84,24 @@ const ShipmentStatus = ({ label = 'none' }) => {
 				/>
 			);
 
+		case 'active':
+			return (
+				<Chip
+					className={classes.status__delivered}
+					label="Active"
+					onClick={handleClick}
+				/>
+			);
+
+		case 'deactive':
+			return (
+				<Chip
+					className={classes.status__failed}
+					label="Deactive"
+					onClick={handleClick}
+				/>
+			);
+
 		default:
 			return (
 				<Chip className={classes.status} label="None" onClick={handleClick} />

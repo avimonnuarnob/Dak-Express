@@ -76,7 +76,7 @@ const AllApiToknesTable = () => {
 		page > 0 ? Math.max(0, (1 + page) * rowsPerPage - apiTokens.length) : 0;
 
 	return (
-		<Box px={2}>
+		<>
 			<TableContainer component={Paper}>
 				<Table aria-label="customized table">
 					<TableHead>
@@ -95,9 +95,9 @@ const AllApiToknesTable = () => {
 					<TableBody>
 						{(rowsPerPage > 0
 							? apiTokens?.slice(
-								page * rowsPerPage,
-								page * rowsPerPage + rowsPerPage
-							)
+									page * rowsPerPage,
+									page * rowsPerPage + rowsPerPage
+							  )
 							: apiTokens
 						)?.map((token, index) => (
 							<StyledTableRow key={token?.access_key}>
@@ -124,7 +124,10 @@ const AllApiToknesTable = () => {
 								</StyledTableCell>
 								<StyledTableCell align="left">
 									<Box className={classes.table__buttons}>
-										<Link to={`/tokens/${index + 1}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+										<Link
+											to={`/tokens/${index + 1}`}
+											style={{ textDecoration: 'none', color: 'inherit' }}
+										>
 											<Button
 												sx={{ width: '100%' }}
 												size="small"
@@ -136,7 +139,10 @@ const AllApiToknesTable = () => {
 											</Button>
 										</Link>
 
-										<Link to="/tokens/new" style={{ textDecoration: 'none', color: 'inherit' }}>
+										<Link
+											to="/tokens/new"
+											style={{ textDecoration: 'none', color: 'inherit' }}
+										>
 											<Button
 												sx={{ width: '100%' }}
 												size="small"
@@ -181,7 +187,7 @@ const AllApiToknesTable = () => {
 					handlePageRowsChange={handlePageRowsChange}
 				/>
 			</Box>
-		</Box>
+		</>
 	);
 };
 

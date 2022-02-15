@@ -6,16 +6,21 @@ import { makeStyles } from '@mui/styles';
 import PropTypes from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
-	card: {
+	card: {},
+	card__body: {
 		display: 'grid',
-		gridTemplateColumns: '1fr 1fr',
+		gridTemplateColumns: '1fr',
+
+		border: '1px solid #E5EBF0',
+		marginTop: '1.5rem',
+		borderRadius: '0.5rem',
+		overflow: 'scroll',
 
 		[theme.breakpoints.up('md')]: {
-			// gridTemplateColumns: '1fr',
 			gridTemplateColumns: 'repeat(4, 1fr)',
 		},
 	},
-	card__item: {
+	card__body__item: {
 		borderBottom: '1px solid #E5EBF0',
 
 		'&:nth-last-child(-n+4)': {
@@ -28,13 +33,13 @@ const TransactionDetailsCard = ({ data }) => {
 	const classes = useStyles();
 
 	return (
-		<div className={classes.card}>
+		<div className={classes.card__body}>
 			<Typography
 				variant="body2"
 				fontWeight="bold"
 				display="inline"
 				padding={2}
-				className={classes.card__item}
+				className={classes.card__body__item}
 			>
 				Transaction Amount
 			</Typography>
@@ -43,13 +48,8 @@ const TransactionDetailsCard = ({ data }) => {
 				variant="body2"
 				display="inline"
 				padding={2}
-				className={classes.card__item}
-				sx={{
-					borderRight: {
-						md: '1px solid #E5EBF0',
-						sm: 0,
-					},
-				}}
+				className={classes.card__body__item}
+				sx={{ borderRight: { md: '1px solid #E5EBF0', sm: 0 } }}
 			>
 				{`BDT ${data.t_amount}`}
 			</Typography>
@@ -59,7 +59,7 @@ const TransactionDetailsCard = ({ data }) => {
 				fontWeight="bold"
 				display="inline"
 				padding={2}
-				className={classes.card__item}
+				className={classes.card__body__item}
 			>
 				Transaction ID
 			</Typography>
@@ -68,7 +68,7 @@ const TransactionDetailsCard = ({ data }) => {
 				variant="body2"
 				display="inline"
 				padding={2}
-				className={classes.card__item}
+				className={classes.card__body__item}
 			>
 				{data.t_id}
 			</Typography>
@@ -78,7 +78,7 @@ const TransactionDetailsCard = ({ data }) => {
 				fontWeight="bold"
 				display="inline"
 				padding={2}
-				className={classes.card__item}
+				className={classes.card__body__item}
 			>
 				Date & Time
 			</Typography>
@@ -87,13 +87,8 @@ const TransactionDetailsCard = ({ data }) => {
 				variant="body2"
 				display="inline"
 				padding={2}
-				className={classes.card__item}
-				sx={{
-					borderRight: {
-						md: '1px solid #E5EBF0',
-						sm: 0,
-					},
-				}}
+				className={classes.card__body__item}
+				sx={{ borderRight: { md: '1px solid #E5EBF0', sm: 0 } }}
 			>
 				{data.t_date}
 			</Typography>
@@ -103,7 +98,7 @@ const TransactionDetailsCard = ({ data }) => {
 				fontWeight="bold"
 				display="inline"
 				padding={2}
-				className={classes.card__item}
+				className={classes.card__body__item}
 			>
 				Payment Method
 			</Typography>
@@ -111,7 +106,7 @@ const TransactionDetailsCard = ({ data }) => {
 				variant="body2"
 				display="inline"
 				padding={2}
-				className={classes.card__item}
+				className={classes.card__body__item}
 			>
 				{data.pay_method}
 			</Typography>

@@ -7,7 +7,7 @@ import ReplayMessage from './ReplayMessage';
 
 const useStyles = makeStyles((theme) => ({
 	box: {
-		padding: theme.spacing(4, 4),
+		padding: theme.spacing(2, 2),
 		margin: theme.spacing(3, 0, 0, 0),
 	},
 	box__header: {

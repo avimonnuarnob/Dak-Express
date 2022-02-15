@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable react/jsx-props-no-spreading */
 import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined';
 import { Box, FormControl, TextField } from '@mui/material';
@@ -9,6 +10,7 @@ const useStyles = makeStyles(() => ({
 	fileUploadInput: {
 		'& .MuiOutlinedInput-root': {
 			'&.Mui-focused fieldset': {
+				borderWidth: '1px !important',
 				borderColor: '#282B2B4D',
 			},
 		},
@@ -40,7 +42,14 @@ const FileUploadElement = ({
 					label={label}
 					focused
 					InputProps={{
-						endAdornment: <InputHelperIcon visibility InitialIcon={FileUploadOutlinedIcon} position="end" edge="end" />,
+						endAdornment: (
+							<InputHelperIcon
+								visibility
+								InitialIcon={FileUploadOutlinedIcon}
+								position="end"
+								edge="end"
+							/>
+						),
 					}}
 					{...rest}
 				/>

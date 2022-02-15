@@ -2,13 +2,14 @@
 import { Box, Button, Grid, Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Form, Formik } from 'formik';
+import { useNavigate } from 'react-router';
 import InputElement from '../../../components/modecules/InputElement';
 import SelectElement from '../../../components/modecules/SelectInput';
 import { sleep } from '../../../utils/functions';
 
 const roleItems = [
-	{ id: 1, label: 'Admin', value: 'admin' },
-	{ id: 2, label: 'Super Admin', value: 'super admin' },
+	{ id: 1, label: 'Access Key', value: 'access' },
+	{ id: 2, label: 'Secret Key', value: 'secret' },
 ];
 
 const useStyles = makeStyles((theme) => ({
@@ -69,6 +70,7 @@ const useStyles = makeStyles((theme) => ({
 
 const CreateApiTokenBody = () => {
 	const classes = useStyles();
+	const navigate = useNavigate();
 
 	const submitForm = async (values, actions) => {
 		await sleep(2000);
@@ -156,7 +158,7 @@ const CreateApiTokenBody = () => {
 							type="button"
 							variant="outlined"
 							disabled={false}
-							onClick={() => {}}
+							onClick={() => navigate(-1)}
 							sx={{ ml: 'auto !important' }}
 							className={classes.pickup__back__button}
 						>

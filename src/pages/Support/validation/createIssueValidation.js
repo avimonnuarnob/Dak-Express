@@ -13,6 +13,14 @@ const validateCreateIssueForm = (values) => {
 		errors.fullName = 'Full name is required';
 	}
 
+	if (!values?.subject) {
+		errors.subject = 'Subject is required';
+	}
+
+	if (!values?.message) {
+		errors.message = 'Message is required';
+	}
+
 	if (!values?.phone) {
 		errors.phone = 'Phone number is required';
 	} else if (values?.phone && !phoneRegex.test(values?.phone)) {

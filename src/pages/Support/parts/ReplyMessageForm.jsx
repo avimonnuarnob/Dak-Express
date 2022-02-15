@@ -1,9 +1,10 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable prettier/prettier */
 /* eslint-disable arrow-body-style */
-import { Box, Button, Grid, Paper, TextField, Typography } from '@mui/material';
+import { Button, Grid, Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Form, Formik } from 'formik';
+import FileUploadElement from '../../../components/modecules/FileUploadElement';
+import TextInputField from '../../../components/modecules/TextInputField';
 import { sleep } from '../../../utils/functions';
 
 const useStyles = makeStyles((theme) => ({
@@ -50,6 +51,7 @@ const ReplyMessageForm = ({ toggleMessageForm }) => {
 		<Formik
 			initialValues={{
 				message: '',
+				attachment: '',
 			}}
 			validate={(values) => {
 				const errors = {};
@@ -67,14 +69,13 @@ const ReplyMessageForm = ({ toggleMessageForm }) => {
 				values,
 				errors,
 				handleChange,
-				handleBlur,
 				touched,
-				setFieldValue,
+				handleBlur,
 			}) => (
 				<Form>
 					<Paper
 						sx={{
-							py: 4,
+							py: 2,
 							px: 2,
 							mt: 3,
 						}}
@@ -94,19 +95,28 @@ const ReplyMessageForm = ({ toggleMessageForm }) => {
 								</Grid>
 
 								<Grid item md={8} xs={12}>
-									<Box sx={{ paddingTop: '10px' }}>
-										<TextField
-											multiline
-											minRows={7}
-											fullWidth
-											label="Message Here"
-											name="message"
-											value={values.message}
-											onChange={handleChange}
-											error={touched.message && Boolean(errors.message)}
-											helperText={touched.message && errors.message}
-										/>
-									</Box>
+									<TextInputField
+										fullWidth
+										isRequired
+										multiline
+										minRows={4}
+										label="Message"
+										name="message"
+									/>
+								</Grid>
+								<Grid item md={4} xs={12} />
+								<Grid item md={8} xs={12}>
+									<FileUploadElement
+										fullWidth
+										type="file"
+										label=""
+										name="attachment"
+										value={values.attachment}
+										onChange={handleChange}
+										onBlur={handleBlur}
+										error={touched.attachment && Boolean(errors.attachment)}
+										helperText={touched.attachment && errors.attachment}
+									/>
 								</Grid>
 							</Grid>
 						</fieldset>

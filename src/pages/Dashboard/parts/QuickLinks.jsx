@@ -1,205 +1,139 @@
+/* eslint-disable prettier/prettier */
 import AddLocationOutlinedIcon from '@mui/icons-material/AddLocationOutlined';
 import AddToPhotosOutlinedIcon from '@mui/icons-material/AddToPhotosOutlined';
 import HistoryOutlinedIcon from '@mui/icons-material/HistoryOutlined';
 import QuizOutlinedIcon from '@mui/icons-material/QuizOutlined';
-import { Box, Button, Grid, Typography } from '@mui/material';
+import { Box, Paper, Typography } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import { Link } from 'react-router-dom';
 
-const QuickLinks = () => (
-	<Box sx={{ mt: 3, color: (theme) => theme.palette.typography.main }}>
-		<Typography sx={{ typography: { sm: 'h5', xs: 'h6' }, fontWeight: '600 !important' }}>Quick Links</Typography>
-		<Box
-			sx={{
-				mt: 3,
-			}}
-		>
-			<Grid container spacing={2}>
-				<Grid item xs={6} sm={6} md={3}>
-					<Link to="/new-shipment" style={{ textDecoration: 'none', color: 'inherit' }}>
-						<Button
-							fullWidth
-							variant="contained"
-							color="inherit"
-							sx={{
-								cursor: 'pointer',
-								bgcolor: (theme) => theme.palette.primary.white,
-								borderRadius: 2,
-								boxShadow: 4,
-								textTransform: 'none',
-							}}
-						>
+const useStyles = makeStyles((theme) => ({
+	quickLinks: {
+		display: 'grid',
+		gridTemplateColumns: 'repeat(auto-fit, minmax(10rem, 1fr))',
+		gap: theme.spacing(2),
+
+		margin: theme.spacing(3, 0),
+	},
+
+	quickLinks__item__icon: {
+		width: '3.75rem',
+		aspectRatio: '1/1',
+		padding: theme.spacing(1),
+		borderRadius: '50%',
+
+		display: 'flex',
+		justifyContent: 'center',
+		alignItems: 'center',
+		margin: 'auto',
+	},
+}));
+
+const QuickLinks = () => {
+	const classes = useStyles();
+
+	return (
+		<Box sx={{ mt: 3, color: (theme) => theme.palette.typography.main }}>
+			<Typography
+				sx={{
+					typography: { sm: 'h5', xs: 'h6' },
+					fontWeight: '600 !important',
+				}}
+			>
+				Quick Links
+			</Typography>
+
+			<Box className={classes.quickLinks}>
+				<Paper>
+					<Link
+						to="/new-shipment"
+						style={{ textDecoration: 'none', color: 'inherit' }}
+					>
+						<Box sx={{ textAlign: 'center', px: 3, py: 2 }}>
 							<Box
-								sx={{
-									textAlign: 'center',
-									p: 1,
-								}}
+								className={classes.quickLinks__item__icon}
+								sx={{ background: '#82A52B33' }}
 							>
-								<Box
-									sx={{
-										width: '3.75rem',
-										aspectRatio: '1/1',
-										p: 1,
-										borderRadius: '50%',
-										background: '#82A52B33',
-
-										display: 'flex',
-										justifyContent: 'center',
-										alignItems: 'center',
-										margin: 'auto',
-									}}
-								>
-									<AddToPhotosOutlinedIcon
-										sx={{
-											color: (theme) => theme.palette.secondary.main,
-										}}
-									/>
-								</Box>
-								<Typography sx={{ my: 2, fontWeight: '600 !important' }}>Create A Shipment</Typography>
+								<AddToPhotosOutlinedIcon
+									sx={{ color: (theme) => theme.palette.secondary.main }}
+								/>
 							</Box>
-						</Button>
-					</Link>
-				</Grid>
 
-				<Grid item xs={6} sm={6} md={3}>
-					<Link to="/transactions" style={{ textDecoration: 'none', color: 'inherit' }}>
-						<Button
-							fullWidth
-							variant="contained"
-							color="inherit"
-							sx={{
-								cursor: 'pointer',
-								bgcolor: (theme) => theme.palette.primary.white,
-								borderRadius: 2,
-								boxShadow: 4,
-								textTransform: 'none',
-							}}
-						>
+							<Typography sx={{ mt: 2, fontWeight: '600 !important' }}>
+								Create A Shipment
+							</Typography>
+						</Box>
+					</Link>
+				</Paper>
+
+				<Paper>
+					<Link
+						to="/transactions"
+						style={{ textDecoration: 'none', color: 'inherit' }}
+					>
+						<Box sx={{ textAlign: 'center', px: 3, py: 2 }}>
 							<Box
-								sx={{
-									textAlign: 'center',
-									p: 1,
-								}}
+								className={classes.quickLinks__item__icon}
+								sx={{ background: '#ECFBE6' }}
 							>
-								<Box
-									sx={{
-										width: '3.75rem',
-										aspectRatio: '1/1',
-										p: 1,
-										borderRadius: '50%',
-										background: '#ECFBE6',
-										display: 'flex',
-										justifyContent: 'center',
-										alignItems: 'center',
-										margin: 'auto',
-									}}
-								>
-									<HistoryOutlinedIcon
-										sx={{
-											color: (theme) => theme.palette.status.success,
-										}}
-									/>
-								</Box>
-								<Typography sx={{ my: 2, fontWeight: '600 !important' }}>Transaction History</Typography>
+								<HistoryOutlinedIcon
+									sx={{ color: (theme) => theme.palette.status.success }}
+								/>
 							</Box>
-						</Button>
-					</Link>
-				</Grid>
 
-				<Grid item xs={6} sm={6} md={3}>
-					<Link to="/locations/pickup" style={{ textDecoration: 'none', color: 'inherit' }}>
-						<Button
-							fullWidth
-							variant="contained"
-							color="inherit"
-							sx={{
-								cursor: 'pointer',
-								bgcolor: (theme) => theme.palette.primary.white,
-								borderRadius: 2,
-								boxShadow: 4,
-								textTransform: 'none',
-							}}
-						>
+							<Typography sx={{ my: 2, fontWeight: '600 !important' }}>
+								Transaction History
+							</Typography>
+						</Box>
+					</Link>
+				</Paper>
+
+				<Paper>
+					<Link
+						to="/locations/pickup"
+						style={{ textDecoration: 'none', color: 'inherit' }}
+					>
+						<Box sx={{ textAlign: 'center', px: 3, py: 2 }}>
 							<Box
-								sx={{
-									textAlign: 'center',
-									p: 1,
-								}}
+								className={classes.quickLinks__item__icon}
+								sx={{ background: '#FFF6E9' }}
 							>
-								<Box
-									sx={{
-										width: '3.75rem',
-										aspectRatio: '1/1',
-										p: 1,
-										borderRadius: '50%',
-										background: '#FFF6E9',
-
-										display: 'flex',
-										justifyContent: 'center',
-										alignItems: 'center',
-										margin: 'auto',
-									}}
-								>
-									<AddLocationOutlinedIcon
-										sx={{
-											color: (theme) => theme.palette.status.pending,
-										}}
-									/>
-								</Box>
-								<Typography sx={{ my: 2, fontWeight: '600 !important' }}>Location</Typography>
+								<AddLocationOutlinedIcon
+									sx={{ color: (theme) => theme.palette.status.pending }}
+								/>
 							</Box>
-						</Button>
-					</Link>
-				</Grid>
 
-				<Grid item xs={6} sm={6} md={3}>
-					<Link to="/supports" style={{ textDecoration: 'none', color: 'inherit' }}>
-						<Button
-							fullWidth
-							variant="contained"
-							color="inherit"
-							sx={{
-								cursor: 'pointer',
-								bgcolor: (theme) => theme.palette.primary.white,
-								borderRadius: 2,
-								boxShadow: 4,
-								textTransform: 'none',
-							}}
-						>
+							<Typography sx={{ my: 2, fontWeight: '600 !important' }}>
+								Location
+							</Typography>
+						</Box>
+					</Link>
+				</Paper>
+
+				<Paper>
+					<Link
+						to="/supports"
+						style={{ textDecoration: 'none', color: 'inherit' }}
+					>
+						<Box sx={{ textAlign: 'center', px: 3, py: 2 }}>
 							<Box
-								elevation={5}
-								sx={{
-									textAlign: 'center',
-									p: 1,
-								}}
+								className={classes.quickLinks__item__icon}
+								sx={{ background: '#E306131A' }}
 							>
-								<Box
-									sx={{
-										width: '3.75rem',
-										aspectRatio: '1/1',
-										p: 1,
-										borderRadius: '50%',
-										background: '#E306131A',
-
-										display: 'flex',
-										justifyContent: 'center',
-										alignItems: 'center',
-										margin: 'auto',
-									}}
-								>
-									<QuizOutlinedIcon
-										sx={{
-											color: (theme) => theme.palette.status.failed,
-										}}
-									/>
-								</Box>
-								<Typography sx={{ my: 2, fontWeight: '600 !important' }}>Support</Typography>
+								<QuizOutlinedIcon
+									sx={{ color: (theme) => theme.palette.status.failed }}
+								/>
 							</Box>
-						</Button>
+
+							<Typography sx={{ my: 2, fontWeight: '600 !important' }}>
+								Support
+							</Typography>
+						</Box>
 					</Link>
-				</Grid>
-			</Grid>
+				</Paper>
+			</Box>
 		</Box>
-	</Box>
-);
+	);
+};
 
 export default QuickLinks;

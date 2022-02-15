@@ -1,9 +1,9 @@
 /* eslint-disable prettier/prettier */
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import { Box, Button, Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Form, Formik } from 'formik';
+import { useNavigate } from 'react-router';
 import editUserProfileValidation from '../validation/editUserProfileValidation';
 import editUserProfileValues from '../validation/editUserProfileValues';
 import EditAccountInfoForm from './EditAccountInfoForm';
@@ -80,6 +80,7 @@ const useStyles = makeStyles((theme) => ({
 
 const EditUserProfileBody = () => {
 	const classes = useStyles();
+	const navigate = useNavigate();
 	return (
 		<Formik
 			initialValues={editUserProfileValues}
@@ -115,14 +116,6 @@ const EditUserProfileBody = () => {
 									BUSINESS
 								</Typography>
 							</Box>
-							<Button
-								size="small"
-								variant="outlined"
-								className={classes['user__button--edit']}
-								startIcon={<EditOutlinedIcon />}
-							>
-								Edit
-							</Button>
 						</Box>
 
 						<Box className={classes.box__header}>
@@ -151,11 +144,11 @@ const EditUserProfileBody = () => {
 							type="button"
 							variant="outlined"
 							disabled={false}
-							onClick={() => {}}
+							onClick={() => navigate(-1)}
 							sx={{ ml: 'auto !important' }}
 							className={classes.edit__back__button}
 						>
-							Back
+							Cancel
 						</Button>
 						<Button
 							disabled={false}

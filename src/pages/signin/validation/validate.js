@@ -5,7 +5,7 @@ const emailRegex =
 
 const usernameRegex = /^[a-zA-Z0-9]+$/;
 
-// const passwordRegex = /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!#$@^%&? "])[a-zA-Z0-9!#$@^%&?]{8,20}$/;
+const passwordRegex = /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!#$@^%&? "])[a-zA-Z0-9!#$@^%&?]{8,20}$/;
 
 const validate = (values) => {
 	const errors = {};
@@ -22,8 +22,9 @@ const validate = (values) => {
 
 	if (!values?.password) {
 		errors.password = 'Password is required';
-	} else if (values?.password?.length < 6) {
-		errors.password = `Password must be a minimum of 6 characters`;
+	} else if (!passwordRegex.test(values?.password)) {
+		errors.password = `Password must be a minimum of 8 characters including number, Upper, Lower And 
+		one special character`;
 	}
 
 	return errors;

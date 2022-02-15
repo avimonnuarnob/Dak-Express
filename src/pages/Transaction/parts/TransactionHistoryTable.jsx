@@ -1,14 +1,10 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable react/self-closing-comp */
 /* eslint-disable arrow-body-style */
-import FirstPageIcon from '@mui/icons-material/FirstPage';
-import KeyboardArrowLeft from '@mui/icons-material/KeyboardArrowLeft';
-import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
-import LastPageIcon from '@mui/icons-material/LastPage';
-import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
+import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import {
 	Box,
-	IconButton,
+	Button,
 	Paper,
 	Table,
 	TableBody,
@@ -16,14 +12,13 @@ import {
 	tableCellClasses,
 	TableContainer,
 	TableHead,
-	TablePagination,
 	TableRow,
-	Typography
+	Typography,
 } from '@mui/material';
-import { styled, useTheme } from '@mui/material/styles';
+import { styled } from '@mui/material/styles';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import TableActionButton from '../../../components/atoms/ActionButton';
+import Pagination from '../../../components/modecules/Pagination';
 import ShipmentStatus from '../../../components/modecules/ShipmentStatus';
 
 const FAKE_DATA = [
@@ -71,101 +66,37 @@ const StyledTableCell = styled(TableCell)(({ theme }) => ({
 	},
 }));
 
-const StyledTableRow = styled(TableRow)(({ theme }) => ({
-	'&:nth-of-type(odd)': {
-		backgroundColor: theme.palette.action.hover,
+const StyledTableRow = styled(TableRow)(() => ({
+	'&:nth-of-type(even)': {
+		backgroundColor: '#f5f5f5',
 	},
+	// hide last border
 	'&:last-child td, &:last-child th': {
 		border: 0,
 	},
 }));
 
-const TablePaginationActions = (props) => {
-	const theme = useTheme();
-	const { count, page, rowsPerPage, onPageChange } = props;
-
-	const handleFirstPageButtonClick = (event) => {
-		onPageChange(event, 0);
-	};
-
-	const handleBackButtonClick = (event) => {
-		onPageChange(event, page - 1);
-	};
-
-	const handleNextButtonClick = (event) => {
-		onPageChange(event, page + 1);
-	};
-
-	const handleLastPageButtonClick = (event) => {
-		onPageChange(event, Math.max(0, Math.ceil(count / rowsPerPage) - 1));
-	};
-
-	return (
-		<Box sx={{ flexShrink: 0, ml: 2.5 }}>
-			<IconButton
-				onClick={handleFirstPageButtonClick}
-				disabled={page === 0}
-				aria-label="first page"
-			>
-				{theme.direction === 'rtl' ? <LastPageIcon /> : <FirstPageIcon />}
-			</IconButton>
-			<IconButton
-				onClick={handleBackButtonClick}
-				disabled={page === 0}
-				aria-label="previous page"
-			>
-				{theme.direction === 'rtl' ? (
-					<KeyboardArrowRight />
-				) : (
-					<KeyboardArrowLeft />
-				)}
-			</IconButton>
-			<IconButton
-				onClick={handleNextButtonClick}
-				disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-				aria-label="next page"
-			>
-				{theme.direction === 'rtl' ? (
-					<KeyboardArrowLeft />
-				) : (
-					<KeyboardArrowRight />
-				)}
-			</IconButton>
-			<IconButton
-				onClick={handleLastPageButtonClick}
-				disabled={page >= Math.ceil(count / rowsPerPage) - 1}
-				aria-label="last page"
-			>
-				{theme.direction === 'rtl' ? <FirstPageIcon /> : <LastPageIcon />}
-			</IconButton>
-		</Box>
-	);
-};
-
 const TransactionHistoryTable = () => {
 	const [page, setPage] = useState(0);
-	const [rowsPerPage, setRowsPerPage] = useState(5);
+	const [rowsPerPage, setRowsPerPage] = useState(20);
 
 	// Avoid a layout jump when reaching the last page with empty rows.
 	const emptyRows =
 		page > 0 ? Math.max(0, (1 + page) * rowsPerPage - FAKE_DATA.length) : 0;
 
-	const handleChangePage = (event, newPage) => {
+	const handlePageChange = (event, newPage) => {
+		// TODO:  Make API call while page changes
 		setPage(newPage);
 	};
 
-	const handleChangeRowsPerPage = (event) => {
+	const handlePageRowsChange = (event) => {
 		setRowsPerPage(parseInt(event.target.value, 10));
 		setPage(0);
 	};
+
 	return (
 		<>
-			<TableContainer
-				component={Paper}
-				sx={{
-					minWidth: '1000px',
-				}}
-			>
+			<TableContainer component={Paper}>
 				<Table aria-label="customized table">
 					<TableHead>
 						<TableRow>
@@ -182,9 +113,9 @@ const TransactionHistoryTable = () => {
 					<TableBody>
 						{(rowsPerPage > 0
 							? FAKE_DATA.slice(
-								page * rowsPerPage,
-								page * rowsPerPage + rowsPerPage
-							)
+									page * rowsPerPage,
+									page * rowsPerPage + rowsPerPage
+							  )
 							: FAKE_DATA
 						).map((row, index) => (
 							<StyledTableRow key={row.name}>
@@ -211,13 +142,19 @@ const TransactionHistoryTable = () => {
 								</StyledTableCell>
 
 								<StyledTableCell align="left">
-									<Link to={`/transactions/${row?.t_id}`} style={{ textDecoration: 'none' }}>
-										<TableActionButton
+									<Link
+										to={`/transactions/${row?.t_id}`}
+										style={{ textDecoration: 'none' }}
+									>
+										<Button
 											sx={{ width: '100%' }}
-											Icon={RemoveRedEyeOutlinedIcon}
-											color="typography.sec"
-											label="View"
-										/>
+											size="small"
+											variant="outlined"
+											color="secondary"
+											startIcon={<VisibilityOutlinedIcon />}
+										>
+											View
+										</Button>
 									</Link>
 								</StyledTableCell>
 							</StyledTableRow>
@@ -231,26 +168,16 @@ const TransactionHistoryTable = () => {
 					</TableBody>
 				</Table>
 			</TableContainer>
-			<TablePagination
-				rowsPerPageOptions={[1, 2, 5, { label: 'All', value: -1 }]}
-				colSpan={3}
-				count={FAKE_DATA.length}
-				rowsPerPage={rowsPerPage}
-				page={page}
-				SelectProps={{
-					inputProps: {
-						'aria-label': 'rows per page',
-					},
-					native: true,
-				}}
-				onPageChange={handleChangePage}
-				onRowsPerPageChange={handleChangeRowsPerPage}
-				ActionsComponent={TablePaginationActions}
-				sx={{
-					display: 'block',
-					borderBottom: 0,
-				}}
-			/>
+
+			<Box sx={{ py: '10px' }}>
+				<Pagination
+					data={FAKE_DATA}
+					page={page}
+					rowsPerPage={rowsPerPage}
+					handlePageChange={handlePageChange}
+					handlePageRowsChange={handlePageRowsChange}
+				/>
+			</Box>
 		</>
 	);
 };

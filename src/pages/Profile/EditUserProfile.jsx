@@ -3,7 +3,6 @@ import React, { useEffect } from 'react';
 import useBreadcrumb from '../../hooks/useBreadcrumb';
 import { setBreadcrumb } from '../../reducers/BreadcrumbReducer';
 import EditUserProfileBody from './parts/EditUserProfileBody';
-import ProfileHeader from './parts/ProfileHeader';
 
 const breadcrumbs = [
 	{ title: 'Dashboard', link: 'dashboard' },
@@ -23,7 +22,7 @@ const EditUserProfile = () => {
 
 	return (
 		<Box sx={{ py: 2, px: 3 }}>
-			<ProfileHeader label="Edit Profile" />
+			{/* <ProfileHeader label="Edit Profile" /> */}
 			<EditUserProfileBody />
 		</Box>
 	);

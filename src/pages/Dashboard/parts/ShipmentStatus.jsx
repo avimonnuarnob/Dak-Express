@@ -7,7 +7,6 @@ import { Box, Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import PropTypes from 'prop-types';
 
-// FakeData
 const FAKE__DATA = [
 	{
 		label: 'Complete Shipment',
@@ -41,7 +40,6 @@ const cards = [
 	},
 ];
 
-// Styles
 const useStyles = makeStyles((theme) => ({
 	container: {
 		display: 'flex',
@@ -78,73 +76,36 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-// Card icon component
-const StatusIcon = ({ backgroundColor, Icon, iconColor }) => {
-	const classes = useStyles();
-	return (
-		<Box
-			className={classes.icon}
-			sx={{
-				background: backgroundColor,
-			}}
-		>
-			<Icon
-				sx={{
-					color: iconColor,
-				}}
-			/>
-		</Box>
-	);
-};
-
-StatusIcon.propTypes = {
-	Icon: PropTypes.elementType.isRequired,
-	backgroundColor: PropTypes.string.isRequired,
-	iconColor: PropTypes.string.isRequired,
-};
-
 // Card component
 const ShipmentCard = ({
 	backgroundColor,
 	iconColor,
-	icon,
+	Icon,
 	iconBgColor,
 	label,
 	count,
 }) => {
 	const classes = useStyles();
 	return (
-		<Box
-			className={classes.card}
-			sx={{
-				backgroundColor,
-			}}
-		>
+		<Box className={classes.card} sx={{ backgroundColor }}>
 			<div>
-				<Typography
-					variant="h6"
-					fontWeight={600}
-					sx={{
-						py: 1,
-					}}
-				>
+				<Typography variant="h6" fontWeight={600} sx={{ py: 1 }}>
 					{label}
 				</Typography>
 				<Typography variant="h4" fontWeight={600}>
 					{count}
 				</Typography>
 			</div>
-			<StatusIcon
-				Icon={icon}
-				backgroundColor={iconBgColor}
-				iconColor={iconColor}
-			/>
+
+			<Box className={classes.icon} sx={{ background: iconBgColor }}>
+				<Icon sx={{ color: iconColor }} />
+			</Box>
 		</Box>
 	);
 };
 
 ShipmentCard.propTypes = {
-	icon: PropTypes.elementType.isRequired,
+	Icon: PropTypes.elementType.isRequired,
 	backgroundColor: PropTypes.string.isRequired,
 	iconColor: PropTypes.string.isRequired,
 	iconBgColor: PropTypes.string.isRequired,
@@ -163,7 +124,7 @@ const ShipmentStatus = () => {
 					backgroundColor={cards[index].backgroundColor}
 					label={data.label}
 					count={data.count}
-					icon={cards[index].icon}
+					Icon={cards[index].icon}
 					iconBgColor={cards[index].iconBgColor}
 					iconColor={cards[index].iconColor}
 				/>
