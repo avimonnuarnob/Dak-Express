@@ -1,11 +1,17 @@
-/* eslint-disable prettier/prettier */
 import { Button, Grid, Paper } from '@mui/material';
-import React, { useState } from 'react';
+import { useEffect, useState } from 'react';
 import PageTitlebar from '../../components/modecules/PageTitlebar';
 import TabItemData from '../../components/modecules/TabItemData';
 import TabItems from '../../components/modecules/TabItems';
+import useBreadcrumb from '../../hooks/useBreadcrumb';
+import { setBreadcrumb } from '../../reducers/BreadcrumbReducer';
 import AllNotificationsBody from './parts/AllNotificationsBody';
 // import ShipmentsTable from './parts/ShipmentsTable';
+
+const breadcrumbs = [
+	{ title: 'Dashboard', link: 'dashboard' },
+	{ title: 'Notifications', link: 'notifications', current: true },
+];
 
 const tabsData = [
 	{ id: 0, label: 'All', value: '' },
@@ -14,9 +20,15 @@ const tabsData = [
 
 const AllNotifications = () => {
 	const [tabItemValue, setTabItemValue] = useState('');
+	// eslint-disable-next-line no-unused-vars
+	const { _, dispatch } = useBreadcrumb();
 
-	const handleChangeTabItemValue = (value, newValue) =>
-		setTabItemValue(newValue);
+	useEffect(() => {
+		dispatch(setBreadcrumb(breadcrumbs));
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
+	const handleChangeTabItemValue = (value, newValue) => setTabItemValue(newValue);
 
 	return (
 		<Grid container px={3} py={2}>
@@ -25,11 +37,7 @@ const AllNotifications = () => {
 			</Grid>
 
 			<Grid component={Paper} item xs={12} mt={2}>
-				<TabItems
-					items={tabsData}
-					value={tabItemValue}
-					onChange={handleChangeTabItemValue}
-				>
+				<TabItems items={tabsData} value={tabItemValue} onChange={handleChangeTabItemValue}>
 					<Grid container>
 						<Grid item md={12} py={1} m={1}>
 							<Button color="secondary" variant="text">

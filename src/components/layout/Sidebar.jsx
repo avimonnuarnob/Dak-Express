@@ -5,7 +5,6 @@ import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
 import HistoryOutlinedIcon from '@mui/icons-material/HistoryOutlined';
 import KeyIcon from '@mui/icons-material/Key';
 import ListAltOutlinedIcon from '@mui/icons-material/ListAltOutlined';
-import ProductionQuantityLimitsOutlinedIcon from '@mui/icons-material/ProductionQuantityLimitsOutlined';
 import QuizOutlinedIcon from '@mui/icons-material/QuizOutlined';
 import { Box, Typography } from '@mui/material';
 import Divider from '@mui/material/Divider';
@@ -170,7 +169,7 @@ const SidebarMenuItems = () => {
 				</List>
 			</Box>
 
-			<Box className={classes.item}>
+			{/* <Box className={classes.item}>
 				<Typography variant="button" color="initial" className={classes.link__title}>
 					My Product
 				</Typography>
@@ -190,7 +189,7 @@ const SidebarMenuItems = () => {
 						</ListItem>
 					</NavLink>
 				</List>
-			</Box>
+			</Box> */}
 
 			<Box className={classes.item}>
 				<Typography variant="button" color="initial" className={classes.link__title}>

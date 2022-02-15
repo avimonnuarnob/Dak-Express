@@ -1,6 +1,6 @@
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import { Box, Button, Grid } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import SearchBar from '../../components/atoms/SearchBar';
 import DateRangeInputField from '../../components/modecules/DateRangeInputField';
@@ -8,7 +8,14 @@ import DownloadButtonOptions from '../../components/modecules/DownloadButton';
 import PageTitlebar from '../../components/modecules/PageTitlebar';
 import TabItemData from '../../components/modecules/TabItemData';
 import TabItems from '../../components/modecules/TabItems';
+import useBreadcrumb from '../../hooks/useBreadcrumb';
+import { setBreadcrumb } from '../../reducers/BreadcrumbReducer';
 import ShipmentsTable from './parts/ShipmentsTable';
+
+const breadcrumbs = [
+	{ title: 'Dashboard', link: 'dashboard' },
+	{ title: 'Shipments', link: 'shipments', current: true },
+];
 
 const tabsData = [
 	{ id: 0, label: 'All (8)', value: '' },
@@ -19,8 +26,16 @@ const tabsData = [
 
 const AllShipments = () => {
 	const [tabItemValue, setTabItemValue] = useState('');
+	// eslint-disable-next-line no-unused-vars
+	const { _, dispatch } = useBreadcrumb();
 
 	const handleChangeTabItemValue = (value, newValue) => setTabItemValue(newValue);
+
+	useEffect(() => {
+		window.scrollTo(0, 0);
+		dispatch(setBreadcrumb(breadcrumbs));
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	return (
 		<Grid container>

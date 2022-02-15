@@ -18,6 +18,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import brandIconLogo from '../../assets/dak_express.svg';
 import useAuthToken from '../../hooks/useAuthToken';
 import { removeAuthToken } from '../../reducers/AuthReducer';
+import BreadcrumbItems from '../modecules/BreadcrumbItems';
 import Language from '../modecules/Language';
 import { DRAWER_WIDTH, HEADER_HEIGHT } from './constants';
 
@@ -327,7 +328,7 @@ const useAuthenticatedHeaderStyles = makeStyles((theme) => ({
 	},
 }));
 
-const AuthenticatedHeader = ({ toggleDrawer = null, open = true, title = 'Dashboard' }) => {
+const AuthenticatedHeader = ({ toggleDrawer = null, open = true }) => {
 	const classes = useAuthenticatedHeaderStyles();
 
 	return (
@@ -337,9 +338,7 @@ const AuthenticatedHeader = ({ toggleDrawer = null, open = true, title = 'Dashbo
 					<MenuIcon />
 				</IconButton>
 
-				<Typography variant="body1" noWrap className={classes.header__title}>
-					{title}
-				</Typography>
+				<BreadcrumbItems />
 
 				<Box className={classes.header__items}>
 					<Box className={classes.header__language}>
