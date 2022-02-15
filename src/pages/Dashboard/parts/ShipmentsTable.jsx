@@ -141,6 +141,7 @@ const ShipmentsTable = ({ category = '' }) => {
 											src="https://picsum.photos/id/237/200/100"
 											alt="Courier Service"
 											width={60}
+											style={{ border: '1px solid gray' }}
 										/>
 									</StyledTableCell>
 									<StyledTableCell align="left">

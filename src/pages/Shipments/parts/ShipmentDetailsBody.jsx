@@ -1,6 +1,8 @@
 /* eslint-disable prettier/prettier */
 import { Button } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { useNavigate } from 'react-router';
+import { Link } from 'react-router-dom';
 import ParcelDetails from './ParcelDetails';
 import PickupDetails from './PickupDetails';
 import ReceiverDetails from './ReceiverDetails';
@@ -36,6 +38,7 @@ const useStyles = makeStyles((theme) => ({
 
 const ShipmentDetailsBody = () => {
 	const classes = useStyles();
+	const navigate = useNavigate();
 
 	return (
 		<>
@@ -51,20 +54,25 @@ const ShipmentDetailsBody = () => {
 					type="button"
 					variant="outlined"
 					disabled={false}
-					onClick={() => {}}
+					onClick={() => navigate(-1)}
 					sx={{ ml: 'auto !important' }}
 					className={classes.get__issue__back__button}
 				>
 					Cancel
 				</Button>
-				<Button
-					disabled={false}
-					type="submit"
-					variant="contained"
-					className={classes.get__issue__button}
+				<Link
+					to="/supports/new"
+					style={{ textDecoration: 'none', color: 'inherit' }}
 				>
-					Any Issue? Get Support
-				</Button>
+					<Button
+						disabled={false}
+						type="submit"
+						variant="contained"
+						className={classes.get__issue__button}
+					>
+						Any Issue? Get Support
+					</Button>
+				</Link>
 			</div>
 		</>
 	);

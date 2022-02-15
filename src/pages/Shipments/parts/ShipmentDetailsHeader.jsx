@@ -25,7 +25,7 @@ const ShipmentDetailsHeader = () => {
 					bgcolor: 'secondary.main',
 				}}
 			/>
-			<BackButton />
+			<BackButton redirectTo="/shipments" label="Back to shipments" />
 		</Box>
 	);
 };
