@@ -5,7 +5,7 @@ const postcodeOrPostalcodeRegex = /(?!([089])\1{4})\d{4}/;
 
 const emailRegex =
 	/^[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/i;
-const passwordRegex = /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!#$@^%&? "])[a-zA-Z0-9!#$@^%&?]{8,20}$/;
+// const passwordRegex = /^(?=.*\d)(?=.*[A-Z])(?=.*[a-z])(?=.*[a-zA-Z!#$@^%&? "])[a-zA-Z0-9!#$@^%&?]{8,20}$/;
 // eslint-disable-next-line no-useless-escape
 const phoneRegex = /([0-9\s\-]{7,})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$/;
 const nidRegex = /^([0-9]{9})(X|V)$|^([0-9]{11})/;
@@ -27,10 +27,9 @@ const validateBusinessInfo = (values) => {
 		errors.website = 'Invalid Website URL';
 	}
 
-	if (!values?.tradeLicence) {
-		errors.tradeLicence = 'Trande Licence File is required';
-	}
-	// else if (!tradeLicenceRegex.test(values?.tradeLicence)) {
+	// if (!values?.tradeLicence) {
+	// 	errors.tradeLicence = 'Trande Licence File is required';
+	// } // else if (!tradeLicenceRegex.test(values?.tradeLicence)) {
 	// 	errors.tradeLicence = 'Invalid Trande Licence Number';
 	// }
 
@@ -102,16 +101,14 @@ const validatePersonalInfo = (values) => {
 
 	if (!values?.password) {
 		errors.password = 'Password is required';
-	} else if (!passwordRegex.test(values?.password)) {
-		errors.password = `Password must be a minimum of 8 characters including number, Upper, Lower And 
-		one special character`;
+	} else if (values?.password?.length < 6) {
+		errors.password = `Password must be a minimum of 6 charactersr`;
 	}
 
 	if (!values?.confirmPassword) {
 		errors.confirmPassword = 'Confirm Password is required';
-	} else if (!passwordRegex.test(values?.confirmPassword)) {
-		errors.confirmPassword = `Confirm Password must be a minimum of 8 characters including number, Upper, Lower And 
-		one special character`;
+	} else if (values?.confirmPassword?.length < 6) {
+		errors.confirmPassword = `Confirm Password must be a minimum of 6 characters`;
 	}
 
 	if (values?.password && values?.confirmPassword && values?.password !== values?.confirmPassword) {

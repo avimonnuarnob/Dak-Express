@@ -14,8 +14,10 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { makeStyles } from '@mui/styles';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import brandIconLogo from '../../assets/dak_express.svg';
+import useAuthToken from '../../hooks/useAuthToken';
+import { removeAuthToken } from '../../reducers/AuthReducer';
 import Language from '../modecules/Language';
 import { DRAWER_WIDTH, HEADER_HEIGHT } from './constants';
 
@@ -65,7 +67,7 @@ const UnauthenticateHeader = () => {
 			<Grid className={classes.header}>
 				<Box className={classes.header__main}>
 					<Box>
-						<Link exact to="/" styles={{ textDecoration: 'none' }}>
+						<Link to="/" styles={{ textDecoration: 'none' }}>
 							<img src={brandIconLogo} alt="Cityscape Global Limited" className={classes.header__logo} />
 						</Link>
 					</Box>
@@ -151,11 +153,20 @@ const useAuthenticatedProfileMenuStyles = makeStyles((theme) => ({
 
 const ProfileMenuItem = () => {
 	const [anchorEl, setAnchorEl] = useState(null);
+	// eslint-disable-next-line no-unused-vars
+	const { _, dispatch } = useAuthToken();
+
+	const navigateTo = useNavigate();
 	const open = Boolean(anchorEl);
 	const classes = useAuthenticatedProfileMenuStyles();
 
 	const handleClick = (event) => setAnchorEl(event.currentTarget);
 	const handleClose = () => setAnchorEl(null);
+
+	const handleLogout = () => {
+		dispatch(removeAuthToken());
+		navigateTo('/');
+	};
 
 	return (
 		<>
@@ -189,7 +200,7 @@ const ProfileMenuItem = () => {
 						overflow: 'visible',
 						filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
 						width: 300,
-						height: 250,
+						height: 230,
 						mt: 1.5,
 						'& .MuiAvatar-root': {
 							width: 40,
@@ -265,14 +276,12 @@ const ProfileMenuItem = () => {
 
 				<Divider />
 
-				<Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
-					<MenuItem className={classes.account__last__item}>
-						<LockOpenOutlinedIcon fontSize="small" />
-						<Typography variant="body2" sx={{ marginLeft: '10px' }}>
-							Sign Out
-						</Typography>
-					</MenuItem>
-				</Link>
+				<MenuItem className={classes.account__last__item} onClick={handleLogout}>
+					<LockOpenOutlinedIcon fontSize="small" />
+					<Typography variant="body2" sx={{ marginLeft: '10px' }}>
+						Sign Out
+					</Typography>
+				</MenuItem>
 			</Menu>
 		</>
 	);

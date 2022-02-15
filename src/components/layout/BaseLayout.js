@@ -1,9 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Box } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { makeStyles } from '@mui/styles';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import PropTypes from 'prop-types';
 import { Suspense, useState } from 'react';
+import useAuthToken from '../../hooks/useAuthToken';
 // import { Outlet } from 'react-router-dom';
 import routeConfig from '../../routes';
 import routes from '../../routes/routes';
@@ -76,22 +78,23 @@ const useStyles = makeStyles((theme) => ({
 
 const BaseLayout = () => {
 	const [open, setOpen] = useState(true);
+	const { state: authenticated } = useAuthToken();
+
 	const toggleDrawer = () => setOpen((prevState) => !prevState);
 
-	const auth = localStorage.getItem('auth') || true;
 	const classes = useStyles();
 
 	return (
 		<>
-			<Header auth={auth} toggleDrawer={toggleDrawer} open={open} />
-			{auth && <Sidebar open={open} />}
+			<Header auth={authenticated} toggleDrawer={toggleDrawer} open={open} />
+			{authenticated && <Sidebar open={open} />}
 
-			<MainContent open={open} auth={auth}>
+			<MainContent open={open} auth={!!authenticated}>
 				<>
 					<Suspense fallback={<ProgressBar />}>
 						<Box className={classes.root}>{routeConfig(routes)}</Box>
 					</Suspense>
-					<Footer auth={auth} />
+					<Footer auth={authenticated} />
 				</>
 			</MainContent>
 		</>

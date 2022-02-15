@@ -6,6 +6,7 @@ import { Form, Formik } from 'formik';
 import { useState } from 'react';
 import PageTitlebar from '../../components/modecules/PageTitlebar';
 import RadioInputField from '../../components/modecules/RadioInputField';
+import isEmpty from '../../utils/isEmpty';
 import CouriersListTable from './parts/CouriersListTable';
 import DangerousGoodsDeclaration from './parts/DangerousGoodsDeclaration';
 import PercelDetailsForm from './parts/PercelDetailsForm';
@@ -22,17 +23,30 @@ const packageSelectionItems = [
 const CreateNewShipment = () => {
 	const [packageSelection, setPackageSelection] = useState(packageSelectionItems[0]?.value);
 	const [showCouriersAndPreviewButton, setShowCouriersAndPreviewButton] = useState(false);
+
 	const onChange = (event) => setPackageSelection(event.target.value);
 
 	// eslint-disable-next-line no-unused-vars
 	const onSubmit = (data, fn, error) => {
 		console.log(data);
-		setShowCouriersAndPreviewButton(!showCouriersAndPreviewButton);
+		setShowCouriersAndPreviewButton(true);
+	};
+
+	const handlePreviewAndProceed = (data) => () => {
+		console.log(data);
+
+		if (!isEmpty(data)) {
+			localStorage.setItem('previewShipmentData', JSON.stringify(data));
+		}
 	};
 
 	const handleResetForm = (formState) => () => {
 		formState.setValues(initialValues);
-		setShowCouriersAndPreviewButton(!showCouriersAndPreviewButton);
+		setShowCouriersAndPreviewButton(false);
+
+		if (localStorage.getItem('previewShipmentData')) {
+			localStorage.removeItem('previewShipmentData');
+		}
 	};
 
 	return (
@@ -110,7 +124,8 @@ const CreateNewShipment = () => {
 										variant="contained"
 										size="large"
 										color="secondary"
-										type="submit"
+										type="button"
+										onClick={handlePreviewAndProceed(props?.values)}
 										sx={{ px: 12 }}
 									>
 										Preview & proceed

@@ -24,9 +24,12 @@ const useStyles = makeStyles((theme) => ({
 	checkbox__input: {
 		color: `${theme.palette.secondary.main} !important`,
 	},
+	'checkbox__label--item': {
+		color: `${theme.palette.secondary.main} !important`,
+	},
 }));
 
-const CheckboxInputField = ({ items = [], label = '', isRequired = false, ...props }) => {
+const CheckboxInputField = ({ items = [], label = '', isRequired = false, coloredLabel = false, ...props }) => {
 	// eslint-disable-next-line no-unused-vars
 	const [field, meta, helpers] = useField(props);
 
@@ -52,6 +55,7 @@ const CheckboxInputField = ({ items = [], label = '', isRequired = false, ...pro
 			>
 				{items?.map((item) => (
 					<FormControlLabel
+						className={coloredLabel ? classes['checkbox__label--item'] : null}
 						key={item?.id}
 						control={<Checkbox {...props} {...field} className={classes.checkbox__input} />}
 						label={item?.label}

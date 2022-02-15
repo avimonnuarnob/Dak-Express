@@ -26,6 +26,7 @@ const Issue = lazy(() => import('../pages/Support/Issue'));
 const AllNotifications = lazy(() => import('../pages/Notification/AllNotifications'));
 const UserProfile = lazy(() => import('../pages/Profile/UserProfile'));
 const EditUserProfile = lazy(() => import('../pages/Profile/EditUserProfile'));
+const ChangePassword = lazy(() => import('../pages/ChangePassword/ChangePassword'));
 const AllApiTokens = lazy(() => import('../pages/Token/AllApiTokens'));
 const CreateApiToken = lazy(() => import('../pages/Token/CreateApiToken'));
 const ApiTokenView = lazy(() => import('../pages/Token/ApiTokenView'));
@@ -212,8 +213,8 @@ const routes = [
 	{
 		path: '/change-password',
 		exact: true,
-		component: EditUserProfile,
-		name: 'EditUserProfile',
+		component: ChangePassword,
+		name: 'ChangePassword',
 		protected: true,
 	},
 	{

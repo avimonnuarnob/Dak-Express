@@ -1,12 +1,13 @@
-import { Grid } from '@mui/material/';
-import Button from '@mui/material/Button';
-import Paper from '@mui/material/Paper';
+import { Button, CircularProgress, Grid, Paper, Typography } from '@mui/material/';
 import { styled } from '@mui/material/styles';
-import Typography from '@mui/material/Typography';
 import { makeStyles } from '@mui/styles';
 import { Form, Formik } from 'formik';
+import { useReducer, useState } from 'react';
 import { Link } from 'react-router-dom';
-import InputElement from '../../components/modecules/InputElement';
+import AlertModal from '../../components/modecules/AlertModal';
+import TextInputField from '../../components/modecules/TextInputField';
+import { initialState, loadingReducer, startLoading, stopLoading } from '../../reducers/LoadingReducer';
+import { sleep } from '../../utils/functions';
 import validate from './validation/validate';
 
 const Item = styled(Paper)(({ theme }) => ({
@@ -54,6 +55,10 @@ const useStyles = makeStyles((theme) => ({
 		background: `${theme.palette.secondary.main} !important`,
 		height: '55px',
 		marginBottom: '20px !important',
+		'&:disabled': {
+			color: `${theme.palette.primary.disable} !important`,
+			background: `${theme.palette.secondary.sec} !important`,
+		},
 	},
 	forgot__password__link: {
 		color: `${theme.palette.secondary.main} !important`,
@@ -62,69 +67,92 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ForgotPassword = () => {
+	const [loading, dispatch] = useReducer(loadingReducer, initialState);
+	const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
+
 	const classes = useStyles();
 
 	const initialValues = {
 		email: '',
 	};
 
-	// TODO: Make API call for forgot password
-	const handleSubmitForgotPassword = (data, others) => {
-		console.log(data, others);
-		others.setSubmitting(false);
+	const handleSubmitForgotPassword = async (data, fn) => {
+		dispatch(startLoading());
+		console.log({ data });
+
+		sleep(5000).then(() => {
+			fn.resetForm();
+			dispatch(stopLoading());
+			setShowForgotPasswordModal(true);
+			fn.setSubmitting(false);
+		});
 	};
 
 	return (
-		<Grid container className={classes.container}>
-			<Grid item xl={4} lg={4} md={4} sm={10} xs={12}>
-				<Item>
-					<Paper elevation={3} sx={{ padding: '50px 30px' }} className={classes.forgot__password}>
-						<Typography variant="h4" className={classes.forgot__password__header}>
-							Forgot Password?
-						</Typography>
+		<>
+			<Grid container className={classes.container}>
+				<Grid item xl={4} lg={4} md={4} sm={10} xs={12}>
+					<Item>
+						<Paper elevation={3} sx={{ padding: '50px 30px' }} className={classes.forgot__password}>
+							<Typography variant="h4" className={classes.forgot__password__header}>
+								Forgot Password?
+							</Typography>
 
-						<Typography variant="body2" className={classes.forgot__password__text}>
-							{/* eslint-disable-next-line react/no-unescaped-entities */}
-							Don't worry! Just fill in your email and we'll send you a link to reset your password.
-						</Typography>
+							<Typography variant="body2" className={classes.forgot__password__text}>
+								{/* eslint-disable-next-line react/no-unescaped-entities */}
+								Don't worry! Just fill in your email and we'll send you a link to reset your password.
+							</Typography>
 
-						<Formik initialValues={initialValues} validate={validate} onSubmit={handleSubmitForgotPassword}>
-							{({ errors, values, touched, handleBlur, handleChange, isSubmitting }) => (
-								<Form>
-									<fieldset disabled={isSubmitting} style={{ border: 'none' }}>
-										<InputElement
-											fullWidth
-											isRequired
-											label="Email"
-											name="email"
-											type="email"
-											boxStyles={{ padding: '20px 0' }}
-											value={values.email}
-											onChange={handleChange}
-											onBlur={handleBlur}
-											error={touched.email && Boolean(errors.email)}
-											helperText={touched.email && errors.email}
-										/>
+							<Formik initialValues={initialValues} validate={validate} onSubmit={handleSubmitForgotPassword}>
+								{() => (
+									<Form>
+										<fieldset disabled={loading} style={{ border: 'none' }}>
+											<TextInputField
+												fullWidth
+												isRequired
+												label="Email"
+												name="email"
+												type="email"
+												boxStyles={{ padding: '20px 0' }}
+											/>
 
-										<Button type="submit" variant="contained" fullWidth className={classes.forgot__password__button}>
-											Reset Password
-										</Button>
-									</fieldset>
-								</Form>
-							)}
-						</Formik>
+											<Button
+												type="submit"
+												disabled={loading}
+												endIcon={loading && <CircularProgress size={20} color="inherit" />}
+												variant="contained"
+												fullWidth
+												className={classes.forgot__password__button}
+											>
+												{loading ? 'Resettting Password...' : 'Reset Password'}
+											</Button>
+										</fieldset>
+									</Form>
+								)}
+							</Formik>
 
-						<Typography variant="body2" color="initial">
-							{/* eslint-disable-next-line react/no-unescaped-entities */}
-							Alreay have an account?{' '}
-							<Link className={classes.forgot__password__link} to="/">
-								Sign In
-							</Link>
-						</Typography>
-					</Paper>
-				</Item>
+							<Typography variant="body2" color="initial">
+								{/* eslint-disable-next-line react/no-unescaped-entities */}
+								Alreay have an account?{' '}
+								<Link className={classes.forgot__password__link} to="/">
+									Sign In
+								</Link>
+							</Typography>
+						</Paper>
+					</Item>
+				</Grid>
 			</Grid>
-		</Grid>
+
+			{showForgotPasswordModal && (
+				<AlertModal
+					title="Check Your Email"
+					description="We have send you reset password link to your email, please check your email."
+					button="Close"
+					showModal={showForgotPasswordModal}
+					closeModal={setShowForgotPasswordModal}
+				/>
+			)}
+		</>
 	);
 };
 

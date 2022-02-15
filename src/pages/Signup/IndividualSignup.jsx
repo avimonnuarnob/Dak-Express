@@ -4,7 +4,7 @@ import { Box, Button, Grid, Paper, Step, StepLabel, Stepper, Typography } from '
 import { makeStyles } from '@mui/styles';
 import { Form, Formik } from 'formik';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import AlertModal from '../../components/modecules/AlertModal';
 import { sleep } from '../../utils/functions';
 import IndividualBusinessInfoForm from './parts/IndividualBusinessInfoForm';
@@ -78,6 +78,7 @@ const IndividualSignup = () => {
 	const [activeStep, setActiveStep] = useState(0);
 	const [successModal, setSuccessModal] = useState(false);
 
+	const redirectTo = useNavigate();
 	const classes = useStyles();
 
 	const validationRules = validation[activeStep];
@@ -93,21 +94,28 @@ const IndividualSignup = () => {
 		setActiveStep((prevActiveStep) => prevActiveStep - 1);
 	};
 
-	const submitForm = async (values, actions) => {
-		await sleep(2000);
-		console.log(JSON.stringify(values, null, 2));
+	const submitForm = async (values, fn) => {
+		console.log({ values });
 
+		await sleep(2000);
 		setSuccessModal(true);
-		actions.setSubmitting(false);
+
+		sleep(4000).then(() => {
+			fn.resetForm();
+			fn.setValues({});
+			setSuccessModal(false);
+			fn.setSubmitting(false);
+			redirectTo('/');
+		});
 	};
 
-	const handleSubmit = (values, actions) => {
+	const handleSubmit = (values, fn) => {
 		if (isLastStep) {
-			submitForm(values, actions);
+			submitForm(values, fn);
 		} else {
 			setActiveStep((currentStep) => currentStep + 1);
-			actions.setTouched({});
-			actions.setSubmitting(false);
+			fn.setTouched({});
+			fn.setSubmitting(false);
 		}
 	};
 
@@ -119,7 +127,7 @@ const IndividualSignup = () => {
 				</Typography>
 
 				<Typography variant="h6" className={classes.signup__header}>
-					Business
+					Individual
 				</Typography>
 
 				<Typography variant="body2" className={classes.signup__text}>
@@ -230,7 +238,7 @@ const IndividualSignup = () => {
 					redirectTo="/"
 					title="Registration Successful"
 					description="Your account has been successfully registered you can now login"
-					button="Go to login"
+					button="Sign In"
 					showModal={successModal}
 					closeModal={setSuccessModal}
 				/>

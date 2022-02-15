@@ -1,10 +1,10 @@
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
-import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 import { Box, Button, Grid } from '@mui/material';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import SearchBar from '../../components/atoms/SearchBar';
-import DateInput from '../../components/modecules/DateInput';
+import DateRangeInputField from '../../components/modecules/DateRangeInputField';
+import DownloadButtonOptions from '../../components/modecules/DownloadButton';
 import PageTitlebar from '../../components/modecules/PageTitlebar';
 import TabItemData from '../../components/modecules/TabItemData';
 import TabItems from '../../components/modecules/TabItems';
@@ -30,14 +30,7 @@ const AllShipments = () => {
 
 			<Grid item xs={12} mx={2}>
 				<Box sx={{ display: 'flex', justifyContent: 'end', alignItems: 'end' }}>
-					<Button
-						variant="contained"
-						color="secondary"
-						sx={{ px: 2, py: 1, m: 1 }}
-						startIcon={<FileDownloadOutlinedIcon />}
-					>
-						Download
-					</Button>
+					<DownloadButtonOptions label="Download" />
 
 					<Link to="/new-shipment" style={{ textDecoration: 'none', color: 'inherit' }}>
 						<Button variant="outlined" color="secondary" sx={{ px: 2, py: 1, m: 1 }} startIcon={<AddOutlinedIcon />}>
@@ -47,7 +40,7 @@ const AllShipments = () => {
 				</Box>
 			</Grid>
 
-			<Grid item xs={12}>
+			<Grid item xs={12} mt={2} mb={2}>
 				<TabItems items={tabsData} value={tabItemValue} onChange={handleChangeTabItemValue}>
 					<Grid container>
 						<Grid item md={4} py={1} m={1}>
@@ -55,7 +48,7 @@ const AllShipments = () => {
 						</Grid>
 
 						<Grid item md={7} py={1} m={1}>
-							<DateInput fullWidth label="Date" name="date" />
+							<DateRangeInputField fullWidth startLabel="Start Date" endLabel="End Date" name="date" />
 						</Grid>
 					</Grid>
 				</TabItems>

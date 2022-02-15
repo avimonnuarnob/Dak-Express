@@ -1,4 +1,4 @@
-import { Button, CircularProgress, Grid, Paper, Typography } from '@mui/material';
+import { Button, CircularProgress, Grid, Paper, Typography } from '@mui/material/';
 import { styled } from '@mui/material/styles';
 import { makeStyles } from '@mui/styles';
 import { Form, Formik } from 'formik';
@@ -6,6 +6,8 @@ import { useReducer, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AlertModal from '../../components/modecules/AlertModal';
 import PasswordInputField from '../../components/modecules/PasswordInputField';
+import useAuthToken from '../../hooks/useAuthToken';
+import { setAuthToken } from '../../reducers/AuthReducer';
 import { initialState, loadingReducer, startLoading, stopLoading } from '../../reducers/LoadingReducer';
 import { sleep } from '../../utils/functions';
 import validate from './validation/validate';
@@ -21,7 +23,7 @@ const useStyles = makeStyles((theme) => ({
 		textAlign: 'center',
 		color: theme.palette.text.secondary,
 	},
-	reset__password: {
+	change_password: {
 		position: 'absolute',
 		left: '50%',
 		top: '50%',
@@ -34,63 +36,68 @@ const useStyles = makeStyles((theme) => ({
 			width: `100%`,
 		},
 	},
-	reset__password__header: {
+	change_password__header: {
 		fontWeight: 'bolder !important',
 		padding: '5px 0',
 		color: theme.palette.typography.main,
 	},
-	reset__password__text: {
+	change_password__text: {
 		padding: '5px 0',
 		color: theme.palette.typography.main,
 	},
-	reset__password__others: {
+	change_password__others: {
 		display: 'flex',
 		justifyContent: 'space-between',
 		alignItems: 'center',
 	},
-	reset__password__rememberme: {
+	change_password__rememberme: {
 		color: `${theme.palette.secondary.main} !important`,
 	},
-	reset__password__button: {
+	change_password__button: {
 		background: `${theme.palette.secondary.main} !important`,
 		height: '55px',
-		margin: '30px 0 !important',
+		marginTop: '30px !important',
 		'&:disabled': {
 			color: `${theme.palette.primary.disable} !important`,
 			background: `${theme.palette.secondary.sec} !important`,
 		},
 	},
-	reset__password__link: {
+	change_password__link: {
 		color: `${theme.palette.secondary.main} !important`,
 		textDecoration: 'none !important',
 	},
 }));
 
-const ResetPassword = () => {
+const ChangePassword = () => {
 	const [loading, dispatch] = useReducer(loadingReducer, initialState);
-	const [showResetPasswordModal, setShowResetPasswordModal] = useState(false);
-
+	const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
 	// eslint-disable-next-line no-unused-vars
+	const { state: authToken, dispatch: authDispatcher } = useAuthToken();
+
 	const redirectTo = useNavigate();
 	const classes = useStyles();
 
 	const initialValues = {
-		password: '',
-		confirmPassword: '',
+		currentPassword: '',
+		newPassword: '',
+		confirmNewPassword: '',
 	};
 
-	// TODO: Make API call for sign in to account
-	const handleSubmitResetPassword = async (data, fn) => {
+	// TODO: Make API call for change password
+	const hadnleSubmitChangePassword = async (data, fn) => {
 		console.log({ data });
 		dispatch(startLoading());
 		await sleep(2000);
-		setShowResetPasswordModal(true);
+		setShowChangePasswordModal(true);
 		dispatch(stopLoading());
 
 		sleep(4000).then(() => {
 			fn.resetForm();
 			fn.setSubmitting(false);
-			setShowResetPasswordModal(false);
+			authDispatcher(setAuthToken(''));
+			localStorage.clear();
+			sessionStorage.clear();
+			setShowChangePasswordModal(false);
 			redirectTo('/');
 		});
 	};
@@ -100,38 +107,46 @@ const ResetPassword = () => {
 			<Grid container className={classes.container}>
 				<Grid item xl={4} lg={4} md={4} sm={10} xs={12}>
 					<Item>
-						<Paper elevation={3} sx={{ padding: '50px 30px' }} className={classes.reset__password}>
-							<Typography variant="h4" className={classes.reset__password__header}>
+						<Paper elevation={3} sx={{ padding: '50px 30px' }} className={classes.change_password}>
+							<Typography variant="h4" className={classes.change_password__header}>
 								Set New Password
 							</Typography>
 
-							<Typography variant="body2" className={classes.reset__password__text}>
-								Please enter your new password.
+							<Typography variant="body2" className={classes.change_password__text}>
+								Please enter your current and new password.
 							</Typography>
 
-							<Formik initialValues={initialValues} validate={validate} onSubmit={handleSubmitResetPassword}>
-								{() => (
+							<Formik initialValues={initialValues} validate={validate} onSubmit={hadnleSubmitChangePassword}>
+								{({ isSubmitting }) => (
 									<Form>
-										<fieldset style={{ border: 'none' }}>
+										<fieldset disabled={isSubmitting} style={{ border: 'none' }}>
 											<PasswordInputField
 												fullWidth
 												isRequired
-												label="Password"
-												name="password"
+												label="Current Password"
+												name="currentPassword"
 												boxStyles={{ padding: '30px 0' }}
 											/>
 
-											<PasswordInputField fullWidth isRequired label="Confirm Password" name="confirmPassword" />
+											<PasswordInputField
+												fullWidth
+												isRequired
+												label="New Password"
+												name="newPassword"
+												boxStyles={{ paddingBottom: '30px' }}
+											/>
+
+											<PasswordInputField fullWidth isRequired label="Confirm New Password" name="confirmNewPassword" />
 
 											<Button
 												type="submit"
+												variant="contained"
 												disabled={loading}
 												endIcon={loading && <CircularProgress size={20} color="inherit" />}
-												variant="contained"
 												fullWidth
-												className={classes.reset__password__button}
+												className={classes.change_password__button}
 											>
-												{loading ? 'Saving New Password...' : 'Save Password'}
+												{loading ? 'Saving New Password...' : 'Change Password'}
 											</Button>
 										</fieldset>
 									</Form>
@@ -142,18 +157,18 @@ const ResetPassword = () => {
 				</Grid>
 			</Grid>
 
-			{showResetPasswordModal && (
+			{showChangePasswordModal && (
 				<AlertModal
 					redirectTo="/"
-					title="Password Reset Successfully"
-					description="We have reset you old password and save new given password."
+					title="Password Changed Successfully"
+					description="We have changed your old password and saved new password. You are about to Signing out..."
 					button="Sign In"
-					showModal={showResetPasswordModal}
-					closeModal={setShowResetPasswordModal}
+					showModal={showChangePasswordModal}
+					closeModal={setShowChangePasswordModal}
 				/>
 			)}
 		</>
 	);
 };
 
-export default ResetPassword;
+export default ChangePassword;

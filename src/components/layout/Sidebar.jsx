@@ -3,7 +3,9 @@ import AddLocationOutlinedIcon from '@mui/icons-material/AddLocationOutlined';
 import AddToPhotosOutlinedIcon from '@mui/icons-material/AddToPhotosOutlined';
 import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
 import HistoryOutlinedIcon from '@mui/icons-material/HistoryOutlined';
+import KeyIcon from '@mui/icons-material/Key';
 import ListAltOutlinedIcon from '@mui/icons-material/ListAltOutlined';
+import ProductionQuantityLimitsOutlinedIcon from '@mui/icons-material/ProductionQuantityLimitsOutlined';
 import QuizOutlinedIcon from '@mui/icons-material/QuizOutlined';
 import { Box, Typography } from '@mui/material';
 import Divider from '@mui/material/Divider';
@@ -28,27 +30,27 @@ const SidebarLayout = styled('div')(({ theme }) => ({
 
 const useSidebarHeaderStyles = makeStyles((theme) => ({
 	sidebar: {
-		margin: '70px 0 20px 0',
 		display: 'flex',
+		gap: '5px',
 		flexDirection: 'column',
 		justifyContent: 'center',
 		alignItems: 'center',
+		padding: '10px 0',
 	},
 	sidebar__logo: {
-		height: 60,
-		marginBottom: '20px',
+		width: 100,
+		marginBottom: '10px',
 	},
 	sidebar__type: {
-		width: '100px',
+		width: 'auto',
+		padding: '0px 10px',
 		textAlign: 'center',
 		borderRadius: '50px',
-		marginBottom: '10px',
 		background: theme.palette.secondary.main,
 		color: theme.palette.typography.white,
 	},
 	sidebar__text: {
 		color: theme.palette.status.pending,
-		paddingTop: '10px',
 		textAlign: 'center',
 		margin: '0 auto',
 	},
@@ -77,7 +79,7 @@ const SidebarHeader = () => {
 
 const useSidebarMenuItemStyles = makeStyles((theme) => ({
 	item: {
-		marginBottom: '15px',
+		marginBottom: '10px',
 	},
 	divider: {
 		background: theme.palette.typography.light,
@@ -115,6 +117,10 @@ const SidebarMenuItems = () => {
 	return (
 		<Box sx={{ fontSize: '14px !important' }}>
 			<Box className={classes.item}>
+				<List>
+					<SidebarHeader />
+				</List>
+
 				<Typography variant="button" color="initial" className={classes.link__title}>
 					General
 				</Typography>
@@ -159,6 +165,28 @@ const SidebarMenuItems = () => {
 								<AddToPhotosOutlinedIcon />
 							</ListItemIcon>
 							<ListItemText>Create A Shipment</ListItemText>
+						</ListItem>
+					</NavLink>
+				</List>
+			</Box>
+
+			<Box className={classes.item}>
+				<Typography variant="button" color="initial" className={classes.link__title}>
+					My Product
+				</Typography>
+
+				<Divider className={classes.divider} variant="middle" />
+
+				<List>
+					<NavLink
+						to="/locations/pickup"
+						className={({ isActive }) => (isActive ? classes.link__active : classes.link__item)}
+					>
+						<ListItem button>
+							<ListItemIcon className={classes.link__icon}>
+								<ProductionQuantityLimitsOutlinedIcon />
+							</ListItemIcon>
+							<ListItemText>All Products</ListItemText>
 						</ListItem>
 					</NavLink>
 				</List>
@@ -238,6 +266,25 @@ const SidebarMenuItems = () => {
 					</NavLink>
 				</List>
 			</Box>
+
+			<Box className={classes.item}>
+				<Typography variant="button" color="initial" className={classes.link__title}>
+					MY TOKEN
+				</Typography>
+
+				<Divider className={classes.divider} variant="middle" />
+
+				<List>
+					<NavLink to="/tokens" className={({ isActive }) => (isActive ? classes.link__active : classes.link__item)}>
+						<ListItem button>
+							<ListItemIcon className={classes.link__icon}>
+								<KeyIcon />
+							</ListItemIcon>
+							<ListItemText>Manage Tokens</ListItemText>
+						</ListItem>
+					</NavLink>
+				</List>
+			</Box>
 		</Box>
 	);
 };
@@ -260,7 +307,7 @@ const Sidebar = ({ open = true }) => {
 
 	return (
 		<Drawer className={classes.sidebar} variant="persistent" anchor="left" open={open}>
-			<SidebarHeader />
+			{/* <SidebarHeader /> */}
 			<Divider />
 			<SidebarMenuItems />
 		</Drawer>

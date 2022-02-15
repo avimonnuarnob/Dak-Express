@@ -1,13 +1,8 @@
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
-import { Box, Button, Typography } from '@mui/material';
-import Paper from '@mui/material/Paper';
+import { Box, Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
+import { tableCellClasses } from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import { makeStyles } from '@mui/styles';
 import { useEffect, useState } from 'react';
@@ -103,12 +98,14 @@ const ShipmentsTable = ({ category = '' }) => {
 							: shipmentsData
 						)?.map((shipment) => (
 							<StyledTableRow key={shipment?.id}>
-								<StyledTableCell scope="row">
+								<StyledTableCell>
 									<Typography fontWeight={600}>{shipment?.id}</Typography>
 								</StyledTableCell>
-								<StyledTableCell scope="row">
+
+								<StyledTableCell>
 									<Typography fontWeight={600}>{shipment?.shipmentId}</Typography>
 								</StyledTableCell>
+
 								<StyledTableCell align="left">
 									<Box>
 										<Typography variant="body1">{shipment?.name}</Typography>
@@ -117,14 +114,27 @@ const ShipmentsTable = ({ category = '' }) => {
 										</Typography>
 									</Box>
 								</StyledTableCell>
+
 								<StyledTableCell align="left">
-									<img src={shipment?.courierImage} alt="Courier Service" width={60} />
+									<img
+										src={shipment?.courierImage}
+										alt="Courier Service"
+										width={60}
+										height={40}
+										style={{ border: '1px solid gray' }}
+									/>
 								</StyledTableCell>
+
 								<StyledTableCell align="left">{shipment?.deliveryDate}</StyledTableCell>
-								<StyledTableCell align="left">{shipment?.cost}</StyledTableCell>
+
+								<StyledTableCell align="left" sx={{ fontWeight: 'bold' }}>
+									{shipment?.cost}
+								</StyledTableCell>
+
 								<StyledTableCell align="left">
 									<ShipmentStatus label={shipment?.status} />
 								</StyledTableCell>
+
 								<StyledTableCell align="left">
 									<Box className={classes.table__buttons}>
 										<Link to={`/shipments/${shipment?.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
@@ -160,16 +170,16 @@ const ShipmentsTable = ({ category = '' }) => {
 								<TableCell colSpan={6} />
 							</TableRow>
 						)}
-
-						{shipmentsData?.length === 0 && (
-							<Box>
-								<Typography variant="body1" sx={{ color: (theme) => theme.palette.status.failed }}>
-									OOPS! There is no data
-								</Typography>
-							</Box>
-						)}
 					</TableBody>
 				</Table>
+
+				{shipmentsData?.length === 0 && (
+					<Box>
+						<Typography variant="body1" py={2} textAlign="center" color="GrayText">
+							SORRY! There is no data to show
+						</Typography>
+					</Box>
+				)}
 			</TableContainer>
 
 			<Box sx={{ py: '10px' }}>
