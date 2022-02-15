@@ -1,5 +1,3 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable no-undef */
 import { Box, Button } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import PageTitlebar from '../../components/modecules/PageTitlebar';
@@ -40,19 +38,10 @@ const PreviewFormData = () => {
 	const classes = useStyles();
 
 	return (
-		<Box
-			sx={{
-				py: 2,
-				px: 2,
-			}}
-		>
+		<Box sx={{ py: 2, px: 2 }}>
 			<PageTitlebar title="New Shipment" />
-			<Box
-				sx={{
-					py: 2,
-					px: 3,
-				}}
-			>
+
+			<Box sx={{ py: 2, px: 3 }}>
 				<PickupDetails edit />
 				<ReceiverDetails edit />
 				<ParcelDetails edit />
@@ -70,12 +59,7 @@ const PreviewFormData = () => {
 						Cancel
 					</Button>
 
-					<Button
-						disabled={false}
-						type="submit"
-						variant="contained"
-						className={classes.preview__button}
-					>
+					<Button disabled={false} type="submit" variant="contained" className={classes.preview__button}>
 						Submit
 					</Button>
 				</div>

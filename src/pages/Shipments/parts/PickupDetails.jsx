@@ -1,5 +1,3 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable arrow-body-style */
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import { Box, Button, Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
@@ -62,25 +60,14 @@ const PickupDetails = ({ edit }) => {
 					Pickup Details
 				</Typography>
 				{edit && (
-					<Button
-						size="small"
-						variant="outlined"
-						className={classes.button__edit}
-						startIcon={<EditOutlinedIcon />}
-					>
+					<Button size="small" variant="outlined" className={classes.button__edit} startIcon={<EditOutlinedIcon />}>
 						Edit
 					</Button>
 				)}
 			</Box>
 
 			<div className={classes.card}>
-				<Typography
-					variant="body2"
-					fontWeight="bold"
-					display="inline"
-					padding={2}
-					className={classes.card__item}
-				>
+				<Typography variant="body2" fontWeight="bold" display="inline" padding={2} className={classes.card__item}>
 					Full Name
 				</Typography>
 
@@ -124,32 +111,15 @@ const PickupDetails = ({ edit }) => {
 					Cityscape Global Ltd
 				</Typography>
 
-				<Typography
-					variant="body2"
-					fontWeight="bold"
-					display="inline"
-					padding={2}
-					className={classes.card__item}
-				>
+				<Typography variant="body2" fontWeight="bold" display="inline" padding={2} className={classes.card__item}>
 					Mobile Number
 				</Typography>
 
-				<Typography
-					variant="body2"
-					display="inline"
-					padding={2}
-					className={classes.card__item}
-				>
+				<Typography variant="body2" display="inline" padding={2} className={classes.card__item}>
 					+880 1324 249011
 				</Typography>
 
-				<Typography
-					variant="body2"
-					fontWeight="bold"
-					display="inline"
-					padding={2}
-					className={classes.card__item}
-				>
+				<Typography variant="body2" fontWeight="bold" display="inline" padding={2} className={classes.card__item}>
 					Address
 				</Typography>
 				<Typography
@@ -161,8 +131,7 @@ const PickupDetails = ({ edit }) => {
 						gridColumn: '2 / -1',
 					}}
 				>
-					Cityscape Tower, 8th Floor, 53 Gulshan Avenue, Gulshan-1, Dhaka-1212,
-					Bangladesh.
+					Cityscape Tower, 8th Floor, 53 Gulshan Avenue, Gulshan-1, Dhaka-1212, Bangladesh.
 				</Typography>
 
 				<Typography
@@ -193,22 +162,11 @@ const PickupDetails = ({ edit }) => {
 					22 Dec 2021
 				</Typography>
 
-				<Typography
-					variant="body2"
-					fontWeight="bold"
-					display="inline"
-					padding={2}
-					className={classes.card__item}
-				>
+				<Typography variant="body2" fontWeight="bold" display="inline" padding={2} className={classes.card__item}>
 					Pickup Time
 				</Typography>
 
-				<Typography
-					variant="body2"
-					display="inline"
-					padding={2}
-					className={classes.card__item}
-				>
+				<Typography variant="body2" display="inline" padding={2} className={classes.card__item}>
 					08:50 PM
 				</Typography>
 			</div>

@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import { Box, Button, Grid, Paper } from '@mui/material';
 import { FieldArray } from 'formik';
@@ -13,16 +14,16 @@ const unitTypesItems = [
 ];
 
 const quantitySelectionItems = [
-	{ id: 'd1d0435e-863d-11ec-a8a3-0242ac120002', value: '1', label: '1 pcs' },
-	{ id: '0eed0330-863e-11ec-a8a3-0242ac120002', value: '1', label: '2 pcs' },
-	{ id: '14a778d2-863e-11ec-a8a3-0242ac120002', value: '1', label: '3 pcs' },
-	{ id: '184274b0-863e-11ec-a8a3-0242ac120002', value: '1', label: '4 pcs' },
-	{ id: '1b9189a8-863e-11ec-a8a3-0242ac120002', value: '1', label: '5 pcs' },
-	{ id: '1f065e88-863e-11ec-a8a3-0242ac120002', value: '1', label: '6 pcs' },
-	{ id: '226c100e-863e-11ec-a8a3-0242ac120002', value: '1', label: '7 pcs' },
-	{ id: '256d8882-863e-11ec-a8a3-0242ac120002', value: '1', label: '8 pcs' },
-	{ id: '28bdded8-863e-11ec-a8a3-0242ac120002', value: '1', label: '9 pcs' },
-	{ id: '2da4e6ee-863e-11ec-a8a3-0242ac120002', value: '1', label: '10 pcs' },
+	{ id: 'd1d0435e-863d-11ec-a8a3-0242ac120002', value: '1', label: '1' },
+	{ id: '0eed0330-863e-11ec-a8a3-0242ac120002', value: '2', label: '2' },
+	{ id: '14a778d2-863e-11ec-a8a3-0242ac120002', value: '3', label: '3' },
+	{ id: '184274b0-863e-11ec-a8a3-0242ac120002', value: '4', label: '4' },
+	{ id: '1b9189a8-863e-11ec-a8a3-0242ac120002', value: '5', label: '5' },
+	{ id: '1f065e88-863e-11ec-a8a3-0242ac120002', value: '6', label: '6' },
+	{ id: '226c100e-863e-11ec-a8a3-0242ac120002', value: '7', label: '7' },
+	{ id: '256d8882-863e-11ec-a8a3-0242ac120002', value: '8', label: '8' },
+	{ id: '28bdded8-863e-11ec-a8a3-0242ac120002', value: '9', label: '9' },
+	{ id: '2da4e6ee-863e-11ec-a8a3-0242ac120002', value: '10', label: '10' },
 ];
 
 const weightSelectionItems = [
@@ -75,10 +76,7 @@ const PercelDetailsForm = ({ values }) => (
 				<>
 					{values?.products?.length > 0 &&
 						values?.products?.map((product, index) => (
-							// eslint-disable-next-line react/no-array-index-key
 							<Box key={index}>
-								{/* {values?.products?.length > 1 && <Divider sx={{ my: 4 }} />} */}
-
 								<Grid container rowSpacing={3} columnSpacing={2} pb={5}>
 									<Grid item md={6} sm={12} xs={12}>
 										<TextInputField
