@@ -1,8 +1,9 @@
-/* eslint-disable prettier/prettier */
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable arrow-body-style */
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import { Box, Button, Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import PropTypes from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
 	box: {
@@ -50,7 +51,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const ReceiverDetails = ({ edit }) => {
+const ReceiverDetails = ({ edit, receiver, setPreviewData }) => {
 	const classes = useStyles();
 	return (
 		<Paper className={classes.box}>
@@ -64,6 +65,7 @@ const ReceiverDetails = ({ edit }) => {
 						variant="outlined"
 						className={classes.button__edit}
 						startIcon={<EditOutlinedIcon />}
+						onClick={() => setPreviewData(false)}
 					>
 						Edit
 					</Button>
@@ -71,13 +73,7 @@ const ReceiverDetails = ({ edit }) => {
 			</Box>
 
 			<div className={classes.card}>
-				<Typography
-					variant="body2"
-					fontWeight="bold"
-					display="inline"
-					padding={2}
-					className={classes.card__item}
-				>
+				<Typography variant="body2" fontWeight="bold" display="inline" padding={2} className={classes.card__item}>
 					Full Name
 				</Typography>
 
@@ -86,20 +82,12 @@ const ReceiverDetails = ({ edit }) => {
 					display="inline"
 					padding={2}
 					className={classes.card__item}
-					sx={{
-						gridColumn: '2 / -1',
-					}}
+					sx={{ gridColumn: '2 / -1' }}
 				>
-					Md Rafez Hossain
+					{receiver?.firstName || ' '} {receiver?.lastName || ' '}
 				</Typography>
 
-				<Typography
-					variant="body2"
-					fontWeight="bold"
-					display="inline"
-					padding={2}
-					className={classes.card__item}
-				>
+				<Typography variant="body2" fontWeight="bold" display="inline" padding={2} className={classes.card__item}>
 					Business Name
 				</Typography>
 
@@ -108,42 +96,20 @@ const ReceiverDetails = ({ edit }) => {
 					display="inline"
 					padding={2}
 					className={classes.card__item}
-					sx={{
-						borderRight: {
-							md: '1px solid #E5EBF0',
-							sm: 0,
-						},
-					}}
+					sx={{ borderRight: { md: '1px solid #E5EBF0', sm: 0 } }}
 				>
-					Cityscape Global Ltd
+					{receiver?.businessName || 'N/A'}
 				</Typography>
 
-				<Typography
-					variant="body2"
-					fontWeight="bold"
-					display="inline"
-					padding={2}
-					className={classes.card__item}
-				>
+				<Typography variant="body2" fontWeight="bold" display="inline" padding={2} className={classes.card__item}>
 					Mobile Number
 				</Typography>
 
-				<Typography
-					variant="body2"
-					display="inline"
-					padding={2}
-					className={classes.card__item}
-				>
-					+880 1324 249011
+				<Typography variant="body2" display="inline" padding={2} className={classes.card__item}>
+					{`+${receiver?.phone}` || 'N/A'}
 				</Typography>
 
-				<Typography
-					variant="body2"
-					fontWeight="bold"
-					display="inline"
-					padding={2}
-					className={classes.card__item}
-				>
+				<Typography variant="body2" fontWeight="bold" display="inline" padding={2} className={classes.card__item}>
 					Address
 				</Typography>
 				<Typography
@@ -151,16 +117,27 @@ const ReceiverDetails = ({ edit }) => {
 					display="inline"
 					padding={2}
 					className={classes.card__item}
-					sx={{
-						gridColumn: '2 / -1',
-					}}
+					sx={{ gridColumn: '2 / -1' }}
 				>
-					Cityscape Tower, 8th Floor, 53 Gulshan Avenue, Gulshan-1, Dhaka-1212,
-					Bangladesh.
+					{`${receiver?.address || ' '}, ${receiver?.city || ' '}, ${receiver?.district || ' '}-${
+						receiver?.zipcode || ' '
+					}, Bangladesh`}
 				</Typography>
 			</div>
 		</Paper>
 	);
+};
+
+ReceiverDetails.propTypes = {
+	edit: PropTypes.bool,
+	receiver: PropTypes.objectOf(PropTypes.any),
+	setPreviewData: PropTypes.func,
+};
+
+ReceiverDetails.defaultProps = {
+	edit: false,
+	receiver: {},
+	setPreviewData: () => {},
 };
 
 export default ReceiverDetails;

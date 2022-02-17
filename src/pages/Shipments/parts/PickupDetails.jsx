@@ -1,6 +1,8 @@
+/* eslint-disable import/no-extraneous-dependencies */
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import { Box, Button, Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import PropTypes from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
 	box: {
@@ -51,7 +53,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const PickupDetails = ({ edit }) => {
+const PickupDetails = ({ edit, pickup, setPreviewData }) => {
 	const classes = useStyles();
 	return (
 		<Paper className={classes.box}>
@@ -60,7 +62,13 @@ const PickupDetails = ({ edit }) => {
 					Pickup Details
 				</Typography>
 				{edit && (
-					<Button size="small" variant="outlined" className={classes.button__edit} startIcon={<EditOutlinedIcon />}>
+					<Button
+						size="small"
+						variant="outlined"
+						className={classes.button__edit}
+						startIcon={<EditOutlinedIcon />}
+						onClick={() => setPreviewData(false)}
+					>
 						Edit
 					</Button>
 				)}
@@ -76,11 +84,9 @@ const PickupDetails = ({ edit }) => {
 					display="inline"
 					padding={2}
 					className={classes.card__item}
-					sx={{
-						gridColumn: '2 / -1',
-					}}
+					sx={{ gridColumn: '2 / -1' }}
 				>
-					Md Rafez Hossain
+					{pickup?.firstName || ' '} {pickup?.lastName || ' '}
 				</Typography>
 
 				<Typography
@@ -89,9 +95,7 @@ const PickupDetails = ({ edit }) => {
 					display="inline"
 					padding={2}
 					className={classes.card__item}
-					sx={{
-						gridColumn: '1',
-					}}
+					sx={{ gridColumn: '1' }}
 				>
 					Business Name
 				</Typography>
@@ -101,14 +105,9 @@ const PickupDetails = ({ edit }) => {
 					display="inline"
 					padding={2}
 					className={classes.card__item}
-					sx={{
-						borderRight: {
-							md: '1px solid #E5EBF0',
-							sm: 0,
-						},
-					}}
+					sx={{ borderRight: { md: '1px solid #E5EBF0', sm: 0 } }}
 				>
-					Cityscape Global Ltd
+					{pickup?.businessName || 'N/A'}
 				</Typography>
 
 				<Typography variant="body2" fontWeight="bold" display="inline" padding={2} className={classes.card__item}>
@@ -116,7 +115,7 @@ const PickupDetails = ({ edit }) => {
 				</Typography>
 
 				<Typography variant="body2" display="inline" padding={2} className={classes.card__item}>
-					+880 1324 249011
+					{`+${pickup?.phone}` || 'N/A'}
 				</Typography>
 
 				<Typography variant="body2" fontWeight="bold" display="inline" padding={2} className={classes.card__item}>
@@ -127,11 +126,11 @@ const PickupDetails = ({ edit }) => {
 					display="inline"
 					padding={2}
 					className={classes.card__item}
-					sx={{
-						gridColumn: '2 / -1',
-					}}
+					sx={{ gridColumn: '2 / -1' }}
 				>
-					Cityscape Tower, 8th Floor, 53 Gulshan Avenue, Gulshan-1, Dhaka-1212, Bangladesh.
+					{`${pickup?.address || ' '}, ${pickup?.city || ' '}, ${pickup?.district || ' '}-${
+						pickup?.zipcode || ' '
+					}, Bangladesh`}
 				</Typography>
 
 				<Typography
@@ -140,9 +139,7 @@ const PickupDetails = ({ edit }) => {
 					display="inline"
 					padding={2}
 					className={classes.card__item}
-					sx={{
-						gridColumn: '1',
-					}}
+					sx={{ gridColumn: '1' }}
 				>
 					Pickup Date
 				</Typography>
@@ -152,14 +149,9 @@ const PickupDetails = ({ edit }) => {
 					display="inline"
 					padding={2}
 					className={classes.card__item}
-					sx={{
-						borderRight: {
-							md: '1px solid #E5EBF0',
-							sm: 0,
-						},
-					}}
+					sx={{ borderRight: { md: '1px solid #E5EBF0', sm: 0 } }}
 				>
-					22 Dec 2021
+					{new Date(pickup?.pickupDate)?.toLocaleDateString('bn-BD') || 'N/A'}
 				</Typography>
 
 				<Typography variant="body2" fontWeight="bold" display="inline" padding={2} className={classes.card__item}>
@@ -167,11 +159,23 @@ const PickupDetails = ({ edit }) => {
 				</Typography>
 
 				<Typography variant="body2" display="inline" padding={2} className={classes.card__item}>
-					08:50 PM
+					{new Date(pickup?.pickupDate)?.toLocaleTimeString('bn-BD') || 'N/A'}
 				</Typography>
 			</div>
 		</Paper>
 	);
+};
+
+PickupDetails.propTypes = {
+	edit: PropTypes.bool,
+	pickup: PropTypes.objectOf(PropTypes.any),
+	setPreviewData: PropTypes.func,
+};
+
+PickupDetails.defaultProps = {
+	edit: false,
+	pickup: {},
+	setPreviewData: () => {},
 };
 
 export default PickupDetails;

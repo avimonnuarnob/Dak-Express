@@ -1,22 +1,27 @@
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import StorefrontIcon from '@mui/icons-material/Storefront';
-import { Button, Grid, Paper, Typography } from '@mui/material';
+import { Box, Button, Grid, Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Link } from 'react-router-dom';
+import { FOOTER_HEIGHT, HEADER_HEIGHT } from '../../components/layout/constants';
 
 const useStyles = makeStyles((theme) => ({
 	signup: {
-		position: 'absolute',
-		left: '50%',
-		top: '50%',
-		transform: 'translate(-50%, -50%)',
 		width: '47%',
+		minHeight: `calc(100vh - ${HEADER_HEIGHT + FOOTER_HEIGHT}px) !important`,
+
+		display: 'flex',
+		flexDirection: 'column',
+		justifyContent: 'center',
+		alignItems: 'center',
+		margin: '0 auto',
+
 		[theme.breakpoints.down('md')]: {
 			width: `77%`,
-			margin: '40px 0',
+			// margin: '40px 0',
 		},
 		[theme.breakpoints.down('sm')]: {
-			margin: '50px 0',
+			// margin: '50px 0',
 			width: `87%`,
 		},
 	},
@@ -63,8 +68,8 @@ const SignUp = () => {
 	const classes = useStyles();
 
 	return (
-		<Grid className={classes.signup}>
-			<Typography variant="h4" color="initial" align="center" my={3}>
+		<Box container className={classes.signup}>
+			<Typography variant="h4" color="initial" align="center" py={3}>
 				Choose Account Type
 			</Typography>
 
@@ -109,7 +114,7 @@ const SignUp = () => {
 					</Paper>
 				</Grid>
 			</Grid>
-		</Grid>
+		</Box>
 	);
 };
 

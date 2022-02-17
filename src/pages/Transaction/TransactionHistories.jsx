@@ -20,14 +20,13 @@ const TransactionHistories = () => {
 	}, []);
 
 	return (
-		<>
-			<Box sx={{ p: 3 }}>
-				<TransactionHistoryHeader />
-			</Box>
-			<Box sx={{ mt: 3, borderRadius: 3, overflow: 'scroll', px: 3 }}>
+		<Box sx={{ px: 3, py: 2 }}>
+			<TransactionHistoryHeader />
+
+			<Box sx={{ mt: 3 }}>
 				<TransactionHistoryTable />
 			</Box>
-		</>
+		</Box>
 	);
 };
 

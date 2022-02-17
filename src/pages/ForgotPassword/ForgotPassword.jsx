@@ -1,39 +1,25 @@
 import { Button, CircularProgress, Grid, Paper, Typography } from '@mui/material/';
-import { styled } from '@mui/material/styles';
 import { makeStyles } from '@mui/styles';
 import { Form, Formik } from 'formik';
 import { useReducer, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { FOOTER_HEIGHT, HEADER_HEIGHT } from '../../components/layout/constants';
 import AlertModal from '../../components/modecules/AlertModal';
 import TextInputField from '../../components/modecules/TextInputField';
 import { initialState, loadingReducer, startLoading, stopLoading } from '../../reducers/LoadingReducer';
 import { sleep } from '../../utils/functions';
 import validate from './validation/validate';
 
-const Item = styled(Paper)(({ theme }) => ({
-	...theme.typography.body2,
-	textAlign: 'center',
-	color: theme.palette.text.secondary,
-}));
-
 const useStyles = makeStyles((theme) => ({
 	container: {
 		textAlign: 'center',
 		color: theme.palette.text.secondary,
+		minHeight: `calc(100vh - ${HEADER_HEIGHT + FOOTER_HEIGHT}px) !important`,
+
+		justifyContent: 'center',
+		alignItems: 'center',
 	},
-	forgot__password: {
-		position: 'absolute',
-		left: '50%',
-		top: '50%',
-		transform: 'translate(-50%, -50%)',
-		width: `33%`,
-		[theme.breakpoints.down('md')]: {
-			width: `67%`,
-		},
-		[theme.breakpoints.down('sm')]: {
-			width: `100%`,
-		},
-	},
+	forgot__password: {},
 	forgot__password__header: {
 		fontWeight: 'bolder !important',
 		padding: '5px 0',
@@ -91,55 +77,53 @@ const ForgotPassword = () => {
 	return (
 		<>
 			<Grid container className={classes.container}>
-				<Grid item xl={4} lg={4} md={4} sm={10} xs={12}>
-					<Item>
-						<Paper elevation={3} sx={{ padding: '50px 30px' }} className={classes.forgot__password}>
-							<Typography variant="h4" className={classes.forgot__password__header}>
-								Forgot Password?
-							</Typography>
+				<Grid item xl={5} lg={5} md={5} sm={10} xs={12}>
+					<Paper elevation={3} sx={{ padding: '50px 30px' }} className={classes.forgot__password}>
+						<Typography variant="h4" className={classes.forgot__password__header}>
+							Forgot Password?
+						</Typography>
 
-							<Typography variant="body2" className={classes.forgot__password__text}>
-								{/* eslint-disable-next-line react/no-unescaped-entities */}
-								Don't worry! Just fill in your email and we'll send you a link to reset your password.
-							</Typography>
+						<Typography variant="body2" className={classes.forgot__password__text}>
+							{/* eslint-disable-next-line react/no-unescaped-entities */}
+							Don't worry! Just fill in your email and we'll send you a link to reset your password.
+						</Typography>
 
-							<Formik initialValues={initialValues} validate={validate} onSubmit={handleSubmitForgotPassword}>
-								{() => (
-									<Form>
-										<fieldset disabled={loading} style={{ border: 'none' }}>
-											<TextInputField
-												fullWidth
-												isRequired
-												label="Email"
-												name="email"
-												type="email"
-												boxStyles={{ padding: '20px 0' }}
-											/>
+						<Formik initialValues={initialValues} validate={validate} onSubmit={handleSubmitForgotPassword}>
+							{() => (
+								<Form>
+									<fieldset disabled={loading} style={{ border: 'none' }}>
+										<TextInputField
+											fullWidth
+											isRequired
+											label="Email"
+											name="email"
+											type="email"
+											boxStyles={{ padding: '20px 0' }}
+										/>
 
-											<Button
-												type="submit"
-												disabled={loading}
-												endIcon={loading && <CircularProgress size={20} color="inherit" />}
-												variant="contained"
-												fullWidth
-												className={classes.forgot__password__button}
-											>
-												{loading ? 'Resettting Password...' : 'Reset Password'}
-											</Button>
-										</fieldset>
-									</Form>
-								)}
-							</Formik>
+										<Button
+											type="submit"
+											disabled={loading}
+											endIcon={loading && <CircularProgress size={20} color="inherit" />}
+											variant="contained"
+											fullWidth
+											className={classes.forgot__password__button}
+										>
+											{loading ? 'Resettting Password...' : 'Reset Password'}
+										</Button>
+									</fieldset>
+								</Form>
+							)}
+						</Formik>
 
-							<Typography variant="body2" color="initial">
-								{/* eslint-disable-next-line react/no-unescaped-entities */}
-								Alreay have an account?{' '}
-								<Link className={classes.forgot__password__link} to="/">
-									Sign In
-								</Link>
-							</Typography>
-						</Paper>
-					</Item>
+						<Typography variant="body2" color="initial">
+							{/* eslint-disable-next-line react/no-unescaped-entities */}
+							Alreay have an account?{' '}
+							<Link className={classes.forgot__password__link} to="/">
+								Sign In
+							</Link>
+						</Typography>
+					</Paper>
 				</Grid>
 			</Grid>
 

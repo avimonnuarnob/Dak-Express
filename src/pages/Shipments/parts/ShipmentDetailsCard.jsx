@@ -1,8 +1,9 @@
-/* eslint-disable prettier/prettier */
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable arrow-body-style */
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import { Box, Button, Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import PropTypes from 'prop-types';
 
 const useStyles = makeStyles((theme) => ({
 	box: {
@@ -51,7 +52,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const ShipmentDetailsCard = ({ edit }) => {
+const ShipmentDetailsCard = ({ edit, courier, setPreviewData }) => {
 	const classes = useStyles();
 	return (
 		<Paper className={classes.box}>
@@ -66,6 +67,7 @@ const ShipmentDetailsCard = ({ edit }) => {
 						variant="outlined"
 						className={classes.button__edit}
 						startIcon={<EditOutlinedIcon />}
+						onClick={() => setPreviewData(false)}
 					>
 						Edit
 					</Button>
@@ -73,13 +75,7 @@ const ShipmentDetailsCard = ({ edit }) => {
 			</Box>
 
 			<div className={classes.card}>
-				<Typography
-					variant="body2"
-					fontWeight="bold"
-					display="inline"
-					padding={2}
-					className={classes.card__item}
-				>
+				<Typography variant="body2" fontWeight="bold" display="inline" padding={2} className={classes.card__item}>
 					Courier
 				</Typography>
 
@@ -88,11 +84,9 @@ const ShipmentDetailsCard = ({ edit }) => {
 					display="inline"
 					padding={2}
 					className={classes.card__item}
-					sx={{
-						gridColumn: '2 / -1',
-					}}
+					sx={{ gridColumn: '2 / -1' }}
 				>
-					RedX
+					<img src={courier?.courierImage} alt={courier?.id} width={60} />
 				</Typography>
 
 				<Typography
@@ -101,6 +95,7 @@ const ShipmentDetailsCard = ({ edit }) => {
 					display="inline"
 					padding={2}
 					className={classes.card__item}
+					sx={{ borderBottom: 0 }}
 				>
 					Estimited Delivery Timeline
 				</Typography>
@@ -110,37 +105,33 @@ const ShipmentDetailsCard = ({ edit }) => {
 					display="inline"
 					padding={2}
 					className={classes.card__item}
-					sx={{
-						borderRight: {
-							md: '1px solid #E5EBF0',
-							sm: 0,
-						},
-					}}
+					sx={{ borderRight: { md: '1px solid #E5EBF0', sm: 0 }, borderBottom: 0 }}
 				>
-					26 - 28 Dec 2021
+					{new Date(courier?.deliveryDate)?.toLocaleTimeString('bn-BD') || 'N/A'}
 				</Typography>
 
-				<Typography
-					variant="body2"
-					fontWeight="bold"
-					display="inline"
-					padding={2}
-					className={classes.card__item}
-				>
+				<Typography variant="body2" fontWeight="bold" display="inline" padding={2} className={classes.card__item}>
 					Shipping Fee
 				</Typography>
 
-				<Typography
-					variant="body2"
-					display="inline"
-					padding={2}
-					className={classes.card__item}
-				>
-					BDT 70
+				<Typography variant="body2" display="inline" padding={2} className={classes.card__item}>
+					{`BDT ${courier?.cost || 'N/A'}`}
 				</Typography>
 			</div>
 		</Paper>
 	);
+};
+
+ShipmentDetailsCard.propTypes = {
+	edit: PropTypes.bool,
+	courier: PropTypes.objectOf(PropTypes.any),
+	setPreviewData: PropTypes.func,
+};
+
+ShipmentDetailsCard.defaultProps = {
+	edit: false,
+	courier: {},
+	setPreviewData: () => {},
 };
 
 export default ShipmentDetailsCard;
