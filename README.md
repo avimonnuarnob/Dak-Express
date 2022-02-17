@@ -3,13 +3,13 @@
 Open your terminal and simply clone this repo.
 
 ```sh
-git clone https://gitlab.com/cityscapeglobal/freight-forwarding-cfa.git
+git clone https://gitlab.com/cityscapeglobal/dakexpress-web.git
 ```
 
 Then go to the project directory.
 
 ```sh
-cd freight-forwarding-cfa
+cd dakexpress-web
 ```
 
 requires [Node.js](https://nodejs.org/) v12+ to run.
@@ -18,12 +18,16 @@ Install the dependencies and devDependencies.
 
 ```sh
 npm install
+or
+yarn install
 ```
 
 For run the application.
 
 ```sh
 npm start
+or
+yarn start
 ```
 
 Verify the server running by navigating to your server address in
