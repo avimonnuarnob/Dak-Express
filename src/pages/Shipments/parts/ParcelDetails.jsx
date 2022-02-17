@@ -1,30 +1,10 @@
-/* eslint-disable prettier/prettier */
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable arrow-body-style */
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import { Box, Button, Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import PropTypes from 'prop-types';
 import TransactionDetailsTable from '../../Transaction/parts/TransactionDetailsTable';
-
-const TABLE_FAKE_DATA = [
-	{
-		p_name: 'Backpack LEATHER MARK Rexine School Bag',
-		unit: 'Kg',
-		qty: '01',
-		weight: '10 Kg',
-		length: '10 CM',
-		width: '10 CM',
-		height: '10 CM',
-	},
-	{
-		p_name: 'Backpack LEATHER MARK Rexine School Bag',
-		unit: 'Kg',
-		qty: '01',
-		weight: '10 Kg',
-		length: '10 CM',
-		width: '10 CM',
-		height: '10 CM',
-	},
-];
 
 const useStyles = makeStyles((theme) => ({
 	box: {
@@ -53,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const ParcelDetails = ({ edit }) => {
+const ParcelDetails = ({ edit, products, setPreviewData }) => {
 	const classes = useStyles();
 	return (
 		<Paper className={classes.box}>
@@ -67,6 +47,7 @@ const ParcelDetails = ({ edit }) => {
 						variant="outlined"
 						className={classes.button__edit}
 						startIcon={<EditOutlinedIcon />}
+						onClick={() => setPreviewData(false)}
 					>
 						Edit
 					</Button>
@@ -81,10 +62,22 @@ const ParcelDetails = ({ edit }) => {
 					overflow: 'scroll',
 				}}
 			>
-				<TransactionDetailsTable data={TABLE_FAKE_DATA} />
+				<TransactionDetailsTable data={products} />
 			</Box>
 		</Paper>
 	);
+};
+
+ParcelDetails.propTypes = {
+	edit: PropTypes.bool,
+	products: PropTypes.arrayOf(PropTypes.any),
+	setPreviewData: PropTypes.func,
+};
+
+ParcelDetails.defaultProps = {
+	edit: false,
+	products: [],
+	setPreviewData: () => {},
 };
 
 export default ParcelDetails;

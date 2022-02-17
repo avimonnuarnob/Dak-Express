@@ -1,4 +1,3 @@
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import { Box, Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
@@ -146,18 +145,6 @@ const ShipmentsTable = ({ category = '' }) => {
 												startIcon={<VisibilityOutlinedIcon />}
 											>
 												View
-											</Button>
-										</Link>
-
-										<Link to="/new-shipment" style={{ textDecoration: 'none', color: 'inherit' }}>
-											<Button
-												sx={{ width: '100%' }}
-												size="small"
-												variant="outlined"
-												className={classes['table__buttons--edit']}
-												startIcon={<EditOutlinedIcon />}
-											>
-												Edit
 											</Button>
 										</Link>
 									</Box>

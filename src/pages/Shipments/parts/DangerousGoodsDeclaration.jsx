@@ -13,7 +13,7 @@ const dangerousItemsDetections = [
 	},
 ];
 
-const DangerousGoodsDeclaration = () => {
+const DangerousGoodsDeclaration = ({ values }) => {
 	const [showDangerousProducts, setShowDangerousProducts] = useState(false);
 
 	const showDangerousProductsModal = () => setShowDangerousProducts(!showDangerousProducts);
@@ -40,7 +40,11 @@ const DangerousGoodsDeclaration = () => {
 
 					<Grid item md={12} sm={12} xs={12}>
 						<Grid item md={12} sm={12} xs={12}>
-							<CheckboxInputField name="noDangerousGoods" items={dangerousItemsDetections} />
+							<CheckboxInputField
+								name="noDangerousGoods"
+								items={dangerousItemsDetections}
+								checked={values.noDangerousGoods}
+							/>
 						</Grid>
 					</Grid>
 				</Grid>

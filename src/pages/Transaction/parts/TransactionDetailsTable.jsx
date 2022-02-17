@@ -7,7 +7,7 @@ import {
 	tableCellClasses,
 	TableContainer,
 	TableHead,
-	TableRow,
+	TableRow
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 
@@ -46,15 +46,15 @@ const TransactionDetailsTable = ({ data }) => (
 				</TableRow>
 			</TableHead>
 			<TableBody>
-				{data.map((row) => (
-					<StyledTableRow key={row.p_name}>
-						<StyledTableCell align="left">{row.p_name}</StyledTableCell>
-						<StyledTableCell align="left">{row.unit}</StyledTableCell>
-						<StyledTableCell align="left">{row.qty}</StyledTableCell>
-						<StyledTableCell align="left">{row.weight}</StyledTableCell>
-						<StyledTableCell align="left">{row.length}</StyledTableCell>
-						<StyledTableCell align="left">{row.width}</StyledTableCell>
-						<StyledTableCell align="left">{row.height}</StyledTableCell>
+				{data?.map((row, index) => (
+					<StyledTableRow key={`${row.productTitle}-${(index+1).toString()}`}>
+						<StyledTableCell align="left">{row?.productTitle || "N/A"}</StyledTableCell>
+						<StyledTableCell align="left">{row?.unitType || "N/A"}</StyledTableCell>
+						<StyledTableCell align="left">{row?.quantity || "N/A"}</StyledTableCell>
+						<StyledTableCell align="left">{row?.weight || "N/A"}</StyledTableCell>
+						<StyledTableCell align="left">{row?.length || "N/A"}</StyledTableCell>
+						<StyledTableCell align="left">{row?.width || "N/A"}</StyledTableCell>
+						<StyledTableCell align="left">{row?.height || "N/A"}</StyledTableCell>
 					</StyledTableRow>
 				))}
 			</TableBody>

@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import { Box, Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 import BackButton from '../../../components/atoms/BackButton';
@@ -24,11 +23,8 @@ const AllIssuesHeader = () => (
 				<SearchBar />
 			</Box>
 
-			<Link
-				to="/supports/new"
-				style={{ textDecoration: 'none', color: 'inherit' }}
-			>
-				<Button variant="contained" color="secondary" sx={{ px: 5, py: 2 }}>
+			<Link to="/supports/new" style={{ textDecoration: 'none', color: 'inherit' }}>
+				<Button variant="contained" color="secondary" sx={{ px: 3, py: 1 }}>
 					Get Support
 				</Button>
 			</Link>

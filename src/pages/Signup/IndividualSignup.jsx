@@ -1,17 +1,17 @@
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable react/no-unescaped-entities */
-import { Box, Button, Grid, Paper, Step, StepLabel, Stepper, Typography, CircularProgress } from '@mui/material';
+import { Box, Button, CircularProgress, Grid, Paper, Step, StepLabel, Stepper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Form, Formik } from 'formik';
 import { useReducer, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import AlertModal from '../../components/modecules/AlertModal';
+import { initialState, loadingReducer, startLoading, stopLoading } from '../../reducers/LoadingReducer';
 import { sleep } from '../../utils/functions';
 import IndividualBusinessInfoForm from './parts/IndividualBusinessInfoForm';
 import PersonalInfoForm from './parts/PersonalnfoForm';
 import initialValues from './validation/individualFormInitialValues';
 import validation from './validation/individualFormValidation';
-import { initialState, loadingReducer, startLoading, stopLoading } from '../../reducers/LoadingReducer';
 
 const useStyles = makeStyles((theme) => ({
 	icon: {
@@ -24,16 +24,13 @@ const useStyles = makeStyles((theme) => ({
 		padding: '25px',
 		textAlign: 'center',
 		color: theme.palette.text.secondary,
-		position: 'absolute',
-		left: '50%',
-		top: '50%',
-		transform: 'translate(-50%, -50%)',
+		margin: '0 auto',
 		width: `67%`,
 		[theme.breakpoints.down('md')]: {
 			width: `100%`,
 		},
 		[theme.breakpoints.down('sm')]: {
-			marginTop: '64px!important',
+			// marginTop: '64px!important',
 			width: `100%`,
 		},
 	},
@@ -67,9 +64,6 @@ const useStyles = makeStyles((theme) => ({
 	signup__link: {
 		color: `${theme.palette.secondary.main} !important`,
 		textDecoration: 'none !important',
-	},
-	signup__actions: {
-		margin: '0 auto !important',
 	},
 }));
 
@@ -125,119 +119,120 @@ const IndividualSignup = () => {
 
 	return (
 		<>
-			<Paper elevation={3} className={classes.signup}>
-				<Typography variant="h4" className={classes.signup__header}>
-					Let's Get Started With
-				</Typography>
+			<Box sx={{ p: 5 }}>
+				<Paper elevation={3} className={classes.signup}>
+					<Typography variant="h4" className={classes.signup__header}>
+						Let's Get Started With
+					</Typography>
 
-				<Typography variant="h6" className={classes.signup__header}>
-					Individual
-				</Typography>
+					<Typography variant="h6" className={classes.signup__header}>
+						Individual
+					</Typography>
 
-				<Typography variant="body2" className={classes.signup__text}>
-					Please provide the following informations.
-				</Typography>
+					<Typography variant="body2" className={classes.signup__text}>
+						Please provide the following informations.
+					</Typography>
 
-				<Box sx={{ width: '100%' }}>
-					<Stepper activeStep={activeStep} alternativeLabel>
-						{steps.map((label) => {
-							const stepProps = {};
-							const labelProps = {};
+					<Box sx={{ width: '100%' }}>
+						<Stepper activeStep={activeStep} alternativeLabel>
+							{steps.map((label) => {
+								const stepProps = {};
+								const labelProps = {};
 
-							return (
-								<Step key={label} {...stepProps}>
-									<StepLabel
-										{...labelProps}
-										// eslint-disable-next-line prettier/prettier
+								return (
+									<Step key={label} {...stepProps}>
+										<StepLabel
+											{...labelProps}
+											// eslint-disable-next-line prettier/prettier
 										StepIconProps={{ classes: { active: classes.icon, completed: classes.icon, text: classes.text } }}
-									>
-										{label}
-									</StepLabel>
-								</Step>
-							);
-						})}
-					</Stepper>
+										>
+											{label}
+										</StepLabel>
+									</Step>
+								);
+							})}
+						</Stepper>
 
-					{activeStep === steps.length ? null : (
-						<Formik initialValues={initialValue} validate={validationRules} onSubmit={handleSubmit}>
-							{({ isSubmitting, values, errors, handleChange, handleBlur, touched, setFieldValue }) => (
-								<Form>
-									{activeStep === 0 && (
-										<IndividualBusinessInfoForm
-											initialValues={initialValue}
-											values={values}
-											errors={errors}
-											handleChange={handleChange}
-											handleBlur={handleBlur}
-											touched={touched}
-											isSubmitting={isSubmitting}
-											setFieldValue={setFieldValue}
-										/>
-									)}
+						{activeStep === steps.length ? null : (
+							<Formik initialValues={initialValue} validate={validationRules} onSubmit={handleSubmit}>
+								{({ isSubmitting, values, errors, handleChange, handleBlur, touched, setFieldValue }) => (
+									<Form>
+										{activeStep === 0 && (
+											<IndividualBusinessInfoForm
+												initialValues={initialValue}
+												values={values}
+												errors={errors}
+												handleChange={handleChange}
+												handleBlur={handleBlur}
+												touched={touched}
+												isSubmitting={isSubmitting}
+												setFieldValue={setFieldValue}
+											/>
+										)}
 
-									{activeStep === 1 && (
-										<PersonalInfoForm
-											initialValues={initialValue}
-											values={values}
-											errors={errors}
-											handleChange={handleChange}
-											handleBlur={handleBlur}
-											touched={touched}
-											isSubmitting={isSubmitting}
-											setFieldValue={setFieldValue}
-										/>
-									)}
+										{activeStep === 1 && (
+											<PersonalInfoForm
+												initialValues={initialValue}
+												values={values}
+												errors={errors}
+												handleChange={handleChange}
+												handleBlur={handleBlur}
+												touched={touched}
+												isSubmitting={isSubmitting}
+												setFieldValue={setFieldValue}
+											/>
+										)}
 
-									<Grid container item md={11} columnSpacing={2} sm={12} xs={12} className={classes.signup__actions}>
-										<Grid item md={6} sm={6} xs={12} order={{ md: 1, sm: 1, xs: 2 }}>
-											{activeStep === 0 ? (
-												<Link to="/signup" style={{ textDecoration: 'none' }}>
-													<Button type="button" variant="outlined" fullWidth className={classes.signup__back__button}>
+										<Grid container spacing={2} sx={{ px: 1 }}>
+											<Grid item xs={12} md={6}>
+												{activeStep === 0 ? (
+													<Link to="/signup" style={{ textDecoration: 'none' }}>
+														<Button type="button" variant="outlined" fullWidth className={classes.signup__back__button}>
+															Back
+														</Button>
+													</Link>
+												) : (
+													<Button
+														type="button"
+														variant="outlined"
+														fullWidth
+														disabled={activeStep === 0}
+														onClick={() => handleBack(setFieldValue)}
+														sx={{ mr: 1 }}
+														className={classes.signup__back__button}
+													>
 														Back
 													</Button>
-												</Link>
-											) : (
+												)}
+											</Grid>
+											<Grid item xs={12} md={6}>
 												<Button
-													type="button"
-													variant="outlined"
+													disabled={isSubmitting || (activeStep === 1 && !values?.terms)}
+													type="submit"
+													variant="contained"
 													fullWidth
-													disabled={activeStep === 0}
-													onClick={() => handleBack(setFieldValue)}
-													sx={{ mr: 1 }}
-													className={classes.signup__back__button}
+													className={classes.signup__button}
+													endIcon={loading && <CircularProgress size={20} color="inherit" />}
 												>
-													Back
+													{/* eslint-disable-next-line no-nested-ternary */}
+													{activeStep === steps.length - 1 ? (loading ? 'Signing Up...' : 'Submit') : 'Next'}
 												</Button>
-											)}
+											</Grid>
 										</Grid>
+									</Form>
+								)}
+							</Formik>
+						)}
+					</Box>
 
-										<Grid item md={6} sm={6} xs={12} order={{ xs: 1 }}>
-											<Button
-												disabled={isSubmitting || (activeStep === 1 && !values?.terms)}
-												type="submit"
-												variant="contained"
-												fullWidth
-												className={classes.signup__button}
-												endIcon={loading && <CircularProgress size={20} color="inherit" />}
-											>
-												{/* eslint-disable-next-line no-nested-ternary */}
-												{activeStep === steps.length - 1 ? (loading ? 'Signing Up...' : 'Submit') : 'Next'}
-											</Button>
-										</Grid>
-									</Grid>
-								</Form>
-							)}
-						</Formik>
-					)}
-				</Box>
-
-				<Typography variant="body2" color="initial" sx={{ marginTop: '15px' }}>
-					Alreay have an account?{' '}
-					<Link className={classes.signup__link} to="/">
-						Sign In
-					</Link>
-				</Typography>
-			</Paper>
+					<Typography variant="body2" color="initial" sx={{ marginTop: '15px' }}>
+						Alreay have an account?{' '}
+						<Link className={classes.signup__link} to="/">
+							Sign In
+						</Link>
+					</Typography>
+				</Paper>
+			</Box>
 
 			{successModal && (
 				<AlertModal

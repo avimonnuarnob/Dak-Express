@@ -13,25 +13,16 @@ const FAKE_DATA = {
 };
 
 const TABLE_FAKE_DATA = [
-	{
-		p_name: 'Backpack LEATHER MARK Rexine School Bag',
-		unit: 'Kg',
-		qty: '01',
-		weight: '10 Kg',
-		length: '10 CM',
-		width: '10 CM',
-		height: '10 CM',
-	},
-	{
-		p_name: 'Backpack LEATHER MARK Rexine School Bag',
-		unit: 'Kg',
-		qty: '01',
-		weight: '10 Kg',
-		length: '10 CM',
-		width: '10 CM',
-		height: '10 CM',
-	},
-];
+  {
+    "productTitle": "asxs",
+    "unitType": "lb",
+    "weight": "2",
+    "quantity": "2",
+    "height": "",
+    "width": "",
+    "length": ""
+  }
+]
 
 const useStyles = makeStyles((theme) => ({
 	card: {},

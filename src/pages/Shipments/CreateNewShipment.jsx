@@ -4,7 +4,8 @@ import CachedOutlinedIcon from '@mui/icons-material/CachedOutlined';
 import { Box, Button, Grid } from '@mui/material';
 import { Form, Formik } from 'formik';
 import { useEffect, useState } from 'react';
-import PageTitlebar from '../../components/modecules/PageTitlebar';
+import BackButton from '../../components/atoms/BackButton';
+import HeaderTitle from '../../components/atoms/HeaderTitle';
 import RadioInputField from '../../components/modecules/RadioInputField';
 import useBreadcrumb from '../../hooks/useBreadcrumb';
 import { setBreadcrumb } from '../../reducers/BreadcrumbReducer';
@@ -14,6 +15,7 @@ import DangerousGoodsDeclaration from './parts/DangerousGoodsDeclaration';
 import PercelDetailsForm from './parts/PercelDetailsForm';
 import PickupDetailsForm from './parts/PickupDetailsForm';
 import ReceiverDetailsForm from './parts/ReceiverDetailsForm';
+import PreviewFormData from './PreviewFormData';
 import initialValues from './validation/initialValues';
 import validate from './validation/validate';
 
@@ -30,6 +32,7 @@ const breadcrumbs = [
 const CreateNewShipment = () => {
 	const [packageSelection, setPackageSelection] = useState(packageSelectionItems[0]?.value);
 	const [showCouriersAndPreviewButton, setShowCouriersAndPreviewButton] = useState(false);
+	const [previewData, setPreviewData] = useState(false);
 	// eslint-disable-next-line no-unused-vars
 	const { _, dispatch } = useBreadcrumb();
 
@@ -46,6 +49,7 @@ const CreateNewShipment = () => {
 
 		if (!isEmpty(data)) {
 			localStorage.setItem('previewShipmentData', JSON.stringify(data));
+			setPreviewData(true);
 		}
 	};
 
@@ -64,13 +68,23 @@ const CreateNewShipment = () => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
+	if (previewData) return <PreviewFormData setPreviewData={setPreviewData} />;
+
 	return (
-		<Grid container>
-			<Grid item xs={12} mx={2}>
-				<PageTitlebar title="Create A Shipment" />
+		<Grid container sx={{ px: 3, py: 2 }}>
+			<Grid item xs={12} mb={3}>
+				<Box sx={{ display: 'flex', alignItems: 'center' }}>
+					<HeaderTitle label="Create A Shipment" />
+					<BackButton redirectTo="/shipments" label="Back to shipments" />
+				</Box>
 			</Grid>
 
-			<Formik initialValues={initialValues} validate={validate} onSubmit={onSubmit}>
+			<Formik
+				initialValues={JSON.parse(localStorage.getItem('previewShipmentData')) ?? initialValues}
+				validate={validate}
+				onSubmit={onSubmit}
+				enableReinitialize
+			>
 				{(props) => (
 					<Form>
 						<Grid item xs={12} px={2} mx={4}>

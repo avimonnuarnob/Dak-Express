@@ -63,7 +63,12 @@ const CouriersListTable = ({ setFieldValue = null, values = {}, ...props }) => {
 							{couriers?.map((courier) => (
 								<StyledTableRow key={courier?.id} onClick={handleSelectCourier(courier)}>
 									<StyledTableCell align="center">
-										<FormControlLabel value={courier} control={<Radio color="secondary" />} label="" />
+										<FormControlLabel
+											value={courier}
+											control={<Radio color="secondary" />}
+											label=""
+											checked={values?.courier?.id === courier?.id}
+										/>
 									</StyledTableCell>
 									<StyledTableCell align="center">
 										<img src={courier?.courierImage} alt="Courier Service" width={60} />
