@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
 	titlebar__text: {},
 }));
 
-const PageTitlebar = ({ title = 'Dashboard' }) => {
+const PageTitlebar = ({ title = 'Dashboard', link = '/dashboard', page = 'Dashboard' }) => {
 	const classes = useStyles();
 
 	return (
@@ -40,12 +40,12 @@ const PageTitlebar = ({ title = 'Dashboard' }) => {
 				{title}
 			</Typography>
 
-			<Link to="/dashboard" className={classes.titlebar__link}>
+			<Link to={link} className={classes.titlebar__link}>
 				<Button
 					className={classes.titlebar__items}
 					startIcon={<ArrowBackIosNewOutlinedIcon fontSize="small" className={classes.titlebar__icon} />}
 				>
-					<Typography className={classes.titlebar__text}>Back to Dashboard</Typography>
+					<Typography className={classes.titlebar__text}>Back to {page}</Typography>
 				</Button>
 			</Link>
 		</Box>
@@ -54,6 +54,10 @@ const PageTitlebar = ({ title = 'Dashboard' }) => {
 
 PageTitlebar.propTypes = {
 	title: PropTypes.string.isRequired,
+	// eslint-disable-next-line react/require-default-props
+	link: PropTypes.string,
+	// eslint-disable-next-line react/require-default-props
+	page: PropTypes.string,
 };
 
 export default PageTitlebar;

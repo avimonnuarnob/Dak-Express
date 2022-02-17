@@ -1,7 +1,11 @@
+/* eslint-disable react/forbid-prop-types */
+/* eslint-disable react/require-default-props */
 /* eslint-disable react/no-array-index-key */
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import { Box, Button, Grid, Paper } from '@mui/material';
 import { FieldArray } from 'formik';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import PropTypes from 'prop-types';
 import FormHeaderTitle from '../../../components/modecules/FormHeaderTitle';
 import SelectInputField from '../../../components/modecules/SelectInputField';
 import TextInputField from '../../../components/modecules/TextInputField';
@@ -66,9 +70,9 @@ const heightSelectionItems = [
 	{ id: 'a1922c66-8642-11ec-a8a3-0242ac120002', value: '10m', label: '5-10 M' },
 ];
 
-const PercelDetailsForm = ({ values }) => (
+const PercelDetailsForm = ({ values = {}, title = 'Parcel Details', hideButton = false }) => (
 	<Paper sx={{ p: 4, m: 2 }} elevation={3}>
-		<FormHeaderTitle formTitle="Percel Details" />
+		<FormHeaderTitle formTitle={title} />
 		<FieldArray
 			name="products"
 			// eslint-disable-next-line no-unused-vars
@@ -147,34 +151,42 @@ const PercelDetailsForm = ({ values }) => (
 							</Box>
 						))}
 
-					<Grid item md={12} sm={12} xs={12} sx={{ textAlign: 'center' }}>
-						<Button
-							size="large"
-							variant="outlined"
-							color="secondary"
-							type="button"
-							startIcon={<AddOutlinedIcon />}
-							onClick={(event) => {
-								event.preventDefault();
+					{!hideButton && (
+						<Grid item md={12} sm={12} xs={12} sx={{ textAlign: 'center' }}>
+							<Button
+								size="large"
+								variant="outlined"
+								color="secondary"
+								type="button"
+								startIcon={<AddOutlinedIcon />}
+								onClick={(event) => {
+									event.preventDefault();
 
-								push({
-									productTitle: '',
-									unitType: '',
-									weight: '',
-									quantity: '',
-									length: '',
-									width: '',
-									height: '',
-								});
-							}}
-						>
-							Add New product
-						</Button>
-					</Grid>
+									push({
+										productTitle: '',
+										unitType: '',
+										weight: '',
+										quantity: '',
+										length: '',
+										width: '',
+										height: '',
+									});
+								}}
+							>
+								Add New product
+							</Button>
+						</Grid>
+					)}
 				</>
 			)}
 		/>
 	</Paper>
 );
+
+PercelDetailsForm.propTypes = {
+	values: PropTypes.object,
+	title: PropTypes.string,
+	hideButton: PropTypes.bool,
+};
 
 export default PercelDetailsForm;

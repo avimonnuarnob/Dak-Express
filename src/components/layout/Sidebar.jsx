@@ -1,6 +1,7 @@
 import AddLocationAltOutlinedIcon from '@mui/icons-material/AddLocationAltOutlined';
 import AddLocationOutlinedIcon from '@mui/icons-material/AddLocationOutlined';
 import AddToPhotosOutlinedIcon from '@mui/icons-material/AddToPhotosOutlined';
+import CategoryOutlinedIcon from '@mui/icons-material/CategoryOutlined';
 import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
 import HistoryOutlinedIcon from '@mui/icons-material/HistoryOutlined';
 import KeyIcon from '@mui/icons-material/Key';
@@ -117,7 +118,9 @@ const SidebarMenuItems = () => {
 		<Box sx={{ fontSize: '14px !important' }}>
 			<Box className={classes.item}>
 				<List>
-					<SidebarHeader />
+					<NavLink to="/dashboard" style={{ textDecoration: 'none', color: 'inherit' }}>
+						<SidebarHeader />
+					</NavLink>
 				</List>
 
 				<Typography variant="button" color="initial" className={classes.link__title}>
@@ -169,7 +172,7 @@ const SidebarMenuItems = () => {
 				</List>
 			</Box>
 
-			{/* <Box className={classes.item}>
+			<Box className={classes.item}>
 				<Typography variant="button" color="initial" className={classes.link__title}>
 					My Product
 				</Typography>
@@ -177,19 +180,16 @@ const SidebarMenuItems = () => {
 				<Divider className={classes.divider} variant="middle" />
 
 				<List>
-					<NavLink
-						to="/locations/pickup"
-						className={({ isActive }) => (isActive ? classes.link__active : classes.link__item)}
-					>
+					<NavLink to="/products" className={({ isActive }) => (isActive ? classes.link__active : classes.link__item)}>
 						<ListItem button>
 							<ListItemIcon className={classes.link__icon}>
-								<ProductionQuantityLimitsOutlinedIcon />
+								<CategoryOutlinedIcon />
 							</ListItemIcon>
 							<ListItemText>All Products</ListItemText>
 						</ListItem>
 					</NavLink>
 				</List>
-			</Box> */}
+			</Box>
 
 			<Box className={classes.item}>
 				<Typography variant="button" color="initial" className={classes.link__title}>

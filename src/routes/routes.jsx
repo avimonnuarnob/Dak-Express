@@ -12,6 +12,9 @@ const AllShipments = lazy(() => import('../pages/Shipments/AllShipments'));
 const CreateNewShipment = lazy(() => import('../pages/Shipments/CreateNewShipment'));
 const ShipmentDetails = lazy(() => import('../pages/Shipments/ShipmentDetails'));
 const ShipmentDetailsPreview = lazy(() => import('../pages/Shipments/PreviewFormData'));
+const Products = lazy(() => import('../pages/Products/Products'));
+const CreateNewProducts = lazy(() => import('../pages/Products/CreateNewProducts'));
+const EditProduct = lazy(() => import('../pages/Products/EditProduct'));
 const PickupLocations = lazy(() => import('../pages/Location/PickupLocation/PickupLocations'));
 const CreatePickupLocation = lazy(() => import('../pages/Location/PickupLocation/CreatePickupLocation'));
 const PickupLocationDetails = lazy(() => import('../pages/Location/PickupLocation/PickupLocationDetails'));
@@ -109,6 +112,27 @@ const routes = [
 		exact: true,
 		component: ShipmentDetailsPreview,
 		name: 'ShipmentDetailsPreview',
+		protected: true,
+	},
+	{
+		path: '/products',
+		exact: true,
+		component: Products,
+		name: 'Products',
+		protected: true,
+	},
+	{
+		path: '/products/new',
+		exact: true,
+		component: CreateNewProducts,
+		name: 'CreateNewProducts',
+		protected: true,
+	},
+	{
+		path: '/products/edit/:id',
+		exact: true,
+		component: EditProduct,
+		name: 'EditProduct',
 		protected: true,
 	},
 	{

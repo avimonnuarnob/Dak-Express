@@ -5,7 +5,7 @@ import {
 	CircularProgress,
 	Grid,
 	Paper,
-	Typography,
+	Typography
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { makeStyles } from '@mui/styles';
@@ -21,7 +21,7 @@ import {
 	initialState,
 	loadingReducer,
 	startLoading,
-	stopLoading,
+	stopLoading
 } from '../../reducers/LoadingReducer';
 import { sleep } from '../../utils/functions';
 import validate from './validation/validate';
