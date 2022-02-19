@@ -1,8 +1,9 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable arrow-body-style */
 import { Box, Button, Grid, Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Form, Formik } from 'formik';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import PropTypes from 'prop-types';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import PhoneNumberInputField from '../../../../components/modecules/PhoneNumberInputField';
 import SelectInputField from '../../../../components/modecules/SelectInputField';
@@ -11,17 +12,10 @@ import { sleep } from '../../../../utils/functions';
 import validateAddPickupLocation from '../validation/AddpickupLocationValidation';
 import AddPickupLocationInitialValues from '../validation/AddPickupLocationValues';
 
-const distItems = [];
+const allDistrictArray = [];
 
 const distDivArray = {
-	Barisal: [
-		'Barguna',
-		'Barisal',
-		'Bhola',
-		'Jhalokati',
-		'Patuakhali',
-		'Pirojpur',
-	],
+	Barisal: ['Barguna', 'Barisal', 'Bhola', 'Jhalokati', 'Patuakhali', 'Pirojpur'],
 	Chittagong: [
 		'Bandarban',
 		'Brahmanbaria',
@@ -63,32 +57,14 @@ const distDivArray = {
 		'Satkhira',
 	],
 	Mymensingh: ['Jamalpur', 'Mymensingh', 'Netrakona', 'Sherpur'],
-	Rajshahi: [
-		'Bogra',
-		'Chapainawabganj',
-		'Joypurhat',
-		'Naogaon',
-		'Natore',
-		'Pabna',
-		'Rajshahi',
-		'Sirajganj',
-	],
-	Rangpur: [
-		'Dinajpur',
-		'Gaibandha',
-		'Kurigram',
-		'Lalmonirhat',
-		'Nilphamari',
-		'Panchagarh',
-		'Rangpur',
-		'Thakurgaon',
-	],
+	Rajshahi: ['Bogra', 'Chapainawabganj', 'Joypurhat', 'Naogaon', 'Natore', 'Pabna', 'Rajshahi', 'Sirajganj'],
+	Rangpur: ['Dinajpur', 'Gaibandha', 'Kurigram', 'Lalmonirhat', 'Nilphamari', 'Panchagarh', 'Rangpur', 'Thakurgaon'],
 	Sylhet: ['Habiganj', 'Moulvibazar', 'Sunamganj', 'Sylhet'],
 };
 
 Object.keys(distDivArray).map((divison, divisionIndex) =>
 	distDivArray[divison].forEach((dist, distIndex) =>
-		distItems.push({
+		allDistrictArray.push({
 			id: `${divisionIndex}${distIndex}-${dist}`,
 			label: dist,
 			value: dist.toLowerCase(),
@@ -104,7 +80,7 @@ const useStyles = makeStyles((theme) => ({
 		display: 'flex',
 		borderBottom: `1px solid ${theme.palette.secondary.main}`,
 	},
-	pickup__back__button: {
+	'pickup__button--back': {
 		color: `${theme.palette.secondary.main} !important`,
 		borderColor: `${theme.palette.secondary.main} !important`,
 		height: '55px',
@@ -128,9 +104,27 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const AddPickupLocationForm = () => {
+const AddPickupLocationForm = ({ isEditable }) => {
 	const classes = useStyles();
 	const navigate = useNavigate();
+	const [pickupLocationInitialValues, setPickupLocationInitialValues] = useState(AddPickupLocationInitialValues);
+
+	const getData = async () => {
+		await sleep(2000);
+
+		try {
+			if (localStorage.getItem('pickupData'))
+				setPickupLocationInitialValues(JSON.parse(localStorage.getItem('pickupData')));
+		} catch (e) {
+			console.log(e);
+		}
+	};
+
+	useEffect(() => {
+		if (isEditable) {
+			getData();
+		}
+	}, [isEditable]);
 
 	const submitForm = async (values, actions) => {
 		await sleep(2000);
@@ -145,19 +139,16 @@ const AddPickupLocationForm = () => {
 
 	return (
 		<Formik
-			initialValues={AddPickupLocationInitialValues}
+			initialValues={pickupLocationInitialValues}
 			validate={validateAddPickupLocation}
 			onSubmit={handleSubmit}
+			enableReinitialize
 		>
 			{({ isSubmitting }) => (
 				<Form>
 					<Paper sx={{ py: 4, px: 6, mt: 3 }}>
 						<Box className={classes.form__header}>
-							<Typography
-								fontSize="24px"
-								fontWeight="bold"
-								sx={{ color: 'status.pending', mb: 3 }}
-							>
+							<Typography fontSize="24px" fontWeight="bold" sx={{ color: 'status.pending', mb: 3 }}>
 								Pickup Location
 							</Typography>
 						</Box>
@@ -165,44 +156,24 @@ const AddPickupLocationForm = () => {
 						<fieldset disabled={isSubmitting} style={{ border: 'none' }}>
 							<Grid container spacing={2}>
 								<Grid item md={6} sm={6} xs={12}>
-									<TextInputField
-										fullWidth
-										isRequired
-										label="First Name"
-										name="firstName"
-									/>
+									<TextInputField fullWidth isRequired label="First Name" name="firstName" />
 								</Grid>
 
 								<Grid item md={6} sm={6} xs={12}>
-									<TextInputField
-										fullWidth
-										isRequired
-										label="Last Name"
-										name="lastName"
-									/>
+									<TextInputField fullWidth isRequired label="Last Name" name="lastName" />
 								</Grid>
 
 								<Grid item md={12} sm={12} xs={12}>
-									<TextInputField
-										fullWidth
-										isRequired
-										label="Business Name"
-										name="businessName"
-									/>
+									<TextInputField fullWidth isRequired label="Business Name" name="businessName" />
 								</Grid>
 
 								<Grid item md={6} sm={6} xs={12}>
-									<PhoneNumberInputField
-										fullWidth
-										isRequired
-										label="Phone"
-										name="phone"
-									/>
+									<PhoneNumberInputField fullWidth isRequired label="Phone" name="phone" />
 								</Grid>
 
 								<Grid item md={6} sm={6} xs={12}>
 									<SelectInputField
-										items={distItems}
+										items={allDistrictArray}
 										fullWidth
 										isRequired
 										label="District / State"
@@ -212,7 +183,7 @@ const AddPickupLocationForm = () => {
 
 								<Grid item md={6} sm={6} xs={12}>
 									<SelectInputField
-										items={distItems}
+										items={allDistrictArray}
 										fullWidth
 										isRequired
 										label="City / Town"
@@ -221,21 +192,11 @@ const AddPickupLocationForm = () => {
 								</Grid>
 
 								<Grid item md={6} sm={6} xs={12}>
-									<TextInputField
-										fullWidth
-										isRequired
-										label="Post Code / Postal Code"
-										name="postcodeOrPostalcode"
-									/>
+									<TextInputField fullWidth isRequired label="Post Code / Postal Code" name="postcodeOrPostalcode" />
 								</Grid>
 
 								<Grid item md={12} sm={12} xs={12}>
-									<TextInputField
-										fullWidth
-										isRequired
-										label="Address"
-										name="address"
-									/>
+									<TextInputField fullWidth isRequired label="Address" name="address" />
 								</Grid>
 							</Grid>
 						</fieldset>
@@ -248,17 +209,12 @@ const AddPickupLocationForm = () => {
 							disabled={false}
 							onClick={() => navigate(-1)}
 							sx={{ ml: 'auto !important' }}
-							className={classes.pickup__back__button}
+							className={classes['pickup__button--back']}
 						>
 							Cancel
 						</Button>
 
-						<Button
-							disabled={false}
-							type="submit"
-							variant="contained"
-							className={classes.pickup__button}
-						>
+						<Button disabled={false} type="submit" variant="contained" className={classes.pickup__button}>
 							Submit
 						</Button>
 					</div>
@@ -266,6 +222,14 @@ const AddPickupLocationForm = () => {
 			)}
 		</Formik>
 	);
+};
+
+AddPickupLocationForm.propTypes = {
+	isEditable: PropTypes.bool,
+};
+
+AddPickupLocationForm.defaultProps = {
+	isEditable: false,
 };
 
 export default AddPickupLocationForm;

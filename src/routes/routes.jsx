@@ -17,9 +17,11 @@ const CreateNewProducts = lazy(() => import('../pages/Products/CreateNewProducts
 const EditProduct = lazy(() => import('../pages/Products/EditProduct'));
 const PickupLocations = lazy(() => import('../pages/Location/PickupLocation/PickupLocations'));
 const CreatePickupLocation = lazy(() => import('../pages/Location/PickupLocation/CreatePickupLocation'));
+const EditPickupLocation = lazy(() => import('../pages/Location/PickupLocation/EditPickupLocation'));
 const PickupLocationDetails = lazy(() => import('../pages/Location/PickupLocation/PickupLocationDetails'));
 const ReceiverLocations = lazy(() => import('../pages/Location/ReceiverLocation/ReceiverLocations'));
 const CreateReceiverLocation = lazy(() => import('../pages/Location/ReceiverLocation/CreateReceiverLocation'));
+const EditReceiverLocation = lazy(() => import('../pages/Location/ReceiverLocation/EditReceiverLocation'));
 const ReceiverLocationDetails = lazy(() => import('../pages/Location/ReceiverLocation/ReceiverLocationDetails'));
 const TransactionHistories = lazy(() => import('../pages/Transaction/TransactionHistories'));
 const TransactionHistoryDetails = lazy(() => import('../pages/Transaction/TransactionHistoryDetails'));
@@ -150,6 +152,13 @@ const routes = [
 		protected: true,
 	},
 	{
+		path: '/locations/pickup/:id/edit',
+		exact: true,
+		component: EditPickupLocation,
+		name: 'CreatePickupLocation',
+		protected: true,
+	},
+	{
 		path: '/locations/pickup/:id',
 		exact: true,
 		component: PickupLocationDetails,
@@ -168,6 +177,13 @@ const routes = [
 		exact: true,
 		component: CreateReceiverLocation,
 		name: 'CreateReceiverLocation',
+		protected: true,
+	},
+	{
+		path: '/locations/receiver/:id/edit',
+		exact: true,
+		component: EditReceiverLocation,
+		name: 'CreatePickupLocation',
 		protected: true,
 	},
 	{

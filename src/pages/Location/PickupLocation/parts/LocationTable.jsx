@@ -1,5 +1,3 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable arrow-body-style */
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
 import {
@@ -13,7 +11,8 @@ import {
 	TableContainer,
 	TableHead,
 	TableRow,
-	Typography,
+	// eslint-disable-next-line prettier/prettier
+	Typography
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { makeStyles } from '@mui/styles';
@@ -64,23 +63,21 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const LocationTable = () => {
-	// eslint-disable-next-line no-unused-vars
 	const classes = useStyles();
-	const [page, setPage] = useState(0);
+	const [pageNumber, setPageNumber] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(20);
 
 	// Avoid a layout jump when reaching the last page with empty rows.
-	const emptyRows =
-		page > 0 ? Math.max(0, (1 + page) * rowsPerPage - locationData.length) : 0;
+	const emptyRows = pageNumber > 0 ? Math.max(0, (1 + pageNumber) * rowsPerPage - locationData.length) : 0;
 
 	const handlePageChange = (event, newPage) => {
 		// TODO:  Make API call while page changes
-		setPage(newPage);
+		setPageNumber(newPage);
 	};
 
 	const handlePageRowsChange = (event) => {
 		setRowsPerPage(parseInt(event.target.value, 10));
-		setPage(0);
+		setPageNumber(0);
 	};
 	return (
 		<>
@@ -98,30 +95,20 @@ const LocationTable = () => {
 					</TableHead>
 					<TableBody>
 						{(rowsPerPage > 0
-							? locationData.slice(
-									page * rowsPerPage,
-									page * rowsPerPage + rowsPerPage
-							  )
+							? locationData.slice(pageNumber * rowsPerPage, pageNumber * rowsPerPage + rowsPerPage)
 							: locationData
 						).map((row, index) => (
 							<StyledTableRow key={row.name}>
 								<StyledTableCell align="left">
-									<Typography fontWeight={600}>
-										{(index + 1)?.toString().padStart(2, '0')}
-									</Typography>
+									<Typography fontWeight={600}>{(index + 1)?.toString().padStart(2, '0')}</Typography>
 								</StyledTableCell>
 								<StyledTableCell align="left">{row.name}</StyledTableCell>
 								<StyledTableCell align="left">{row.phone}</StyledTableCell>
-								<StyledTableCell align="left">
-									{row.business_name}
-								</StyledTableCell>
+								<StyledTableCell align="left">{row.business_name}</StyledTableCell>
 								<StyledTableCell align="left">{row.address}</StyledTableCell>
 								<StyledTableCell align="left">
 									<Box className={classes.table__buttons}>
-										<Link
-											to={`/locations/pickup/${row?.id}`}
-											style={{ textDecoration: 'none' }}
-										>
+										<Link to={`/locations/pickup/${row?.id}`} style={{ textDecoration: 'none' }}>
 											<Button
 												sx={{ width: '100%' }}
 												size="small"
@@ -133,10 +120,7 @@ const LocationTable = () => {
 											</Button>
 										</Link>
 
-										<Link
-											to="/locations/pickup/new"
-											style={{ textDecoration: 'none', color: 'inherit' }}
-										>
+										<Link to={`/locations/pickup/${row.id}/edit`} style={{ textDecoration: 'none', color: 'inherit' }}>
 											<Button
 												sx={{ width: '100%' }}
 												size="small"
@@ -164,7 +148,7 @@ const LocationTable = () => {
 			<Box sx={{ py: '10px' }}>
 				<Pagination
 					data={locationData}
-					page={page}
+					page={pageNumber}
 					rowsPerPage={rowsPerPage}
 					handlePageChange={handlePageChange}
 					handlePageRowsChange={handlePageRowsChange}
