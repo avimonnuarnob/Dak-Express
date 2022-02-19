@@ -1,11 +1,10 @@
-/* eslint-disable prettier/prettier */
 import { Box } from '@mui/material';
 import { useEffect } from 'react';
 import BackButton from '../../../components/atoms/BackButton';
 import HeaderTitle from '../../../components/atoms/HeaderTitle';
 import useBreadcrumb from '../../../hooks/useBreadcrumb';
 import { setBreadcrumb } from '../../../reducers/BreadcrumbReducer';
-import AddPickupLocationForm from './parts/AddPickupLocationForm';
+import PickupLocationForm from './parts/PickupLocationForm';
 
 const breadcrumbs = [
 	{ title: 'Dashboard', link: 'dashboard' },
@@ -31,12 +30,9 @@ const CreatePickupLocation = () => {
 		<Box sx={{ py: 2, px: 5 }}>
 			<Box sx={{ display: { xs: 'block', sm: 'flex' }, alignItems: 'center' }}>
 				<HeaderTitle label="ADD NEW LOCATION" />
-				<BackButton
-					redirectTo="/locations/pickup"
-					label="Back To Pickup Locations"
-				/>
+				<BackButton redirectTo="/locations/pickup" label="Back To Pickup Locations" />
 			</Box>
-			<AddPickupLocationForm />
+			<PickupLocationForm />
 		</Box>
 	);
 };

@@ -9,15 +9,15 @@ import ReceiverLocationForm from './parts/ReceiverLocationForm';
 
 const breadcrumbs = [
 	{ title: 'Dashboard', link: 'dashboard' },
-	{ title: 'Receiver Locations', link: 'locations/receiver' },
+	{ title: 'Pickup Locations', link: 'locations/pickup' },
 	{
-		title: 'Add New Receiver Location',
-		link: 'locations/receiver/new',
+		title: 'Add New Pickup Location',
+		link: 'locations/pickup/new',
 		current: true,
 	},
 ];
 
-const CreateReceiverLocation = () => {
+const EditReceiverLocation = () => {
 	// eslint-disable-next-line no-unused-vars
 	const { _, dispatch } = useBreadcrumb();
 
@@ -30,15 +30,15 @@ const CreateReceiverLocation = () => {
 	return (
 		<Box sx={{ py: 2, px: 5 }}>
 			<Box sx={{ display: { xs: 'block', sm: 'flex' }, alignItems: 'center' }}>
-				<HeaderTitle label="ADD NEW LOCATION" />
+				<HeaderTitle label="EDIT RECEIVER LOCATION" />
 				<BackButton
 					redirectTo="/locations/receiver"
-					label="Back To Receiver Locations"
+					label="Back To receiver Locations"
 				/>
 			</Box>
-			<ReceiverLocationForm />
+			<ReceiverLocationForm isEditable/>
 		</Box>
 	);
 };
 
-export default CreateReceiverLocation;
+export default EditReceiverLocation;
