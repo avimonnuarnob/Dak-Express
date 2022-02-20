@@ -14,6 +14,7 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import { makeStyles } from '@mui/styles';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 import brandIconLogo from '../../assets/dak_express.svg';
 import useAuthToken from '../../hooks/useAuthToken';
@@ -61,6 +62,7 @@ const useUnauthenticateHeaderStyles = makeStyles((theme) => ({
 }));
 
 const UnauthenticateHeader = () => {
+	const { t } = useTranslation();
 	const classes = useUnauthenticateHeaderStyles();
 
 	return (
@@ -75,12 +77,16 @@ const UnauthenticateHeader = () => {
 
 					<Box className={classes.header__elements}>
 						<Box className={classes.header__language}>
-							<Language lightText />
+							<Tooltip title="Language">
+								<Language lightText />
+							</Tooltip>
 						</Box>
 						<Box>
-							<Button variant="contained" color="secondary" className={classes.header__button}>
-								SIGN IN
-							</Button>
+							<Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+								<Button variant="contained" color="secondary" className={classes.header__button}>
+									{t('sign-in')}
+								</Button>
+							</Link>
 						</Box>
 					</Box>
 				</Box>
@@ -154,6 +160,7 @@ const useAuthenticatedProfileMenuStyles = makeStyles((theme) => ({
 
 const ProfileMenuItem = () => {
 	const [anchorEl, setAnchorEl] = useState(null);
+	const { t } = useTranslation();
 	// eslint-disable-next-line no-unused-vars
 	const { _, dispatch } = useAuthToken();
 
@@ -241,10 +248,10 @@ const ProfileMenuItem = () => {
 
 							<Box className={classes.d_flex}>
 								<Typography variant="caption" className={classes.account__info__type}>
-									Business
+									{t('company-type')}
 								</Typography>
 								<Typography variant="caption" className={classes.account__info__text}>
-									Free
+									{t('company-plan')}
 								</Typography>
 							</Box>
 						</Box>
@@ -254,7 +261,7 @@ const ProfileMenuItem = () => {
 				<Link to="/profile" style={{ textDecoration: 'none', color: 'inherit' }}>
 					<MenuItem>
 						<Typography variant="body2" className={classes.account__item}>
-							Profile
+							{t('links-profile')}
 						</Typography>
 					</MenuItem>
 				</Link>
@@ -262,7 +269,7 @@ const ProfileMenuItem = () => {
 				<Link to="/change-password" style={{ textDecoration: 'none', color: 'inherit' }}>
 					<MenuItem>
 						<Typography variant="body2" className={classes.account__item}>
-							Change Password
+							{t('links-change-password')}
 						</Typography>
 					</MenuItem>
 				</Link>
@@ -270,7 +277,7 @@ const ProfileMenuItem = () => {
 				<Link to="/tokens" style={{ textDecoration: 'none', color: 'inherit' }}>
 					<MenuItem>
 						<Typography variant="body2" className={classes.account__item}>
-							My API Token
+							{t('links-api-token')}
 						</Typography>
 					</MenuItem>
 				</Link>
@@ -280,7 +287,7 @@ const ProfileMenuItem = () => {
 				<MenuItem className={classes.account__last__item} onClick={handleLogout}>
 					<LockOpenOutlinedIcon fontSize="small" />
 					<Typography variant="body2" sx={{ marginLeft: '10px' }}>
-						Sign Out
+						{t('links-sign-out')}
 					</Typography>
 				</MenuItem>
 			</Menu>
@@ -335,14 +342,18 @@ const AuthenticatedHeader = ({ toggleDrawer = null, open = true }) => {
 		<AppBar className={classes.header} open={open}>
 			<Toolbar className={classes.header__toolbar}>
 				<IconButton className={classes.header__icon} aria-label="open drawer" edge="start" onClick={toggleDrawer}>
-					<MenuIcon />
+					<Tooltip title="Toggle Menu">
+						<MenuIcon />
+					</Tooltip>
 				</IconButton>
 
 				<BreadcrumbItems />
 
 				<Box className={classes.header__items}>
 					<Box className={classes.header__language}>
-						<Language lightText={false} />
+						<Tooltip title="Language">
+							<Language lightText={false} />
+						</Tooltip>
 					</Box>
 
 					<Box className={classes.header__notification}>

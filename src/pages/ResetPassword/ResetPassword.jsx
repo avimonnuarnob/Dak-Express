@@ -2,6 +2,7 @@ import { Button, CircularProgress, Grid, Paper, Typography } from '@mui/material
 import { makeStyles } from '@mui/styles';
 import { Form, Formik } from 'formik';
 import { useReducer, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { FOOTER_HEIGHT, HEADER_HEIGHT } from '../../components/layout/constants';
 import AlertModal from '../../components/modecules/AlertModal';
@@ -55,6 +56,7 @@ const useStyles = makeStyles((theme) => ({
 const ResetPassword = () => {
 	const [loading, dispatch] = useReducer(loadingReducer, initialState);
 	const [showResetPasswordModal, setShowResetPasswordModal] = useState(false);
+	const { t } = useTranslation();
 
 	// eslint-disable-next-line no-unused-vars
 	const redirectTo = useNavigate();
@@ -87,11 +89,11 @@ const ResetPassword = () => {
 				<Grid item xl={4} lg={4} md={4} sm={10} xs={12}>
 					<Paper elevation={3} sx={{ padding: '50px 30px' }} className={classes.reset__password}>
 						<Typography variant="h4" className={classes.reset__password__header}>
-							Set New Password
+							{t('reset-password')}
 						</Typography>
 
 						<Typography variant="body2" className={classes.reset__password__text}>
-							Please enter your new password.
+							{t('reset-password-description')}
 						</Typography>
 
 						<Formik initialValues={initialValues} validate={validate} onSubmit={handleSubmitResetPassword}>
@@ -101,12 +103,17 @@ const ResetPassword = () => {
 										<PasswordInputField
 											fullWidth
 											isRequired
-											label="Password"
+											label={t('sign-up-form-password')}
 											name="password"
 											boxStyles={{ padding: '30px 0' }}
 										/>
 
-										<PasswordInputField fullWidth isRequired label="Confirm Password" name="confirmPassword" />
+										<PasswordInputField
+											fullWidth
+											isRequired
+											label={t('sign-up-form-confirm-password')}
+											name="confirmPassword"
+										/>
 
 										<Button
 											type="submit"
@@ -116,7 +123,7 @@ const ResetPassword = () => {
 											fullWidth
 											className={classes.reset__password__button}
 										>
-											{loading ? 'Saving New Password...' : 'Save Password'}
+											{loading ? t('saving-password') : t('save-password')}
 										</Button>
 									</fieldset>
 								</Form>
@@ -129,9 +136,9 @@ const ResetPassword = () => {
 			{showResetPasswordModal && (
 				<AlertModal
 					redirectTo="/"
-					title="Password Reset Successfully"
-					description="We have reset you old password and save new given password."
-					button="Sign In"
+					title={t('reset-password-modal-title')}
+					description={t('reset-password-modal-description')}
+					button={t('sign-in')}
 					showModal={showResetPasswordModal}
 					closeModal={setShowResetPasswordModal}
 				/>

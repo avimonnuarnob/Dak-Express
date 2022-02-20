@@ -1,20 +1,9 @@
-/* eslint-disable no-unused-vars */
-
 /* eslint-disable react/jsx-props-no-spreading */
 /* eslint-disable no-nested-ternary */
-/* eslint-disable prettier/prettier */
-import {
-	Box,
-	FormControl,
-	MenuItem,
-	Paper,
-	Select,
-	Tab,
-	Tabs,
-	Typography
-} from '@mui/material';
+import { Box, FormControl, MenuItem, Paper, Select, Tab, Tabs, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import Chart from './Chart';
 
 const FAKE_DATA = [
@@ -144,19 +133,17 @@ const TabPanel = (props) => {
 			aria-labelledby={`shipmentStatus-tab-${index}`}
 			{...other}
 		>
-			{value === index && (
-				<Box sx={{ pr: 3, py: 3, bgcolor: '#ffffff', overflow: 'auto' }}>
-					{children}
-				</Box>
-			)}
+			{value === index && <Box sx={{ pr: 3, py: 3, bgcolor: '#ffffff', overflow: 'auto' }}>{children}</Box>}
 		</div>
 	);
 };
 
 const ShipmentChartStats = () => {
-	const classes = useStyles();
 	const [year, setYear] = useState('2021');
 	const [tab, setTab] = useState(0);
+	const { t } = useTranslation();
+
+	const classes = useStyles();
 
 	const handleYearChange = (event) => {
 		setYear(event.target.value);
@@ -169,9 +156,7 @@ const ShipmentChartStats = () => {
 	return (
 		<Paper>
 			<Box className={classes.status__header}>
-				<Typography sx={{ typography: { sm: 'h5', xs: 'h6' }, px: 2 }}>
-					Shipment Status
-				</Typography>
+				<Typography sx={{ typography: { sm: 'h5', xs: 'h6' }, px: 2 }}>{t('dashboard-shipment-status')}</Typography>
 				<FormControl>
 					<Select
 						labelId="shipmentYear-select-label"
@@ -189,11 +174,7 @@ const ShipmentChartStats = () => {
 
 			<Box>
 				<Box sx={{ px: { xs: 1, sm: 3 } }} className={classes.status__tab}>
-					<Tabs
-						value={tab}
-						onChange={handleTabChange}
-						TabIndicatorProps={{ style: { display: 'none' } }}
-					>
+					<Tabs value={tab} onChange={handleTabChange} TabIndicatorProps={{ style: { display: 'none' } }}>
 						<Tab label="Complete" {...tabProps(0, tab)} />
 						<Tab label="In Transit" {...tabProps(1, tab)} />
 						<Tab label="Failed" {...tabProps(2, tab)} />

@@ -4,6 +4,7 @@ import { Box, Button, CircularProgress, Grid, Paper, Step, StepLabel, Stepper, T
 import { makeStyles } from '@mui/styles';
 import { Form, Formik } from 'formik';
 import { useReducer, useState } from 'react';
+import { Trans, useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 import AlertModal from '../../components/modecules/AlertModal';
 import { initialState, loadingReducer, startLoading, stopLoading } from '../../reducers/LoadingReducer';
@@ -67,13 +68,13 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const steps = ['Business Info', 'Contact Person Info'];
-
 const BusinessSignup = () => {
 	const [activeStep, setActiveStep] = useState(0);
 	const [successModal, setSuccessModal] = useState(false);
 	const [loading, dispatch] = useReducer(loadingReducer, initialState);
+	const { t } = useTranslation();
 
+	const steps = [t('sign-up-individual-first-step'), t('sign-up-individual-last-step')];
 	const redirectTo = useNavigate();
 	const classes = useStyles();
 
@@ -122,15 +123,15 @@ const BusinessSignup = () => {
 			<Box sx={{ py: 5 }}>
 				<Paper elevation={3} className={classes.signup}>
 					<Typography variant="h4" className={classes.signup__header}>
-						Let's Get Started With
+						{t('sign-up-individual')}
 					</Typography>
 
 					<Typography variant="h6" className={classes.signup__header}>
-						Business
+						{t('sign-up-business-type')}
 					</Typography>
 
 					<Typography variant="body2" className={classes.signup__text}>
-						Please provide the following informations.
+						{t('sign-up-individual-type-subtitle')}
 					</Typography>
 
 					<Box sx={{ width: '100%' }}>
@@ -188,7 +189,7 @@ const BusinessSignup = () => {
 												{activeStep === 0 ? (
 													<Link to="/signup" style={{ textDecoration: 'none' }}>
 														<Button type="button" variant="outlined" fullWidth className={classes.signup__back__button}>
-															Back
+															{t('sign-up-form-back-button')}
 														</Button>
 													</Link>
 												) : (
@@ -201,7 +202,7 @@ const BusinessSignup = () => {
 														sx={{ mr: 1 }}
 														className={classes.signup__back__button}
 													>
-														Back
+														{t('sign-up-form-back-button')}
 													</Button>
 												)}
 											</Grid>
@@ -216,7 +217,11 @@ const BusinessSignup = () => {
 													endIcon={loading && <CircularProgress size={20} color="inherit" />}
 												>
 													{/* eslint-disable-next-line no-nested-ternary */}
-													{activeStep === steps.length - 1 ? (loading ? 'Signing Up...' : 'Submit') : 'Next'}
+													{activeStep === steps.length - 1
+														? loading
+															? t('signing-up')
+															: t('sign-up-form-submit-button')
+														: t('sign-up-form-next-button')}
 												</Button>
 											</Grid>
 										</Grid>
@@ -227,19 +232,18 @@ const BusinessSignup = () => {
 					</Box>
 
 					<Typography variant="body2" color="initial" sx={{ marginTop: '15px' }}>
-						Alreay have an account?{' '}
-						<Link className={classes.signup__link} to="/">
-							Sign In
-						</Link>
+						<Trans i18nKey="sign-up-link">
+							<Link to="/" className={classes.signup__link} />
+						</Trans>
 					</Typography>
 				</Paper>
 			</Box>
 			{successModal && (
 				<AlertModal
 					redirectTo="/"
-					title="Registration Successful"
-					description="Your account has been successfully registered you can now login"
-					button="Sign In"
+					title={t('sign-up-success-title')}
+					description={t('sign-up-success-description')}
+					button={t('sign-up-success-button')}
 					showModal={successModal}
 					closeModal={setSuccessModal}
 				/>

@@ -1,5 +1,6 @@
 import { Box, Grid, Link, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { useTranslation } from 'react-i18next';
 import Language from '../modecules/Language';
 import { FOOTER_HEIGHT, SMALL_DEVICE_FOOTER_HEIGHT } from './constants';
 
@@ -15,16 +16,17 @@ const useFooterLinksStyles = makeStyles((theme) => ({
 	},
 }));
 
-const footerLinks = [
-	{ title: 'FAQs', link: 'faqs' },
-	{ title: 'Contact Us', link: 'contact-us' },
-	{ title: 'Shipment Charges', link: 'shipment-charges' },
-	{ title: 'Privacy Policy', link: 'privacy-policy' },
-	{ title: 'Terms & Condiotions', link: 'terms-conditions' },
-];
-
 const FooterLinks = () => {
+	const { t } = useTranslation();
 	const classes = useFooterLinksStyles();
+
+	const footerLinks = [
+		{ title: t('links-faqs'), link: 'faqs' },
+		{ title: t('links-contact'), link: 'contact-us' },
+		{ title: t('links-shipment'), link: 'shipment-charges' },
+		{ title: t('links-policy'), link: 'privacy-policy' },
+		{ title: t('links-terms'), link: 'terms-conditions' },
+	];
 
 	return (
 		<>
@@ -89,6 +91,7 @@ const useUnauthenticateFooterStyles = makeStyles((theme) => ({
 }));
 
 const UnauthenticatedFooter = () => {
+	const { t } = useTranslation();
 	const classes = useUnauthenticateFooterStyles();
 
 	return (
@@ -96,7 +99,9 @@ const UnauthenticatedFooter = () => {
 			<Grid className={classes.footer}>
 				<Box className={classes.footer__main}>
 					<Box>
-						<Typography color="white">&copy; 2022 Cityscape Global Ltd.</Typography>
+						<Typography color="white">
+							&copy; {t('year')} {t('company')}
+						</Typography>
 					</Box>
 
 					<Box component="div" className={classes.footer__links}>
@@ -107,7 +112,7 @@ const UnauthenticatedFooter = () => {
 						<Box className={classes.footer__language}>
 							<Language />
 						</Box>
-						<Typography color="white">Version 1.0.1</Typography>
+						<Typography color="white">{t('version')}</Typography>
 					</Box>
 				</Box>
 			</Grid>
@@ -141,6 +146,7 @@ const useAuthenticatedFooter = makeStyles((theme) => ({
 }));
 
 const AuthenticatedFooter = () => {
+	const { t } = useTranslation();
 	const classes = useAuthenticatedFooter();
 
 	return (
@@ -149,13 +155,13 @@ const AuthenticatedFooter = () => {
 				<Box className={classes.footer__main}>
 					<Box>
 						<Typography variant="caption" className={classes.footer__texts}>
-							&copy; 2022 Cityscape Global Ltd.
+							&copy; {t('year')} {t('company')}
 						</Typography>
 					</Box>
 
 					<Box className={classes.footer__elements}>
 						<Typography variant="caption" className={classes.footer__texts}>
-							Version 1.0.1
+							{t('version')}
 						</Typography>
 					</Box>
 				</Box>

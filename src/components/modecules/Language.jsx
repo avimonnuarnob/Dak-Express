@@ -4,17 +4,19 @@ import MenuItem from '@mui/material/MenuItem';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import PropTypes from 'prop-types';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import useLanguage from '../../hooks/useLanguage';
 import { changeLanguage } from '../../reducers/LanguageReducer';
 import LanguageItem from '../atoms/LanguageItem';
 
 const languages = [
-	{ key: 'english', value: 'ENGLISH' },
-	{ key: 'bangla', value: 'BANGLA' },
+	{ key: 'english', label: 'ENGLISH', value: 'en' },
+	{ key: 'bangla', label: 'BANGLA', value: 'bn' },
 ];
 
 const Language = ({ lightText = true }) => {
 	const [anchorEl, setAnchorEl] = useState(null);
+	const { i18n } = useTranslation();
 	const { state: language, dispatch } = useLanguage();
 
 	const open = Boolean(anchorEl);
@@ -24,6 +26,7 @@ const Language = ({ lightText = true }) => {
 	const changeLanguageOnSelect = (lang) => () => {
 		dispatch(changeLanguage(lang?.value));
 		localStorage.setItem('language', lang?.value);
+		i18n.changeLanguage(lang?.value);
 		handleClose();
 	};
 

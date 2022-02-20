@@ -63,15 +63,17 @@ const PasswordInputField = ({
 					}
 					sx={elementStyles}
 					endAdornment={
-						<InputHelperIcon
-							visibility={passwordVisibility.showPassword}
-							InitialIcon={VisibilityOffOutlinedIcon}
-							ToggledIcon={VisibilityOutlinedIcon}
-							onClick={handleClickOnIcon}
-							onMouseDown={handleMouseDownOnIcon}
-							position="end"
-							edge="end"
-						/>
+						field?.value?.length ? (
+							<InputHelperIcon
+								visibility={passwordVisibility.showPassword}
+								InitialIcon={VisibilityOffOutlinedIcon}
+								ToggledIcon={VisibilityOutlinedIcon}
+								onClick={handleClickOnIcon}
+								onMouseDown={handleMouseDownOnIcon}
+								position="end"
+								edge="end"
+							/>
+						) : null
 					}
 					{...props}
 					{...field}

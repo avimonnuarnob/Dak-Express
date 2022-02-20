@@ -1,71 +1,88 @@
 import { Grid } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 import FileUploadElement from '../../../components/modecules/FileUploadElement';
 import TextInputField from '../../../components/modecules/TextInputField';
 
-const BusinessInfoForm = ({ isSubmitting = false }) => (
-	<fieldset disabled={isSubmitting} style={{ border: 'none' }}>
-		<Grid container spacing={2}>
-			<Grid item md={6} sm={6} xs={12}>
-				<TextInputField
-					fullWidth
-					isRequired
-					label="Business Name"
-					name="businessName"
-					boxStyles={{ paddingTop: '10px' }}
-				/>
-			</Grid>
+const BusinessInfoForm = ({ isSubmitting = false }) => {
+	const { t } = useTranslation();
 
-			<Grid item md={6} sm={6} xs={12}>
-				<TextInputField
-					fullWidth
-					isRequired
-					label="Website or Social URL"
-					name="website"
-					boxStyles={{ paddingTop: '10px' }}
-				/>
-			</Grid>
+	return (
+		<fieldset disabled={isSubmitting} style={{ border: 'none' }}>
+			<Grid container spacing={2}>
+				<Grid item md={6} sm={6} xs={12}>
+					<TextInputField
+						fullWidth
+						isRequired
+						label={t('sign-up-form-business-name')}
+						name="businessName"
+						boxStyles={{ paddingTop: '10px' }}
+					/>
+				</Grid>
 
-			<Grid item md={6} sm={6} xs={12}>
-				<FileUploadElement
-					fullWidth
-					isRequired
-					type="file"
-					label="Trade Licence"
-					name="tradeLicence"
-					defaultValue={null}
-					boxStyles={{ paddingTop: '10px' }}
-				/>
-			</Grid>
+				<Grid item md={6} sm={6} xs={12}>
+					<TextInputField
+						fullWidth
+						isRequired
+						label={t('sign-up-form-website-url')}
+						name="website"
+						boxStyles={{ paddingTop: '10px' }}
+					/>
+				</Grid>
 
-			<Grid item md={6} sm={6} xs={12}>
-				<TextInputField
-					fullWidth
-					isRequired
-					label="District / State"
-					name="districtOrState"
-					boxStyles={{ paddingTop: '10px' }}
-				/>
-			</Grid>
+				<Grid item md={6} sm={6} xs={12}>
+					<FileUploadElement
+						fullWidth
+						isRequired
+						type="file"
+						label={t('sign-up-form-trade-licence')}
+						name="tradeLicence"
+						defaultValue={null}
+						boxStyles={{ paddingTop: '10px' }}
+					/>
+				</Grid>
 
-			<Grid item md={6} sm={6} xs={12}>
-				<TextInputField fullWidth isRequired label="City / Town" name="cityOrTown" boxStyles={{ paddingTop: '10px' }} />
-			</Grid>
+				<Grid item md={6} sm={6} xs={12}>
+					<TextInputField
+						fullWidth
+						isRequired
+						label={t('sign-up-form-district')}
+						name="districtOrState"
+						boxStyles={{ paddingTop: '10px' }}
+					/>
+				</Grid>
 
-			<Grid item md={6} sm={6} xs={12}>
-				<TextInputField
-					fullWidth
-					isRequired
-					label="Post Code / Postal Code"
-					name="postcodeOrPostalcode"
-					boxStyles={{ paddingTop: '10px' }}
-				/>
-			</Grid>
+				<Grid item md={6} sm={6} xs={12}>
+					<TextInputField
+						fullWidth
+						isRequired
+						label={t('sign-up-form-city')}
+						name="cityOrTown"
+						boxStyles={{ paddingTop: '10px' }}
+					/>
+				</Grid>
 
-			<Grid item md={12} sm={12} xs={12}>
-				<TextInputField fullWidth isRequired label="Address" name="address" boxStyles={{ paddingTop: '10px' }} />
+				<Grid item md={6} sm={6} xs={12}>
+					<TextInputField
+						fullWidth
+						isRequired
+						label={t('sign-up-form-post-code')}
+						name="postcodeOrPostalcode"
+						boxStyles={{ paddingTop: '10px' }}
+					/>
+				</Grid>
+
+				<Grid item md={12} sm={12} xs={12}>
+					<TextInputField
+						fullWidth
+						isRequired
+						label={t('sign-up-form-address')}
+						name="address"
+						boxStyles={{ paddingTop: '10px' }}
+					/>
+				</Grid>
 			</Grid>
-		</Grid>
-	</fieldset>
-);
+		</fieldset>
+	);
+};
 
 export default BusinessInfoForm;

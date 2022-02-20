@@ -16,6 +16,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { styled } from '@mui/material/styles';
 import { makeStyles } from '@mui/styles';
+import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
 import brandIconLogo from '../../assets/dak_express.svg';
 import { DRAWER_WIDTH } from './constants';
@@ -57,6 +58,7 @@ const useSidebarHeaderStyles = makeStyles((theme) => ({
 }));
 
 const SidebarHeader = () => {
+	const { t } = useTranslation();
 	const classes = useSidebarHeaderStyles();
 
 	return (
@@ -66,10 +68,10 @@ const SidebarHeader = () => {
 
 				<Box>
 					<Typography variant="body1" className={classes.sidebar__type}>
-						Business
+						{t('company-type')}
 					</Typography>
 					<Typography variant="body2" className={classes.sidebar__text}>
-						Free
+						{t('company-plan')}
 					</Typography>
 				</Box>
 			</Box>
@@ -112,6 +114,7 @@ const useSidebarMenuItemStyles = makeStyles((theme) => ({
 }));
 
 const SidebarMenuItems = () => {
+	const { t } = useTranslation();
 	const classes = useSidebarMenuItemStyles();
 
 	return (
@@ -124,7 +127,7 @@ const SidebarMenuItems = () => {
 				</List>
 
 				<Typography variant="button" color="initial" className={classes.link__title}>
-					General
+					{t('links-dashboard-category')}
 				</Typography>
 
 				<Divider className={classes.divider} variant="middle" />
@@ -135,7 +138,7 @@ const SidebarMenuItems = () => {
 							<ListItemIcon className={classes.link__icon}>
 								<DashboardOutlinedIcon />
 							</ListItemIcon>
-							<ListItemText>Dashboard</ListItemText>
+							<ListItemText>{t('links-dashboard')}</ListItemText>
 						</ListItem>
 					</NavLink>
 				</List>
@@ -143,7 +146,7 @@ const SidebarMenuItems = () => {
 
 			<Box className={classes.item}>
 				<Typography variant="button" color="initial" className={classes.link__title}>
-					My Shipment
+					{t('links-shipments-category')}
 				</Typography>
 
 				<Divider className={classes.divider} variant="middle" />
@@ -154,7 +157,7 @@ const SidebarMenuItems = () => {
 							<ListItemIcon className={classes.link__icon}>
 								<ListAltOutlinedIcon />
 							</ListItemIcon>
-							<ListItemText>All Shipments</ListItemText>
+							<ListItemText>{t('links-all-shipments')}</ListItemText>
 						</ListItem>
 					</NavLink>
 
@@ -166,7 +169,7 @@ const SidebarMenuItems = () => {
 							<ListItemIcon className={classes.link__icon}>
 								<AddToPhotosOutlinedIcon />
 							</ListItemIcon>
-							<ListItemText>Create A Shipment</ListItemText>
+							<ListItemText>{t('links-create-shipments')}</ListItemText>
 						</ListItem>
 					</NavLink>
 				</List>
@@ -174,7 +177,7 @@ const SidebarMenuItems = () => {
 
 			<Box className={classes.item}>
 				<Typography variant="button" color="initial" className={classes.link__title}>
-					My Product
+					{t('links-products-category')}
 				</Typography>
 
 				<Divider className={classes.divider} variant="middle" />
@@ -185,7 +188,7 @@ const SidebarMenuItems = () => {
 							<ListItemIcon className={classes.link__icon}>
 								<CategoryOutlinedIcon />
 							</ListItemIcon>
-							<ListItemText>All Products</ListItemText>
+							<ListItemText>{t('links-all-products')}</ListItemText>
 						</ListItem>
 					</NavLink>
 				</List>
@@ -193,7 +196,7 @@ const SidebarMenuItems = () => {
 
 			<Box className={classes.item}>
 				<Typography variant="button" color="initial" className={classes.link__title}>
-					Location
+					{t('links-locations-category')}
 				</Typography>
 
 				<Divider className={classes.divider} variant="middle" />
@@ -207,7 +210,7 @@ const SidebarMenuItems = () => {
 							<ListItemIcon className={classes.link__icon}>
 								<AddLocationOutlinedIcon />
 							</ListItemIcon>
-							<ListItemText>Pickup Location</ListItemText>
+							<ListItemText>{t('links-pickup-location')}</ListItemText>
 						</ListItem>
 					</NavLink>
 
@@ -219,7 +222,7 @@ const SidebarMenuItems = () => {
 							<ListItemIcon className={classes.link__icon}>
 								<AddLocationAltOutlinedIcon />
 							</ListItemIcon>
-							<ListItemText>Receiver Location</ListItemText>
+							<ListItemText>{t('links-receiver-location')}</ListItemText>
 						</ListItem>
 					</NavLink>
 				</List>
@@ -227,7 +230,7 @@ const SidebarMenuItems = () => {
 
 			<Box className={classes.item}>
 				<Typography variant="button" color="initial" className={classes.link__title}>
-					Payment
+					{t('links-payment-category')}
 				</Typography>
 
 				<Divider className={classes.divider} variant="middle" />
@@ -241,7 +244,7 @@ const SidebarMenuItems = () => {
 							<ListItemIcon className={classes.link__icon}>
 								<HistoryOutlinedIcon />
 							</ListItemIcon>
-							<ListItemText>Transaction History</ListItemText>
+							<ListItemText>{t('links-transaction-history')}</ListItemText>
 						</ListItem>
 					</NavLink>
 				</List>
@@ -249,7 +252,7 @@ const SidebarMenuItems = () => {
 
 			<Box className={classes.item}>
 				<Typography variant="button" color="initial" className={classes.link__title}>
-					Support
+					{t('links-support-category')}
 				</Typography>
 
 				<Divider className={classes.divider} variant="middle" />
@@ -260,7 +263,7 @@ const SidebarMenuItems = () => {
 							<ListItemIcon className={classes.link__icon}>
 								<QuizOutlinedIcon />
 							</ListItemIcon>
-							<ListItemText>Support</ListItemText>
+							<ListItemText>{t('links-support')}</ListItemText>
 						</ListItem>
 					</NavLink>
 				</List>
@@ -268,7 +271,7 @@ const SidebarMenuItems = () => {
 
 			<Box className={classes.item}>
 				<Typography variant="button" color="initial" className={classes.link__title}>
-					MY TOKEN
+					{t('links-token-category')}
 				</Typography>
 
 				<Divider className={classes.divider} variant="middle" />
@@ -279,7 +282,7 @@ const SidebarMenuItems = () => {
 							<ListItemIcon className={classes.link__icon}>
 								<KeyIcon />
 							</ListItemIcon>
-							<ListItemText>Manage Tokens</ListItemText>
+							<ListItemText>{t('links-manage-token')}</ListItemText>
 						</ListItem>
 					</NavLink>
 				</List>
