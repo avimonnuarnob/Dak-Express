@@ -2,7 +2,7 @@ import { ThemeProvider } from '@mui/material/styles';
 import { createBrowserHistory } from 'history';
 import { useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { BrowserRouter } from 'react-router-dom';
+import { HashRouter } from 'react-router-dom';
 import BaseLayout from './components/layout/BaseLayout';
 import { AuthProvider } from './contexts/AuthContext';
 import { BreadcrumbProvider } from './contexts/BreadcrumbContext';
@@ -23,9 +23,9 @@ const App = () => {
 			<LanguageProvider>
 				<AuthProvider>
 					<BreadcrumbProvider>
-						<BrowserRouter history={browserHistory}>
+						<HashRouter history={browserHistory}>
 							<BaseLayout />
-						</BrowserRouter>
+						</HashRouter>
 					</BreadcrumbProvider>
 				</AuthProvider>
 			</LanguageProvider>
