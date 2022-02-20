@@ -4,14 +4,14 @@ import PropTypes from 'prop-types';
 import banglaLanguageIcon from '../../assets/bangla-language-icon.svg';
 import englishLanguageIcon from '../../assets/english-language-icon.svg';
 
-const LanguageItem = ({ language = 'ENGLISH', lightText = false, navItem = false }) => {
+const LanguageItem = ({ language = 'en', lightText = false, navItem = false }) => {
 	const languageItemImageStyle = navItem ? { height: 18, width: 28 } : { width: 44, height: 26 };
 	const lang = localStorage.getItem('language');
 
 	return (
 		<Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
 			<img
-				src={language === 'BANGLA' ? banglaLanguageIcon : englishLanguageIcon}
+				src={language === 'bn' ? banglaLanguageIcon : englishLanguageIcon}
 				alt="Language"
 				style={languageItemImageStyle}
 			/>
@@ -21,7 +21,7 @@ const LanguageItem = ({ language = 'ENGLISH', lightText = false, navItem = false
 				// eslint-disable-next-line no-nested-ternary
 				color={`${lightText ? 'white' : lang === language ? 'primary.light' : 'primary.main'}`}
 			>
-				{language === 'BANGLA' ? 'বাংলা' : 'ENGLISH'}
+				{language === 'bn' ? 'বাংলা' : 'ENGLISH'}
 			</Box>
 		</Box>
 	);

@@ -2,6 +2,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import StorefrontIcon from '@mui/icons-material/Storefront';
 import { Box, Button, Grid, Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { FOOTER_HEIGHT, HEADER_HEIGHT } from '../../components/layout/constants';
 
@@ -65,12 +66,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SignUp = () => {
+	const { t } = useTranslation();
 	const classes = useStyles();
 
 	return (
-		<Box container className={classes.signup}>
-			<Typography variant="h4" color="initial" align="center" py={3}>
-				Choose Account Type
+		<Box className={classes.signup}>
+			<Typography variant="h4" color="initial" align="center" my={3}>
+				{t('sign-up-type')}
 			</Typography>
 
 			<Grid container style={{ display: 'flex', justifyContent: 'center', alignItems: 'center' }} spacing={3}>
@@ -79,16 +81,16 @@ const SignUp = () => {
 						<AccountCircleIcon className={classes.signup__individual__icon} />
 
 						<Typography variant="h5" color="initial" my={3} className={classes.signup__individual__header}>
-							Individual
+							{t('sign-up-individual-type')}
 						</Typography>
 
 						<Typography variant="body2" color="initial" my={3}>
-							Best for personal use(Regular courier service).
+							{t('sign-up-individual-type-description')}
 						</Typography>
 
 						<Link to="/signup/individual" style={{ textDecoration: 'none' }}>
 							<Button variant="outlined" className={classes.signup__individual__button} size="large">
-								Sign Up
+								{t('sign-up-individual-type-submit')}
 							</Button>
 						</Link>
 					</Paper>
@@ -99,16 +101,16 @@ const SignUp = () => {
 						<StorefrontIcon className={classes.signup__business__icon} />
 
 						<Typography variant="h5" color="initial" my={3} className={classes.signup__business__header}>
-							Business
+							{t('sign-up-business-type')}
 						</Typography>
 
 						<Typography variant="body2" color="initial" my={3}>
-							Best for business use.
+							{t('sign-up-business-type-description')}
 						</Typography>
 
 						<Link to="/signup/business" style={{ textDecoration: 'none' }}>
 							<Button variant="contained" size="large" className={classes.signup__business__button}>
-								Sign Up
+								{t('sign-up-business-type-submit')}
 							</Button>
 						</Link>
 					</Paper>

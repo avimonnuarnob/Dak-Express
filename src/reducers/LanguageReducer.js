@@ -6,7 +6,7 @@ export const types = {
 	TOGGLE_LANGUAGE: 'TOGGLE_LANGUAGE',
 };
 
-export const initialState = localStorage.getItem('language') || 'ENGLISH';
+export const initialState = localStorage.getItem('language') || 'en';
 
 export const reducer = (state = initialState, action) => {
 	switch (action.type) {
@@ -19,4 +19,4 @@ export const reducer = (state = initialState, action) => {
 	}
 };
 
-export const changeLanguage = (payload = 'ENGLISH') => ({ type: types.TOGGLE_LANGUAGE, payload });
+export const changeLanguage = (payload = 'en') => ({ type: types.TOGGLE_LANGUAGE, payload });

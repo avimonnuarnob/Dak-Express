@@ -1,42 +1,30 @@
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable arrow-body-style */
-/* eslint-disable prettier/prettier */
 import ListAltOutlinedIcon from '@mui/icons-material/ListAltOutlined';
 import PriorityHighIcon from '@mui/icons-material/PriorityHigh';
 import { Box, Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import PropTypes from 'prop-types';
-
-const FAKE__DATA = [
-	{
-		label: 'Complete Shipment',
-		count: 95,
-	},
-	{ label: 'Shipments in transit', count: 12 },
-	{ label: 'Failed Shipment', count: 5 },
-];
+import { useTranslation } from 'react-i18next';
 
 const cards = [
 	{
 		backgroundColor: 'primary.greenish',
 		icon: ListAltOutlinedIcon,
 		iconColor: 'secondary.lighter',
-		iconBgColor:
-			'linear-gradient(135deg, rgba(104, 129, 40, 0) 0%, rgba(104, 129, 40, 0.64) 97.35%)',
+		iconBgColor: 'linear-gradient(135deg, rgba(104, 129, 40, 0) 0%, rgba(104, 129, 40, 0.64) 97.35%)',
 	},
 	{
 		backgroundColor: 'primary.orangish',
 		icon: ListAltOutlinedIcon,
 		iconColor: 'status.pending',
-		iconBgColor:
-			'linear-gradient(135deg, rgba(183, 129, 3, 0) 0%, rgba(183, 129, 3, 0.24) 97.35%)',
+		iconBgColor: 'linear-gradient(135deg, rgba(183, 129, 3, 0) 0%, rgba(183, 129, 3, 0.24) 97.35%)',
 	},
 	{
 		backgroundColor: 'primary.redish',
 		icon: PriorityHighIcon,
 		iconColor: 'status.failed',
-		iconBgColor:
-			'linear-gradient(135deg, rgba(183, 33, 54, 0) 0%, rgba(183, 33, 54, 0.24) 97.35%)',
+		iconBgColor: 'linear-gradient(135deg, rgba(183, 33, 54, 0) 0%, rgba(183, 33, 54, 0.24) 97.35%)',
 	},
 ];
 
@@ -77,14 +65,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 // Card component
-const ShipmentCard = ({
-	backgroundColor,
-	iconColor,
-	Icon,
-	iconBgColor,
-	label,
-	count,
-}) => {
+const ShipmentCard = ({ backgroundColor, iconColor, Icon, iconBgColor, label, count }) => {
 	const classes = useStyles();
 	return (
 		<Box className={classes.card} sx={{ backgroundColor }}>
@@ -114,11 +95,21 @@ ShipmentCard.propTypes = {
 };
 
 const ShipmentStatus = () => {
+	const { t } = useTranslation();
 	const classes = useStyles();
+
+	const shipmentStatusData = [
+		{
+			label: t('dashboard-complete-shipment'),
+			count: 95,
+		},
+		{ label: t('dashboard-intransit-shipment'), count: 12 },
+		{ label: t('dashboard-failed-shipment'), count: 5 },
+	];
 
 	return (
 		<Paper elevation={3} className={classes.container}>
-			{FAKE__DATA.map((data, index) => (
+			{shipmentStatusData.map((data, index) => (
 				<ShipmentCard
 					key={`card-${index.toString()}`}
 					backgroundColor={cards[index].backgroundColor}

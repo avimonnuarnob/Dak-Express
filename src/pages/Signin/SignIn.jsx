@@ -2,6 +2,7 @@ import { Box, Button, CircularProgress, Grid, Paper, Typography } from '@mui/mat
 import { makeStyles } from '@mui/styles';
 import { Form, Formik } from 'formik';
 import { useEffect, useReducer } from 'react';
+import { Trans, useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 import { FOOTER_HEIGHT, HEADER_HEIGHT } from '../../components/layout/constants';
 import CheckboxInputField from '../../components/modecules/CheckboxInputField';
@@ -55,17 +56,18 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const rememberMeSelectionItems = [
-	{
-		id: 'dd63a554-8bd2-11ec-a8a3-0242ac120002',
-		value: false,
-		label: 'Remember Me',
-	},
-];
-
 const SignIn = () => {
 	const [loading, dispatch] = useReducer(loadingReducer, initialState);
+	const { t } = useTranslation();
 	const { state: authToken, dispatch: authDispatcher } = useAuthToken();
+
+	const rememberMeSelectionItems = [
+		{
+			id: 'dd63a554-8bd2-11ec-a8a3-0242ac120002',
+			value: false,
+			label: t('sign-in-remember-me'),
+		},
+	];
 
 	const navigateTo = useNavigate();
 	const classes = useStyles();
@@ -110,11 +112,11 @@ const SignIn = () => {
 			<Grid item xl={4} lg={4} md={4} sm={10} xs={12}>
 				<Paper elevation={3} sx={{ padding: '50px 30px' }} className={classes.signin}>
 					<Typography variant="h4" className={classes.signin__header}>
-						Sign In
+						{t('sign-in-title')}
 					</Typography>
 
 					<Typography variant="body2" className={classes.signin__text}>
-						Fill in the fields below to sign in into your account.
+						{t('sign-in-subtitle')}
 					</Typography>
 
 					<Formik initialValues={initialValues} validate={validate} onSubmit={handleSubmitSignin}>
@@ -124,7 +126,7 @@ const SignIn = () => {
 									<TextInputField
 										fullWidth
 										isRequired
-										label="Username or Email"
+										label={t('sign-in-email-label')}
 										name="email"
 										boxStyles={{ padding: '30px 0' }}
 									/>
@@ -132,7 +134,7 @@ const SignIn = () => {
 									<PasswordInputField
 										fullWidth
 										isRequired
-										label="Password"
+										label={t('sign-in-password-label')}
 										name="password"
 										boxStyles={{ paddingBottom: '10px' }}
 									/>
@@ -141,7 +143,7 @@ const SignIn = () => {
 										<CheckboxInputField items={rememberMeSelectionItems} name="rememberMe" coloredLabel />
 
 										<Link className={classes.signin__link} to="/forgot-password">
-											<Typography>Forgot Password?</Typography>
+											<Typography>{t('sign-in-forgot-password')}</Typography>
 										</Link>
 									</Box>
 
@@ -153,7 +155,7 @@ const SignIn = () => {
 										fullWidth
 										className={classes.signin__button}
 									>
-										{loading ? 'Signing In...' : 'Sign In'}
+										{loading ? t('signing-in') : t('sign-in')}
 									</Button>
 								</fieldset>
 							</Form>
@@ -161,10 +163,9 @@ const SignIn = () => {
 					</Formik>
 
 					<Typography variant="body2" color="initial">
-						Don&apos;t have account?{' '}
-						<Link className={classes.signin__link} to="/signup">
-							Create An Account
-						</Link>
+						<Trans i18nKey="sign-in-link">
+							<Link to="/signup" className={classes.signin__link} />
+						</Trans>
 					</Typography>
 				</Paper>
 			</Grid>

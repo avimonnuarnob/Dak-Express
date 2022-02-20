@@ -1,5 +1,6 @@
 import { Box, Checkbox, FormControlLabel, FormGroup, Grid } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { Trans, useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import PasswordInputField from '../../../components/modecules/PasswordInputField';
 import PhoneNumberInputField from '../../../components/modecules/PhoneNumberInputField';
@@ -73,6 +74,7 @@ const PersonalInfoForm = ({
 	handleBlur = null,
 	setFieldValue = null,
 }) => {
+	const { t } = useTranslation();
 	const classes = useStyles();
 
 	const handleTermsChange = (event) => {
@@ -84,21 +86,45 @@ const PersonalInfoForm = ({
 		<fieldset disabled={isSubmitting} style={{ border: 'none' }}>
 			<Grid container spacing={2}>
 				<Grid item md={6} sm={6} xs={12}>
-					<TextInputField fullWidth isRequired label="First Name" name="firstName" boxStyles={{ paddingTop: '10px' }} />
+					<TextInputField
+						fullWidth
+						isRequired
+						label={t('sign-up-form-first-name')}
+						name="firstName"
+						boxStyles={{ paddingTop: '10px' }}
+					/>
 				</Grid>
 
 				<Grid item md={6} sm={6} xs={12}>
-					<TextInputField fullWidth isRequired label="Last Name" name="lastName" boxStyles={{ paddingTop: '10px' }} />
+					<TextInputField
+						fullWidth
+						isRequired
+						label={t('sign-up-form-last-name')}
+						name="lastName"
+						boxStyles={{ paddingTop: '10px' }}
+					/>
 				</Grid>
 
 				<Grid item md={6} sm={6} xs={12}>
 					<Box sx={{ paddingTop: '10px' }}>
-						<PhoneNumberInputField fullWidth isRequired label="Phone" name="phone" setFieldValue={setFieldValue} />
+						<PhoneNumberInputField
+							fullWidth
+							isRequired
+							label={t('sign-up-form-phone')}
+							name="phone"
+							setFieldValue={setFieldValue}
+						/>
 					</Box>
 				</Grid>
 
 				<Grid item md={6} sm={6} xs={12}>
-					<TextInputField fullWidth isRequired label="Email" name="email" boxStyles={{ paddingTop: '10px' }} />
+					<TextInputField
+						fullWidth
+						isRequired
+						label={t('sign-up-form-email')}
+						name="email"
+						boxStyles={{ paddingTop: '10px' }}
+					/>
 				</Grid>
 
 				<Grid item md={6} sm={6} xs={12}>
@@ -106,7 +132,7 @@ const PersonalInfoForm = ({
 						fullWidth
 						isRequired
 						items={roleItems}
-						label="Role"
+						label={t('sign-up-form-role')}
 						name="role"
 						boxStyles={{ paddingTop: '10px' }}
 					/>
@@ -117,7 +143,7 @@ const PersonalInfoForm = ({
 						fullWidth
 						isRequired
 						type="number"
-						label="NID Number"
+						label={t('sign-up-form-nid')}
 						name="nid"
 						boxStyles={{ paddingTop: '10px' }}
 					/>
@@ -127,7 +153,7 @@ const PersonalInfoForm = ({
 					<PasswordInputField
 						fullWidth
 						isRequired
-						label="Password"
+						label={t('sign-up-form-password')}
 						name="password"
 						boxStyles={{ paddingTop: '10px' }}
 					/>
@@ -137,7 +163,7 @@ const PersonalInfoForm = ({
 					<PasswordInputField
 						fullWidth
 						isRequired
-						label="Confirm Password"
+						label={t('sign-up-form-confirm-password')}
 						name="confirmPassword"
 						boxStyles={{ paddingTop: '10px' }}
 					/>
@@ -158,12 +184,10 @@ const PersonalInfoForm = ({
 							}
 							label={
 								<span>
-									I agree with DAK Express{' '}
-									<Link to="terms-and-conditions" className={classes.signup__link}>
-										<span variant="body1" sx={{ marginLeft: '-10px' }}>
-											terms & conditions
-										</span>
-									</Link>
+									<Trans i18nKey="sign-up-form-agreement">
+										<Link to="terms-and-conditions" className={classes.signup__link} />
+										<span variant="body1" sx={{ marginLeft: '-10px' }} />
+									</Trans>
 								</span>
 							}
 						/>

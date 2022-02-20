@@ -1,5 +1,7 @@
 import { ThemeProvider } from '@mui/material/styles';
 import { createBrowserHistory } from 'history';
+import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { BrowserRouter } from 'react-router-dom';
 import BaseLayout from './components/layout/BaseLayout';
 import { AuthProvider } from './contexts/AuthContext';
@@ -9,18 +11,26 @@ import theme from './theme';
 
 const browserHistory = createBrowserHistory();
 
-const App = () => (
-	<ThemeProvider theme={theme}>
-		<LanguageProvider>
-			<AuthProvider>
-				<BreadcrumbProvider>
-					<BrowserRouter history={browserHistory}>
-						<BaseLayout />
-					</BrowserRouter>
-				</BreadcrumbProvider>
-			</AuthProvider>
-		</LanguageProvider>
-	</ThemeProvider>
-);
+const App = () => {
+	const { i18n } = useTranslation();
+
+	useEffect(() => {
+		i18n.changeLanguage(localStorage.getItem('language'));
+	}, [i18n]);
+
+	return (
+		<ThemeProvider theme={theme}>
+			<LanguageProvider>
+				<AuthProvider>
+					<BreadcrumbProvider>
+						<BrowserRouter history={browserHistory}>
+							<BaseLayout />
+						</BrowserRouter>
+					</BreadcrumbProvider>
+				</AuthProvider>
+			</LanguageProvider>
+		</ThemeProvider>
+	);
+};
 
 export default App;
