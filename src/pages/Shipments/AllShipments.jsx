@@ -1,6 +1,7 @@
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import { Box, Button, Grid } from '@mui/material';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import SearchBar from '../../components/atoms/SearchBar';
 import DateRangeInputField from '../../components/modecules/DateRangeInputField';
@@ -12,44 +13,47 @@ import useBreadcrumb from '../../hooks/useBreadcrumb';
 import { setBreadcrumb } from '../../reducers/BreadcrumbReducer';
 import ShipmentsTable from './parts/ShipmentsTable';
 
-const breadcrumbs = [
-	{ title: 'Dashboard', link: 'dashboard' },
-	{ title: 'Shipments', link: 'shipments', current: true },
-];
-
-const tabsData = [
-	{ id: 0, label: 'All (8)', value: '' },
-	{ id: 1, label: 'In Transit (5)', value: 'intransit' },
-	{ id: 2, label: 'Delivered (7)', value: 'delivery' },
-	{ id: 3, label: 'Failed (6)', value: 'failed' },
-];
-
 const AllShipments = () => {
 	const [tabItemValue, setTabItemValue] = useState('');
+	const { t } = useTranslation();
 	// eslint-disable-next-line no-unused-vars
 	const { _, dispatch } = useBreadcrumb();
+
+	const breadcrumbs = useMemo(
+		() => [
+			{ title: t('dashboard'), link: 'dashboard' },
+			{ title: t('all-shipments'), link: 'shipments', current: true },
+		],
+		[t]
+	);
+
+	const tabsData = [
+		{ id: 0, label: t('shipments-all'), value: '' },
+		{ id: 1, label: t('shipments-intransit'), value: 'intransit' },
+		{ id: 2, label: t('shipments-delivered'), value: 'delivery' },
+		{ id: 3, label: t('shipments-failed'), value: 'failed' },
+	];
 
 	const handleChangeTabItemValue = (value, newValue) => setTabItemValue(newValue);
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
 		dispatch(setBreadcrumb(breadcrumbs));
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [breadcrumbs, dispatch]);
 
 	return (
 		<Grid container>
 			<Grid item xs={12}>
-				<PageTitlebar title="All Shipments" />
+				<PageTitlebar title={t('all-shipments')} page={t('back-to-dashboard')} />
 			</Grid>
 
 			<Grid item xs={12} mx={2}>
 				<Box sx={{ display: 'flex', justifyContent: 'end', alignItems: 'end' }}>
-					<DownloadButtonOptions label="Download" />
+					<DownloadButtonOptions label={t('download')} />
 
 					<Link to="/new-shipment" style={{ textDecoration: 'none', color: 'inherit' }}>
 						<Button variant="outlined" color="secondary" sx={{ px: 2, py: 1, m: 1 }} startIcon={<AddOutlinedIcon />}>
-							Add New Shipment
+							{t('add-new-shipment')}
 						</Button>
 					</Link>
 				</Box>
@@ -63,7 +67,7 @@ const AllShipments = () => {
 						</Grid>
 
 						<Grid item md={7} py={1} m={1}>
-							<DateRangeInputField fullWidth startLabel="Start Date" endLabel="End Date" name="date" />
+							<DateRangeInputField fullWidth startLabel={t('start-date')} endLabel={t('end-date')} name="date" />
 						</Grid>
 					</Grid>
 				</TabItems>

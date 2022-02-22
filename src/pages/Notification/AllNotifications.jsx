@@ -1,5 +1,6 @@
 import { Button, Grid, Paper } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import PageTitlebar from '../../components/modecules/PageTitlebar';
 import TabItemData from '../../components/modecules/TabItemData';
 import TabItems from '../../components/modecules/TabItems';
@@ -8,32 +9,36 @@ import { setBreadcrumb } from '../../reducers/BreadcrumbReducer';
 import AllNotificationsBody from './parts/AllNotificationsBody';
 // import ShipmentsTable from './parts/ShipmentsTable';
 
-const breadcrumbs = [
-	{ title: 'Dashboard', link: 'dashboard' },
-	{ title: 'Notifications', link: 'notifications', current: true },
-];
-
-const tabsData = [
-	{ id: 0, label: 'All', value: '' },
-	{ id: 1, label: 'Unread', value: 'unread' },
-];
-
 const AllNotifications = () => {
 	const [tabItemValue, setTabItemValue] = useState('');
+	const { t } = useTranslation();
 	// eslint-disable-next-line no-unused-vars
 	const { _, dispatch } = useBreadcrumb();
 
+	const breadcrumbs = useMemo(
+		() => [
+			{ title: t('dashboard'), link: 'dashboard' },
+			{ title: t('notifications'), link: 'notifications', current: true },
+		],
+		[t]
+	);
+
+	const tabsData = [
+		{ id: 0, label: t('all'), value: '' },
+		{ id: 1, label: t('unread'), value: 'unread' },
+	];
+
 	useEffect(() => {
+		window.scrollTo(0, 0);
 		dispatch(setBreadcrumb(breadcrumbs));
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [breadcrumbs, dispatch]);
 
 	const handleChangeTabItemValue = (value, newValue) => setTabItemValue(newValue);
 
 	return (
 		<Grid container px={3} py={2}>
 			<Grid item xs={12}>
-				<PageTitlebar title="All Notification" />
+				<PageTitlebar title={t('all-notifications')} page={t('back-to-dashboard')} />
 			</Grid>
 
 			<Grid component={Paper} item xs={12} mt={2}>
@@ -41,7 +46,7 @@ const AllNotifications = () => {
 					<Grid container>
 						<Grid item md={12} py={1} m={1}>
 							<Button color="secondary" variant="text">
-								Mark all as read
+								{t('mark-all-as-read')}
 							</Button>
 						</Grid>
 					</Grid>

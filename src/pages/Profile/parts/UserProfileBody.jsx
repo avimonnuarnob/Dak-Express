@@ -3,6 +3,7 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import VerifiedIcon from '@mui/icons-material/Verified';
 import { Box, Button, Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import UserAccountInfo from './UserAccountInfo';
 import UserCompanyInfo from './UserCompanyInfo';
@@ -54,6 +55,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const UserProfileBody = () => {
+	const { t } = useTranslation()
 	const classes = useStyles();
 	return (
 		<Paper className={classes.box}>
@@ -73,7 +75,7 @@ const UserProfileBody = () => {
 					</Box>
 
 					<Typography fontWeight="600" color="typography.main">
-						BUSINESS
+						{t('company-type')}
 					</Typography>
 				</Box>
 
@@ -84,14 +86,14 @@ const UserProfileBody = () => {
 						className={classes['user__button--edit']}
 						startIcon={<EditOutlinedIcon />}
 					>
-						Edit
+						{t('edit')}
 					</Button>
 				</Link>
 			</Box>
 
 			<Box className={classes.box__header}>
 				<Typography variant="h5" fontWeight="bold">
-					Account Info
+					{t('profile-account-info')}
 				</Typography>
 			</Box>
 
@@ -99,7 +101,7 @@ const UserProfileBody = () => {
 
 			<Box className={classes.box__header} sx={{ mt: 3 }}>
 				<Typography variant="h5" fontWeight="bold">
-					Company Info
+					{t('profile-company-info')}
 				</Typography>
 			</Box>
 

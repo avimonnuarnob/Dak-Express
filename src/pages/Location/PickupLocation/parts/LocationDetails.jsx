@@ -2,6 +2,7 @@
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import { Box, Button, Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
@@ -42,15 +43,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const LocationDetails = () => {
+	const { t } = useTranslation();
 	const classes = useStyles();
+
 	return (
 		<Paper sx={{ p: 2, mt: 3 }}>
 			<Box className={classes.card__header}>
 				<Typography fontSize="24px" fontWeight="bold" sx={{ color: 'status.pending' }}>
-					Pickup Details
+					{t('pickup-location-details')}
 				</Typography>
 				<Box sx={{ ml: 'auto' }}>
-					<Link to="/locations/pickup/new" style={{ textDecoration: 'none', color: 'inherit' }}>
+					<Link to="/locations/pickup/edit" style={{ textDecoration: 'none', color: 'inherit' }}>
 						<Button
 							sx={{ width: '100%' }}
 							size="small"
@@ -58,7 +61,7 @@ const LocationDetails = () => {
 							className={classes.button__edit}
 							startIcon={<EditOutlinedIcon />}
 						>
-							Edit
+							{t('edit')}
 						</Button>
 					</Link>
 				</Box>
@@ -66,7 +69,7 @@ const LocationDetails = () => {
 
 			<div className={classes.card__body}>
 				<Typography variant="body2" fontWeight="bold" display="inline" padding={2} className={classes.card__body__item}>
-					Full Name
+					{t('full-name')}
 				</Typography>
 
 				<Typography
@@ -87,7 +90,7 @@ const LocationDetails = () => {
 					className={classes.card__body__item}
 					sx={{ gridColumn: '1' }}
 				>
-					Business Name
+					{t('business-name')}
 				</Typography>
 
 				<Typography
@@ -101,7 +104,7 @@ const LocationDetails = () => {
 				</Typography>
 
 				<Typography variant="body2" fontWeight="bold" display="inline" padding={2} className={classes.card__body__item}>
-					Mobile Number
+					{t('mobile-number')}
 				</Typography>
 
 				<Typography variant="body2" display="inline" padding={2} className={classes.card__body__item}>
@@ -109,7 +112,7 @@ const LocationDetails = () => {
 				</Typography>
 
 				<Typography variant="body2" fontWeight="bold" display="inline" padding={2} className={classes.card__body__item}>
-					Address
+					{t('address')}
 				</Typography>
 				<Typography
 					variant="body2"

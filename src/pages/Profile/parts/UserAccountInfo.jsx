@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme) => ({
 	card: {
@@ -23,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 const UserAccountInfo = () => {
+	const { t } = useTranslation();
 	const classes = useStyles();
 
 	return (
@@ -34,7 +36,7 @@ const UserAccountInfo = () => {
 				padding={2}
 				className={classes.card__item}
 			>
-				Mobile Number
+				{t('mobile-number')}
 			</Typography>
 
 			<Typography
@@ -56,7 +58,7 @@ const UserAccountInfo = () => {
 				padding={2}
 				className={classes.card__item}
 			>
-				Email
+				{t('email')}
 			</Typography>
 
 			<Typography
@@ -76,7 +78,7 @@ const UserAccountInfo = () => {
 				className={classes.card__item}
 				sx={{ borderBottom: 0 }}
 			>
-				Role
+				{t('role')}
 			</Typography>
 
 			<Typography
@@ -100,7 +102,7 @@ const UserAccountInfo = () => {
 				className={classes.card__item}
 				sx={{ borderBottom: 0 }}
 			>
-				NID
+				{t('NID')}
 			</Typography>
 			<Typography
 				variant="body2"

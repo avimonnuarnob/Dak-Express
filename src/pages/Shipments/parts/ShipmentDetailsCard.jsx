@@ -4,6 +4,7 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import { Box, Button, Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme) => ({
 	box: {
@@ -53,12 +54,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ShipmentDetailsCard = ({ edit, courier, setPreviewData }) => {
+	const { t } = useTranslation();
 	const classes = useStyles();
+
 	return (
 		<Paper className={classes.box}>
 			<Box className={classes.box__header}>
 				<Typography variant="h5" fontWeight="bold">
-					Shipment Details
+					{t('courier-details')}
 				</Typography>
 
 				{edit && (
@@ -69,14 +72,14 @@ const ShipmentDetailsCard = ({ edit, courier, setPreviewData }) => {
 						startIcon={<EditOutlinedIcon />}
 						onClick={() => setPreviewData(false)}
 					>
-						Edit
+						{t('edit')}
 					</Button>
 				)}
 			</Box>
 
 			<div className={classes.card}>
 				<Typography variant="body2" fontWeight="bold" display="inline" padding={2} className={classes.card__item}>
-					Courier
+					{t('courier')}
 				</Typography>
 
 				<Typography
@@ -97,7 +100,7 @@ const ShipmentDetailsCard = ({ edit, courier, setPreviewData }) => {
 					className={classes.card__item}
 					sx={{ borderBottom: 0 }}
 				>
-					Estimited Delivery Timeline
+					{t('estimated-delivery')}
 				</Typography>
 
 				<Typography
@@ -111,7 +114,7 @@ const ShipmentDetailsCard = ({ edit, courier, setPreviewData }) => {
 				</Typography>
 
 				<Typography variant="body2" fontWeight="bold" display="inline" padding={2} className={classes.card__item}>
-					Shipping Fee
+					{t('shipping-cost')}
 				</Typography>
 
 				<Typography variant="body2" display="inline" padding={2} className={classes.card__item}>

@@ -4,6 +4,7 @@
 import { Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme) => ({
 	card: {},
@@ -30,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const TransactionDetailsCard = ({ data }) => {
+	const {t} = useTranslation();
 	const classes = useStyles();
 
 	return (
@@ -41,7 +43,7 @@ const TransactionDetailsCard = ({ data }) => {
 				padding={2}
 				className={classes.card__body__item}
 			>
-				Transaction Amount
+				{t('transaction-amount')}
 			</Typography>
 
 			<Typography
@@ -61,7 +63,7 @@ const TransactionDetailsCard = ({ data }) => {
 				padding={2}
 				className={classes.card__body__item}
 			>
-				Transaction ID
+				{t('transaction-id')}
 			</Typography>
 
 			<Typography
@@ -80,7 +82,7 @@ const TransactionDetailsCard = ({ data }) => {
 				padding={2}
 				className={classes.card__body__item}
 			>
-				Date & Time
+				{t('date-and-time')}
 			</Typography>
 
 			<Typography
@@ -100,7 +102,7 @@ const TransactionDetailsCard = ({ data }) => {
 				padding={2}
 				className={classes.card__body__item}
 			>
-				Payment Method
+				{t('payment-method')}
 			</Typography>
 			<Typography
 				variant="body2"

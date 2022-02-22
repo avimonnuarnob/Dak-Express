@@ -17,6 +17,7 @@ import {
 import { styled } from '@mui/material/styles';
 import { makeStyles } from '@mui/styles';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import Pagination from '../../../../components/modecules/Pagination';
 import locationData from './locationData.json';
@@ -63,9 +64,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const LocationTable = () => {
-	const classes = useStyles();
 	const [pageNumber, setPageNumber] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(20);
+	const { t } = useTranslation();
+	const classes = useStyles();
 
 	// Avoid a layout jump when reaching the last page with empty rows.
 	const emptyRows = pageNumber > 0 ? Math.max(0, (1 + pageNumber) * rowsPerPage - locationData.length) : 0;
@@ -79,6 +81,7 @@ const LocationTable = () => {
 		setRowsPerPage(parseInt(event.target.value, 10));
 		setPageNumber(0);
 	};
+
 	return (
 		<>
 			<TableContainer component={Paper}>
@@ -116,7 +119,7 @@ const LocationTable = () => {
 												color="secondary"
 												startIcon={<VisibilityOutlinedIcon />}
 											>
-												View
+												{t('view')}
 											</Button>
 										</Link>
 
@@ -128,7 +131,7 @@ const LocationTable = () => {
 												className={classes['table__buttons--edit']}
 												startIcon={<EditOutlinedIcon />}
 											>
-												Edit
+												{t('edit')}
 											</Button>
 										</Link>
 									</Box>

@@ -2,6 +2,7 @@
 /* eslint-disable arrow-body-style */
 import { Box, Chip, Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { useTranslation } from 'react-i18next';
 import IssueDetailsCard from './IssueDetailsCard';
 import ReplayMessage from './ReplayMessage';
 
@@ -29,6 +30,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const IssueDetailsBody = ({ data }) => {
+	const {t} = useTranslation();
 	const classes = useStyles();
 
 	return (
@@ -36,7 +38,7 @@ const IssueDetailsBody = ({ data }) => {
 			<Paper className={classes.box}>
 				<Box className={classes.box__header}>
 					<Typography variant="h5" fontWeight="bold">
-						Issue Details
+						{t('issue-details')}
 					</Typography>
 					<Box sx={{ ml: 'auto' }}>
 						<Chip label="Solved" className={classes.box__header__chip} />

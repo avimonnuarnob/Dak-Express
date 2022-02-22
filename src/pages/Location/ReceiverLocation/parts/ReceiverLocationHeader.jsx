@@ -1,17 +1,20 @@
 /* eslint-disable arrow-body-style */
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import { Box, Button } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import BackButton from '../../../../components/atoms/BackButton';
 import HeaderTitle from '../../../../components/atoms/HeaderTitle';
 import SearchBar from '../../../../components/atoms/SearchBar';
 
 const ReceiverLocationHeader = () => {
+	const { t } = useTranslation();
+
 	return (
 		<>
 			<Box sx={{ display: { xs: 'block', sm: 'flex' }, alignItems: 'center' }}>
-				<HeaderTitle label="Receiver Location" />
-				<BackButton />
+				<HeaderTitle label={t('receiver-locations')} />
+				<BackButton label={t('back-to-dashboard')} />
 			</Box>
 
 			<Box
@@ -28,7 +31,7 @@ const ReceiverLocationHeader = () => {
 
 				<Link to="/locations/receiver/new" style={{ textDecoration: 'none' }}>
 					<Button variant="outlined" color="secondary" sx={{ px: 2, py: 1, ml: 2 }} startIcon={<AddOutlinedIcon />}>
-						Add New Location
+						{t('add-new-receiver-location')}
 					</Button>
 				</Link>
 			</Box>

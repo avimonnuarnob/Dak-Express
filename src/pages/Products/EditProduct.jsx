@@ -2,7 +2,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { Box, Button, CircularProgress, Grid } from '@mui/material';
 import { Form, Formik } from 'formik';
-import { useEffect, useReducer } from 'react';
+import { useEffect, useMemo, useReducer } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import PageTitlebar from '../../components/modecules/PageTitlebar';
 import useBreadcrumb from '../../hooks/useBreadcrumb';
@@ -13,6 +14,7 @@ import PercelDetailsForm from '../Shipments/parts/PercelDetailsForm';
 import validate from './validation/validate';
 
 const EditProduct = () => {
+	const { t } = useTranslation();
 	const [loading, dispatch] = useReducer(loadingReducer, initialState);
 
 	// eslint-disable-next-line no-unused-vars
@@ -49,22 +51,24 @@ const EditProduct = () => {
 		}
 	};
 
-	const breadcrumbs = [
-		{ title: 'Dashboard', link: 'dashboard' },
-		{ title: 'All Products', link: 'products' },
-		{ title: 'Edit Product', link: `products/edit/${id}`, current: true },
-	];
+	const breadcrumbs = useMemo(
+		() => [
+			{ title: t('dashboard'), link: 'dashboard' },
+			{ title: t('all-products'), link: 'products' },
+			{ title: id, link: `products/edit/${id}`, current: true },
+		],
+		[id, t]
+	);
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
 		breadcrumbDispatcher(setBreadcrumb(breadcrumbs));
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [breadcrumbDispatcher, breadcrumbs]);
 
 	return (
 		<Grid container>
 			<Grid item xs={12} mx={5}>
-				<PageTitlebar title="Edit Product" link="/products" page="All Products" />
+				<PageTitlebar title={t('edit-product')} link="/products" page={t('back-to-all-products')} />
 			</Grid>
 
 			<Grid item xs={12} mx={2}>
@@ -72,14 +76,14 @@ const EditProduct = () => {
 					{(props) => (
 						<Form>
 							<Grid item xs={12} mx={4}>
-								<PercelDetailsForm hideButton title="Product Details" {...props} />
+								<PercelDetailsForm hideButton title={t('product-details')} {...props} />
 							</Grid>
 
 							<Grid item xs={12} mx={4}>
 								<Box sx={{ m: 2, display: 'flex', alignContent: 'flex-end', justifyContent: 'flex-end' }}>
 									<Link to="/products" style={{ textDecoration: 'none', color: 'inherit' }}>
 										<Button variant="outlined" type="button" size="large" color="secondary" sx={{ px: 4 }}>
-											Cancel
+											{t('cancel')}
 										</Button>
 									</Link>
 
@@ -100,7 +104,7 @@ const EditProduct = () => {
 											},
 										}}
 									>
-										{loading ? 'Editing Product...' : 'Edit Product'}
+										{loading ? t('editing-product') : t('edit-product')}
 									</Button>
 								</Box>
 							</Grid>

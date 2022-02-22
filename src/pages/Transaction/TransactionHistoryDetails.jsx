@@ -1,5 +1,6 @@
 import { Box } from '@mui/material';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import useBreadcrumb from '../../hooks/useBreadcrumb';
 import { setBreadcrumb } from '../../reducers/BreadcrumbReducer';
@@ -7,21 +8,24 @@ import TransactionHistoryDetailsBody from './parts/TransactionHistoryDetailsBody
 import TransactionHistoryDetailsHeader from './parts/TransactionHistoryDetailsHeader';
 
 const TransactionHistoryDetails = () => {
+	const { t } = useTranslation();
 	// eslint-disable-next-line no-unused-vars
 	const { _, dispatch } = useBreadcrumb();
 	const { id } = useParams();
 
-	const breadcrumbs = [
-		{ title: 'Dashboard', link: 'dashboard' },
-		{ title: 'Transactions', link: 'transactions' },
-		{ title: id, link: `transactions/${id}`, current: true },
-	];
+	const breadcrumbs = useMemo(
+		() => [
+			{ title: t('dashboard'), link: 'dashboard' },
+			{ title: t('transactions'), link: 'transactions' },
+			{ title: id, link: `transactions/${id}`, current: true },
+		],
+		[id, t]
+	);
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
 		dispatch(setBreadcrumb(breadcrumbs));
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [breadcrumbs, dispatch]);
 
 	return (
 		<Box sx={{ p: 3 }}>

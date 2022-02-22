@@ -6,6 +6,7 @@ import { Box, Button, Grid, Paper } from '@mui/material';
 import { FieldArray } from 'formik';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 import FormHeaderTitle from '../../../components/modecules/FormHeaderTitle';
 import SelectInputField from '../../../components/modecules/SelectInputField';
 import TextInputField from '../../../components/modecules/TextInputField';
@@ -70,118 +71,122 @@ const heightSelectionItems = [
 	{ id: 'a1922c66-8642-11ec-a8a3-0242ac120002', value: '10m', label: '5-10 M' },
 ];
 
-const PercelDetailsForm = ({ values = {}, title = 'Parcel Details', hideButton = false }) => (
-	<Paper sx={{ p: 4, m: 2 }} elevation={3}>
-		<FormHeaderTitle formTitle={title} />
-		<FieldArray
-			name="products"
-			// eslint-disable-next-line no-unused-vars
-			render={({ remove, push }) => (
-				<>
-					{values?.products?.length > 0 &&
-						values?.products?.map((product, index) => (
-							<Box key={index}>
-								<Grid container rowSpacing={3} columnSpacing={2} pb={5}>
-									<Grid item md={6} sm={12} xs={12}>
-										<TextInputField
-											fullWidth
-											isRequired
-											label={`Product ${index + 1} Title`}
-											name={`products.${index}.productTitle`}
-										/>
+const PercelDetailsForm = ({ values = {}, title = '', hideButton = false }) => {
+	const { t } = useTranslation();
+
+	return (
+		<Paper sx={{ p: 4, m: 2 }} elevation={3}>
+			<FormHeaderTitle formTitle={title} />
+			<FieldArray
+				name="products"
+				// eslint-disable-next-line no-unused-vars
+				render={({ remove, push }) => (
+					<>
+						{values?.products?.length > 0 &&
+							values?.products?.map((product, index) => (
+								<Box key={index}>
+									<Grid container rowSpacing={3} columnSpacing={2} pb={5}>
+										<Grid item md={6} sm={12} xs={12}>
+											<TextInputField
+												fullWidth
+												isRequired
+												label={`${t('product-title')} ${index + 1}`}
+												name={`products.${index}.productTitle`}
+											/>
+										</Grid>
+
+										<Grid item md={3} sm={4} xs={6}>
+											<SelectInputField
+												items={unitTypesItems}
+												fullWidth
+												isRequired
+												label={t('unit-type')}
+												name={`products.${index}.unitType`}
+											/>
+										</Grid>
+
+										<Grid item md={3} sm={4} xs={6}>
+											<SelectInputField
+												items={weightSelectionItems}
+												fullWidth
+												isRequired
+												label={t('weight')}
+												name={`products.${index}.weight`}
+											/>
+										</Grid>
+
+										<Grid item md={3} sm={4} xs={6}>
+											<SelectInputField
+												items={quantitySelectionItems}
+												fullWidth
+												isRequired
+												label={t('quantity')}
+												name={`products.${index}.quantity`}
+											/>
+										</Grid>
+
+										<Grid item md={3} sm={4} xs={6}>
+											<SelectInputField
+												items={lengthSelectionItems}
+												fullWidth
+												label={`${t('length')} (CM)`}
+												name={`products.${index}.length`}
+											/>
+										</Grid>
+
+										<Grid item md={3} sm={4} xs={6}>
+											<SelectInputField
+												items={widthSelectionItems}
+												fullWidth
+												label={`${t('width')} (CM)`}
+												name={`products.${index}.width`}
+											/>
+										</Grid>
+
+										<Grid item md={3} sm={4} xs={6}>
+											<SelectInputField
+												items={heightSelectionItems}
+												fullWidth
+												label={`${t('height')} (CM)`}
+												name={`products.${index}.height`}
+											/>
+										</Grid>
 									</Grid>
+								</Box>
+							))}
 
-									<Grid item md={3} sm={4} xs={6}>
-										<SelectInputField
-											items={unitTypesItems}
-											fullWidth
-											isRequired
-											label="Unit Type"
-											name={`products.${index}.unitType`}
-										/>
-									</Grid>
+						{!hideButton && (
+							<Grid item md={12} sm={12} xs={12} sx={{ textAlign: 'center' }}>
+								<Button
+									size="large"
+									variant="outlined"
+									color="secondary"
+									type="button"
+									startIcon={<AddOutlinedIcon />}
+									onClick={(event) => {
+										event.preventDefault();
 
-									<Grid item md={3} sm={4} xs={6}>
-										<SelectInputField
-											items={weightSelectionItems}
-											fullWidth
-											isRequired
-											label="Weight"
-											name={`products.${index}.weight`}
-										/>
-									</Grid>
-
-									<Grid item md={3} sm={4} xs={6}>
-										<SelectInputField
-											items={quantitySelectionItems}
-											fullWidth
-											isRequired
-											label="Quantity"
-											name={`products.${index}.quantity`}
-										/>
-									</Grid>
-
-									<Grid item md={3} sm={4} xs={6}>
-										<SelectInputField
-											items={lengthSelectionItems}
-											fullWidth
-											label="Length (CM)"
-											name={`products.${index}.length`}
-										/>
-									</Grid>
-
-									<Grid item md={3} sm={4} xs={6}>
-										<SelectInputField
-											items={widthSelectionItems}
-											fullWidth
-											label="Width (CM)"
-											name={`products.${index}.width`}
-										/>
-									</Grid>
-
-									<Grid item md={3} sm={4} xs={6}>
-										<SelectInputField
-											items={heightSelectionItems}
-											fullWidth
-											label="Height (CM)"
-											name={`products.${index}.height`}
-										/>
-									</Grid>
-								</Grid>
-							</Box>
-						))}
-
-					{!hideButton && (
-						<Grid item md={12} sm={12} xs={12} sx={{ textAlign: 'center' }}>
-							<Button
-								size="large"
-								variant="outlined"
-								color="secondary"
-								type="button"
-								startIcon={<AddOutlinedIcon />}
-								onClick={(event) => {
-									event.preventDefault();
-
-									push({
-										productTitle: '',
-										unitType: '',
-										weight: '',
-										quantity: '',
-										length: '',
-										width: '',
-										height: '',
-									});
-								}}
-							>
-								Add New product
-							</Button>
-						</Grid>
-					)}
-				</>
-			)}
-		/>
-	</Paper>
-);
+										push({
+											productTitle: '',
+											unitType: '',
+											weight: '',
+											quantity: '',
+											length: '',
+											width: '',
+											height: '',
+										});
+									}}
+								>
+									{t('add-new-product')}
+								</Button>
+							</Grid>
+						)}
+					</>
+				)}
+			/>
+		</Paper>
+	);
+};
 
 PercelDetailsForm.propTypes = {
 	values: PropTypes.object,

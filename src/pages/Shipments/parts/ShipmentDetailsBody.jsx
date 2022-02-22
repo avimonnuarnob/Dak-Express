@@ -1,6 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { Button } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import { Link } from 'react-router-dom';
 import ParcelDetails from './ParcelDetails';
@@ -85,6 +86,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ShipmentDetailsBody = () => {
+	const {t} = useTranslation();
 	const classes = useStyles();
 	const navigate = useNavigate();
 
@@ -106,7 +108,7 @@ const ShipmentDetailsBody = () => {
 					sx={{ ml: 'auto !important' }}
 					className={classes.get__issue__back__button}
 				>
-					Cancel
+					{t('cancel')}
 				</Button>
 				<Link
 					to="/supports/new"
@@ -118,7 +120,7 @@ const ShipmentDetailsBody = () => {
 						variant="contained"
 						className={classes.get__issue__button}
 					>
-						Any Issue? Get Support
+						{t('any-issue-get-support')}
 					</Button>
 				</Link>
 			</div>

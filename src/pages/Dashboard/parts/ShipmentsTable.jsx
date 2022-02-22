@@ -1,7 +1,7 @@
 /* eslint-disable prettier/prettier */
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
-import { Box, Typography, Paper, Button } from '@mui/material';
+import { Box, Button, Paper, Typography } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -11,6 +11,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { makeStyles } from '@mui/styles';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import Pagination from '../../../components/modecules/Pagination';
 import ShipmentStatus from '../../../components/modecules/ShipmentStatus';
@@ -50,6 +51,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ShipmentsTable = ({ category = '' }) => {
+	const {t} = useTranslation();
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(20);
 	const [shipmentsData, setShipmentsData] = useState([]);
@@ -166,7 +168,7 @@ const ShipmentsTable = ({ category = '' }) => {
 													color="secondary"
 													startIcon={<VisibilityOutlinedIcon />}
 												>
-													View
+													{t('view')}
 												</Button>
 											</Link>
 
@@ -181,7 +183,7 @@ const ShipmentsTable = ({ category = '' }) => {
 													className={classes['table__buttons--edit']}
 													startIcon={<EditOutlinedIcon />}
 												>
-													Edit
+													{t('edit')}
 												</Button>
 											</Link>
 										</Box>

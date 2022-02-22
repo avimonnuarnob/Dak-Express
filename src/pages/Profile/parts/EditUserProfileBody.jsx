@@ -1,8 +1,8 @@
-/* eslint-disable prettier/prettier */
 import VerifiedIcon from '@mui/icons-material/Verified';
 import { Box, Button, Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Form, Formik } from 'formik';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import editUserProfileValidation from '../validation/editUserProfileValidation';
 import editUserProfileValues from '../validation/editUserProfileValues';
@@ -79,6 +79,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const EditUserProfileBody = () => {
+	const { t } = useTranslation();
 	const classes = useStyles();
 	const navigate = useNavigate();
 	return (
@@ -102,25 +103,21 @@ const EditUserProfileBody = () => {
 								/>
 
 								<Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-									<Typography
-										variant="h6"
-										fontWeight="600"
-										color="secondary.main"
-									>
+									<Typography variant="h6" fontWeight="600" color="secondary.main">
 										Md Rafez Hossain
 									</Typography>
 									<VerifiedIcon fontSize="small" sx={{ color: '#13BFF4' }} />
 								</Box>
 
 								<Typography fontWeight="600" color="typography.main">
-									BUSINESS
+									{t('company-type')}
 								</Typography>
 							</Box>
 						</Box>
 
 						<Box className={classes.box__header}>
 							<Typography variant="h5" fontWeight="bold">
-								Account Info
+								{t('profile-account-info')}
 							</Typography>
 						</Box>
 
@@ -131,7 +128,7 @@ const EditUserProfileBody = () => {
 					<Paper className={classes.box}>
 						<Box className={classes.box__header} sx={{ mt: 3 }}>
 							<Typography variant="h5" fontWeight="bold">
-								Company Info
+								{t('profile-company-info')}
 							</Typography>
 						</Box>
 
@@ -148,15 +145,10 @@ const EditUserProfileBody = () => {
 							sx={{ ml: 'auto !important' }}
 							className={classes.edit__back__button}
 						>
-							Cancel
+							{t('cancel')}
 						</Button>
-						<Button
-							disabled={false}
-							type="submit"
-							variant="contained"
-							className={classes.edit__button}
-						>
-							Save
+						<Button disabled={false} type="submit" variant="contained" className={classes.edit__button}>
+							{t('save')}
 						</Button>
 					</div>
 				</Form>

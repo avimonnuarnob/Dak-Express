@@ -1,31 +1,20 @@
 /* eslint-disable arrow-body-style */
 import { Box, Chip } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 import BackButton from '../../../components/atoms/BackButton';
 import HeaderTitle from '../../../components/atoms/HeaderTitle';
 
 const ShipmentDetailsHeader = () => {
+	const { t } = useTranslation();
+
 	return (
-		<Box
-			sx={{
-				display: {
-					xs: 'block',
-					sm: 'flex',
-				},
-				alignItems: 'center',
-			}}
-		>
-			<HeaderTitle label="Shipment Detail: KLM7642138" />
+		<Box sx={{ display: { xs: 'block', sm: 'flex' }, alignItems: 'center' }}>
+			<HeaderTitle label={`${t('shipment-details')} : KLM7642138`} />
 			<Chip
-				label="SEND A PACKAGE"
-				sx={{
-					ml: 2,
-					fontSize: '12px',
-					px: 2,
-					color: 'primary.white',
-					bgcolor: 'secondary.main',
-				}}
+				label={t('send-a-package')}
+				sx={{ ml: 2, fontSize: '12px', px: 2, color: 'primary.white', bgcolor: 'secondary.main' }}
 			/>
-			<BackButton redirectTo="/shipments" label="Back to shipments" />
+			<BackButton redirectTo="/shipments" label={t('back-to-shipments')} />
 		</Box>
 	);
 };

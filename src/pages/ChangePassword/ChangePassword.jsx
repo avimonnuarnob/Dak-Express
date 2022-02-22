@@ -1,33 +1,17 @@
-/* eslint-disable prettier/prettier */
-import {
-	Button,
-	CircularProgress,
-	Grid,
-	Paper,
-	Typography,
-} from '@mui/material/';
+import { Button, CircularProgress, Grid, Paper, Typography } from '@mui/material/';
 import { makeStyles } from '@mui/styles';
 import { Form, Formik } from 'formik';
-import React, { useEffect, useReducer, useState } from 'react';
+import React, { useEffect, useMemo, useReducer, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import {
-	FOOTER_HEIGHT,
-	HEADER_HEIGHT,
-} from '../../components/layout/constants';
-
+import { FOOTER_HEIGHT, HEADER_HEIGHT } from '../../components/layout/constants';
 import AlertModal from '../../components/modecules/AlertModal';
 import PasswordInputField from '../../components/modecules/PasswordInputField';
 import useAuthToken from '../../hooks/useAuthToken';
 import useBreadcrumb from '../../hooks/useBreadcrumb';
 import { setAuthToken } from '../../reducers/AuthReducer';
 import { setBreadcrumb } from '../../reducers/BreadcrumbReducer';
-import {
-	initialState,
-	loadingReducer,
-	startLoading,
-	stopLoading,
-} from '../../reducers/LoadingReducer';
-
+import { initialState, loadingReducer, startLoading, stopLoading } from '../../reducers/LoadingReducer';
 import { sleep } from '../../utils/functions';
 import validate from './validation/validate';
 
@@ -73,13 +57,8 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const breadcrumbs = [
-	{ title: 'Dashboard', link: 'dashboard' },
-	{ title: 'Profile', link: 'profile' },
-	{ title: 'Change Password', link: 'change-password', current: true },
-];
-
 const ChangePassword = () => {
+	const { t } = useTranslation();
 	const [loading, dispatch] = useReducer(loadingReducer, initialState);
 	const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
 
@@ -88,11 +67,19 @@ const ChangePassword = () => {
 	// eslint-disable-next-line no-unused-vars
 	const { _, dispatch: breadcrumbDispatcher } = useBreadcrumb();
 
+	const breadcrumbs = useMemo(
+		() => [
+			{ title: t('dashboard'), link: 'dashboard' },
+			{ title: t('links-profile'), link: 'profile' },
+			{ title: t('change-password'), link: 'change-password', current: true },
+		],
+		[t]
+	);
+
 	useEffect(() => {
 		window.scrollTo(0, 0);
 		breadcrumbDispatcher(setBreadcrumb(breadcrumbs));
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [breadcrumbDispatcher, breadcrumbs]);
 
 	const redirectTo = useNavigate();
 	const classes = useStyles();
@@ -128,37 +115,23 @@ const ChangePassword = () => {
 		<>
 			<Grid container className={classes.container}>
 				<Grid item xl={4} lg={4} md={6} sm={10} xs={12}>
-					<Paper
-						elevation={3}
-						sx={{ padding: '50px 30px' }}
-						className={classes.change_password}
-					>
-						<Typography
-							variant="h4"
-							className={classes.change_password__header}
-						>
-							Set New Password
+					<Paper elevation={3} sx={{ padding: '50px 30px' }} className={classes.change_password}>
+						<Typography variant="h4" className={classes.change_password__header}>
+							{t('set-new-password')}
 						</Typography>
 
-						<Typography
-							variant="body2"
-							className={classes.change_password__text}
-						>
-							Please enter your current and new password.
+						<Typography variant="body2" className={classes.change_password__text}>
+							{t('set-new-password-desc')}
 						</Typography>
 
-						<Formik
-							initialValues={initialValues}
-							validate={validate}
-							onSubmit={hadnleSubmitChangePassword}
-						>
+						<Formik initialValues={initialValues} validate={validate} onSubmit={hadnleSubmitChangePassword}>
 							{({ isSubmitting }) => (
 								<Form>
 									<fieldset disabled={isSubmitting} style={{ border: 'none' }}>
 										<PasswordInputField
 											fullWidth
 											isRequired
-											label="Current Password"
+											label={t('current-password')}
 											name="currentPassword"
 											boxStyles={{ padding: '30px 0' }}
 										/>
@@ -166,7 +139,7 @@ const ChangePassword = () => {
 										<PasswordInputField
 											fullWidth
 											isRequired
-											label="New Password"
+											label={t('new-password')}
 											name="newPassword"
 											boxStyles={{ paddingBottom: '30px' }}
 										/>
@@ -174,7 +147,7 @@ const ChangePassword = () => {
 										<PasswordInputField
 											fullWidth
 											isRequired
-											label="Confirm New Password"
+											label={t('confirm-new-password')}
 											name="confirmNewPassword"
 										/>
 
@@ -182,15 +155,11 @@ const ChangePassword = () => {
 											type="submit"
 											variant="contained"
 											disabled={loading}
-											endIcon={
-												loading && (
-													<CircularProgress size={20} color="inherit" />
-												)
-											}
+											endIcon={loading && <CircularProgress size={20} color="inherit" />}
 											fullWidth
 											className={classes.change_password__button}
 										>
-											{loading ? 'Saving New Password...' : 'Change Password'}
+											{loading ? t('saving-password') : t('change-password')}
 										</Button>
 									</fieldset>
 								</Form>

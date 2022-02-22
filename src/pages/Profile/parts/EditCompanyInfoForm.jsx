@@ -1,20 +1,13 @@
-/* eslint-disable prettier/prettier */
 import { Box, Grid } from '@mui/material';
 import { useFormikContext } from 'formik';
-import TextInputField from '../../../components/modecules/TextInputField';
+import { useTranslation } from 'react-i18next';
 import SelectInputField from '../../../components/modecules/SelectInputField';
+import TextInputField from '../../../components/modecules/TextInputField';
 
 const distItems = [];
 
 const distDivArray = {
-	Barisal: [
-		'Barguna',
-		'Barisal',
-		'Bhola',
-		'Jhalokati',
-		'Patuakhali',
-		'Pirojpur',
-	],
+	Barisal: ['Barguna', 'Barisal', 'Bhola', 'Jhalokati', 'Patuakhali', 'Pirojpur'],
 	Chittagong: [
 		'Bandarban',
 		'Brahmanbaria',
@@ -56,26 +49,8 @@ const distDivArray = {
 		'Satkhira',
 	],
 	Mymensingh: ['Jamalpur', 'Mymensingh', 'Netrakona', 'Sherpur'],
-	Rajshahi: [
-		'Bogra',
-		'Chapainawabganj',
-		'Joypurhat',
-		'Naogaon',
-		'Natore',
-		'Pabna',
-		'Rajshahi',
-		'Sirajganj',
-	],
-	Rangpur: [
-		'Dinajpur',
-		'Gaibandha',
-		'Kurigram',
-		'Lalmonirhat',
-		'Nilphamari',
-		'Panchagarh',
-		'Rangpur',
-		'Thakurgaon',
-	],
+	Rajshahi: ['Bogra', 'Chapainawabganj', 'Joypurhat', 'Naogaon', 'Natore', 'Pabna', 'Rajshahi', 'Sirajganj'],
+	Rangpur: ['Dinajpur', 'Gaibandha', 'Kurigram', 'Lalmonirhat', 'Nilphamari', 'Panchagarh', 'Rangpur', 'Thakurgaon'],
 	Sylhet: ['Habiganj', 'Moulvibazar', 'Sunamganj', 'Sylhet'],
 };
 
@@ -92,8 +67,8 @@ Object.keys(distDivArray).map((divison, divisionIndex) =>
 console.log(distItems);
 
 const EditCompanyInfoForm = () => {
-	const { isSubmitting, values, handleBlur, handleChange, touched, errors } =
-		useFormikContext();
+	const { t } = useTranslation();
+	const { isSubmitting, values, handleBlur, handleChange, touched, errors } = useFormikContext();
 
 	return (
 		<fieldset disabled={isSubmitting} style={{ border: 'none' }}>
@@ -102,7 +77,7 @@ const EditCompanyInfoForm = () => {
 					<TextInputField
 						fullWidth
 						isRequired
-						label="Business Name"
+						label={t('business-name')}
 						name="businessName"
 						boxStyles={{ paddingTop: '10px' }}
 					/>
@@ -111,7 +86,7 @@ const EditCompanyInfoForm = () => {
 				<Grid item md={6} sm={6} xs={12}>
 					<TextInputField
 						fullWidth
-						label="Website or Fb Url"
+						label={t('website-url')}
 						name="url"
 						boxStyles={{ paddingTop: '10px' }}
 						value={values.url}
@@ -124,12 +99,7 @@ const EditCompanyInfoForm = () => {
 
 				<Grid item md={6} sm={6} xs={12}>
 					<Box sx={{ paddingTop: '10px' }}>
-						<TextInputField
-							fullWidth
-							isRequired
-							label="Trade License"
-							name="trade"
-						/>
+						<TextInputField fullWidth isRequired label={t('trade-license')} name="trade" />
 					</Box>
 				</Grid>
 
@@ -138,7 +108,7 @@ const EditCompanyInfoForm = () => {
 						fullWidth
 						isRequired
 						items={distItems}
-						label="District / State"
+						label={t('district-state')}
 						name="districtOrState"
 						boxStyles={{ paddingTop: '10px' }}
 					/>
@@ -149,7 +119,7 @@ const EditCompanyInfoForm = () => {
 						fullWidth
 						isRequired
 						items={distItems}
-						label="City / Town"
+						label={t('city-town')}
 						name="cityOrTown"
 						boxStyles={{ paddingTop: '10px' }}
 					/>
@@ -159,7 +129,7 @@ const EditCompanyInfoForm = () => {
 					<TextInputField
 						fullWidth
 						isRequired
-						label="Post Code / Postal Code"
+						label={t('post-code')}
 						name="postcodeOrPostalcode"
 						boxStyles={{ paddingTop: '10px' }}
 					/>
@@ -171,7 +141,7 @@ const EditCompanyInfoForm = () => {
 						minRows={3}
 						fullWidth
 						isRequired
-						label="Address"
+						label={t('address')}
 						name="address"
 						boxStyles={{ paddingTop: '10px' }}
 					/>

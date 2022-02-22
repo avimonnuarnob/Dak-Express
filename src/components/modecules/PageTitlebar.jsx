@@ -45,7 +45,7 @@ const PageTitlebar = ({ title = 'Dashboard', link = '/dashboard', page = 'Dashbo
 					className={classes.titlebar__items}
 					startIcon={<ArrowBackIosNewOutlinedIcon fontSize="small" className={classes.titlebar__icon} />}
 				>
-					<Typography className={classes.titlebar__text}>Back to {page}</Typography>
+					<Typography className={classes.titlebar__text}>{page}</Typography>
 				</Button>
 			</Link>
 		</Box>

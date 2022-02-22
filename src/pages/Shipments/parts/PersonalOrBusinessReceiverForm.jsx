@@ -1,12 +1,13 @@
 import { Grid } from '@mui/material';
 import { useFormikContext } from 'formik';
+import { t } from 'i18next';
 import React from 'react';
 import CheckboxInputField from '../../../components/modecules/CheckboxInputField';
 import PhoneNumberInputField from '../../../components/modecules/PhoneNumberInputField';
 import TextInputField from '../../../components/modecules/TextInputField';
 
 const receiverSaveItems = [
-	{ id: 'b4a1c022-87d8-11ec-a8a3-0242ac120002', value: false, label: 'Save receiver location' },
+	{ id: 'b4a1c022-87d8-11ec-a8a3-0242ac120002', value: false, label: t('save-receiver-location') },
 ];
 
 const PersonalOrBusinessReceiverForm = () => {
@@ -15,37 +16,37 @@ const PersonalOrBusinessReceiverForm = () => {
 	return (
 		<Grid container rowSpacing={3} columnSpacing={2}>
 			<Grid item md={6} sm={12} xs={12}>
-				<TextInputField fullWidth isRequired label="Receiver First Name" name="receiver.firstName" />
+				<TextInputField fullWidth isRequired label={t('receiver-first-name')} name="receiver.firstName" />
 			</Grid>
 
 			<Grid item md={6} sm={12} xs={12}>
-				<TextInputField fullWidth isRequired label="Receiver Last Name" name="receiver.lastName" />
+				<TextInputField fullWidth isRequired label={t('receiver-last-name')} name="receiver.lastName" />
 			</Grid>
 
 			{values?.receiver?.type === 'Business' && (
 				<Grid item md={12} sm={12} xs={12}>
-					<TextInputField fullWidth isRequired label="Business Name" name="receiver.businessName" />
+					<TextInputField fullWidth isRequired label={t('business-name')} name="receiver.businessName" />
 				</Grid>
 			)}
 
 			<Grid item md={6} sm={6} xs={12}>
-				<PhoneNumberInputField fullWidth isRequired label="Phone" name="receiver.phone" />
+				<PhoneNumberInputField fullWidth isRequired label={t('phone')} name="receiver.phone" />
 			</Grid>
 
 			<Grid item md={6} sm={12} xs={12}>
-				<TextInputField fullWidth isRequired label="District / State" name="receiver.district" />
+				<TextInputField fullWidth isRequired label={t('district-state')} name="receiver.district" />
 			</Grid>
 
 			<Grid item md={6} sm={12} xs={12}>
-				<TextInputField fullWidth isRequired label="City / Town" name="receiver.city" />
+				<TextInputField fullWidth isRequired label={t('city-town')} name="receiver.city" />
 			</Grid>
 
 			<Grid item md={6} sm={12} xs={12}>
-				<TextInputField fullWidth isRequired label="Post Code / Postal Code" name="receiver.zipcode" />
+				<TextInputField fullWidth isRequired label={t('post-code')} name="receiver.zipcode" />
 			</Grid>
 
 			<Grid item md={12} sm={12} xs={12}>
-				<TextInputField fullWidth isRequired label="Address" name="receiver.address" />
+				<TextInputField fullWidth isRequired label={t('address')} name="receiver.address" />
 			</Grid>
 
 			<Grid item md={12} sm={12} xs={12}>

@@ -1,5 +1,5 @@
 import { Box, Typography } from '@mui/material';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import SearchBar from '../../components/atoms/SearchBar';
 import useBreadcrumb from '../../hooks/useBreadcrumb';
@@ -13,12 +13,12 @@ const Dashboard = () => {
 	const { t } = useTranslation();
 	// eslint-disable-next-line no-unused-vars
 	const { _, dispatch } = useBreadcrumb();
-	const breadcrumbs = [{ title: t('dashboard'), link: 'dashboard', current: true }];
+	const breadcrumbs = useMemo(() => [{ title: t('dashboard'), link: 'dashboard', current: true }], [t]);
 
 	useEffect(() => {
+		window.scrollTo(0, 0);
 		dispatch(setBreadcrumb(breadcrumbs));
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [breadcrumbs, dispatch]);
 
 	return (
 		<>

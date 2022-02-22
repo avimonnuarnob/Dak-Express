@@ -261,7 +261,7 @@ const ProfileMenuItem = () => {
 				<Link to="/profile" style={{ textDecoration: 'none', color: 'inherit' }}>
 					<MenuItem>
 						<Typography variant="body2" className={classes.account__item}>
-							{t('links-profile')}
+							{t('profile')}
 						</Typography>
 					</MenuItem>
 				</Link>
@@ -269,7 +269,7 @@ const ProfileMenuItem = () => {
 				<Link to="/change-password" style={{ textDecoration: 'none', color: 'inherit' }}>
 					<MenuItem>
 						<Typography variant="body2" className={classes.account__item}>
-							{t('links-change-password')}
+							{t('change-password')}
 						</Typography>
 					</MenuItem>
 				</Link>
@@ -277,7 +277,7 @@ const ProfileMenuItem = () => {
 				<Link to="/tokens" style={{ textDecoration: 'none', color: 'inherit' }}>
 					<MenuItem>
 						<Typography variant="body2" className={classes.account__item}>
-							{t('links-api-token')}
+							{t('api-token')}
 						</Typography>
 					</MenuItem>
 				</Link>
@@ -287,7 +287,7 @@ const ProfileMenuItem = () => {
 				<MenuItem className={classes.account__last__item} onClick={handleLogout}>
 					<LockOpenOutlinedIcon fontSize="small" />
 					<Typography variant="body2" sx={{ marginLeft: '10px' }}>
-						{t('links-sign-out')}
+						{t('sign-out')}
 					</Typography>
 				</MenuItem>
 			</Menu>

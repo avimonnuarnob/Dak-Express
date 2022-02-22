@@ -127,7 +127,7 @@ const SidebarMenuItems = () => {
 				</List>
 
 				<Typography variant="button" color="initial" className={classes.link__title}>
-					{t('links-dashboard-category')}
+					{t('dashboard-category')}
 				</Typography>
 
 				<Divider className={classes.divider} variant="middle" />
@@ -138,7 +138,7 @@ const SidebarMenuItems = () => {
 							<ListItemIcon className={classes.link__icon}>
 								<DashboardOutlinedIcon />
 							</ListItemIcon>
-							<ListItemText>{t('links-dashboard')}</ListItemText>
+							<ListItemText>{t('dashboard')}</ListItemText>
 						</ListItem>
 					</NavLink>
 				</List>
@@ -146,7 +146,7 @@ const SidebarMenuItems = () => {
 
 			<Box className={classes.item}>
 				<Typography variant="button" color="initial" className={classes.link__title}>
-					{t('links-shipments-category')}
+					{t('shipments-category')}
 				</Typography>
 
 				<Divider className={classes.divider} variant="middle" />
@@ -157,7 +157,7 @@ const SidebarMenuItems = () => {
 							<ListItemIcon className={classes.link__icon}>
 								<ListAltOutlinedIcon />
 							</ListItemIcon>
-							<ListItemText>{t('links-all-shipments')}</ListItemText>
+							<ListItemText>{t('all-shipments')}</ListItemText>
 						</ListItem>
 					</NavLink>
 
@@ -169,7 +169,7 @@ const SidebarMenuItems = () => {
 							<ListItemIcon className={classes.link__icon}>
 								<AddToPhotosOutlinedIcon />
 							</ListItemIcon>
-							<ListItemText>{t('links-create-shipments')}</ListItemText>
+							<ListItemText>{t('create-shipments')}</ListItemText>
 						</ListItem>
 					</NavLink>
 				</List>
@@ -177,7 +177,7 @@ const SidebarMenuItems = () => {
 
 			<Box className={classes.item}>
 				<Typography variant="button" color="initial" className={classes.link__title}>
-					{t('links-products-category')}
+					{t('products-category')}
 				</Typography>
 
 				<Divider className={classes.divider} variant="middle" />
@@ -188,7 +188,7 @@ const SidebarMenuItems = () => {
 							<ListItemIcon className={classes.link__icon}>
 								<CategoryOutlinedIcon />
 							</ListItemIcon>
-							<ListItemText>{t('links-all-products')}</ListItemText>
+							<ListItemText>{t('all-products')}</ListItemText>
 						</ListItem>
 					</NavLink>
 				</List>
@@ -196,7 +196,7 @@ const SidebarMenuItems = () => {
 
 			<Box className={classes.item}>
 				<Typography variant="button" color="initial" className={classes.link__title}>
-					{t('links-locations-category')}
+					{t('locations-category')}
 				</Typography>
 
 				<Divider className={classes.divider} variant="middle" />
@@ -210,7 +210,7 @@ const SidebarMenuItems = () => {
 							<ListItemIcon className={classes.link__icon}>
 								<AddLocationOutlinedIcon />
 							</ListItemIcon>
-							<ListItemText>{t('links-pickup-location')}</ListItemText>
+							<ListItemText>{t('pickup-location')}</ListItemText>
 						</ListItem>
 					</NavLink>
 
@@ -222,7 +222,7 @@ const SidebarMenuItems = () => {
 							<ListItemIcon className={classes.link__icon}>
 								<AddLocationAltOutlinedIcon />
 							</ListItemIcon>
-							<ListItemText>{t('links-receiver-location')}</ListItemText>
+							<ListItemText>{t('receiver-location')}</ListItemText>
 						</ListItem>
 					</NavLink>
 				</List>
@@ -230,7 +230,7 @@ const SidebarMenuItems = () => {
 
 			<Box className={classes.item}>
 				<Typography variant="button" color="initial" className={classes.link__title}>
-					{t('links-payment-category')}
+					{t('payment-category')}
 				</Typography>
 
 				<Divider className={classes.divider} variant="middle" />
@@ -244,7 +244,7 @@ const SidebarMenuItems = () => {
 							<ListItemIcon className={classes.link__icon}>
 								<HistoryOutlinedIcon />
 							</ListItemIcon>
-							<ListItemText>{t('links-transaction-history')}</ListItemText>
+							<ListItemText>{t('transaction-history')}</ListItemText>
 						</ListItem>
 					</NavLink>
 				</List>
@@ -252,7 +252,7 @@ const SidebarMenuItems = () => {
 
 			<Box className={classes.item}>
 				<Typography variant="button" color="initial" className={classes.link__title}>
-					{t('links-support-category')}
+					{t('support-category')}
 				</Typography>
 
 				<Divider className={classes.divider} variant="middle" />
@@ -263,7 +263,7 @@ const SidebarMenuItems = () => {
 							<ListItemIcon className={classes.link__icon}>
 								<QuizOutlinedIcon />
 							</ListItemIcon>
-							<ListItemText>{t('links-support')}</ListItemText>
+							<ListItemText>{t('support')}</ListItemText>
 						</ListItem>
 					</NavLink>
 				</List>
@@ -271,7 +271,7 @@ const SidebarMenuItems = () => {
 
 			<Box className={classes.item}>
 				<Typography variant="button" color="initial" className={classes.link__title}>
-					{t('links-token-category')}
+					{t('token-category')}
 				</Typography>
 
 				<Divider className={classes.divider} variant="middle" />
@@ -282,7 +282,7 @@ const SidebarMenuItems = () => {
 							<ListItemIcon className={classes.link__icon}>
 								<KeyIcon />
 							</ListItemIcon>
-							<ListItemText>{t('links-manage-token')}</ListItemText>
+							<ListItemText>{t('manage-token')}</ListItemText>
 						</ListItem>
 					</NavLink>
 				</List>

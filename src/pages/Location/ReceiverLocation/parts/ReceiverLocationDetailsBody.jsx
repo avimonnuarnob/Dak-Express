@@ -1,9 +1,10 @@
 /* eslint-disable prettier/prettier */
 /* eslint-disable arrow-body-style */
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import { Box, Button, Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 
 const useStyles = makeStyles((theme) => ({
 	button: {},
@@ -43,7 +44,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ReceiverLocationDetailsBody = () => {
+	const {t} = useTranslation();
 	const classes = useStyles();
+
 	return (
 		<Paper sx={{ p: 2, mt: 3 }}>
 			<Box className={classes.card__header}>
@@ -52,7 +55,7 @@ const ReceiverLocationDetailsBody = () => {
 					fontWeight="bold"
 					sx={{ color: 'status.pending' }}
 				>
-					Receiver Details
+					{t('receiver-location-details')}
 				</Typography>
 				<Box sx={{ ml: 'auto' }}>
 					<Link
@@ -66,7 +69,7 @@ const ReceiverLocationDetailsBody = () => {
 							className={classes.button__edit}
 							startIcon={<EditOutlinedIcon />}
 						>
-							Edit
+							{t('edit')}
 						</Button>
 					</Link>
 				</Box>
@@ -80,7 +83,7 @@ const ReceiverLocationDetailsBody = () => {
 					padding={2}
 					className={classes.card__body__item}
 				>
-					Full Name
+					{t('full-name')}
 				</Typography>
 
 				<Typography
@@ -100,7 +103,7 @@ const ReceiverLocationDetailsBody = () => {
 					padding={2}
 					className={classes.card__body__item}
 				>
-					Business Name
+					{t('business-name')}
 				</Typography>
 
 				<Typography
@@ -120,7 +123,7 @@ const ReceiverLocationDetailsBody = () => {
 					padding={2}
 					className={classes.card__body__item}
 				>
-					Mobile Number
+					{t('mobile-number')}
 				</Typography>
 
 				<Typography
@@ -139,7 +142,7 @@ const ReceiverLocationDetailsBody = () => {
 					padding={2}
 					className={classes.card__body__item}
 				>
-					Address
+					{t('address')}
 				</Typography>
 				<Typography
 					variant="body2"

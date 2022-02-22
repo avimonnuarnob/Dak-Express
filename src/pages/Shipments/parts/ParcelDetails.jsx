@@ -4,6 +4,7 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import { Box, Button, Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 import TransactionDetailsTable from '../../Transaction/parts/TransactionDetailsTable';
 
 const useStyles = makeStyles((theme) => ({
@@ -34,12 +35,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ParcelDetails = ({ edit, products, setPreviewData }) => {
+	const { t } = useTranslation();
 	const classes = useStyles();
+
 	return (
 		<Paper className={classes.box}>
 			<Box className={classes.box__header}>
 				<Typography variant="h5" fontWeight="bold">
-					Receiver Details
+					{t('parcel-details')}
 				</Typography>
 				{edit && (
 					<Button
@@ -49,7 +52,7 @@ const ParcelDetails = ({ edit, products, setPreviewData }) => {
 						startIcon={<EditOutlinedIcon />}
 						onClick={() => setPreviewData(false)}
 					>
-						Edit
+						{t('edit')}
 					</Button>
 				)}
 			</Box>

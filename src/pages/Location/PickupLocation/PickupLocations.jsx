@@ -1,23 +1,28 @@
 import { Box } from '@mui/material';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import useBreadcrumb from '../../../hooks/useBreadcrumb';
 import { setBreadcrumb } from '../../../reducers/BreadcrumbReducer';
 import LocationHeader from './parts/LocationHeader';
 import LocationTable from './parts/LocationTable';
 
-const breadcrumbs = [
-	{ title: 'Dashboard', link: 'dashboard' },
-	{ title: 'Pickup Locations', link: 'locations/pickup', current: true },
-];
-
 const PickupLocations = () => {
+	const { t } = useTranslation();
 	// eslint-disable-next-line no-unused-vars
 	const { _, dispatch } = useBreadcrumb();
 
+	const breadcrumbs = useMemo(
+		() => [
+			{ title: t('dashboard'), link: 'dashboard' },
+			{ title: t('pickup-locations'), link: 'locations/pickup', current: true },
+		],
+		[t]
+	);
+
 	useEffect(() => {
+		window.scrollTo(0, 0);
 		dispatch(setBreadcrumb(breadcrumbs));
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [breadcrumbs, dispatch]);
 
 	return (
 		<Box sx={{ py: 2, px: 3 }}>

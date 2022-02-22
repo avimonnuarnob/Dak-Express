@@ -1,6 +1,7 @@
 import { Box, Button, CircularProgress, FormControlLabel, Paper, Radio, RadioGroup, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { useReducer, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import { initialState, loadingReducer, startLoading, stopLoading } from '../../../reducers/LoadingReducer';
 import { sleep } from '../../../utils/functions';
@@ -40,9 +41,10 @@ const useStyles = makeStyles((theme) => ({
 const WhoWillPay = ({ edit }) => {
 	const [selection, setSelection] = useState('');
 	const [loading, dispatch] = useReducer(loadingReducer, initialState);
-	const redirectTo = useNavigate();
+	const { t } = useTranslation();
 
 	const classes = useStyles();
+	const redirectTo = useNavigate();
 	const navigate = useNavigate();
 
 	const updateSelection = (event, value) => {
@@ -77,27 +79,28 @@ const WhoWillPay = ({ edit }) => {
 						color: 'status.pending',
 					}}
 				>
-					Who Will Pay
+					{t('who-will-pay')}
 				</Typography>
 				{!edit ? (
 					<Typography fontSize="24px" fontWeight="bold" sx={{ color: 'typography.sec' }}>
-						Sender
+						{t('sender')}
 					</Typography>
 				) : (
 					<RadioGroup name="value" value={selection.value} onChange={updateSelection} className={classes.radioFlexRow}>
 						<FormControlLabel
 							label={
 								<Typography variant="h5" fontWeight="600" color={selection === 'sender' ? 'secondary' : 'primary'}>
-									Sender
+									{t('sender')}
 								</Typography>
 							}
 							value="sender"
 							control={<Radio color="secondary" />}
 						/>
+
 						<FormControlLabel
 							label={
 								<Typography variant="h5" fontWeight="600" color={selection === 'receiver' ? 'secondary' : 'primary'}>
-									Receiver
+									{t('receiver')}
 								</Typography>
 							}
 							value="receiver"
@@ -116,7 +119,7 @@ const WhoWillPay = ({ edit }) => {
 						sx={{ ml: 'auto !important' }}
 						className={classes.preview__back__button}
 					>
-						Cancel
+						{t('cancel')}
 					</Button>
 
 					<Button
@@ -127,7 +130,7 @@ const WhoWillPay = ({ edit }) => {
 						endIcon={loading && <CircularProgress size={20} color="inherit" />}
 						className={classes.preview__button}
 					>
-						{loading ? 'Submitting...' : 'Submit'}
+						{loading ? t('submitting') : t('submit')}
 					</Button>
 				</div>
 			)}
