@@ -175,9 +175,9 @@ const ShipmentChartStats = () => {
 			<Box>
 				<Box sx={{ px: { xs: 1, sm: 3 } }} className={classes.status__tab}>
 					<Tabs value={tab} onChange={handleTabChange} TabIndicatorProps={{ style: { display: 'none' } }}>
-						<Tab label="Complete" {...tabProps(0, tab)} />
-						<Tab label="In Transit" {...tabProps(1, tab)} />
-						<Tab label="Failed" {...tabProps(2, tab)} />
+						<Tab label={t('dashboard-shipment-status-complete')} {...tabProps(0, tab)} />
+						<Tab label={t('dashboard-shipment-status-intransit')} {...tabProps(1, tab)} />
+						<Tab label={t('dashboard-shipment-status-failed')} {...tabProps(2, tab)} />
 					</Tabs>
 				</Box>
 

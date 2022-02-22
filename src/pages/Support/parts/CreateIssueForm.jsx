@@ -1,8 +1,7 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable arrow-body-style */
 import { Box, Button, Grid, Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Form, Formik } from 'formik';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import FileUploadElement from '../../../components/modecules/FileUploadElement';
 import PhoneNumberInputField from '../../../components/modecules/PhoneNumberInputField';
@@ -58,6 +57,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CreateIssueForm = () => {
+	const { t } = useTranslation();
 	const classes = useStyles();
 	const navigate = useNavigate();
 
@@ -73,64 +73,32 @@ const CreateIssueForm = () => {
 	};
 
 	return (
-		<Formik
-			initialValues={createIssueInitialValues}
-			validate={createIssueValidation}
-			onSubmit={handleSubmit}
-		>
-			{({
-				isSubmitting,
-				values,
-				errors,
-				handleChange,
-				handleBlur,
-				touched,
-			}) => (
+		<Formik initialValues={createIssueInitialValues} validate={createIssueValidation} onSubmit={handleSubmit}>
+			{({ isSubmitting, values, errors, handleChange, handleBlur, touched }) => (
 				<Form>
 					<Paper className={classes.box}>
 						<Box className={classes.box__header}>
 							<Typography variant="h5" fontWeight="bold">
-								Having trouble?
+								{t('having-trouble')}
 							</Typography>
 						</Box>
 
 						<fieldset disabled={isSubmitting} style={{ border: 'none' }}>
 							<Grid container spacing={2}>
 								<Grid item md={6} sm={6} xs={12}>
-									<TextInputField
-										fullWidth
-										isRequired
-										label="Full Name"
-										name="fullName"
-									/>
+									<TextInputField fullWidth isRequired label={t('full-name')} name="fullName" />
 								</Grid>
 
 								<Grid item md={6} sm={6} xs={12}>
-									<PhoneNumberInputField
-										fullWidth
-										isRequired
-										label="Mobile Number"
-										name="phone"
-									/>
+									<PhoneNumberInputField fullWidth isRequired label={t('mobile-number')} name="phone" />
 								</Grid>
 
 								<Grid item md={6} sm={6} xs={12}>
-									<TextInputField
-										fullWidth
-										isRequired
-										label="Email"
-										name="email"
-									/>
+									<TextInputField fullWidth isRequired label={t('email')} name="email" />
 								</Grid>
 
 								<Grid item md={6} sm={6} xs={12}>
-									<SelectInputField
-										items={issueItems}
-										fullWidth
-										isRequired
-										label="Subject"
-										name="subject"
-									/>
+									<SelectInputField items={issueItems} fullWidth isRequired label={t('subject')} name="subject" />
 								</Grid>
 
 								<Grid item md={6} sm={6} xs={12}>
@@ -139,7 +107,7 @@ const CreateIssueForm = () => {
 										// isrequired
 										type="file"
 										label=""
-										name="attachment"
+										name={t('attachment')}
 										// defaultValue={null}
 										value={values.attachment}
 										onChange={handleChange}
@@ -150,23 +118,11 @@ const CreateIssueForm = () => {
 								</Grid>
 
 								<Grid item md={6} sm={6} xs={12}>
-									<TextInputField
-										fullWidth
-										isRequired
-										label="Shipment Reference ID"
-										name="ship_id"
-									/>
+									<TextInputField fullWidth isRequired label={t('issue-shipment-id')} name="ship_id" />
 								</Grid>
 
 								<Grid item md={12} sm={12} xs={12}>
-									<TextInputField
-										fullWidth
-										isRequired
-										multiline
-										minRows={4}
-										label="Message"
-										name="message"
-									/>
+									<TextInputField fullWidth isRequired multiline minRows={4} label={t('message')} name="message" />
 								</Grid>
 							</Grid>
 						</fieldset>
@@ -180,16 +136,11 @@ const CreateIssueForm = () => {
 							sx={{ ml: 'auto !important' }}
 							className={classes.issue__back__button}
 						>
-							Cancel
+							{t('cancel')}
 						</Button>
 
-						<Button
-							disabled={false}
-							type="submit"
-							variant="contained"
-							className={classes.issue__button}
-						>
-							Submit
+						<Button disabled={false} type="submit" variant="contained" className={classes.issue__button}>
+							{t('submit')}
 						</Button>
 					</div>
 				</Form>

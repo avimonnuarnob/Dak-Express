@@ -1,12 +1,16 @@
 /* eslint-disable prettier/prettier */
 import { Box } from '@mui/material';
+import { useTranslation } from 'react-i18next';
+import BackButton from '../../../components/atoms/BackButton';
+import HeaderTitle from '../../../components/atoms/HeaderTitle';
+import SearchBar from '../../../components/atoms/SearchBar';
 import DateRangeInputField from '../../../components/modecules/DateRangeInputField';
 import DownloadButtonOptions from '../../../components/modecules/DownloadButton';
-import BackButton from '../../../components/atoms/BackButton';
-import SearchBar from '../../../components/atoms/SearchBar';
-import HeaderTitle from '../../../components/atoms/HeaderTitle';
 
-const TransactionHistoryHeader = () => (
+const TransactionHistoryHeader = () =>{
+	const {t} = useTranslation();
+	
+	return (
 	<>
 		<Box
 			sx={{
@@ -14,9 +18,9 @@ const TransactionHistoryHeader = () => (
 				alignItems: 'center',
 			}}
 		>
-			<HeaderTitle label="Transaction History" />
+			<HeaderTitle label={t('transaction-histories')} />
 
-			<BackButton />
+			<BackButton label={t('back-to-dashboard')} />
 		</Box>
 
 		<Box
@@ -38,14 +42,14 @@ const TransactionHistoryHeader = () => (
 			>
 				<DateRangeInputField
 					fullWidth
-					startLabel="Start Date"
-					endLabel="End Date"
+					startLabel={t('start-date')}
+					endLabel={t('end-date')}
 					name="date"
 				/>
-				<DownloadButtonOptions label="Download" />
+				<DownloadButtonOptions label={t('download')} />
 			</Box>
 		</Box>
 	</>
-);
+)};
 
 export default TransactionHistoryHeader;

@@ -1,31 +1,35 @@
 import { Box } from '@mui/material';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import BackButton from '../../components/atoms/BackButton';
 import HeaderTitle from '../../components/atoms/HeaderTitle';
 import useBreadcrumb from '../../hooks/useBreadcrumb';
 import { setBreadcrumb } from '../../reducers/BreadcrumbReducer';
 import CreateApiTokenBody from './parts/CreateApiTokenBody';
 
-const breadcrumbs = [
-	{ title: 'Dashboard', link: 'dashboard' },
-	{ title: 'Tokens', link: 'tokens' },
-	{ title: 'Create New Token', link: 'tokens/new', current: true },
-];
-
 const CreateApiToken = () => {
+	const { t } = useTranslation();
 	// eslint-disable-next-line no-unused-vars
 	const { _, dispatch } = useBreadcrumb();
+
+	const breadcrumbs = useMemo(
+		() => [
+			{ title: t('dashboard'), link: 'dashboard' },
+			{ title: t('links-api-token'), link: 'tokens' },
+			{ title: t('create-api-token'), link: 'tokens/new', current: true },
+		],
+		[t]
+	);
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
 		dispatch(setBreadcrumb(breadcrumbs));
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [dispatch, breadcrumbs]);
 
 	return (
 		<Box sx={{ py: 2, px: 3 }}>
 			<Box sx={{ display: 'flex', alignItems: 'center' }}>
-				<HeaderTitle label="Create API Token" />
+				<HeaderTitle label={t('token-create')} />
 				<BackButton redirectTo="/tokens" label="Back to tokens" />
 			</Box>
 

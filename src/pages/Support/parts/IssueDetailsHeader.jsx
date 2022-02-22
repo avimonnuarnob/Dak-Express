@@ -1,9 +1,11 @@
 /* eslint-disable arrow-body-style */
 import { Box, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 import BackButton from '../../../components/atoms/BackButton';
 import CopyToClipboard from '../../../components/modecules/CopyToClipboard';
 
 const IssueDetailsHeader = () => {
+	const { t } = useTranslation();
 	return (
 		<Box
 			sx={{
@@ -13,7 +15,7 @@ const IssueDetailsHeader = () => {
 			}}
 		>
 			<Typography variant="h4" fontWeight="bold" color="primary">
-				Issue ID:
+				{t('issue-id')}:
 			</Typography>
 			<CopyToClipboard copyText="IS74849F">
 				<Typography variant="h4" fontWeight="bold" color="secondary">

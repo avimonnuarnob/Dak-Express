@@ -3,6 +3,7 @@
 import { Button, Grid, Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Form, Formik } from 'formik';
+import { useTranslation } from 'react-i18next';
 import FileUploadElement from '../../../components/modecules/FileUploadElement';
 import TextInputField from '../../../components/modecules/TextInputField';
 import { sleep } from '../../../utils/functions';
@@ -34,6 +35,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ReplyMessageForm = ({ toggleMessageForm }) => {
+	const {t} = useTranslation();
 	const classes = useStyles();
 
 	const submitForm = async (values, actions) => {
@@ -90,7 +92,7 @@ const ReplyMessageForm = ({ toggleMessageForm }) => {
 											color: 'status.pending',
 										}}
 									>
-										Message
+										{t('reply-message')}
 									</Typography>
 								</Grid>
 
@@ -100,7 +102,7 @@ const ReplyMessageForm = ({ toggleMessageForm }) => {
 										isRequired
 										multiline
 										minRows={4}
-										label="Message"
+										label={t('message-here')}
 										name="message"
 									/>
 								</Grid>
@@ -130,7 +132,7 @@ const ReplyMessageForm = ({ toggleMessageForm }) => {
 							sx={{ ml: 'auto !important' }}
 							className={classes.issue__back__button}
 						>
-							Cancel
+							{t('cancel')}
 						</Button>
 
 						<Button
@@ -139,7 +141,7 @@ const ReplyMessageForm = ({ toggleMessageForm }) => {
 							variant="contained"
 							className={classes.issue__button}
 						>
-							Submit
+							{t('submit')}
 						</Button>
 					</div>
 				</Form>

@@ -1,5 +1,6 @@
 import { Box } from '@mui/material';
-import { useEffect } from 'react';
+import { useEffect, useMemo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import useBreadcrumb from '../../hooks/useBreadcrumb';
 import { setBreadcrumb } from '../../reducers/BreadcrumbReducer';
@@ -18,21 +19,24 @@ const FAKE__DATA = {
 };
 
 const Issue = () => {
+	const { t } = useTranslation();
 	// eslint-disable-next-line no-unused-vars
 	const { _, dispatch } = useBreadcrumb();
 	const { id } = useParams();
 
-	const breadcrumbs = [
-		{ title: 'Dashboard', link: 'dashboard' },
-		{ title: 'Supports', link: 'supports' },
-		{ title: id, link: `supports/${id}`, current: true },
-	];
+	const breadcrumbs = useMemo(
+		() => [
+			{ title: t('dashboard'), link: 'dashboard' },
+			{ title: t('links-support'), link: 'supports' },
+			{ title: id, link: `supports/${id}`, current: true },
+		],
+		[t, id]
+	);
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
 		dispatch(setBreadcrumb(breadcrumbs));
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [breadcrumbs, dispatch]);
 
 	return (
 		<Box sx={{ py: 2, px: 3 }}>

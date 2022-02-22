@@ -21,11 +21,11 @@ const FooterLinks = () => {
 	const classes = useFooterLinksStyles();
 
 	const footerLinks = [
-		{ title: t('links-faqs'), link: 'faqs' },
-		{ title: t('links-contact'), link: 'contact-us' },
-		{ title: t('links-shipment'), link: 'shipment-charges' },
-		{ title: t('links-policy'), link: 'privacy-policy' },
-		{ title: t('links-terms'), link: 'terms-conditions' },
+		{ title: t('faqs'), link: 'faqs' },
+		{ title: t('contact'), link: 'contact-us' },
+		{ title: t('shipment'), link: 'shipment-charges' },
+		{ title: t('policy'), link: 'privacy-policy' },
+		{ title: t('terms'), link: 'terms-conditions' },
 	];
 
 	return (

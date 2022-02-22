@@ -12,6 +12,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { makeStyles } from '@mui/styles';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import Pagination from '../../../components/modecules/Pagination';
 import ShipmentStatus from '../../../components/modecules/ShipmentStatus';
@@ -57,6 +58,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const AllApiToknesTable = () => {
+	const {t} = useTranslation();
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(20);
 
@@ -135,7 +137,7 @@ const AllApiToknesTable = () => {
 												color="secondary"
 												startIcon={<VisibilityOutlinedIcon />}
 											>
-												View
+												{t('view')}
 											</Button>
 										</Link>
 
@@ -150,7 +152,7 @@ const AllApiToknesTable = () => {
 												className={classes['table__buttons--edit']}
 												startIcon={<EditOutlinedIcon />}
 											>
-												Edit
+												{t('edit')}
 											</Button>
 										</Link>
 									</Box>

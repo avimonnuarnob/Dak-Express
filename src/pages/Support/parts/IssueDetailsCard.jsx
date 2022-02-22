@@ -1,6 +1,6 @@
-/* eslint-disable prettier/prettier */
 import { Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme) => ({
 	card: {
@@ -22,17 +22,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const IssueDetailsCard = ({ data }) => {
+	const { t } = useTranslation();
 	const classes = useStyles();
 	return (
 		<div className={classes.card}>
-			<Typography
-				variant="body2"
-				fontWeight="bold"
-				display="inline"
-				padding={2}
-				className={classes.card__item}
-			>
-				Shipment Reference ID
+			<Typography variant="body2" fontWeight="bold" display="inline" padding={2} className={classes.card__item}>
+				{t('issue-shipment-id')}
 			</Typography>
 			<Typography
 				variant="body2"
@@ -52,7 +47,7 @@ const IssueDetailsCard = ({ data }) => {
 				className={classes.card__item}
 				sx={{ gridColumn: '1' }}
 			>
-				Full Name
+				{t('full-name')}
 			</Typography>
 			<Typography
 				variant="body2"
@@ -65,32 +60,15 @@ const IssueDetailsCard = ({ data }) => {
 			>
 				{data?.fullName ?? 'N/A'}
 			</Typography>
-			<Typography
-				variant="body2"
-				fontWeight="bold"
-				display="inline"
-				padding={2}
-				className={classes.card__item}
-			>
-				Mobile Number
+			<Typography variant="body2" fontWeight="bold" display="inline" padding={2} className={classes.card__item}>
+				{t('mobile-number')}
 			</Typography>
-			<Typography
-				variant="body2"
-				display="inline"
-				padding={2}
-				className={classes.card__item}
-			>
+			<Typography variant="body2" display="inline" padding={2} className={classes.card__item}>
 				{data?.phone ?? 'N/A'}
 			</Typography>
 
-			<Typography
-				variant="body2"
-				fontWeight="bold"
-				display="inline"
-				padding={2}
-				className={classes.card__item}
-			>
-				Email
+			<Typography variant="body2" fontWeight="bold" display="inline" padding={2} className={classes.card__item}>
+				{t('email')}
 			</Typography>
 			<Typography
 				variant="body2"
@@ -110,7 +88,7 @@ const IssueDetailsCard = ({ data }) => {
 				className={classes.card__item}
 				sx={{ gridColumn: '1' }}
 			>
-				Subject
+				{t('subject')}
 			</Typography>
 			<Typography
 				variant="body2"
@@ -123,32 +101,15 @@ const IssueDetailsCard = ({ data }) => {
 			>
 				{data?.subject ?? 'N/A'}
 			</Typography>
-			<Typography
-				variant="body2"
-				fontWeight="bold"
-				display="inline"
-				padding={2}
-				className={classes.card__item}
-			>
-				Date
+			<Typography variant="body2" fontWeight="bold" display="inline" padding={2} className={classes.card__item}>
+				{t('date')}
 			</Typography>
-			<Typography
-				variant="body2"
-				display="inline"
-				padding={2}
-				className={classes.card__item}
-			>
+			<Typography variant="body2" display="inline" padding={2} className={classes.card__item}>
 				{data?.date ?? 'N/A'}
 			</Typography>
 
-			<Typography
-				variant="body2"
-				fontWeight="bold"
-				display="inline"
-				padding={2}
-				className={classes.card__item}
-			>
-				Attachment
+			<Typography variant="body2" fontWeight="bold" display="inline" padding={2} className={classes.card__item}>
+				{t('attachment')}
 			</Typography>
 			<Typography
 				variant="body2"
@@ -168,7 +129,7 @@ const IssueDetailsCard = ({ data }) => {
 				className={classes.card__item}
 				sx={{ borderBottom: 0 }}
 			>
-				Message
+				{t('message')}
 			</Typography>
 			<Typography
 				variant="body2"

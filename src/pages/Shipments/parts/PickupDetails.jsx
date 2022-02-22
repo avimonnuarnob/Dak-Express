@@ -3,6 +3,7 @@ import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import { Box, Button, Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import PropTypes from 'prop-types';
+import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme) => ({
 	box: {
@@ -54,12 +55,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const PickupDetails = ({ edit, pickup, setPreviewData }) => {
+	const { t } = useTranslation();
 	const classes = useStyles();
 	return (
 		<Paper className={classes.box}>
 			<Box className={classes.box__header}>
 				<Typography variant="h5" fontWeight="bold">
-					Pickup Details
+					{t('pickup-details')}
 				</Typography>
 				{edit && (
 					<Button
@@ -69,14 +71,14 @@ const PickupDetails = ({ edit, pickup, setPreviewData }) => {
 						startIcon={<EditOutlinedIcon />}
 						onClick={() => setPreviewData(false)}
 					>
-						Edit
+						{t('edit')}
 					</Button>
 				)}
 			</Box>
 
 			<div className={classes.card}>
 				<Typography variant="body2" fontWeight="bold" display="inline" padding={2} className={classes.card__item}>
-					Full Name
+					{t('full-name')}
 				</Typography>
 
 				<Typography
@@ -97,7 +99,7 @@ const PickupDetails = ({ edit, pickup, setPreviewData }) => {
 					className={classes.card__item}
 					sx={{ gridColumn: '1' }}
 				>
-					Business Name
+					{t('business-name')}
 				</Typography>
 
 				<Typography
@@ -111,7 +113,7 @@ const PickupDetails = ({ edit, pickup, setPreviewData }) => {
 				</Typography>
 
 				<Typography variant="body2" fontWeight="bold" display="inline" padding={2} className={classes.card__item}>
-					Mobile Number
+					{t('phone')}
 				</Typography>
 
 				<Typography variant="body2" display="inline" padding={2} className={classes.card__item}>
@@ -119,7 +121,7 @@ const PickupDetails = ({ edit, pickup, setPreviewData }) => {
 				</Typography>
 
 				<Typography variant="body2" fontWeight="bold" display="inline" padding={2} className={classes.card__item}>
-					Address
+					{t('address')}
 				</Typography>
 				<Typography
 					variant="body2"
@@ -141,7 +143,7 @@ const PickupDetails = ({ edit, pickup, setPreviewData }) => {
 					className={classes.card__item}
 					sx={{ gridColumn: '1' }}
 				>
-					Pickup Date
+					{t('pickup-date')}
 				</Typography>
 
 				<Typography
@@ -155,7 +157,7 @@ const PickupDetails = ({ edit, pickup, setPreviewData }) => {
 				</Typography>
 
 				<Typography variant="body2" fontWeight="bold" display="inline" padding={2} className={classes.card__item}>
-					Pickup Time
+					{t('pickup-time')}
 				</Typography>
 
 				<Typography variant="body2" display="inline" padding={2} className={classes.card__item}>

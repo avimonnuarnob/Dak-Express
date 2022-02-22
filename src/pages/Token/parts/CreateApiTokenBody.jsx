@@ -2,9 +2,10 @@
 import { Box, Button, Grid, Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Form, Formik } from 'formik';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
-import TextInputField from '../../../components/modecules/TextInputField';
 import SelectInputField from '../../../components/modecules/SelectInputField';
+import TextInputField from '../../../components/modecules/TextInputField';
 import { sleep } from '../../../utils/functions';
 
 const roleItems = [
@@ -69,6 +70,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const CreateApiTokenBody = () => {
+	const {t} = useTranslation();
 	const classes = useStyles();
 	const navigate = useNavigate();
 
@@ -108,7 +110,7 @@ const CreateApiTokenBody = () => {
 					<Paper className={classes.box}>
 						<Box className={classes.box__header}>
 							<Typography variant="h5" fontWeight="bold">
-								Generate Token
+								{t('generate-token')}
 							</Typography>
 						</Box>
 						<fieldset disabled={isSubmitting} style={{ border: 'none' }}>
@@ -117,7 +119,7 @@ const CreateApiTokenBody = () => {
 									<TextInputField
 										fullWidth
 										isRequired
-										label="Name"
+										label={t('name')}
 										name="name"
 										boxStyles={{ paddingTop: '10px' }}
 									/>
@@ -128,7 +130,7 @@ const CreateApiTokenBody = () => {
 										fullWidth
 										isRequired
 										items={roleItems}
-										label="Type"
+										label={t('type')}
 										name="type"
 										boxStyles={{ paddingTop: '10px' }}
 									/>
@@ -145,7 +147,7 @@ const CreateApiTokenBody = () => {
 							sx={{ ml: 'auto !important' }}
 							className={classes.pickup__back__button}
 						>
-							Cancel
+							{t('cancel')}
 						</Button>
 
 						<Button
@@ -154,7 +156,7 @@ const CreateApiTokenBody = () => {
 							variant="contained"
 							className={classes.pickup__button}
 						>
-							Generate Key
+							{t('generate-key')}
 						</Button>
 					</div>
 				</Form>

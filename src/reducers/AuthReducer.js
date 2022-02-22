@@ -25,10 +25,18 @@ export const reducer = (state = initialState, action) => {
 
 export const setAuthToken = (payload = '') => {
 	localStorage.setItem('token', payload);
+	localStorage.setItem('sidebar', true);
+
 	return { type: types.SET_AUTH_TOKEN, payload };
 };
 
 export const removeAuthToken = () => {
+	const lang = localStorage.getItem('language');
 	localStorage.clear();
+
+	if (lang) {
+		localStorage.setItem('language', lang);
+	}
+
 	return { type: types.REMOVE_AUTH_TOKEN };
 };

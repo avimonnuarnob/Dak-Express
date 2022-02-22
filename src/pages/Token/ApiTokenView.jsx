@@ -1,5 +1,6 @@
 import { Box } from '@mui/material';
 import { useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
 import BackButton from '../../components/atoms/BackButton';
 import HeaderTitle from '../../components/atoms/HeaderTitle';
@@ -10,6 +11,7 @@ import ApiTokenOverViewBody from './parts/ApiTokenOverViewBody';
 const ApiTokenView = () => {
 	// eslint-disable-next-line no-unused-vars
 	const { _, dispatch } = useBreadcrumb();
+	const { t } = useTranslation();
 	const { id } = useParams();
 
 	const breadcrumbs = [
@@ -27,7 +29,7 @@ const ApiTokenView = () => {
 	return (
 		<Box sx={{ py: 2, px: 3 }}>
 			<Box sx={{ display: 'flex', alignItems: 'center' }}>
-				<HeaderTitle label="API Token Overview" />
+				<HeaderTitle label={t('api-token-header')} />
 				<BackButton redirectTo="/tokens" label="Back to tokens" />
 			</Box>
 

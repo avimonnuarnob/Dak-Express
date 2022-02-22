@@ -1,19 +1,12 @@
-/* eslint-disable prettier/prettier */
 import ConfirmationNumberOutlinedIcon from '@mui/icons-material/ConfirmationNumberOutlined';
 import MopedOutlinedIcon from '@mui/icons-material/MopedOutlined';
 import ShoppingCartCheckoutOutlinedIcon from '@mui/icons-material/ShoppingCartCheckoutOutlined';
 import TaskOutlinedIcon from '@mui/icons-material/TaskOutlined';
 import ViewInArOutlinedIcon from '@mui/icons-material/ViewInArOutlined';
-import {
-	Box,
-	Paper,
-	Step,
-	StepLabel,
-	Stepper,
-	Typography,
-} from '@mui/material';
+import { Box, Paper, Step, StepLabel, Stepper, Typography } from '@mui/material';
 import { alpha } from '@mui/material/styles';
 import { makeStyles } from '@mui/styles';
+import { useTranslation } from 'react-i18next';
 
 const steps = [
 	{
@@ -71,12 +64,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ShipmentStatus = () => {
+	const { t } = useTranslation();
 	const classes = useStyles();
 
 	return (
 		<Paper className={classes.container}>
 			<Typography variant="h5" fontWeight="600" mb={5}>
-				Shipment #{' '}
+				{t('shipments')} #{' '}
 				<Typography variant="span" sx={{ color: 'status.pending' }}>
 					KLM7642138
 				</Typography>

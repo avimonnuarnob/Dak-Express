@@ -3,7 +3,8 @@
 import CachedOutlinedIcon from '@mui/icons-material/CachedOutlined';
 import { Box, Button, Grid } from '@mui/material';
 import { Form, Formik } from 'formik';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import BackButton from '../../components/atoms/BackButton';
 import HeaderTitle from '../../components/atoms/HeaderTitle';
 import RadioInputField from '../../components/modecules/RadioInputField';
@@ -19,17 +20,22 @@ import PreviewFormData from './PreviewFormData';
 import initialValues from './validation/initialValues';
 import validate from './validation/validate';
 
-const packageSelectionItems = [
-	{ id: '1ecaf118-84d1-11ec-a8a3-0242ac120002', value: 'Send', label: 'Send A Package' },
-	{ id: '40129af6-84d1-11ec-a8a3-0242ac120002', value: 'Receive', label: 'Receive A Package' },
-];
-
-const breadcrumbs = [
-	{ title: 'Dashboard', link: 'dashboard' },
-	{ title: 'Create New Shipment', link: 'new-shipment', current: true },
-];
-
 const CreateNewShipment = () => {
+	const { t } = useTranslation();
+
+	const packageSelectionItems = [
+		{ id: '1ecaf118-84d1-11ec-a8a3-0242ac120002', value: 'Send', label: t('send-a-package') },
+		{ id: '40129af6-84d1-11ec-a8a3-0242ac120002', value: 'Receive', label: t('receive-a-package') },
+	];
+
+	const breadcrumbs = useMemo(
+		() => [
+			{ title: t('dashboard'), link: 'dashboard' },
+			{ title: t('create-a-shipment'), link: 'new-shipment', current: true },
+		],
+		[t]
+	);
+
 	const [packageSelection, setPackageSelection] = useState(packageSelectionItems[0]?.value);
 	const [showCouriersAndPreviewButton, setShowCouriersAndPreviewButton] = useState(false);
 	const [previewData, setPreviewData] = useState(false);
@@ -65,8 +71,7 @@ const CreateNewShipment = () => {
 	useEffect(() => {
 		window.scrollTo(0, 0);
 		dispatch(setBreadcrumb(breadcrumbs));
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [breadcrumbs, dispatch]);
 
 	if (previewData) return <PreviewFormData setPreviewData={setPreviewData} />;
 
@@ -74,8 +79,8 @@ const CreateNewShipment = () => {
 		<Grid container sx={{ px: 3, py: 2 }}>
 			<Grid item xs={12} mb={3}>
 				<Box sx={{ display: 'flex', alignItems: 'center' }}>
-					<HeaderTitle label="Create A Shipment" />
-					<BackButton redirectTo="/shipments" label="Back to shipments" />
+					<HeaderTitle label={t('create-a-shipment')} />
+					<BackButton redirectTo="/shipments" label={t('back-to-shipments')} />
 				</Box>
 			</Grid>
 
@@ -118,7 +123,7 @@ const CreateNewShipment = () => {
 						)}
 
 						<Grid item xs={12} mx={4}>
-							<PercelDetailsForm {...props} />
+							<PercelDetailsForm title={t('parcel-details')} {...props} />
 						</Grid>
 
 						<Grid item xs={12} mx={4}>
@@ -142,7 +147,7 @@ const CreateNewShipment = () => {
 									startIcon={<CachedOutlinedIcon />}
 									sx={{ px: 4 }}
 								>
-									Reset
+									{t('reset')}
 								</Button>
 
 								<Box sx={{ m: 1 }} />
@@ -157,7 +162,7 @@ const CreateNewShipment = () => {
 										onClick={handlePreviewAndProceed(props?.values)}
 										sx={{ px: 12 }}
 									>
-										Preview & proceed
+										{t('preview-and-proceed')}
 									</Button>
 								) : (
 									<Button
@@ -168,7 +173,7 @@ const CreateNewShipment = () => {
 										color="secondary"
 										sx={{ px: 12 }}
 									>
-										Get Price
+										{t('get-price')}
 									</Button>
 								)}
 							</Box>

@@ -5,6 +5,7 @@ import { tableCellClasses } from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import { makeStyles } from '@mui/styles';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import Pagination from '../../../components/modecules/Pagination';
 import products from './products.json';
@@ -45,6 +46,7 @@ const useStyles = makeStyles((theme) => ({
 const ShipmentsTable = () => {
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(20);
+	const { t } = useTranslation();
 
 	const classes = useStyles();
 
@@ -121,7 +123,7 @@ const ShipmentsTable = () => {
 													className={classes['table__buttons--edit']}
 													startIcon={<EditOutlinedIcon />}
 												>
-													Edit
+													{t('edit')}
 												</Button>
 											</Link>
 										</Box>

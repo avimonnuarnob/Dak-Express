@@ -2,6 +2,7 @@
 /* eslint-disable arrow-body-style */
 import { Box, Chip, Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { useTranslation } from 'react-i18next';
 import TransactionDetailsCard from './TransactionDetailsCard';
 import TransactionDetailsTable from './TransactionDetailsTable';
 
@@ -35,7 +36,9 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const TransactionHistoryDetailsBody = () => {
+	const {t} = useTranslation();
 	const classes = useStyles();
+
 	return (
 		<>
 			<Paper sx={{ p: 2, mt: 3 }}>
@@ -45,11 +48,11 @@ const TransactionHistoryDetailsBody = () => {
 						fontWeight="bold"
 						sx={{ color: 'status.pending' }}
 					>
-						Transaction Details
+						{t('transaction-details')}
 					</Typography>
 					<Box sx={{ ml: 'auto' }}>
 						<Chip
-							label="SUCCESS"
+							label={t('success')}
 							sx={{
 								backgroundColor: 'status.success',
 								color: (theme) => theme.palette.primary.white,
@@ -68,7 +71,7 @@ const TransactionHistoryDetailsBody = () => {
 						fontWeight="bold"
 						sx={{ color: 'status.pending' }}
 					>
-						Parcel Details
+						{t('product-details')}
 					</Typography>
 				</Box>
 

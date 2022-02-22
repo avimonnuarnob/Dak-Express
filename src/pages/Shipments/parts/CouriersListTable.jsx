@@ -7,6 +7,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import FormHeaderTitle from '../../../components/modecules/FormHeaderTitle';
 import couriers from './couriers.json';
 
@@ -32,6 +33,7 @@ const StyledTableRow = styled(TableRow)(({ theme }) => ({
 
 // eslint-disable-next-line no-unused-vars
 const CouriersListTable = ({ setFieldValue = null, values = {}, ...props }) => {
+	const { t } = useTranslation();
 	const [selectCourier, setSelectCourier] = useState({});
 
 	const handleSelectCourier = (courier) => () => {
@@ -41,9 +43,9 @@ const CouriersListTable = ({ setFieldValue = null, values = {}, ...props }) => {
 
 	return (
 		<Paper sx={{ p: 4, m: 2 }} elevation={3}>
-			<FormHeaderTitle formTitle="Career List & Price">
+			<FormHeaderTitle formTitle={t('courier-list-and-price')}>
 				<Box pb={1}>
-					<Typography>Choose your desired Career & Price</Typography>
+					<Typography>{t('choose-your-desired-courier-and-price')}</Typography>
 				</Box>
 			</FormHeaderTitle>
 

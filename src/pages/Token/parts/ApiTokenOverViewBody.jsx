@@ -7,10 +7,11 @@ import {
 	// FormControlLabel,
 	Paper,
 	Switch,
-	Typography,
+	Typography
 } from '@mui/material';
 import { makeStyles, styled } from '@mui/styles';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import ApiTokenOverviewCard from './ApiTokenOverviewCard';
 
 const useStyles = makeStyles((theme) => ({
@@ -60,6 +61,7 @@ const StyledSwitch = styled(Switch)(({ theme }) => ({
 }));
 
 const ApiTokenOverViewBody = () => {
+	const {t} = useTranslation();
 	const classes = useStyles();
 
 	const [checked, setChecked] = useState(true);
@@ -71,7 +73,7 @@ const ApiTokenOverViewBody = () => {
 		<Paper className={classes.box}>
 			<Box className={classes.box__header}>
 				<Typography variant="h5" fontWeight="bold">
-					API Token
+					{t('api-tokens-header')}
 				</Typography>
 				<Box sx={{ ml: 'auto' }}>
 					<StyledSwitch

@@ -13,10 +13,11 @@ import {
 	TableContainer,
 	TableHead,
 	TableRow,
-	Typography,
+	Typography
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import Pagination from '../../../components/modecules/Pagination';
 import ShipmentStatus from '../../../components/modecules/ShipmentStatus';
@@ -77,6 +78,7 @@ const StyledTableRow = styled(TableRow)(() => ({
 }));
 
 const TransactionHistoryTable = () => {
+	const {t} = useTranslation();
 	const [page, setPage] = useState(0);
 	const [rowsPerPage, setRowsPerPage] = useState(20);
 
@@ -153,7 +155,7 @@ const TransactionHistoryTable = () => {
 											color="secondary"
 											startIcon={<VisibilityOutlinedIcon />}
 										>
-											View
+											{t('view')}
 										</Button>
 									</Link>
 								</StyledTableCell>

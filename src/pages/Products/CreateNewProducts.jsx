@@ -2,7 +2,8 @@
 /* eslint-disable react/jsx-props-no-spreading */
 import { Box, Button, CircularProgress, Grid } from '@mui/material';
 import { Form, Formik } from 'formik';
-import { useEffect, useReducer } from 'react';
+import { useEffect, useMemo, useReducer } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 import PageTitlebar from '../../components/modecules/PageTitlebar';
 import useBreadcrumb from '../../hooks/useBreadcrumb';
@@ -14,18 +15,21 @@ import PercelDetailsForm from '../Shipments/parts/PercelDetailsForm';
 import initialValues from './validation/initialValues';
 import validate from './validation/validate';
 
-const breadcrumbs = [
-	{ title: 'Dashboard', link: 'dashboard' },
-	{ title: 'All Products', link: 'products' },
-	{ title: 'Create New Product', link: 'products/new', current: true },
-];
-
 const CreateNewProduct = () => {
 	const [loading, dispatch] = useReducer(loadingReducer, initialState);
-
+	const { t } = useTranslation();
 	// eslint-disable-next-line no-unused-vars
 	const { _, dispatch: breadcrumbDispatcher } = useBreadcrumb();
 	const navigateTo = useNavigate();
+
+	const breadcrumbs = useMemo(
+		() => [
+			{ title: t('dashboard'), link: 'dashboard' },
+			{ title: t('all-products'), link: 'products' },
+			{ title: t('add-new-product'), link: 'products/new', current: true },
+		],
+		[t]
+	);
 
 	const onSubmit = (data, fn) => {
 		console.log({ data, fn });
@@ -45,13 +49,12 @@ const CreateNewProduct = () => {
 	useEffect(() => {
 		window.scrollTo(0, 0);
 		breadcrumbDispatcher(setBreadcrumb(breadcrumbs));
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [breadcrumbDispatcher, breadcrumbs]);
 
 	return (
 		<Grid container>
 			<Grid item xs={12} mx={5}>
-				<PageTitlebar title="Create New Product" link="/products" page="All Products" />
+				<PageTitlebar title={t('add-new-product')} link="/products" page={t('back-to-all-products')} />
 			</Grid>
 
 			<Grid item xs={12} mx={2}>
@@ -59,7 +62,7 @@ const CreateNewProduct = () => {
 					{(props) => (
 						<Form>
 							<Grid item xs={12} mx={4}>
-								<PercelDetailsForm title="Product Details" {...props} />
+								<PercelDetailsForm title={t('product-details')} {...props} />
 							</Grid>
 
 							<Grid item xs={12} mx={4}>
@@ -70,7 +73,7 @@ const CreateNewProduct = () => {
 								<Box sx={{ m: 2, display: 'flex', alignContent: 'flex-end', justifyContent: 'flex-end' }}>
 									<Link to="/products" style={{ textDecoration: 'none', color: 'inherit' }}>
 										<Button variant="outlined" type="button" size="large" color="secondary" sx={{ px: 4 }}>
-											Cancel
+											{t('cancel')}
 										</Button>
 									</Link>
 
@@ -91,7 +94,7 @@ const CreateNewProduct = () => {
 											},
 										}}
 									>
-										{loading ? 'Saving Product...' : 'Save Product'}
+										{loading ? t('saving-product') : t('save-product')}
 									</Button>
 								</Box>
 							</Grid>

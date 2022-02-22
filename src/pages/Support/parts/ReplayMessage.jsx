@@ -1,8 +1,8 @@
-/* eslint-disable prettier/prettier */
 import ReplyAllIcon from '@mui/icons-material/ReplyAll';
 import { alpha, Box, Button, Grid, Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import ReplyMessageForm from './ReplyMessageForm';
 
@@ -36,6 +36,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ReplayMessage = () => {
+	const { t } = useTranslation();
 	const classes = useStyles();
 	const [showMessageForm, setShowMessageForm] = useState(false);
 
@@ -46,24 +47,21 @@ const ReplayMessage = () => {
 			<Paper className={classes.box}>
 				<Box className={classes.box__header}>
 					<Typography variant="h5" fontWeight="bold">
-						Replay Message
+						{t('reply-message')}
 					</Typography>
 				</Box>
 
 				<Grid container sx={{ mt: 3 }}>
 					<Grid item md={3}>
-						<Typography fontWeight="600">Message</Typography>
+						<Typography fontWeight="600"> {t('reply')}</Typography>
 					</Grid>
 					<Grid item md={8}>
 						<Typography>
-							Dear Mr. Hossain, Greetings from Cityscape Global Ltd and thank
-							you for your e-mail. Please do not hesitate to contact us at our
-							Contact Centre number 16240 (accessible from within Bangladesh) or
-							+88 096127 16240 (accessible from overseas) from 9 AM to 9 PM
-							(except public holidays) or email us at
-							servicequalitydak@cityscapeglobal.net for any further information
-							regarding any query. Assuring you of our best services always.
-							Thanking you, Cityscape Global Ltd
+							Dear Mr. Hossain, Greetings from Cityscape Global Ltd and thank you for your e-mail. Please do not
+							hesitate to contact us at our Contact Centre number 16240 (accessible from within Bangladesh) or +88
+							096127 16240 (accessible from overseas) from 9 AM to 9 PM (except public holidays) or email us at
+							servicequalitydak@cityscapeglobal.net for any further information regarding any query. Assuring you of our
+							best services always. Thanking you, Cityscape Global Ltd
 						</Typography>
 					</Grid>
 				</Grid>
@@ -77,14 +75,11 @@ const ReplayMessage = () => {
 						onClick={toggleMessageForm}
 						className={classes.button__replay}
 					>
-						Reply
+						{t('reply')}
 					</Button>
-					<Link
-						to="/supports/new"
-						style={{ textDecoration: 'none', color: 'inherit' }}
-					>
+					<Link to="/supports/new" style={{ textDecoration: 'none', color: 'inherit' }}>
 						<Button variant="contained" className={classes.button__support}>
-							Get Another Support
+							{t('get-another-support')}
 						</Button>
 					</Link>
 				</Box>

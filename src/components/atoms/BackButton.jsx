@@ -1,11 +1,10 @@
 /* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable prettier/prettier */
-import PropTypes from 'prop-types';
 import ArrowBackIosNewIcon from '@mui/icons-material/ArrowBackIosNew';
 import { Button, Typography } from '@mui/material';
+import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-const BackButton = ({ redirectTo, label }) => (
+const BackButton = ({ redirectTo, label = 'Dashboard' }) => (
 	<Link to={redirectTo} style={{ textDecoration: 'none', marginLeft: 'auto' }}>
 		<Button sx={{ display: 'flex', alignItems: 'center' }}>
 			<ArrowBackIosNewIcon fontSize="small" />

@@ -1,10 +1,9 @@
-/* eslint-disable prettier/prettier */
 /* eslint-disable react/function-component-definition */
-
 import SearchIcon from '@mui/icons-material/Search';
 import Box from '@mui/material/Box';
 import InputBase from '@mui/material/InputBase';
 import { styled } from '@mui/material/styles';
+import { useTranslation } from 'react-i18next';
 
 const Search = styled('div')(({ theme }) => ({
 	position: 'relative',
@@ -45,18 +44,19 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 	},
 }));
 
-export default function SearchBar() {
+const SearchBar = () => {
+	const { t } = useTranslation();
+
 	return (
 		<Box sx={{ flexGrow: 1 }}>
 			<Search>
 				<SearchIconWrapper>
 					<SearchIcon color="disabled" />
 				</SearchIconWrapper>
-				<StyledInputBase
-					placeholder="Search Here…"
-					inputProps={{ 'aria-label': 'search' }}
-				/>
+				<StyledInputBase placeholder={t('search-here')} inputProps={{ 'aria-label': 'search' }} />
 			</Search>
 		</Box>
 	);
-}
+};
+
+export default SearchBar;

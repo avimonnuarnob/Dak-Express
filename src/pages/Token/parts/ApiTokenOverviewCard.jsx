@@ -1,7 +1,6 @@
-/* eslint-disable prettier/prettier */
-/* eslint-disable arrow-body-style */
 import { Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { useTranslation } from 'react-i18next';
 import CopyToClipboard from '../../../components/modecules/CopyToClipboard';
 
 const useStyles = makeStyles((theme) => ({
@@ -34,23 +33,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ApiTokenOverviewCard = ({ checked }) => {
+	const { t } = useTranslation();
 	const classes = useStyles();
 
 	return (
-		<div
-			className={[
-				classes.card,
-				`${checked ? classes['card--active'] : classes['card--deactive']}`,
-			].join(' ')}
-		>
-			<Typography
-				variant="body2"
-				fontWeight="bold"
-				display="inline"
-				padding={2}
-				className={classes.card__item}
-			>
-				Name
+		<div className={[classes.card, `${checked ? classes['card--active'] : classes['card--deactive']}`].join(' ')}>
+			<Typography variant="body2" fontWeight="bold" display="inline" padding={2} className={classes.card__item}>
+				{t('token-name')}
 			</Typography>
 			<Typography
 				variant="body2"
@@ -61,32 +50,15 @@ const ApiTokenOverviewCard = ({ checked }) => {
 			>
 				Android Key
 			</Typography>
-			<Typography
-				variant="body2"
-				fontWeight="bold"
-				display="inline"
-				padding={2}
-				className={classes.card__item}
-			>
-				Type
+			<Typography variant="body2" fontWeight="bold" display="inline" padding={2} className={classes.card__item}>
+				{t('token-type')}
 			</Typography>
-			<Typography
-				variant="body2"
-				display="inline"
-				padding={2}
-				className={classes.card__item}
-			>
+			<Typography variant="body2" display="inline" padding={2} className={classes.card__item}>
 				Standard
 			</Typography>
 
-			<Typography
-				variant="body2"
-				fontWeight="bold"
-				display="inline"
-				padding={2}
-				className={classes.card__item}
-			>
-				Access Key
+			<Typography variant="body2" fontWeight="bold" display="inline" padding={2} className={classes.card__item}>
+				{t('token-access-key')}
 			</Typography>
 			<Typography
 				variant="body2"
@@ -103,14 +75,8 @@ const ApiTokenOverviewCard = ({ checked }) => {
 				</CopyToClipboard>
 			</Typography>
 
-			<Typography
-				variant="body2"
-				fontWeight="bold"
-				display="inline"
-				padding={2}
-				className={classes.card__item}
-			>
-				Secret Key
+			<Typography variant="body2" fontWeight="bold" display="inline" padding={2} className={classes.card__item}>
+				{t('token-secret-key')}
 			</Typography>
 			<Typography
 				variant="body2"
@@ -127,14 +93,8 @@ const ApiTokenOverviewCard = ({ checked }) => {
 				</CopyToClipboard>
 			</Typography>
 
-			<Typography
-				variant="body2"
-				fontWeight="bold"
-				display="inline"
-				padding={2}
-				className={classes.card__item}
-			>
-				Create Date
+			<Typography variant="body2" fontWeight="bold" display="inline" padding={2} className={classes.card__item}>
+				{t('token-create-date')}
 			</Typography>
 			<Typography
 				variant="body2"
@@ -145,21 +105,10 @@ const ApiTokenOverviewCard = ({ checked }) => {
 			>
 				12 Dec 2021
 			</Typography>
-			<Typography
-				variant="body2"
-				fontWeight="bold"
-				display="inline"
-				padding={2}
-				className={classes.card__item}
-			>
-				Expiry Date
+			<Typography variant="body2" fontWeight="bold" display="inline" padding={2} className={classes.card__item}>
+				{t('token-expiry-date')}
 			</Typography>
-			<Typography
-				variant="body2"
-				display="inline"
-				padding={2}
-				className={classes.card__item}
-			>
+			<Typography variant="body2" display="inline" padding={2} className={classes.card__item}>
 				12 Dec 2021
 			</Typography>
 		</div>

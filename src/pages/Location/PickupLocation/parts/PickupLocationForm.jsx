@@ -4,6 +4,7 @@ import { Form, Formik } from 'formik';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import PhoneNumberInputField from '../../../../components/modecules/PhoneNumberInputField';
 import SelectInputField from '../../../../components/modecules/SelectInputField';
@@ -105,9 +106,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const AddPickupLocationForm = ({ isEditable }) => {
+	const [pickupLocationInitialValues, setPickupLocationInitialValues] = useState(AddPickupLocationInitialValues);
+	const { t } = useTranslation();
+
 	const classes = useStyles();
 	const navigate = useNavigate();
-	const [pickupLocationInitialValues, setPickupLocationInitialValues] = useState(AddPickupLocationInitialValues);
 
 	const getData = async () => {
 		await sleep(2000);
@@ -149,26 +152,26 @@ const AddPickupLocationForm = ({ isEditable }) => {
 					<Paper sx={{ py: 4, px: 6, mt: 3 }}>
 						<Box className={classes.form__header}>
 							<Typography fontSize="24px" fontWeight="bold" sx={{ color: 'status.pending', mb: 3 }}>
-								Pickup Location
+								{t('pickup-location-details')}
 							</Typography>
 						</Box>
 
 						<fieldset disabled={isSubmitting} style={{ border: 'none' }}>
 							<Grid container spacing={2}>
 								<Grid item md={6} sm={6} xs={12}>
-									<TextInputField fullWidth isRequired label="First Name" name="firstName" />
+									<TextInputField fullWidth isRequired label={t('first-name')} name="firstName" />
 								</Grid>
 
 								<Grid item md={6} sm={6} xs={12}>
-									<TextInputField fullWidth isRequired label="Last Name" name="lastName" />
+									<TextInputField fullWidth isRequired label={t('last-name')} name="lastName" />
 								</Grid>
 
 								<Grid item md={12} sm={12} xs={12}>
-									<TextInputField fullWidth isRequired label="Business Name" name="businessName" />
+									<TextInputField fullWidth isRequired label={t('business-name')} name="businessName" />
 								</Grid>
 
 								<Grid item md={6} sm={6} xs={12}>
-									<PhoneNumberInputField fullWidth isRequired label="Phone" name="phone" />
+									<PhoneNumberInputField fullWidth isRequired label={t('phone')} name="phone" />
 								</Grid>
 
 								<Grid item md={6} sm={6} xs={12}>
@@ -176,7 +179,7 @@ const AddPickupLocationForm = ({ isEditable }) => {
 										items={allDistrictArray}
 										fullWidth
 										isRequired
-										label="District / State"
+										label={t('district-state')}
 										name="districtOrState"
 									/>
 								</Grid>
@@ -186,17 +189,17 @@ const AddPickupLocationForm = ({ isEditable }) => {
 										items={allDistrictArray}
 										fullWidth
 										isRequired
-										label="City / Town"
+										label={t('city-town')}
 										name="cityOrTown"
 									/>
 								</Grid>
 
 								<Grid item md={6} sm={6} xs={12}>
-									<TextInputField fullWidth isRequired label="Post Code / Postal Code" name="postcodeOrPostalcode" />
+									<TextInputField fullWidth isRequired label={t('post-code')} name="postcodeOrPostalcode" />
 								</Grid>
 
 								<Grid item md={12} sm={12} xs={12}>
-									<TextInputField fullWidth isRequired label="Address" name="address" />
+									<TextInputField fullWidth isRequired label={t('address')} name="address" />
 								</Grid>
 							</Grid>
 						</fieldset>
@@ -211,11 +214,11 @@ const AddPickupLocationForm = ({ isEditable }) => {
 							sx={{ ml: 'auto !important' }}
 							className={classes['pickup__button--back']}
 						>
-							Cancel
+							{t('cancel')}
 						</Button>
 
 						<Button disabled={false} type="submit" variant="contained" className={classes.pickup__button}>
-							Submit
+							{t('submit')}
 						</Button>
 					</div>
 				</Form>
