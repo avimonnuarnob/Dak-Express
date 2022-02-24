@@ -1,26 +1,27 @@
 import { Grid } from '@mui/material';
 import { useFormikContext } from 'formik';
-import { t } from 'i18next';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import CheckboxInputField from '../../../components/modecules/CheckboxInputField';
 import PhoneNumberInputField from '../../../components/modecules/PhoneNumberInputField';
 import TextInputField from '../../../components/modecules/TextInputField';
 
-const receiverSaveItems = [
-	{ id: 'b4a1c022-87d8-11ec-a8a3-0242ac120002', value: false, label: t('save-receiver-location') },
-];
-
 const PersonalOrBusinessReceiverForm = () => {
+	const { t } = useTranslation();
 	const { values } = useFormikContext();
+
+	const receiverSaveItems = [
+		{ id: 'b4a1c022-87d8-11ec-a8a3-0242ac120002', value: false, label: t('save-receiver-location') },
+	];
 
 	return (
 		<Grid container rowSpacing={3} columnSpacing={2}>
 			<Grid item md={6} sm={12} xs={12}>
-				<TextInputField fullWidth isRequired label={t('receiver-first-name')} name="receiver.firstName" />
+				<TextInputField fullWidth isRequired label={t('first-name')} name="receiver.firstName" />
 			</Grid>
 
 			<Grid item md={6} sm={12} xs={12}>
-				<TextInputField fullWidth isRequired label={t('receiver-last-name')} name="receiver.lastName" />
+				<TextInputField fullWidth isRequired label={t('last-name')} name="receiver.lastName" />
 			</Grid>
 
 			{values?.receiver?.type === 'Business' && (

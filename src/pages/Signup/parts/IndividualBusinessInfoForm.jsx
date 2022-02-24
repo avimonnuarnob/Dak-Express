@@ -12,7 +12,7 @@ const BusinessInfoFormIndividual = ({ isSubmitting = false }) => {
 					<TextInputField
 						fullWidth
 						isRequired
-						label={t('sign-up-form-business-name')}
+						label={t('business-name')}
 						name="businessName"
 						boxStyles={{ paddingTop: '10px' }}
 					/>
@@ -22,7 +22,7 @@ const BusinessInfoFormIndividual = ({ isSubmitting = false }) => {
 					<TextInputField
 						fullWidth
 						isRequired
-						label={t('sign-up-form-website-url')}
+						label={t('website-url')}
 						name="website"
 						boxStyles={{ paddingTop: '10px' }}
 					/>
@@ -32,40 +32,28 @@ const BusinessInfoFormIndividual = ({ isSubmitting = false }) => {
 					<TextInputField
 						fullWidth
 						isRequired
-						label={t('sign-up-form-district')}
+						label={t('district')}
 						name="districtOrState"
 						boxStyles={{ paddingTop: '10px' }}
 					/>
 				</Grid>
 
 				<Grid item md={4} sm={6} xs={12}>
-					<TextInputField
-						fullWidth
-						isRequired
-						label={t('sign-up-form-city')}
-						name="cityOrTown"
-						boxStyles={{ paddingTop: '10px' }}
-					/>
+					<TextInputField fullWidth isRequired label={t('city')} name="cityOrTown" boxStyles={{ paddingTop: '10px' }} />
 				</Grid>
 
 				<Grid item md={4} sm={6} xs={12}>
 					<TextInputField
 						fullWidth
 						isRequired
-						label={t('sign-up-form-post-code')}
+						label={t('post-code')}
 						name="postcodeOrPostalcode"
 						boxStyles={{ paddingTop: '10px' }}
 					/>
 				</Grid>
 
 				<Grid item md={12} sm={12} xs={12}>
-					<TextInputField
-						fullWidth
-						isRequired
-						label={t('sign-up-form-address')}
-						name="address"
-						boxStyles={{ paddingTop: '10px' }}
-					/>
+					<TextInputField fullWidth isRequired label={t('address')} name="address" boxStyles={{ paddingTop: '10px' }} />
 				</Grid>
 			</Grid>
 		</fieldset>

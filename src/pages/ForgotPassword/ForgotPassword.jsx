@@ -111,7 +111,7 @@ const ForgotPassword = () => {
 											fullWidth
 											className={classes.forgot__password__button}
 										>
-											{loading ? t('resetting-password') : t('forgot-password')}
+											{loading ? t('resetting-password') : t('reset-password')}
 										</Button>
 									</fieldset>
 								</Form>

@@ -89,7 +89,7 @@ const ResetPassword = () => {
 				<Grid item xl={4} lg={4} md={4} sm={10} xs={12}>
 					<Paper elevation={3} sx={{ padding: '50px 30px' }} className={classes.reset__password}>
 						<Typography variant="h4" className={classes.reset__password__header}>
-							{t('reset-password')}
+							{t('set-new-password')}
 						</Typography>
 
 						<Typography variant="body2" className={classes.reset__password__text}>
@@ -103,17 +103,12 @@ const ResetPassword = () => {
 										<PasswordInputField
 											fullWidth
 											isRequired
-											label={t('sign-up-form-password')}
+											label={t('password')}
 											name="password"
 											boxStyles={{ padding: '30px 0' }}
 										/>
 
-										<PasswordInputField
-											fullWidth
-											isRequired
-											label={t('sign-up-form-confirm-password')}
-											name="confirmPassword"
-										/>
+										<PasswordInputField fullWidth isRequired label={t('confirm-password')} name="confirmPassword" />
 
 										<Button
 											type="submit"

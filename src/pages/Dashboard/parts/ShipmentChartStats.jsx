@@ -156,7 +156,7 @@ const ShipmentChartStats = () => {
 	return (
 		<Paper>
 			<Box className={classes.status__header}>
-				<Typography sx={{ typography: { sm: 'h5', xs: 'h6' }, px: 2 }}>{t('dashboard-shipment-status')}</Typography>
+				<Typography sx={{ typography: { sm: 'h5', xs: 'h6' }, px: 2 }}>{t('shipment-status')}</Typography>
 				<FormControl>
 					<Select
 						labelId="shipmentYear-select-label"
@@ -175,9 +175,9 @@ const ShipmentChartStats = () => {
 			<Box>
 				<Box sx={{ px: { xs: 1, sm: 3 } }} className={classes.status__tab}>
 					<Tabs value={tab} onChange={handleTabChange} TabIndicatorProps={{ style: { display: 'none' } }}>
-						<Tab label={t('dashboard-shipment-status-complete')} {...tabProps(0, tab)} />
-						<Tab label={t('dashboard-shipment-status-intransit')} {...tabProps(1, tab)} />
-						<Tab label={t('dashboard-shipment-status-failed')} {...tabProps(2, tab)} />
+						<Tab label={t('shipment-status-complete')} {...tabProps(0, tab)} />
+						<Tab label={t('shipment-status-intransit')} {...tabProps(1, tab)} />
+						<Tab label={t('shipment-status-failed')} {...tabProps(2, tab)} />
 					</Tabs>
 				</Box>
 

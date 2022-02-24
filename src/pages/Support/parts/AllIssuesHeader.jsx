@@ -11,7 +11,7 @@ const AllIssuesHeader = () => {
 		<>
 			<Box sx={{ display: { xs: 'block', sm: 'flex' }, alignItems: 'center' }}>
 				<HeaderTitle label={t('supports-header')} />
-				<BackButton />
+				<BackButton label={t('back-to-dashboard')} />
 			</Box>
 
 			<Box

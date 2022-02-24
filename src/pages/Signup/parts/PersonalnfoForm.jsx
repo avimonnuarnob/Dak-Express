@@ -89,7 +89,7 @@ const PersonalInfoForm = ({
 					<TextInputField
 						fullWidth
 						isRequired
-						label={t('sign-up-form-first-name')}
+						label={t('first-name')}
 						name="firstName"
 						boxStyles={{ paddingTop: '10px' }}
 					/>
@@ -99,7 +99,7 @@ const PersonalInfoForm = ({
 					<TextInputField
 						fullWidth
 						isRequired
-						label={t('sign-up-form-last-name')}
+						label={t('last-name')}
 						name="lastName"
 						boxStyles={{ paddingTop: '10px' }}
 					/>
@@ -107,24 +107,12 @@ const PersonalInfoForm = ({
 
 				<Grid item md={6} sm={6} xs={12}>
 					<Box sx={{ paddingTop: '10px' }}>
-						<PhoneNumberInputField
-							fullWidth
-							isRequired
-							label={t('sign-up-form-phone')}
-							name="phone"
-							setFieldValue={setFieldValue}
-						/>
+						<PhoneNumberInputField fullWidth isRequired label={t('phone')} name="phone" setFieldValue={setFieldValue} />
 					</Box>
 				</Grid>
 
 				<Grid item md={6} sm={6} xs={12}>
-					<TextInputField
-						fullWidth
-						isRequired
-						label={t('sign-up-form-email')}
-						name="email"
-						boxStyles={{ paddingTop: '10px' }}
-					/>
+					<TextInputField fullWidth isRequired label={t('email')} name="email" boxStyles={{ paddingTop: '10px' }} />
 				</Grid>
 
 				<Grid item md={6} sm={6} xs={12}>
@@ -132,7 +120,7 @@ const PersonalInfoForm = ({
 						fullWidth
 						isRequired
 						items={roleItems}
-						label={t('sign-up-form-role')}
+						label={t('role')}
 						name="role"
 						boxStyles={{ paddingTop: '10px' }}
 					/>
@@ -143,7 +131,7 @@ const PersonalInfoForm = ({
 						fullWidth
 						isRequired
 						type="number"
-						label={t('sign-up-form-nid')}
+						label={t('nid')}
 						name="nid"
 						boxStyles={{ paddingTop: '10px' }}
 					/>
@@ -153,7 +141,7 @@ const PersonalInfoForm = ({
 					<PasswordInputField
 						fullWidth
 						isRequired
-						label={t('sign-up-form-password')}
+						label={t('password')}
 						name="password"
 						boxStyles={{ paddingTop: '10px' }}
 					/>
@@ -163,7 +151,7 @@ const PersonalInfoForm = ({
 					<PasswordInputField
 						fullWidth
 						isRequired
-						label={t('sign-up-form-confirm-password')}
+						label={t('confirm-password')}
 						name="confirmPassword"
 						boxStyles={{ paddingTop: '10px' }}
 					/>

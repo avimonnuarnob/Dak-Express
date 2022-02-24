@@ -70,7 +70,7 @@ const ChangePassword = () => {
 	const breadcrumbs = useMemo(
 		() => [
 			{ title: t('dashboard'), link: 'dashboard' },
-			{ title: t('links-profile'), link: 'profile' },
+			{ title: t('profile'), link: 'profile' },
 			{ title: t('change-password'), link: 'change-password', current: true },
 		],
 		[t]

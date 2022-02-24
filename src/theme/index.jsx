@@ -37,6 +37,15 @@ const freightForwardingColors = {
 };
 
 const theme = createTheme({
+	components: {
+		MuiPaper: {
+			styleOverrides: {
+				root: {
+					boxShadow: '0 0.5rem 0.8rem rgba(0,0,0,0.10)',
+				},
+			},
+		},
+	},
 	palette: {
 		primary: { ...freightForwardingColors.primary },
 		secondary: { ...freightForwardingColors.secondary },

@@ -41,7 +41,7 @@ const QuickLinks = () => {
 					fontWeight: '600 !important',
 				}}
 			>
-				{t('dashboard-quick-links')}
+				{t('quick-links')}
 			</Typography>
 
 			<Box className={classes.quickLinks}>
@@ -52,9 +52,7 @@ const QuickLinks = () => {
 								<AddToPhotosOutlinedIcon sx={{ color: (theme) => theme.palette.secondary.main }} />
 							</Box>
 
-							<Typography sx={{ mt: 2, fontWeight: '600 !important' }}>
-								{t('dashboard-quick-link-shipments')}
-							</Typography>
+							<Typography sx={{ mt: 2, fontWeight: '600 !important' }}>{t('quick-link-shipments')}</Typography>
 						</Box>
 					</Link>
 				</Paper>
@@ -66,9 +64,7 @@ const QuickLinks = () => {
 								<HistoryOutlinedIcon sx={{ color: (theme) => theme.palette.status.success }} />
 							</Box>
 
-							<Typography sx={{ my: 2, fontWeight: '600 !important' }}>
-								{t('dashboard-quick-link-transactions')}
-							</Typography>
+							<Typography sx={{ my: 2, fontWeight: '600 !important' }}>{t('quick-link-transactions')}</Typography>
 						</Box>
 					</Link>
 				</Paper>
@@ -80,9 +76,7 @@ const QuickLinks = () => {
 								<AddLocationOutlinedIcon sx={{ color: (theme) => theme.palette.status.pending }} />
 							</Box>
 
-							<Typography sx={{ my: 2, fontWeight: '600 !important' }}>
-								{t('dashboard-quick-link-locations')}
-							</Typography>
+							<Typography sx={{ my: 2, fontWeight: '600 !important' }}>{t('quick-link-locations')}</Typography>
 						</Box>
 					</Link>
 				</Paper>
@@ -94,7 +88,7 @@ const QuickLinks = () => {
 								<QuizOutlinedIcon sx={{ color: (theme) => theme.palette.status.failed }} />
 							</Box>
 
-							<Typography sx={{ my: 2, fontWeight: '600 !important' }}>{t('dashboard-quick-link-supports')}</Typography>
+							<Typography sx={{ my: 2, fontWeight: '600 !important' }}>{t('quick-link-supports')}</Typography>
 						</Box>
 					</Link>
 				</Paper>

@@ -15,7 +15,7 @@ const CreateApiToken = () => {
 	const breadcrumbs = useMemo(
 		() => [
 			{ title: t('dashboard'), link: 'dashboard' },
-			{ title: t('links-api-token'), link: 'tokens' },
+			{ title: t('api-token'), link: 'tokens' },
 			{ title: t('create-api-token'), link: 'tokens/new', current: true },
 		],
 		[t]
@@ -30,7 +30,7 @@ const CreateApiToken = () => {
 		<Box sx={{ py: 2, px: 3 }}>
 			<Box sx={{ display: 'flex', alignItems: 'center' }}>
 				<HeaderTitle label={t('token-create')} />
-				<BackButton redirectTo="/tokens" label="Back to tokens" />
+				<BackButton redirectTo="/tokens" label={t('back-to-tokens')} />
 			</Box>
 
 			<Box sx={{ mt: 3 }}>

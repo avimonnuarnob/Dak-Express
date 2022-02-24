@@ -14,7 +14,7 @@ const AllIssues = () => {
 	const breadcrumbs = useMemo(
 		() => [
 			{ title: t('dashboard'), link: 'dashboard' },
-			{ title: t('links-support'), link: 'supports', current: true },
+			{ title: t('support'), link: 'supports', current: true },
 		],
 		[t]
 	);

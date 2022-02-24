@@ -6,6 +6,7 @@ import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import { Box, FormControl } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { convertStringToKebabCase } from '../../utils/functions';
 
 const DateRangeInputField = ({
@@ -17,6 +18,7 @@ const DateRangeInputField = ({
 	// isRequired = false,
 	...props
 }) => {
+	const { t } = useTranslation();
 	// eslint-disable-next-line no-unused-vars
 	// const [field, meta, helpers] = useField(props);
 	const [value, setValue] = useState([null, null]);
@@ -47,7 +49,7 @@ const DateRangeInputField = ({
 							<>
 								<TextField {...startProps} />
 								<Box sx={{ mx: 1 }}>
-									<span style={{ fontSize: '14px', fontFamily: 'Inter !important' }}>TO</span>
+									<span style={{ fontSize: '14px', fontFamily: 'Inter !important' }}>{t('to')}</span>
 								</Box>
 								<TextField {...endProps} />
 							</>
