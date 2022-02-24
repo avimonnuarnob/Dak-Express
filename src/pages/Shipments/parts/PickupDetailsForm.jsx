@@ -15,7 +15,7 @@ const PickupDetailsForm = () => {
 	];
 
 	return (
-		<Paper sx={{ p: 4, m: 2 }} elevation={3}>
+		<Paper sx={{ p: 4, my: 2 }} elevation={3}>
 			<FormHeaderTitle formTitle={t('pickup-details')} />
 
 			<Grid container rowSpacing={3} columnSpacing={2}>

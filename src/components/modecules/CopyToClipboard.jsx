@@ -1,14 +1,9 @@
-/* eslint-disable react/forbid-prop-types */
-/* eslint-disable import/no-extraneous-dependencies */
-/* eslint-disable prettier/prettier */
-/* eslint-disable react/button-has-type */
-/* eslint-disable no-return-await */
-/* eslint-disable no-else-return */
-import PropTypes from 'prop-types';
-import { Alert, Box, IconButton, Snackbar } from '@mui/material';
-import React, { useState } from 'react';
 import ContentCopyOutlinedIcon from '@mui/icons-material/ContentCopyOutlined';
 import DoneOutlinedIcon from '@mui/icons-material/DoneOutlined';
+import { Alert, Box, IconButton, Snackbar } from '@mui/material';
+// eslint-disable-next-line import/no-extraneous-dependencies
+import PropTypes from 'prop-types';
+import React, { useState } from 'react';
 
 const CopyToClipboard = ({ copyText, children, disabled }) => {
 	const [isCopied, setIsCopied] = useState(false);
@@ -22,8 +17,8 @@ const CopyToClipboard = ({ copyText, children, disabled }) => {
 		setOpen(false);
 	};
 
-	const copyTextToClipboard = async (text) =>
-		await navigator.clipboard.writeText(text);
+	// eslint-disable-next-line no-return-await
+	const copyTextToClipboard = async (text) => await navigator.clipboard.writeText(text);
 
 	const handleCopyClick = () => {
 		copyTextToClipboard(copyText)
@@ -41,45 +36,30 @@ const CopyToClipboard = ({ copyText, children, disabled }) => {
 	};
 
 	return (
-		<>
-			<Box sx={{ display: 'flex', alignItems: 'center' }}>
-				{children}
-				<IconButton
-					aria-label="copyToClipboard"
-					size="small"
-					onClick={handleCopyClick}
-					disabled={disabled}
-				>
-					{isCopied ? (
-						<DoneOutlinedIcon fontSize="inherit" />
-					) : (
-						<ContentCopyOutlinedIcon fontSize="inherit" />
-					)}
-				</IconButton>
-			</Box>
+		<Box sx={{ display: 'flex', alignItems: 'center' }}>
+			{children}
+			<IconButton aria-label="copyToClipboard" size="small" onClick={handleCopyClick} disabled={disabled}>
+				{isCopied ? <DoneOutlinedIcon fontSize="inherit" /> : <ContentCopyOutlinedIcon fontSize="inherit" />}
+			</IconButton>
+
 			<Snackbar
 				open={open}
 				autoHideDuration={6000}
 				onClose={handleClose}
 				anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
 			>
-				<Alert
-					onClose={handleClose}
-					variant="filled"
-					severity="success"
-					color="secondary"
-					sx={{ width: '100%' }}
-				>
+				<Alert onClose={handleClose} variant="filled" severity="success" color="secondary" sx={{ width: '100%' }}>
 					Text copied successfully
 				</Alert>
 			</Snackbar>
-		</>
+		</Box>
 	);
 };
 
 CopyToClipboard.propTypes = {
 	copyText: PropTypes.string.isRequired,
-	children: PropTypes.object.isRequired,
+	// eslint-disable-next-line react/forbid-prop-types
+	children: PropTypes.elementType.isRequired,
 	disabled: PropTypes.bool,
 };
 

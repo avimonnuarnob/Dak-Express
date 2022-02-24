@@ -77,7 +77,7 @@ const ShipmentsTable = ({ category = '' }) => {
 	}, [category]);
 
 	return (
-		<Box px={2}>
+		<>
 			<TableContainer component={Paper}>
 				<Table aria-label="customized table">
 					<TableHead>
@@ -180,7 +180,7 @@ const ShipmentsTable = ({ category = '' }) => {
 					handlePageRowsChange={handlePageRowsChange}
 				/>
 			</Box>
-		</Box>
+		</>
 	);
 };
 

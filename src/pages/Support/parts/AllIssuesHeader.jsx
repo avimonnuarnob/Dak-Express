@@ -1,18 +1,14 @@
 import { Box, Button } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import BackButton from '../../../components/atoms/BackButton';
-import HeaderTitle from '../../../components/atoms/HeaderTitle';
 import SearchBar from '../../../components/atoms/SearchBar';
+import PageTitlebar from '../../../components/modecules/PageTitlebar';
 
 const AllIssuesHeader = () => {
 	const { t } = useTranslation();
 	return (
 		<>
-			<Box sx={{ display: { xs: 'block', sm: 'flex' }, alignItems: 'center' }}>
-				<HeaderTitle label={t('supports-header')} />
-				<BackButton label={t('back-to-dashboard')} />
-			</Box>
+			<PageTitlebar title={t('supports-header')} link="/locations/pickup" page={t('back-to-dashboard')} />
 
 			<Box
 				sx={{

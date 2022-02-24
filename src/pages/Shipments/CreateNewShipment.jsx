@@ -5,8 +5,7 @@ import { Box, Button, Grid } from '@mui/material';
 import { Form, Formik } from 'formik';
 import { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import BackButton from '../../components/atoms/BackButton';
-import HeaderTitle from '../../components/atoms/HeaderTitle';
+import PageTitlebar from '../../components/modecules/PageTitlebar';
 import RadioInputField from '../../components/modecules/RadioInputField';
 import useBreadcrumb from '../../hooks/useBreadcrumb';
 import { setBreadcrumb } from '../../reducers/BreadcrumbReducer';
@@ -77,11 +76,8 @@ const CreateNewShipment = () => {
 
 	return (
 		<Grid container sx={{ px: 3, py: 2 }}>
-			<Grid item xs={12} mb={3}>
-				<Box sx={{ display: 'flex', alignItems: 'center' }}>
-					<HeaderTitle label={t('create-a-shipment')} />
-					<BackButton redirectTo="/shipments" label={t('back-to-shipments')} />
-				</Box>
+			<Grid item xs={12} mb={2}>
+				<PageTitlebar title={t('create-a-shipment')} link="/shipments" page={t('back-to-shipments')} />
 			</Grid>
 
 			<Formik
@@ -92,7 +88,7 @@ const CreateNewShipment = () => {
 			>
 				{(props) => (
 					<Form>
-						<Grid item xs={12} px={2} mx={4}>
+						<Grid item xs={12}>
 							<RadioInputField
 								row
 								name="type"
@@ -103,41 +99,41 @@ const CreateNewShipment = () => {
 						</Grid>
 
 						{packageSelection === 'Send' ? (
-							<Grid item xs={12} mx={4}>
+							<Grid item xs={12}>
 								<PickupDetailsForm {...props} />
 							</Grid>
 						) : (
-							<Grid item xs={12} mx={4}>
+							<Grid item xs={12}>
 								<ReceiverDetailsForm {...props} />
 							</Grid>
 						)}
 
 						{packageSelection === 'Receive' ? (
-							<Grid item xs={12} mx={4}>
+							<Grid item xs={12}>
 								<PickupDetailsForm {...props} />
 							</Grid>
 						) : (
-							<Grid item xs={12} mx={4}>
+							<Grid item xs={12}>
 								<ReceiverDetailsForm {...props} />
 							</Grid>
 						)}
 
-						<Grid item xs={12} mx={4}>
+						<Grid item xs={12}>
 							<PercelDetailsForm title={t('parcel-details')} {...props} />
 						</Grid>
 
-						<Grid item xs={12} mx={4}>
+						<Grid item xs={12}>
 							<DangerousGoodsDeclaration {...props} />
 						</Grid>
 
 						{showCouriersAndPreviewButton && (
-							<Grid item xs={12} mx={4}>
+							<Grid item xs={12}>
 								<CouriersListTable {...props} />
 							</Grid>
 						)}
 
-						<Grid item xs={12} mx={4}>
-							<Box sx={{ m: 2, display: 'flex', alignContent: 'flex-end', justifyContent: 'flex-end' }}>
+						<Grid item xs={12}>
+							<Box sx={{ my: 2, display: 'flex', alignContent: 'flex-end', justifyContent: 'flex-end' }}>
 								<Button
 									variant="outlined"
 									type="submit"

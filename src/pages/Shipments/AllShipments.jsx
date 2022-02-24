@@ -42,38 +42,38 @@ const AllShipments = () => {
 	}, [breadcrumbs, dispatch]);
 
 	return (
-		<Grid container>
+		<Grid container px={3} py={2}>
 			<Grid item xs={12}>
 				<PageTitlebar title={t('all-shipments')} page={t('back-to-dashboard')} />
 			</Grid>
 
-			<Grid item xs={12} mx={2}>
+			<Grid item xs={12} mt={2}>
 				<Box sx={{ display: 'flex', justifyContent: 'end', alignItems: 'end' }}>
 					<DownloadButtonOptions label={t('download')} />
 
 					<Link to="/new-shipment" style={{ textDecoration: 'none', color: 'inherit' }}>
-						<Button variant="outlined" color="secondary" sx={{ px: 2, py: 1, m: 1 }} startIcon={<AddOutlinedIcon />}>
+						<Button variant="outlined" color="secondary" sx={{ px: 2, py: 1, my: 1 }} startIcon={<AddOutlinedIcon />}>
 							{t('add-new-shipment')}
 						</Button>
 					</Link>
 				</Box>
 			</Grid>
 
-			<Grid item xs={12} mt={2} mb={2}>
+			<Grid item xs={12} mt={2}>
 				<TabItems items={tabsData} value={tabItemValue} onChange={handleChangeTabItemValue}>
-					<Grid container>
-						<Grid item md={4} py={1} m={1}>
+					<Grid container spacing={2}>
+						<Grid item md={4}>
 							<SearchBar />
 						</Grid>
 
-						<Grid item md={7} py={1} m={1}>
+						<Grid item md={8}>
 							<DateRangeInputField fullWidth startLabel={t('start-date')} endLabel={t('end-date')} name="date" />
 						</Grid>
 					</Grid>
 				</TabItems>
 			</Grid>
 
-			<Grid item xs={12}>
+			<Grid item xs={12} mt={2}>
 				<TabItemData value={tabItemValue} index={tabItemValue}>
 					<ShipmentsTable category={tabItemValue} />
 				</TabItemData>

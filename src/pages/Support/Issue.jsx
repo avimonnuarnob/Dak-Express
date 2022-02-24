@@ -1,11 +1,12 @@
-import { Box } from '@mui/material';
+import { Box, Typography } from '@mui/material';
 import { useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useParams } from 'react-router-dom';
+import CopyToClipboard from '../../components/modecules/CopyToClipboard';
+import PageTitlebar from '../../components/modecules/PageTitlebar';
 import useBreadcrumb from '../../hooks/useBreadcrumb';
 import { setBreadcrumb } from '../../reducers/BreadcrumbReducer';
 import IssueDetailsBody from './parts/IssueDetailsBody';
-import IssueDetailsHeader from './parts/IssueDetailsHeader';
 
 const FAKE__DATA = {
 	S_id: 'KLM7642138',
@@ -40,7 +41,23 @@ const Issue = () => {
 
 	return (
 		<Box sx={{ py: 2, px: 3 }}>
-			<IssueDetailsHeader />
+			<PageTitlebar
+				title={
+					<Box sx={{ display: { xs: 'block', sm: 'flex' }, alignItems: 'center', flexWrap: 'wrap', gap: 1 }}>
+						<Typography variant="h4" fontWeight="bold" color="primary">
+							{t('issue-id')}:
+						</Typography>
+
+						<CopyToClipboard copyText="KLM7642138">
+							<Typography variant="h4" fontWeight="bold" color="secondary">
+								KLM7642138
+							</Typography>
+						</CopyToClipboard>
+					</Box>
+				}
+				link="/supports"
+				page={t('back-to-support')}
+			/>
 			<IssueDetailsBody data={FAKE__DATA} />
 		</Box>
 	);

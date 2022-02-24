@@ -27,22 +27,22 @@ const Products = () => {
 	}, [breadcrumbs, dispatch]);
 
 	return (
-		<Grid container>
+		<Grid container px={3} py={2}>
 			<Grid item xs={12}>
 				<PageTitlebar title={t('all-products')} page={t('back-to-dashboard')} />
 			</Grid>
 
-			<Grid item xs={12} mx={2} sx={{ mb: 2 }}>
+			<Grid item xs={12} mt={2}>
 				<Box sx={{ display: 'flex', justifyContent: 'end', alignItems: 'end' }}>
 					<Link to="/products/new" style={{ textDecoration: 'none', color: 'inherit' }}>
-						<Button variant="outlined" color="secondary" sx={{ px: 2, py: 1, m: 1 }} startIcon={<AddOutlinedIcon />}>
+						<Button variant="outlined" color="secondary" sx={{ px: 2, py: 1 }} startIcon={<AddOutlinedIcon />}>
 							{t('add-new-product')}
 						</Button>
 					</Link>
 				</Box>
 			</Grid>
 
-			<Grid item xs={12}>
+			<Grid item xs={12} mt={2}>
 				<ProductsTable />
 			</Grid>
 		</Grid>

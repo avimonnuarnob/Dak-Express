@@ -63,7 +63,7 @@ const ShipmentsTable = () => {
 	const renderEmptyRows = page > 0 ? Math.max(0, (1 + page) * rowsPerPage - products.length) : 0;
 
 	return (
-		<Box px={3}>
+		<>
 			<TableContainer component={Paper}>
 				<Table aria-label="customized table">
 					<TableHead>
@@ -158,7 +158,7 @@ const ShipmentsTable = () => {
 					handlePageRowsChange={handlePageRowsChange}
 				/>
 			</Box>
-		</Box>
+		</>
 	);
 };
 

@@ -1,8 +1,7 @@
 import { Box } from '@mui/material';
 import { useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import BackButton from '../../components/atoms/BackButton';
-import HeaderTitle from '../../components/atoms/HeaderTitle';
+import PageTitlebar from '../../components/modecules/PageTitlebar';
 import useBreadcrumb from '../../hooks/useBreadcrumb';
 import { setBreadcrumb } from '../../reducers/BreadcrumbReducer';
 import CreateApiTokenBody from './parts/CreateApiTokenBody';
@@ -28,10 +27,7 @@ const CreateApiToken = () => {
 
 	return (
 		<Box sx={{ py: 2, px: 3 }}>
-			<Box sx={{ display: 'flex', alignItems: 'center' }}>
-				<HeaderTitle label={t('token-create')} />
-				<BackButton redirectTo="/tokens" label={t('back-to-tokens')} />
-			</Box>
+			<PageTitlebar title={t('token-create')} link="/tokens" page={t('back-to-tokens')} />
 
 			<Box sx={{ mt: 3 }}>
 				<CreateApiTokenBody />

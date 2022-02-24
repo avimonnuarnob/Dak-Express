@@ -1,8 +1,7 @@
 import { Box } from '@mui/material';
 import React, { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import BackButton from '../../components/atoms/BackButton';
-import HeaderTitle from '../../components/atoms/HeaderTitle';
+import PageTitlebar from '../../components/modecules/PageTitlebar';
 import useBreadcrumb from '../../hooks/useBreadcrumb';
 import { setBreadcrumb } from '../../reducers/BreadcrumbReducer';
 import ParcelDetails from './parts/ParcelDetails';
@@ -36,10 +35,7 @@ const PreviewFormData = ({ setPreviewData }) => {
 
 	return (
 		<Box sx={{ py: 2, px: 3 }}>
-			<Box sx={{ display: 'flex', alignItems: 'center' }}>
-				<HeaderTitle label={t('create-a-shipment')} />
-				<BackButton redirectTo="/shipments" label={t('back-to-shipments')} />
-			</Box>
+			<PageTitlebar title={t('create-a-shipment')} link="/shipments" page={t('back-to-shipments')} />
 
 			<Box sx={{ mt: 3 }}>
 				<PickupDetails pickup={shipmentData?.pickup} setPreviewData={setPreviewData} edit />

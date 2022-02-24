@@ -1,25 +1,14 @@
-/* eslint-disable prettier/prettier */
 import { Box, Button } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import BackButton from '../../../components/atoms/BackButton';
-import HeaderTitle from '../../../components/atoms/HeaderTitle';
 import SearchBar from '../../../components/atoms/SearchBar';
+import PageTitlebar from '../../../components/modecules/PageTitlebar';
 
 const AllApiTokensHeader = () => {
-	const {t} = useTranslation()
-	return  (
+	const { t } = useTranslation();
+	return (
 		<>
-			<Box
-				sx={{
-					display: { xs: 'block', sm: 'flex' },
-					alignItems: 'center',
-				}}
-			>
-				<HeaderTitle label={t('api-tokens-header')} />
-	
-				<BackButton label={t('back-to-dashboard')} />
-			</Box>
+			<PageTitlebar title={t('api-tokens-header')} page={t('back-to-dashboard')} />
 			<Box
 				sx={{
 					mt: 3,
@@ -32,7 +21,7 @@ const AllApiTokensHeader = () => {
 				<Box sx={{ width: '250px' }}>
 					<SearchBar />
 				</Box>
-	
+
 				<Link to="/tokens/new" style={{ textDecoration: 'none' }}>
 					<Button variant="contained" color="secondary" sx={{ px: 3, py: 1 }}>
 						{t('create-api-token')}
@@ -40,7 +29,7 @@ const AllApiTokensHeader = () => {
 				</Link>
 			</Box>
 		</>
-	)
-}
+	);
+};
 
 export default AllApiTokensHeader;

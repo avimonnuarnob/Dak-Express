@@ -22,7 +22,7 @@ const DangerousGoodsDeclaration = ({ values }) => {
 
 	return (
 		<>
-			<Paper sx={{ p: 4, m: 2 }} elevation={3}>
+			<Paper sx={{ p: 4, my: 2 }} elevation={3}>
 				<FormHeaderTitle formTitle={t('dangerous-goods-declarations')}>
 					<Box pb={1}>
 						<Typography>
