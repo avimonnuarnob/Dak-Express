@@ -14,7 +14,7 @@ const AllApiTokens = () => {
 	const breadcrumbs = useMemo(
 		() => [
 			{ title: t('dashboard'), link: 'dashboard' },
-			{ title: t('links-api-token'), link: 'tokens', current: true },
+			{ title: t('api-token'), link: 'tokens', current: true },
 		],
 		[t]
 	);

@@ -54,19 +54,15 @@ const WhoWillPay = ({ edit }) => {
 
 	const onSubmitHandler = async () => {
 		const shipmentData = JSON.parse(localStorage.getItem('previewShipmentData'));
-
 		shipmentData.paidBy = selection;
 
 		console.log({ shipmentData });
 		dispatch(startLoading());
 		await sleep(2000);
 		dispatch(stopLoading());
-
-		sleep(4000).then(() => {
-			localStorage.clear();
-			sessionStorage.clear();
-			redirectTo('/shipments');
-		});
+		localStorage.removeItem('previewShipmentData');
+		sessionStorage.removeItem('previewShipmentData');
+		redirectTo('/shipments');
 	};
 
 	return (

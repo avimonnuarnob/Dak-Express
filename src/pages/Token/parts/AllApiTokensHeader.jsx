@@ -18,7 +18,7 @@ const AllApiTokensHeader = () => {
 			>
 				<HeaderTitle label={t('api-tokens-header')} />
 	
-				<BackButton />
+				<BackButton label={t('back-to-dashboard')} />
 			</Box>
 			<Box
 				sx={{

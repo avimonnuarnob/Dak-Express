@@ -1,14 +1,15 @@
-import { Box, Button, Grid, Paper, Typography } from '@mui/material';
+import { Box, Button, CircularProgress, Grid, Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Form, Formik } from 'formik';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import PropTypes from 'prop-types';
-import { useEffect, useState } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router';
 import PhoneNumberInputField from '../../../../components/modecules/PhoneNumberInputField';
 import SelectInputField from '../../../../components/modecules/SelectInputField';
 import TextInputField from '../../../../components/modecules/TextInputField';
+import { initialState, loadingReducer, startLoading, stopLoading } from '../../../../reducers/LoadingReducer';
 import { sleep } from '../../../../utils/functions';
 import validateAddPickupLocation from '../validation/AddpickupLocationValidation';
 import AddPickupLocationInitialValues from '../validation/AddPickupLocationValues';
@@ -106,21 +107,15 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const AddPickupLocationForm = ({ isEditable }) => {
-	const [pickupLocationInitialValues, setPickupLocationInitialValues] = useState(AddPickupLocationInitialValues);
 	const { t } = useTranslation();
-
+	const [pickupLocationInitialValues, setPickupLocationInitialValues] = useState(AddPickupLocationInitialValues);
+	const [loading, dispatch] = useReducer(loadingReducer, initialState);
+	const navigateTo = useNavigate();
 	const classes = useStyles();
-	const navigate = useNavigate();
 
 	const getData = async () => {
-		await sleep(2000);
-
-		try {
-			if (localStorage.getItem('pickupData'))
-				setPickupLocationInitialValues(JSON.parse(localStorage.getItem('pickupData')));
-		} catch (e) {
-			console.log(e);
-		}
+		if (localStorage.getItem('pickupData'))
+			setPickupLocationInitialValues(JSON.parse(localStorage.getItem('pickupData')));
 	};
 
 	useEffect(() => {
@@ -130,9 +125,16 @@ const AddPickupLocationForm = ({ isEditable }) => {
 	}, [isEditable]);
 
 	const submitForm = async (values, actions) => {
-		await sleep(2000);
-		console.log(JSON.stringify(values, null, 2));
-
+		try {
+			dispatch(startLoading());
+			sleep(5000).then(() => {
+				localStorage.setItem('pickupData', JSON.stringify(values));
+				dispatch(stopLoading());
+				navigateTo(-1);
+			});
+		} catch (e) {
+			console.log(e);
+		}
 		actions.setSubmitting(false);
 	};
 
@@ -210,15 +212,21 @@ const AddPickupLocationForm = ({ isEditable }) => {
 							type="button"
 							variant="outlined"
 							disabled={false}
-							onClick={() => navigate(-1)}
+							onClick={() => navigateTo(-1)}
 							sx={{ ml: 'auto !important' }}
 							className={classes['pickup__button--back']}
 						>
 							{t('cancel')}
 						</Button>
 
-						<Button disabled={false} type="submit" variant="contained" className={classes.pickup__button}>
-							{t('submit')}
+						<Button
+							type="submit"
+							variant="contained"
+							disabled={loading}
+							endIcon={loading && <CircularProgress size={20} color="inherit" />}
+							className={classes.pickup__button}
+						>
+							{loading ? t('submitting') : t('submit')}
 						</Button>
 					</div>
 				</Form>

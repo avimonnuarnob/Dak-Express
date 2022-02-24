@@ -189,7 +189,7 @@ const IndividualSignup = () => {
 												{activeStep === 0 ? (
 													<Link to="/signup" style={{ textDecoration: 'none' }}>
 														<Button type="button" variant="outlined" fullWidth className={classes.signup__back__button}>
-															{t('sign-up-form-back-button')}
+															{t('back-button')}
 														</Button>
 													</Link>
 												) : (
@@ -202,7 +202,7 @@ const IndividualSignup = () => {
 														sx={{ mr: 1 }}
 														className={classes.signup__back__button}
 													>
-														{t('sign-up-form-back-button')}
+														{t('back-button')}
 													</Button>
 												)}
 											</Grid>
@@ -219,8 +219,8 @@ const IndividualSignup = () => {
 													{activeStep === steps.length - 1
 														? loading
 															? t('signing-up')
-															: t('sign-up-form-submit-button')
-														: t('sign-up-form-next-button')}
+															: t('submit-button')
+														: t('next-button')}
 												</Button>
 											</Grid>
 										</Grid>

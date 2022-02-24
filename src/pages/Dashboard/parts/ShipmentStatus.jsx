@@ -100,11 +100,11 @@ const ShipmentStatus = () => {
 
 	const shipmentStatusData = [
 		{
-			label: t('dashboard-complete-shipment'),
+			label: t('complete-shipment'),
 			count: 95,
 		},
-		{ label: t('dashboard-intransit-shipment'), count: 12 },
-		{ label: t('dashboard-failed-shipment'), count: 5 },
+		{ label: t('intransit-shipment'), count: 12 },
+		{ label: t('failed-shipment'), count: 5 },
 	];
 
 	return (

@@ -14,7 +14,7 @@ const CreateIssue = () => {
 	const breadcrumbs = useMemo(
 		() => [
 			{ title: t('dashboard'), link: 'dashboard' },
-			{ title: t('links-support'), link: 'supports' },
+			{ title: t('support'), link: 'supports' },
 			{ title: t('get-support'), link: 'supports/new', current: true },
 		],
 		[t]
@@ -29,7 +29,7 @@ const CreateIssue = () => {
 		<Box sx={{ py: 2, px: 3 }}>
 			<Box sx={{ display: { xs: 'block', sm: 'flex' }, alignItems: 'center' }}>
 				<HeaderTitle label={t('get-support')} />
-				<BackButton redirectTo="/supports" label="Back to supports" />
+				<BackButton redirectTo="/supports" label={t('back-to-support')} />
 			</Box>
 			<CreateIssueForm />
 		</Box>

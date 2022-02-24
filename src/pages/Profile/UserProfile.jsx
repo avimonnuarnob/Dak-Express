@@ -13,7 +13,7 @@ const UserProfile = () => {
 	const breadcrumbs = useMemo(
 		() => [
 			{ title: t('dashboard'), link: 'dashboard' },
-			{ title: t('links-profile'), link: 'profile', current: true },
+			{ title: t('profile'), link: 'profile', current: true },
 		],
 		[t]
 	);
