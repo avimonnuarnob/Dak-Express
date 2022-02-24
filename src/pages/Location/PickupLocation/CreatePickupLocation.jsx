@@ -1,8 +1,7 @@
 import { Box } from '@mui/material';
 import { useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import BackButton from '../../../components/atoms/BackButton';
-import HeaderTitle from '../../../components/atoms/HeaderTitle';
+import PageTitlebar from '../../../components/modecules/PageTitlebar';
 import useBreadcrumb from '../../../hooks/useBreadcrumb';
 import { setBreadcrumb } from '../../../reducers/BreadcrumbReducer';
 import PickupLocationForm from './parts/PickupLocationForm';
@@ -31,12 +30,12 @@ const CreatePickupLocation = () => {
 	}, [breadcrumbs, dispatch]);
 
 	return (
-		<Box sx={{ py: 2, px: 5 }}>
-			<Box sx={{ display: { xs: 'block', sm: 'flex' }, alignItems: 'center' }}>
-				<HeaderTitle label={t('add-new-pickup-location')} />
-				<BackButton redirectTo="/locations/pickup" label={t('back-to-pickup-locations')} />
-			</Box>
-
+		<Box sx={{ py: 2, px: 3 }}>
+			<PageTitlebar
+				title={t('add-new-pickup-location')}
+				link="/locations/pickup"
+				page={t('back-to-pickup-locations')}
+			/>
 			<PickupLocationForm />
 		</Box>
 	);

@@ -7,18 +7,16 @@ import { Link } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
 	titlebar: {
-		padding: '10px 20px',
 		display: 'flex',
 		justifyContent: 'space-between',
-		justifyItems: 'center',
+		alignItems: 'center',
+		flexWrap: 'wrap',
 	},
 	titlebar__title: {
 		color: theme.palette.typography.main,
-		textAlign: 'center',
 	},
 	titlebar__link: {
 		textDecoration: 'none',
-		marginTop: '5px',
 	},
 	titlebar__items: {
 		display: 'flex',
@@ -26,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
 		justifyItems: 'center',
 		color: theme.palette.typography.main,
 		textTransform: 'none !important',
+		paddingLeft: '0 !important',
 	},
 	titlebar__icon: {},
 	titlebar__text: {},
@@ -36,9 +35,13 @@ const PageTitlebar = ({ title = 'Dashboard', link = '/dashboard', page = 'Dashbo
 
 	return (
 		<Box className={classes.titlebar}>
-			<Typography variant="h4" fontWeight={700} className={classes.titlebar__title}>
-				{title}
-			</Typography>
+			{typeof title === 'string' ? (
+				<Typography variant="h4" fontWeight={700} className={classes.titlebar__title}>
+					{title}
+				</Typography>
+			) : (
+				<Box className={classes.titlebar__title}>{title}</Box>
+			)}
 
 			<Link to={link} className={classes.titlebar__link}>
 				<Button
@@ -53,7 +56,8 @@ const PageTitlebar = ({ title = 'Dashboard', link = '/dashboard', page = 'Dashbo
 };
 
 PageTitlebar.propTypes = {
-	title: PropTypes.string.isRequired,
+	// eslint-disable-next-line react/require-default-props
+	title: PropTypes.oneOfType([PropTypes.string, PropTypes.element]),
 	// eslint-disable-next-line react/require-default-props
 	link: PropTypes.string,
 	// eslint-disable-next-line react/require-default-props

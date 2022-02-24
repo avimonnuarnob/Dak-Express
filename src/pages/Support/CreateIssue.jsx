@@ -1,8 +1,7 @@
 import { Box } from '@mui/material';
 import React, { useEffect, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
-import BackButton from '../../components/atoms/BackButton';
-import HeaderTitle from '../../components/atoms/HeaderTitle';
+import PageTitlebar from '../../components/modecules/PageTitlebar';
 import useBreadcrumb from '../../hooks/useBreadcrumb';
 import { setBreadcrumb } from '../../reducers/BreadcrumbReducer';
 import CreateIssueForm from './parts/CreateIssueForm';
@@ -27,10 +26,7 @@ const CreateIssue = () => {
 
 	return (
 		<Box sx={{ py: 2, px: 3 }}>
-			<Box sx={{ display: { xs: 'block', sm: 'flex' }, alignItems: 'center' }}>
-				<HeaderTitle label={t('get-support')} />
-				<BackButton redirectTo="/supports" label={t('back-to-support')} />
-			</Box>
+			<PageTitlebar title={t('get-support')} link="/supports" page={t('back-to-support')} />
 			<CreateIssueForm />
 		</Box>
 	);

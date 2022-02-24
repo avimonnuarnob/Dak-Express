@@ -47,11 +47,11 @@ const DateRangeInputField = ({
 						// {...field}
 						renderInput={(startProps, endProps) => (
 							<>
-								<TextField {...startProps} />
+								<TextField {...startProps} fullWidth={fullWidth} />
 								<Box sx={{ mx: 1 }}>
 									<span style={{ fontSize: '14px', fontFamily: 'Inter !important' }}>{t('to')}</span>
 								</Box>
-								<TextField {...endProps} />
+								<TextField {...endProps} fullWidth={fullWidth} />
 							</>
 						)}
 					/>

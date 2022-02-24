@@ -42,7 +42,7 @@ const CouriersListTable = ({ setFieldValue = null, values = {}, ...props }) => {
 	};
 
 	return (
-		<Paper sx={{ p: 4, m: 2 }} elevation={3}>
+		<Paper sx={{ p: 4, my: 2 }} elevation={3}>
 			<FormHeaderTitle formTitle={t('courier-list-and-price')}>
 				<Box pb={1}>
 					<Typography>{t('choose-your-desired-courier-and-price')}</Typography>
