@@ -28,26 +28,26 @@ const BusinessInfoFormIndividual = ({ isSubmitting = false }) => {
 					/>
 				</Grid>
 
-				<Grid item md={4} sm={6} xs={12}>
+				<Grid item md={4} sm={4} xs={12}>
 					<TextInputField
 						fullWidth
 						isRequired
 						label={t('district')}
-						name="districtOrState"
+						name="district"
 						boxStyles={{ paddingTop: '10px' }}
 					/>
 				</Grid>
 
-				<Grid item md={4} sm={6} xs={12}>
-					<TextInputField fullWidth isRequired label={t('city')} name="cityOrTown" boxStyles={{ paddingTop: '10px' }} />
+				<Grid item md={4} sm={4} xs={12}>
+					<TextInputField fullWidth isRequired label={t('city')} name="city" boxStyles={{ paddingTop: '10px' }} />
 				</Grid>
 
-				<Grid item md={4} sm={6} xs={12}>
+				<Grid item md={4} sm={4} xs={12}>
 					<TextInputField
 						fullWidth
 						isRequired
 						label={t('post-code')}
-						name="postcodeOrPostalcode"
+						name="zipcode"
 						boxStyles={{ paddingTop: '10px' }}
 					/>
 				</Grid>

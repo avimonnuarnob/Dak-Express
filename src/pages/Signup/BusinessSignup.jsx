@@ -6,9 +6,14 @@ import { Form, Formik } from 'formik';
 import { useReducer, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
+import axiosBasicInstance from '../../apis/axiosBasicInstance';
+import ErrorAlert from '../../components/atoms/ErrorAlert';
 import AlertModal from '../../components/modecules/AlertModal';
+import useError from '../../hooks/useError';
+import { removeError } from '../../reducers/ErrorReducer';
 import { initialState, loadingReducer, startLoading, stopLoading } from '../../reducers/LoadingReducer';
 import { sleep } from '../../utils/functions';
+import { catchAllErrors } from '../../utils/serializeErrors';
 import BusinessInfoForm from './parts/BusinessInfoForm';
 import PersonalInfoForm from './parts/PersonalnfoForm';
 import initialValues from './validation/businessFormInitialValues';
@@ -70,12 +75,14 @@ const useStyles = makeStyles((theme) => ({
 
 const BusinessSignup = () => {
 	const [activeStep, setActiveStep] = useState(0);
+	const { t } = useTranslation();
 	const [successModal, setSuccessModal] = useState(false);
 	const [loading, dispatch] = useReducer(loadingReducer, initialState);
-	const { t } = useTranslation();
+	// eslint-disable-next-line no-unused-vars
+	const { state: errorState, dispatch: errorDispatch } = useError();
 
 	const steps = [t('sign-up-individual-first-step'), t('sign-up-individual-last-step')];
-	const redirectTo = useNavigate();
+	const navigateTo = useNavigate();
 	const classes = useStyles();
 
 	const validationRules = validation[activeStep];
@@ -91,26 +98,31 @@ const BusinessSignup = () => {
 		setActiveStep((prevActiveStep) => prevActiveStep - 1);
 	};
 
-	const submitForm = async (values, fn) => {
-		console.log({ values });
-		dispatch(startLoading());
+	const handleSubmitBusinessSignup = async (data, fn) => {
+		try {
+			errorDispatch(removeError());
+			dispatch(startLoading());
 
-		await sleep(2000);
-		setSuccessModal(true);
-		dispatch(stopLoading());
+			const response = await axiosBasicInstance.post('/users/register', { ...data, accountType: 'BUSINESS' });
 
-		sleep(4000).then(() => {
-			fn.resetForm();
-			fn.setValues({});
-			setSuccessModal(false);
+			if ([200, 201].includes(response?.status)) {
+				fn.resetForm();
+				dispatch(stopLoading());
+				setSuccessModal(true);
+				await sleep(4000);
+				navigateTo('/');
+			}
+		} catch (error) {
+			catchAllErrors(errorDispatch, error);
+		} finally {
+			dispatch(stopLoading());
 			fn.setSubmitting(false);
-			redirectTo('/');
-		});
+		}
 	};
 
-	const handleSubmit = (values, fn) => {
+	const handleSubmit = (data, fn) => {
 		if (isLastStep) {
-			submitForm(values, fn);
+			handleSubmitBusinessSignup(data, fn);
 		} else {
 			setActiveStep((currentStep) => currentStep + 1);
 			fn.setTouched({});
@@ -122,17 +134,21 @@ const BusinessSignup = () => {
 		<>
 			<Box sx={{ py: 5 }}>
 				<Paper elevation={3} className={classes.signup}>
-					<Typography variant="h4" className={classes.signup__header}>
-						{t('sign-up-individual')}
-					</Typography>
+					<Box sx={{ mb: 2 }}>
+						<Typography variant="h4" className={classes.signup__header}>
+							{t('sign-up-individual')}
+						</Typography>
 
-					<Typography variant="h6" className={classes.signup__header}>
-						{t('sign-up-business-type')}
-					</Typography>
+						<Typography variant="h6" className={classes.signup__header}>
+							{t('sign-up-business-type')}
+						</Typography>
 
-					<Typography variant="body2" className={classes.signup__text}>
-						{t('sign-up-individual-type-subtitle')}
-					</Typography>
+						<Typography variant="body2" className={classes.signup__text}>
+							{t('sign-up-individual-type-subtitle')}
+						</Typography>
+					</Box>
+
+					<ErrorAlert />
 
 					<Box sx={{ width: '100%' }}>
 						<Stepper activeStep={activeStep} alternativeLabel>
@@ -209,7 +225,7 @@ const BusinessSignup = () => {
 
 											<Grid item md={6} sm={6} xs={12} order={{ xs: 1 }}>
 												<Button
-													disabled={isSubmitting || (activeStep === 1 && !values?.terms)}
+													disabled={loading || (activeStep === 1 && !values?.terms)}
 													type="submit"
 													variant="contained"
 													fullWidth

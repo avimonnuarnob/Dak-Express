@@ -1,14 +1,19 @@
-import { Button, CircularProgress, Grid, Paper, Typography } from '@mui/material';
+import { Box, Button, CircularProgress, Grid, Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Form, Formik } from 'formik';
-import { useReducer, useState } from 'react';
+import { useEffect, useReducer, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import axiosBasicInstance from '../../apis/axiosBasicInstance';
+import ErrorAlert from '../../components/atoms/ErrorAlert';
 import { FOOTER_HEIGHT, HEADER_HEIGHT } from '../../components/layout/constants';
 import AlertModal from '../../components/modecules/AlertModal';
 import PasswordInputField from '../../components/modecules/PasswordInputField';
+import useError from '../../hooks/useError';
+import { removeError } from '../../reducers/ErrorReducer';
 import { initialState, loadingReducer, startLoading, stopLoading } from '../../reducers/LoadingReducer';
 import { sleep } from '../../utils/functions';
+import { catchAllErrors } from '../../utils/serializeErrors';
 import validate from './validation/validate';
 
 const useStyles = makeStyles((theme) => ({
@@ -57,44 +62,54 @@ const ResetPassword = () => {
 	const [loading, dispatch] = useReducer(loadingReducer, initialState);
 	const [showResetPasswordModal, setShowResetPasswordModal] = useState(false);
 	const { t } = useTranslation();
-
 	// eslint-disable-next-line no-unused-vars
-	const redirectTo = useNavigate();
+	const { state: errorState, dispatch: errorDispatch } = useError();
+
+	const navigateTo = useNavigate();
 	const classes = useStyles();
+	const { token } = useParams();
 
-	const initialValues = {
-		password: '',
-		confirmPassword: '',
-	};
+	const initialValues = { password: '', confirmPassword: '' };
 
-	// TODO: Make API call for sign in to account
 	const handleSubmitResetPassword = async (data, fn) => {
-		console.log({ data });
-		dispatch(startLoading());
-		await sleep(2000);
-		setShowResetPasswordModal(true);
-		dispatch(stopLoading());
+		try {
+			errorDispatch(removeError());
+			dispatch(startLoading());
 
-		sleep(4000).then(() => {
-			fn.resetForm();
-			fn.setSubmitting(false);
-			setShowResetPasswordModal(false);
-			redirectTo('/');
-		});
+			const response = await axiosBasicInstance.patch('/users/password-reset-complete', { ...data, token });
+
+			if ([200, 201].includes(response?.status)) {
+				fn.resetForm();
+				dispatch(stopLoading());
+				setShowResetPasswordModal(true);
+				await sleep(4000);
+				navigateTo('/');
+			}
+		} catch (error) {
+			catchAllErrors(errorDispatch, error);
+		} finally {
+			dispatch(stopLoading());
+		}
 	};
+
+	useEffect(() => () => setShowResetPasswordModal(false), []);
 
 	return (
 		<>
 			<Grid container className={classes.container}>
 				<Grid item xl={4} lg={4} md={4} sm={10} xs={12}>
 					<Paper elevation={3} sx={{ padding: '50px 30px' }} className={classes.reset__password}>
-						<Typography variant="h4" className={classes.reset__password__header}>
-							{t('set-new-password')}
-						</Typography>
+						<Box sx={{ mb: 2 }}>
+							<Typography variant="h4" className={classes.reset__password__header}>
+								{t('set-new-password')}
+							</Typography>
 
-						<Typography variant="body2" className={classes.reset__password__text}>
-							{t('reset-password-description')}
-						</Typography>
+							<Typography variant="body2" className={classes.reset__password__text}>
+								{t('reset-password-description')}
+							</Typography>
+						</Box>
+
+						<ErrorAlert />
 
 						<Formik initialValues={initialValues} validate={validate} onSubmit={handleSubmitResetPassword}>
 							{() => (
@@ -105,7 +120,7 @@ const ResetPassword = () => {
 											isRequired
 											label={t('password')}
 											name="password"
-											boxStyles={{ padding: '30px 0' }}
+											boxStyles={{ padding: '15px 0 30px 0' }}
 										/>
 
 										<PasswordInputField fullWidth isRequired label={t('confirm-password')} name="confirmPassword" />

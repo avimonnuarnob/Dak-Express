@@ -4,14 +4,18 @@ import { Form, Formik } from 'formik';
 import { useEffect, useReducer } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
+import axiosBasicInstance from '../../apis/axiosBasicInstance';
+import ErrorAlert from '../../components/atoms/ErrorAlert';
 import { FOOTER_HEIGHT, HEADER_HEIGHT } from '../../components/layout/constants';
 import CheckboxInputField from '../../components/modecules/CheckboxInputField';
 import PasswordInputField from '../../components/modecules/PasswordInputField';
 import TextInputField from '../../components/modecules/TextInputField';
 import useAuthToken from '../../hooks/useAuthToken';
+import useError from '../../hooks/useError';
 import { setAuthToken } from '../../reducers/AuthReducer';
+import { removeError } from '../../reducers/ErrorReducer';
 import { initialState, loadingReducer, startLoading, stopLoading } from '../../reducers/LoadingReducer';
-import { sleep } from '../../utils/functions';
+import { catchAllErrors } from '../../utils/serializeErrors';
 import validate from './validation/validate';
 
 const useStyles = makeStyles((theme) => ({
@@ -57,9 +61,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SignIn = () => {
-	const [loading, dispatch] = useReducer(loadingReducer, initialState);
-	const { t } = useTranslation();
 	const { state: authToken, dispatch: authDispatcher } = useAuthToken();
+	const { t } = useTranslation();
+	const [loading, dispatch] = useReducer(loadingReducer, initialState);
+	// eslint-disable-next-line no-unused-vars
+	const { state: errorState, dispatch: errorDispatch } = useError();
 
 	const rememberMeSelectionItems = [
 		{
@@ -80,22 +86,27 @@ const SignIn = () => {
 
 	const handleSubmitSignin = async (data, fn) => {
 		try {
+			errorDispatch(removeError());
 			dispatch(startLoading());
-			const token = data.email + data.password + data.rememberMe;
 
-			sleep(5000)
-				.then(() => {
-					authDispatcher(setAuthToken(token));
-					fn.resetForm();
-					dispatch(stopLoading());
-				})
-				.then(() => {
-					if (localStorage.getItem('token')) {
-						navigateTo('/dashboard');
-					}
-				});
+			const response = await axiosBasicInstance.post('/users/login', data);
+
+			if ([200, 201].includes(response?.status)) {
+				const { accessToken, refreshToken } = response.data;
+
+				authDispatcher(setAuthToken(accessToken));
+				localStorage.setItem('refreshToken', refreshToken);
+
+				fn.resetForm();
+
+				if (localStorage.getItem('token')) {
+					navigateTo('/dashboard');
+				}
+			}
 		} catch (error) {
-			console.log(error);
+			catchAllErrors(errorDispatch, error);
+		} finally {
+			dispatch(stopLoading());
 		}
 	};
 
@@ -111,13 +122,17 @@ const SignIn = () => {
 		<Grid container className={classes.container}>
 			<Grid item xl={4} lg={4} md={4} sm={10} xs={12}>
 				<Paper elevation={3} sx={{ padding: '50px 30px' }} className={classes.signin}>
-					<Typography variant="h4" className={classes.signin__header}>
-						{t('sign-in-title')}
-					</Typography>
+					<Box sx={{ mb: 2 }}>
+						<Typography variant="h4" className={classes.signin__header}>
+							{t('sign-in-title')}
+						</Typography>
 
-					<Typography variant="body2" className={classes.signin__text}>
-						{t('sign-in-subtitle')}
-					</Typography>
+						<Typography variant="body2" className={classes.signin__text}>
+							{t('sign-in-subtitle')}
+						</Typography>
+					</Box>
+
+					<ErrorAlert />
 
 					<Formik initialValues={initialValues} validate={validate} onSubmit={handleSubmitSignin}>
 						{() => (
@@ -128,7 +143,7 @@ const SignIn = () => {
 										isRequired
 										label={t('sign-in-email-label')}
 										name="email"
-										boxStyles={{ padding: '30px 0' }}
+										boxStyles={{ padding: '15px 0 30px 0' }}
 									/>
 
 									<PasswordInputField

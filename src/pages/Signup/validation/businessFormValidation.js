@@ -33,22 +33,22 @@ const validateBusinessInfo = (values) => {
 	// 	errors.tradeLicence = 'Invalid Trande Licence Number';
 	// }
 
-	if (!values?.districtOrState) {
-		errors.districtOrState = 'District or State is required';
-	} else if (values?.districtOrState?.length <= 3) {
-		errors.districtOrState = 'District or State must be a minimum of 3 characters';
+	if (!values?.district) {
+		errors.district = 'District or State is required';
+	} else if (values?.district?.length <= 3) {
+		errors.district = 'District or State must be a minimum of 3 characters';
 	}
 
-	if (!values?.cityOrTown) {
-		errors.cityOrTown = 'City or Town is required';
-	} else if (values?.cityOrTown?.length <= 3) {
-		errors.cityOrTown = 'City or Town must be a minimum of 3 characters';
+	if (!values?.city) {
+		errors.city = 'City or Town is required';
+	} else if (values?.city?.length <= 3) {
+		errors.city = 'City or Town must be a minimum of 3 characters';
 	}
 
-	if (!values?.postcodeOrPostalcode) {
-		errors.postcodeOrPostalcode = 'Post or Postal Code is required';
-	} else if (!postcodeOrPostalcodeRegex.test(values?.postcodeOrPostalcode)) {
-		errors.postcodeOrPostalcode = 'Invalid Post or Postal Code';
+	if (!values?.zipcode) {
+		errors.zipcode = 'Post or Postal Code is required';
+	} else if (!postcodeOrPostalcodeRegex.test(values?.zipcode)) {
+		errors.zipcode = 'Invalid Post or Postal Code';
 	}
 
 	if (!values?.address) {
@@ -93,22 +93,22 @@ const validatePersonalInfo = (values) => {
 		errors.role = 'Role is required';
 	}
 
-	if (!values?.nid) {
-		errors.nid = 'NID is required';
-	} else if (!nidRegex.test(parseInt(values?.nid, 10))) {
-		errors.nid = 'Invalid NID number';
+	if (!values?.nidNo) {
+		errors.nidNo = 'NID is required';
+	} else if (!nidRegex.test(parseInt(values?.nidNo, 10))) {
+		errors.nidNo = 'Invalid NID number';
 	}
 
 	if (!values?.password) {
 		errors.password = 'Password is required';
-	} else if (values?.password?.length < 6) {
-		errors.password = `Password must be a minimum of 6 charactersr`;
+	} else if (values?.password?.length < 8) {
+		errors.password = `Password must be a minimum of 8 charactersr`;
 	}
 
 	if (!values?.confirmPassword) {
 		errors.confirmPassword = 'Confirm Password is required';
-	} else if (values?.confirmPassword?.length < 6) {
-		errors.confirmPassword = `Confirm Password must be a minimum of 6 characters`;
+	} else if (values?.confirmPassword?.length < 8) {
+		errors.confirmPassword = `Confirm Password must be a minimum of 8 characters`;
 	}
 
 	if (values?.password && values?.confirmPassword && values?.password !== values?.confirmPassword) {

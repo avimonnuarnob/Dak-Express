@@ -1,9 +1,9 @@
 const businessFormInitialValues = {
 	businessName: '',
 	website: '',
-	districtOrState: '',
-	cityOrTown: '',
-	postcodeOrPostalcode: '',
+	district: '',
+	city: '',
+	zipcode: '',
 	address: '',
 };
 
@@ -13,7 +13,7 @@ const personalFormInitialValues = {
 	phone: '',
 	email: '',
 	role: '',
-	nid: '',
+	nidNo: '',
 	password: '',
 	confirmPassword: '',
 	terms: false,
