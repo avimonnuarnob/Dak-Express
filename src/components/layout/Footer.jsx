@@ -6,7 +6,7 @@ import { FOOTER_HEIGHT, SMALL_DEVICE_FOOTER_HEIGHT } from './constants';
 
 // ====================== Unauthenticated Footer ======================
 const useFooterLinksStyles = makeStyles((theme) => ({
-	footer_links_item: {
+	'footer__links--item': {
 		color: theme.palette.typography.light,
 		padding: '0px 20px',
 		'&:hover': { color: theme.palette.status.pending },
@@ -32,7 +32,7 @@ const FooterLinks = () => {
 		<>
 			{footerLinks.map((item) => (
 				<Link key={item?.link} href={`/${item?.link}`}>
-					<Typography variant="body2" color="white" className={classes.footer_links_item}>
+					<Typography variant="body2" color="white" className={classes['footer__links--item']}>
 						{item?.title}
 					</Typography>
 				</Link>

@@ -2,9 +2,9 @@ const businessFormInitialValues = {
 	businessName: '',
 	website: '',
 	tradeLicence: null,
-	districtOrState: '',
-	cityOrTown: '',
-	postcodeOrPostalcode: '',
+	district: '',
+	city: '',
+	zipcode: '',
 	address: '',
 };
 
@@ -14,7 +14,7 @@ const personalFormInitialValues = {
 	phone: '',
 	email: '',
 	role: '',
-	nid: '',
+	nidNo: '',
 	password: '',
 	confirmPassword: '',
 	terms: false,

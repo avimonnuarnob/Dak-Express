@@ -3,18 +3,26 @@
 import axios from 'axios';
 
 const axiosApiInstance = axios.create({
-	// TODO: create an config file according to API
+	baseURL: 'http://18.142.117.203:8000/api/v1',
+	timeout: 5000,
+	headers: {
+		'Accept-Language': 'en',
+		'Accept-Code': 'BD',
+	},
 });
 
 axiosApiInstance.interceptors.request.use(
 	async (config) => {
-		// TODO: get and set the access_token
+		const accessToken = localStorage.getItem('accessToken');
 
-		config.headers = {
-			Authorization: `Bearer ${'access_token123'}`,
-			Accept: 'application/json',
-			'Content-Type': 'application/json',
-		};
+		if (accessToken) {
+			config.headers = {
+				Authorization: `Bearer ${accessToken}`,
+				Accept: 'application/json',
+				'Content-Type': 'application/json',
+			};
+		}
+
 		return config;
 	},
 	(error) => {
@@ -26,14 +34,18 @@ axiosApiInstance.interceptors.response.use(
 	(response) => response,
 	async (error) => {
 		const originalRequest = error.config;
-		if (error.response.status === 403 && !originalRequest._retry) {
+
+		if ([401, 403].includes(error?.response?.status) && !originalRequest._retry) {
 			originalRequest._retry = true;
 
 			// TODO: Apply refresh token mechanism token here
+			console.log('Need to work on refresh token!!!');
+			// const accessToken = localStorage.getItem('accessToken');
+			// axios.defaults.headers.common.Authorization = `Bearer ${accessToken}`;
 
-			axios.defaults.headers.common.Authorization = `Bearer ${'access_token123'}`;
 			return axiosApiInstance(originalRequest);
 		}
+
 		return Promise.reject(error);
 	}
 );

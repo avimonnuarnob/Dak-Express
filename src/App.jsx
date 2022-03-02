@@ -6,6 +6,7 @@ import { HashRouter } from 'react-router-dom';
 import BaseLayout from './components/layout/BaseLayout';
 import { AuthProvider } from './contexts/AuthContext';
 import { BreadcrumbProvider } from './contexts/BreadcrumbContext';
+import { ErrorProvider } from './contexts/ErrorContext';
 import { LanguageProvider } from './contexts/LanguageContext';
 import theme from './theme';
 
@@ -21,13 +22,15 @@ const App = () => {
 	return (
 		<ThemeProvider theme={theme}>
 			<LanguageProvider>
-				<AuthProvider>
-					<BreadcrumbProvider>
-						<HashRouter history={browserHistory}>
-							<BaseLayout />
-						</HashRouter>
-					</BreadcrumbProvider>
-				</AuthProvider>
+				<ErrorProvider>
+					<AuthProvider>
+						<BreadcrumbProvider>
+							<HashRouter history={browserHistory}>
+								<BaseLayout />
+							</HashRouter>
+						</BreadcrumbProvider>
+					</AuthProvider>
+				</ErrorProvider>
 			</LanguageProvider>
 		</ThemeProvider>
 	);

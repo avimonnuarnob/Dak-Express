@@ -7,7 +7,7 @@ export const types = {
 	REMOVE_AUTH_TOKEN: 'REMOVE_AUTH_TOKEN',
 };
 
-export const initialState = localStorage.getItem('token') || '';
+export const initialState = localStorage.getItem('accessToken') || '';
 
 export const reducer = (state = initialState, action) => {
 	switch (action.type) {
@@ -24,7 +24,7 @@ export const reducer = (state = initialState, action) => {
 };
 
 export const setAuthToken = (payload = '') => {
-	localStorage.setItem('token', payload);
+	localStorage.setItem('accessToken', payload);
 	localStorage.setItem('sidebar', true);
 
 	return { type: types.SET_AUTH_TOKEN, payload };
@@ -32,10 +32,16 @@ export const setAuthToken = (payload = '') => {
 
 export const removeAuthToken = () => {
 	const lang = localStorage.getItem('language');
+	const sidebar = localStorage.getItem('sidebar');
+
 	localStorage.clear();
 
 	if (lang) {
 		localStorage.setItem('language', lang);
+	}
+
+	if (sidebar) {
+		localStorage.setItem('sidebar', sidebar);
 	}
 
 	return { type: types.REMOVE_AUTH_TOKEN };

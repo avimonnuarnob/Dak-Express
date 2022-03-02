@@ -62,17 +62,17 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const roleItems = [
-	{ id: '027571b2-8c94-11ec-a8a3-0242ac120002', label: 'User', value: 'user' },
-	{ id: '08566d70-8c94-11ec-a8a3-0242ac120002', label: 'Admin', value: 'admin' },
-	{ id: '0c7ffcfe-8c94-11ec-a8a3-0242ac120002', label: 'Super Admin', value: 'super admin' },
+	{ id: '027571b2-8c94-11ec-a8a3-0242ac120002', label: 'Admin', value: 'ADMIN' },
+	{ id: '08566d70-8c94-11ec-a8a3-0242ac120002', label: 'System User', value: 'SYSTEM_USER' },
+	{ id: '0c7ffcfe-8c94-11ec-a8a3-0242ac120002', label: 'Super Admin', value: 'SUPERADMIN' },
 ];
 
 const PersonalInfoForm = ({
-	isSubmitting = false,
 	values = {},
 	handleChange = null,
 	handleBlur = null,
 	setFieldValue = null,
+	isSubmitting = false,
 }) => {
 	const { t } = useTranslation();
 	const classes = useStyles();
@@ -123,6 +123,7 @@ const PersonalInfoForm = ({
 						label={t('role')}
 						name="role"
 						boxStyles={{ paddingTop: '10px' }}
+						elementStyles={{ textAlign: 'left' }}
 					/>
 				</Grid>
 
@@ -132,7 +133,7 @@ const PersonalInfoForm = ({
 						isRequired
 						type="number"
 						label={t('nid')}
-						name="nid"
+						name="nidNo"
 						boxStyles={{ paddingTop: '10px' }}
 					/>
 				</Grid>

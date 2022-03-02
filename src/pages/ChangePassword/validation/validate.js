@@ -11,10 +11,10 @@
 const validate = (values) => {
 	const errors = {};
 
-	if (!values?.currentPassword) {
-		errors.currentPassword = 'Current Password is required';
-	} else if (values?.currentPassword?.length < 6) {
-		errors.currentPassword = `Current Password must be a minimum of 6 characters`;
+	if (!values?.oldPassword) {
+		errors.oldPassword = 'Current Password is required';
+	} else if (values?.oldPassword?.length < 6) {
+		errors.oldPassword = `Current Password must be a minimum of 6 characters`;
 	}
 
 	if (!values?.newPassword) {
