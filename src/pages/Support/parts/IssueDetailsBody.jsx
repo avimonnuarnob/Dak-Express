@@ -48,7 +48,7 @@ const IssueDetailsBody = ({ data }) => {
 				<IssueDetailsCard data={data} />
 			</Paper>
 
-			<ReplayMessage />
+			<ReplayMessage data={data}/>
 		</>
 	);
 };
