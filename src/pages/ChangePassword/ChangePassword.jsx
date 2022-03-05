@@ -1,10 +1,11 @@
 import { Box, Button, CircularProgress, Grid, Paper, Typography } from '@mui/material/';
 import { makeStyles } from '@mui/styles';
 import { Form, Formik } from 'formik';
-import React, { useEffect, useMemo, useReducer, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import axiosApiInstance from '../../apis/axiosApiInstance';
+import { authUrls, methods } from '../../apis/urls';
+import useAxios from '../../apis/useAxios';
 import ErrorAlert from '../../components/atoms/ErrorAlert';
 import { FOOTER_HEIGHT, HEADER_HEIGHT } from '../../components/layout/constants';
 import AlertModal from '../../components/modecules/AlertModal';
@@ -14,10 +15,7 @@ import useBreadcrumb from '../../hooks/useBreadcrumb';
 import useError from '../../hooks/useError';
 import { removeAuthToken } from '../../reducers/AuthReducer';
 import { setBreadcrumb } from '../../reducers/BreadcrumbReducer';
-import { removeError } from '../../reducers/ErrorReducer';
-import { initialState, loadingReducer, startLoading, stopLoading } from '../../reducers/LoadingReducer';
 import { sleep } from '../../utils/functions';
-import { catchAllErrors } from '../../utils/serializeErrors';
 import validate from './validation/validate';
 
 const useStyles = makeStyles((theme) => ({
@@ -65,13 +63,13 @@ const useStyles = makeStyles((theme) => ({
 const ChangePassword = () => {
 	const { t } = useTranslation();
 	const [showChangePasswordModal, setShowChangePasswordModal] = useState(false);
-	const [loading, dispatch] = useReducer(loadingReducer, initialState);
 	// eslint-disable-next-line no-unused-vars
 	const { state: authToken, dispatch: authDispatcher } = useAuthToken();
 	// eslint-disable-next-line no-unused-vars
 	const { _, dispatch: breadcrumbDispatcher } = useBreadcrumb();
 	// eslint-disable-next-line no-unused-vars
 	const { state: errorState, dispatch: errorDispatch } = useError();
+	const { loading, requestToServerWith } = useAxios();
 
 	const breadcrumbs = useMemo(
 		() => [
@@ -93,23 +91,22 @@ const ChangePassword = () => {
 
 	const hadnleSubmitChangePassword = async (data, fn) => {
 		try {
-			errorDispatch(removeError());
-			dispatch(startLoading());
-
-			const response = await axiosApiInstance.patch('/users/password-change', data);
+			const response = await requestToServerWith({
+				url: authUrls.changePassword,
+				method: methods.PATCH,
+				data,
+			});
 
 			if ([200, 201].includes(response?.status)) {
 				fn.resetForm();
-				dispatch(stopLoading());
 				setShowChangePasswordModal(true);
 				await sleep(4000);
 				authDispatcher(removeAuthToken());
 				navigateTo('/');
 			}
+			// eslint-disable-next-line no-shadow
 		} catch (error) {
-			catchAllErrors(errorDispatch, error);
-		} finally {
-			dispatch(stopLoading());
+			console.debug(error);
 		}
 	};
 
@@ -185,9 +182,9 @@ const ChangePassword = () => {
 			{showChangePasswordModal && (
 				<AlertModal
 					redirectTo="/"
-					title="Password Changed Successfully"
-					description="We have changed your old password and saved new password. You are about to Signing out..."
-					button="Sign In"
+					title={t('password-changed-successfully')}
+					description={t('password-changed-successfully-description')}
+					button={t('signin')}
 					showModal={showChangePasswordModal}
 					closeModal={setShowChangePasswordModal}
 				/>

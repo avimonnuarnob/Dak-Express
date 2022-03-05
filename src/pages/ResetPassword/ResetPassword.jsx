@@ -1,19 +1,17 @@
 import { Box, Button, CircularProgress, Grid, Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Form, Formik } from 'formik';
-import { useEffect, useReducer, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate, useParams } from 'react-router-dom';
-import axiosBasicInstance from '../../apis/axiosBasicInstance';
+import { authUrls, methods } from '../../apis/urls';
+import useAxios from '../../apis/useAxios';
 import ErrorAlert from '../../components/atoms/ErrorAlert';
 import { FOOTER_HEIGHT, HEADER_HEIGHT } from '../../components/layout/constants';
 import AlertModal from '../../components/modecules/AlertModal';
 import PasswordInputField from '../../components/modecules/PasswordInputField';
 import useError from '../../hooks/useError';
-import { removeError } from '../../reducers/ErrorReducer';
-import { initialState, loadingReducer, startLoading, stopLoading } from '../../reducers/LoadingReducer';
 import { sleep } from '../../utils/functions';
-import { catchAllErrors } from '../../utils/serializeErrors';
 import validate from './validation/validate';
 
 const useStyles = makeStyles((theme) => ({
@@ -59,11 +57,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ResetPassword = () => {
-	const [loading, dispatch] = useReducer(loadingReducer, initialState);
 	const [showResetPasswordModal, setShowResetPasswordModal] = useState(false);
 	const { t } = useTranslation();
 	// eslint-disable-next-line no-unused-vars
 	const { state: errorState, dispatch: errorDispatch } = useError();
+	const { loading, requestToServerWith } = useAxios();
 
 	const navigateTo = useNavigate();
 	const classes = useStyles();
@@ -73,22 +71,21 @@ const ResetPassword = () => {
 
 	const handleSubmitResetPassword = async (data, fn) => {
 		try {
-			errorDispatch(removeError());
-			dispatch(startLoading());
-
-			const response = await axiosBasicInstance.patch('/users/password-reset-complete', { ...data, token });
+			const response = await requestToServerWith({
+				url: authUrls.resetPassword,
+				method: methods.PATCH,
+				data: { ...data, token },
+			});
 
 			if ([200, 201].includes(response?.status)) {
 				fn.resetForm();
-				dispatch(stopLoading());
 				setShowResetPasswordModal(true);
 				await sleep(4000);
 				navigateTo('/');
 			}
+			// eslint-disable-next-line no-shadow
 		} catch (error) {
-			catchAllErrors(errorDispatch, error);
-		} finally {
-			dispatch(stopLoading());
+			console.debug(error);
 		}
 	};
 

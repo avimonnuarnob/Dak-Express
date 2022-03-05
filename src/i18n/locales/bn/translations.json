@@ -258,5 +258,9 @@
   "intransit": "In Transit",
   "out-for-delivery": "Out for Delivery",
   "delivered": "Delivered",
-  "back-to-tokens" : "আমার API টোকেনে ফিরে যান"
+  "back-to-tokens" : "আমার API টোকেনে ফিরে যান",
+
+  "password-changed-successfully" : "পাসওয়ার্ড সফলভাবে পরিবর্তন হয়েছে",
+  "password-changed-successfully-description" : "আমরা আপনার পুরানো পাসওয়ার্ড পরিবর্তন করেছি এবং নতুন পাসওয়ার্ড সংরক্ষণ করেছি। আপনি সাইন আউট হতে চলেছেন...",
+  "signout-and-signin" : "লগ-আউট করুন এবং লগ-ইন করুন"
 }

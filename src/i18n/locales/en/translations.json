@@ -206,14 +206,12 @@
   "save": "Save",
   "edit-profile": "Edit Profile",
 
-
   "set-new-password": "Set New Password",
   "set-new-password-desc": "Please enter your current and new password",
   "current-password": "Current Password",
   "new-password": "New Password",
   "confirm-new-password": "Confirm New Password",
   "change-password": "Change Password",
-
 
   "api-tokens-header": "My API Token",
   "create-api-token": "Create API Token",
@@ -259,5 +257,10 @@
   "intransit": "In Transit",
   "out-for-delivery": "Out for Delivery",
   "delivered": "Delivered",
-  "back-to-tokens" : "Back To My API Tokens"
+  "back-to-tokens" : "Back To My API Tokens",
+
+  "password-changed-successfully" : "Password Changed Successfully",
+  "password-changed-successfully-description" : "We have changed your old password and saved new password. You are about to Signing out...",
+  "signout-and-signin" : "Sign Out and Sign In"
+
 }
