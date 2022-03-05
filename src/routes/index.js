@@ -21,7 +21,7 @@ const routeConfig = (routes) => {
 	const { _, dispatch } = useError();
 	if (!routes) return <div />;
 
-	window.scrollTo(0, 0);
+	// window.scrollTo(0, 0);
 
 	// eslint-disable-next-line react-hooks/rules-of-hooks
 	const location = useLocation();

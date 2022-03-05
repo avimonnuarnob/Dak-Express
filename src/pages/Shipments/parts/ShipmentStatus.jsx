@@ -6,28 +6,29 @@ import ViewInArOutlinedIcon from '@mui/icons-material/ViewInArOutlined';
 import { Box, Paper, Step, StepLabel, Stepper, Typography } from '@mui/material';
 import { alpha } from '@mui/material/styles';
 import { makeStyles } from '@mui/styles';
+import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 
 const steps = [
 	{
 		label: 'Confirmed',
-		icon: <ConfirmationNumberOutlinedIcon />,
+		icon: <ConfirmationNumberOutlinedIcon fontSize="large" />,
 	},
 	{
 		label: 'Pickup',
-		icon: <ShoppingCartCheckoutOutlinedIcon />,
+		icon: <ShoppingCartCheckoutOutlinedIcon fontSize="large" />,
 	},
 	{
 		label: 'In Transit',
-		icon: <TaskOutlinedIcon />,
+		icon: <TaskOutlinedIcon fontSize="large" />,
 	},
 	{
 		label: 'Out for Delivery',
-		icon: <MopedOutlinedIcon />,
+		icon: <MopedOutlinedIcon fontSize="large" />,
 	},
 	{
 		label: 'Delivered',
-		icon: <ViewInArOutlinedIcon />,
+		icon: <ViewInArOutlinedIcon fontSize="large" />,
 	},
 ];
 
@@ -55,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 	stepIconActive: {
 		color: '#71911C !important',
-		outline: `5px solid ${alpha('#95C11F', 0.2)}`,
+		outline: `0.5rem solid ${alpha('#95C11F', 0.2)}`,
 		borderRadius: '50%',
 	},
 	stepIconCompleted: {
@@ -67,6 +68,12 @@ const ShipmentStatus = () => {
 	const { t } = useTranslation();
 	const classes = useStyles();
 
+	const [activeStep, setActiveStep] = useState(0);
+
+	useEffect(() => {
+		setActiveStep(['confirmed', 'pickup', 'inTransit', 'outForDelivery', 'delivered'].indexOf('outForDelivery'));
+	}, []);
+
 	return (
 		<Paper className={classes.container}>
 			<Typography variant="h5" fontWeight="600" mb={5}>
@@ -76,8 +83,8 @@ const ShipmentStatus = () => {
 				</Typography>
 			</Typography>
 			<Box sx={{ width: '100%', overflowX: 'scroll', p: 7 }}>
-				<Stepper activeStep={3} alternativeLabel>
-					{steps.map((step) => (
+				<Stepper activeStep={activeStep + 1} alternativeLabel>
+					{steps.map((step, index) => (
 						<Step
 							key={step.label}
 							sx={{
@@ -100,6 +107,7 @@ const ShipmentStatus = () => {
 									bottom: 'calc(100% + 20px)',
 									left: '50%',
 									transform: 'translateX(-50%)',
+									color: index <= activeStep ? 'secondary.main' : 'gray',
 								}}
 							>
 								{step.icon}

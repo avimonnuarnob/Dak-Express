@@ -24,6 +24,7 @@ const useStyles = makeStyles((theme) => ({
 const IssueDetailsCard = ({ data }) => {
 	const { t } = useTranslation();
 	const classes = useStyles();
+
 	return (
 		<div className={classes.card}>
 			<Typography variant="body2" fontWeight="bold" display="inline" padding={2} className={classes.card__item}>
@@ -58,7 +59,7 @@ const IssueDetailsCard = ({ data }) => {
 					borderRight: { md: '1px solid #E5EBF0', sm: 0 },
 				}}
 			>
-				{data?.fullName ?? 'N/A'}
+				{`${data?.firstName} ${data?.lastName}` ?? 'N/A'}
 			</Typography>
 			<Typography variant="body2" fontWeight="bold" display="inline" padding={2} className={classes.card__item}>
 				{t('mobile-number')}

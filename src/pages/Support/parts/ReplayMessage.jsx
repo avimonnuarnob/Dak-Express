@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const ReplayMessage = () => {
+const ReplayMessage = ({ data }) => {
 	const { t } = useTranslation();
 	const classes = useStyles();
 	const [showMessageForm, setShowMessageForm] = useState(false);
@@ -50,19 +50,22 @@ const ReplayMessage = () => {
 						{t('reply-message')}
 					</Typography>
 				</Box>
-
 				<Grid container sx={{ mt: 3 }}>
 					<Grid item md={3}>
 						<Typography fontWeight="600"> {t('reply')}</Typography>
 					</Grid>
 					<Grid item md={8}>
-						<Typography>
-							Dear Mr. Hossain, Greetings from Cityscape Global Ltd and thank you for your e-mail. Please do not
-							hesitate to contact us at our Contact Centre number 16240 (accessible from within Bangladesh) or +88
-							096127 16240 (accessible from overseas) from 9 AM to 9 PM (except public holidays) or email us at
-							servicequalitydak@cityscapeglobal.net for any further information regarding any query. Assuring you of our
-							best services always. Thanking you, Cityscape Global Ltd
-						</Typography>
+						{data?.issueReplies?.length > 0
+							? data?.issueReplies?.map((reply) => (
+									<Box sx={{ pl: 2, borderLeft: (theme) => `1px solid ${theme.palette.secondary.main}` }}>
+										<Typography variant="h6" mb={2} color="typography.main">
+											{reply?.messagedAt?.substring(0, 10)}{' '}
+											{new Date(reply?.messagedAt)?.toLocaleTimeString('en', { hour12: true })}
+										</Typography>
+										<Typography sx={{ mb: 5 }}>{reply?.message}</Typography>
+									</Box>
+							  ))
+							: null}
 					</Grid>
 				</Grid>
 			</Paper>

@@ -1,10 +1,11 @@
 const pickupLocationInitialValues = {
-	fullName: '',
+	firstName: '',
+	lastName: '',
 	email: '',
 	subject: '',
 	phone: '',
 	attachment: '',
-	ship_id: '',
+	shipmentCode: '',
 	message: '',
 };
 

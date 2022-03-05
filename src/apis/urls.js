@@ -15,3 +15,8 @@ export const authUrls = {
 	resetPassword: '/users/password-reset-complete',
 	changePassword: '/users/password-change',
 };
+
+export const issueUrls = {
+	issues: '/issues',
+	issueReply: '/issues/message',
+};
