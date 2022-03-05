@@ -1,10 +1,11 @@
 import { Box, Button, CircularProgress, Grid, Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Form, Formik } from 'formik';
-import { useEffect, useReducer } from 'react';
+import { useEffect } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
-import axiosBasicInstance from '../../apis/axiosBasicInstance';
+import { authUrls, methods } from '../../apis/urls';
+import useAxios from '../../apis/useAxios';
 import ErrorAlert from '../../components/atoms/ErrorAlert';
 import { FOOTER_HEIGHT, HEADER_HEIGHT } from '../../components/layout/constants';
 import CheckboxInputField from '../../components/modecules/CheckboxInputField';
@@ -13,9 +14,6 @@ import TextInputField from '../../components/modecules/TextInputField';
 import useAuthToken from '../../hooks/useAuthToken';
 import useError from '../../hooks/useError';
 import { setAuthToken } from '../../reducers/AuthReducer';
-import { removeError } from '../../reducers/ErrorReducer';
-import { initialState, loadingReducer, startLoading, stopLoading } from '../../reducers/LoadingReducer';
-import { catchAllErrors } from '../../utils/serializeErrors';
 import validate from './validation/validate';
 
 const useStyles = makeStyles((theme) => ({
@@ -61,11 +59,14 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const SignIn = () => {
+	// eslint-disable-next-line no-unused-vars
 	const { state: authToken, dispatch: authDispatcher } = useAuthToken();
 	const { t } = useTranslation();
-	const [loading, dispatch] = useReducer(loadingReducer, initialState);
+	// const [loading, dispatch] = useReducer(loadingReducer, initialState);
 	// eslint-disable-next-line no-unused-vars
-	const { state: errorState, dispatch: errorDispatch } = useError();
+	const { state: errorState, dispatch: errorDispatcher } = useError();
+	// eslint-disable-next-line no-unused-vars
+	const { error, loading, requestToServerWith } = useAxios();
 
 	const rememberMeSelectionItems = [
 		{
@@ -86,10 +87,7 @@ const SignIn = () => {
 
 	const handleSubmitSignin = async (data, fn) => {
 		try {
-			errorDispatch(removeError());
-			dispatch(startLoading());
-
-			const response = await axiosBasicInstance.post('/users/login', data);
+			const response = await requestToServerWith({ url: authUrls.signin, method: methods.POST, data });
 
 			if ([200, 201].includes(response?.status)) {
 				const { accessToken, refreshToken } = response.data;
@@ -103,10 +101,9 @@ const SignIn = () => {
 					navigateTo('/dashboard');
 				}
 			}
+			// eslint-disable-next-line no-shadow
 		} catch (error) {
-			catchAllErrors(errorDispatch, error);
-		} finally {
-			dispatch(stopLoading());
+			console.debug(error);
 		}
 	};
 

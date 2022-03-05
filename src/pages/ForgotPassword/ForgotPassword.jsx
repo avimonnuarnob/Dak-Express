@@ -1,19 +1,17 @@
 import { Box, Button, CircularProgress, Grid, Paper, Typography } from '@mui/material/';
 import { makeStyles } from '@mui/styles';
 import { Form, Formik } from 'formik';
-import { useEffect, useReducer, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Trans, useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
-import axiosBasicInstance from '../../apis/axiosBasicInstance';
+import { authUrls, methods } from '../../apis/urls';
+import useAxios from '../../apis/useAxios';
 import ErrorAlert from '../../components/atoms/ErrorAlert';
 import { FOOTER_HEIGHT, HEADER_HEIGHT } from '../../components/layout/constants';
 import AlertModal from '../../components/modecules/AlertModal';
 import TextInputField from '../../components/modecules/TextInputField';
 import useError from '../../hooks/useError';
-import { removeError } from '../../reducers/ErrorReducer';
-import { initialState, loadingReducer, startLoading, stopLoading } from '../../reducers/LoadingReducer';
 import { sleep } from '../../utils/functions';
-import { catchAllErrors } from '../../utils/serializeErrors';
 import validate from './validation/validate';
 
 const useStyles = makeStyles((theme) => ({
@@ -61,9 +59,9 @@ const useStyles = makeStyles((theme) => ({
 const ForgotPassword = () => {
 	const { t } = useTranslation();
 	const [showForgotPasswordModal, setShowForgotPasswordModal] = useState(false);
-	const [loading, dispatch] = useReducer(loadingReducer, initialState);
 	// eslint-disable-next-line no-unused-vars
 	const { state: errorState, dispatch: errorDispatch } = useError();
+	const { loading, requestToServerWith } = useAxios();
 
 	const navigateTo = useNavigate();
 	const classes = useStyles();
@@ -71,29 +69,30 @@ const ForgotPassword = () => {
 
 	const handleSubmitForgotPassword = async (data, fn) => {
 		try {
-			errorDispatch(removeError());
-			dispatch(startLoading());
-
-			const response = await axiosBasicInstance.post('/users/request-password-reset', {
-				...data,
-				redirectUrl: 'https://stage.dakexpress.co/#/reset-password',
+			const response = await requestToServerWith({
+				url: authUrls.forgetPassword,
+				method: methods.POST,
+				data: {
+					...data,
+					redirectUrl: `${window.location.origin}/#/reset-password`,
+				},
 			});
 
 			if ([200, 201].includes(response?.status)) {
 				fn.resetForm();
-				dispatch(stopLoading());
 				setShowForgotPasswordModal(true);
 				await sleep(4000);
 				navigateTo('/');
 			}
+			// eslint-disable-next-line no-shadow
 		} catch (error) {
-			catchAllErrors(errorDispatch, error);
-		} finally {
-			dispatch(stopLoading());
+			console.debug(error);
 		}
 	};
 
 	useEffect(() => () => setShowForgotPasswordModal(false), []);
+
+	console.log(window.location.origin);
 
 	return (
 		<>
