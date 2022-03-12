@@ -1,5 +1,5 @@
 /* eslint-disable no-self-compare */
-import { Box } from '@mui/material';
+import { Box, LinearProgress } from '@mui/material';
 import { styled } from '@mui/material/styles';
 import { makeStyles } from '@mui/styles';
 // eslint-disable-next-line import/no-extraneous-dependencies
@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import { Suspense, useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import useAuthToken from '../../hooks/useAuthToken';
+import useLoading from '../../hooks/useLoading';
 // import { Outlet } from 'react-router-dom';
 import routeConfig from '../../routes';
 import routes from '../../routes/routes';
@@ -83,6 +84,7 @@ const BaseLayout = () => {
 	const [open, setOpen] = useState(() => localStorage.getItem('sidebar') === 'true');
 	const { i18n } = useTranslation();
 	const { state: authenticated } = useAuthToken();
+	const { loading } = useLoading();
 
 	const toggleDrawer = () => {
 		setOpen((prevState) => {
@@ -105,6 +107,7 @@ const BaseLayout = () => {
 
 			<MainContent open={open} auth={!!authenticated}>
 				<>
+					{loading && <LinearProgress color="secondary" />}
 					<Suspense fallback={<ProgressBar />}>
 						<Box className={classes.root}>{routeConfig(routes)}</Box>
 					</Suspense>

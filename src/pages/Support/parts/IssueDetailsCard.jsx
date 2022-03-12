@@ -1,5 +1,6 @@
 import { Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
+import { format } from 'date-fns';
 import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles((theme) => ({
@@ -21,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const IssueDetailsCard = ({ data }) => {
+const IssueDetailsCard = ({ issueData }) => {
 	const { t } = useTranslation();
 	const classes = useStyles();
 
@@ -37,7 +38,7 @@ const IssueDetailsCard = ({ data }) => {
 				className={classes.card__item}
 				sx={{ gridColumn: '2 / -1' }}
 			>
-				{data?.S_id ?? 'N/A'}
+				{issueData?.shipmentCode ?? 'N/A'}
 			</Typography>
 
 			<Typography
@@ -59,13 +60,13 @@ const IssueDetailsCard = ({ data }) => {
 					borderRight: { md: '1px solid #E5EBF0', sm: 0 },
 				}}
 			>
-				{`${data?.firstName} ${data?.lastName}` ?? 'N/A'}
+				{`${issueData?.firstName} ${issueData?.lastName}` ?? 'N/A'}
 			</Typography>
 			<Typography variant="body2" fontWeight="bold" display="inline" padding={2} className={classes.card__item}>
 				{t('mobile-number')}
 			</Typography>
 			<Typography variant="body2" display="inline" padding={2} className={classes.card__item}>
-				{data?.phone ?? 'N/A'}
+				{issueData?.phone ?? 'N/A'}
 			</Typography>
 
 			<Typography variant="body2" fontWeight="bold" display="inline" padding={2} className={classes.card__item}>
@@ -78,7 +79,7 @@ const IssueDetailsCard = ({ data }) => {
 				className={classes.card__item}
 				sx={{ gridColumn: '2 / -1' }}
 			>
-				{data?.email ?? 'N/A'}
+				{issueData?.email ?? 'N/A'}
 			</Typography>
 
 			<Typography
@@ -100,13 +101,13 @@ const IssueDetailsCard = ({ data }) => {
 					borderRight: { md: '1px solid #E5EBF0', sm: 0 },
 				}}
 			>
-				{data?.subject ?? 'N/A'}
+				{issueData?.subject}
 			</Typography>
 			<Typography variant="body2" fontWeight="bold" display="inline" padding={2} className={classes.card__item}>
 				{t('date')}
 			</Typography>
 			<Typography variant="body2" display="inline" padding={2} className={classes.card__item}>
-				{data?.date ?? 'N/A'}
+				{format(new Date(issueData?.createdAt ?? null), 'dd/MM/yyyy hh:mm aa')}
 			</Typography>
 
 			<Typography variant="body2" fontWeight="bold" display="inline" padding={2} className={classes.card__item}>
@@ -119,7 +120,7 @@ const IssueDetailsCard = ({ data }) => {
 				className={classes.card__item}
 				sx={{ gridColumn: '2 / -1' }}
 			>
-				{data?.attachment ?? 'N/A'}
+				{issueData?.attachment}
 			</Typography>
 
 			<Typography
@@ -139,7 +140,7 @@ const IssueDetailsCard = ({ data }) => {
 				className={classes.card__item}
 				sx={{ gridColumn: '2 / -1', borderBottom: 0 }}
 			>
-				{data?.message ?? 'N/A'}
+				{issueData?.message ?? 'N/A'}
 			</Typography>
 		</div>
 	);

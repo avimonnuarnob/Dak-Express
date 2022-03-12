@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 	},
 }));
 
-const IssueDetailsBody = ({ data }) => {
+const IssueDetailsBody = ({ issueData }) => {
 	const {t} = useTranslation();
 	const classes = useStyles();
 
@@ -45,10 +45,10 @@ const IssueDetailsBody = ({ data }) => {
 					</Box>
 				</Box>
 
-				<IssueDetailsCard data={data} />
+				<IssueDetailsCard issueData={issueData} />
 			</Paper>
 
-			<ReplayMessage data={data}/>
+			<ReplayMessage issueData={issueData}/>
 		</>
 	);
 };

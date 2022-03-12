@@ -3,7 +3,7 @@ import { Box, Button, Grid, Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Form, Formik } from 'formik';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import SelectInputField from '../../../components/modecules/SelectInputField';
 import TextInputField from '../../../components/modecules/TextInputField';
 import { sleep } from '../../../utils/functions';

@@ -5,7 +5,7 @@ import { Form, Formik } from 'formik';
 import PropTypes from 'prop-types';
 import { useEffect, useReducer, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import PhoneNumberInputField from '../../../../components/modecules/PhoneNumberInputField';
 import SelectInputField from '../../../../components/modecules/SelectInputField';
 import TextInputField from '../../../../components/modecules/TextInputField';

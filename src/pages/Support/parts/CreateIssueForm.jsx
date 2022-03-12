@@ -1,9 +1,9 @@
-import { Alert, Box, Button, Grid, Paper, Snackbar, Typography } from '@mui/material';
+import { Alert, Box, Button, CircularProgress, Grid, Paper, Snackbar, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Form, Formik } from 'formik';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import { issueUrls, methods } from '../../../apis/urls';
 import useAxios from '../../../apis/useAxios';
 import ErrorAlert from '../../../components/atoms/ErrorAlert';
@@ -18,7 +18,7 @@ import createIssueValidation from '../validation/createIssueValidation';
 
 const issueItems = [
 	{ id: '1', label: 'Shipment', value: 'SHIPMENT' },
-	{ id: '2', label: 'blah blah', value: 'blah blah' },
+	{ id: '2', label: 'Transaction', value: 'TRANSACTION' },
 ];
 
 const useStyles = makeStyles((theme) => ({
@@ -85,6 +85,7 @@ const CreateIssueForm = () => {
 			method: methods.POST,
 			data: values,
 		});
+
 		if ([200, 201].includes(response?.status)) {
 			setSuccessBar(true);
 			actions.resetForm();
@@ -101,7 +102,7 @@ const CreateIssueForm = () => {
 	return (
 		<>
 			<Formik initialValues={createIssueInitialValues} validate={createIssueValidation} onSubmit={handleSubmit}>
-				{({ isSubmitting, values, errors, handleChange, handleBlur, touched }) => (
+				{({ values, errors, handleChange, handleBlur, touched }) => (
 					<Form>
 						<Paper className={classes.box}>
 							<Box className={classes.box__header}>
@@ -112,7 +113,7 @@ const CreateIssueForm = () => {
 
 							<ErrorAlert />
 
-							<fieldset disabled={isSubmitting} style={{ border: 'none' }}>
+							<fieldset disabled={loading} style={{ border: 'none' }}>
 								<Grid container spacing={2}>
 									<Grid item md={6} sm={6} xs={12}>
 										<TextInputField fullWidth isRequired label={t('first-name')} name="firstName" />
@@ -146,7 +147,6 @@ const CreateIssueForm = () => {
 											type="file"
 											label={t('attachment')}
 											name="attachment"
-											// defaultValue={null}
 											value={values.attachment}
 											onChange={handleChange}
 											onBlur={handleBlur}
@@ -172,8 +172,14 @@ const CreateIssueForm = () => {
 								{t('cancel')}
 							</Button>
 
-							<Button disabled={loading} type="submit" variant="contained" className={classes.issue__button}>
-								{t('submit')}
+							<Button
+								disabled={loading}
+								type="submit"
+								variant="contained"
+								endIcon={loading && <CircularProgress size={20} color="inherit" />}
+								className={classes.issue__button}
+							>
+								{loading ? t('submitting') : t('submit')}
 							</Button>
 						</div>
 					</Form>

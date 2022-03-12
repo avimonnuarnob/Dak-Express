@@ -102,6 +102,15 @@ const ShipmentStatus = ({ label = 'none' }) => {
 				/>
 			);
 
+			case 'open':
+				return (
+					<Chip
+						className={classes.status__delivered}
+						label="Open"
+						onClick={handleClick}
+					/>
+				);
+
 		default:
 			return (
 				<Chip className={classes.status} label="None" onClick={handleClick} />
