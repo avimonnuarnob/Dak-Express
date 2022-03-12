@@ -39,28 +39,26 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ReplyMessageForm = ({ toggleMessageForm }) => {
+	const [successBar, setSuccessBar] = useState(false);
+	const { t } = useTranslation();
+	const { requestToServerWith, loading } = useAxios();
 	// eslint-disable-next-line no-unused-vars
 	const { state: errorState, dispatch: errorDispatch } = useError();
-	const { t } = useTranslation();
-	const classes = useStyles();
 	const { id } = useParams();
-	const [successBar, setSuccessBar] = useState(false);
-	const { requestToServerWith, loading } = useAxios();
+	const classes = useStyles();
 
 	const handleCloseSuccessBar = (event, reason) => {
-		if (reason === 'clickaway') {
-			return;
-		}
-
+		if (reason === 'clickaway') return;
 		setSuccessBar(false);
 	};
 
-	const submitForm = async (values, actions) => {
+	const handleSubmitReplyMessage = async (data, actions) => {
 		const response = await requestToServerWith({
 			url: issueUrls.issueReply,
 			method: methods.POST,
-			data: { ...values, issueId: id },
+			data: { ...data, issueId: id },
 		});
+
 		if ([200, 201].includes(response?.status)) {
 			setSuccessBar(true);
 			actions.resetForm();
@@ -68,10 +66,6 @@ const ReplyMessageForm = ({ toggleMessageForm }) => {
 			await sleep(2000);
 			window.scrollTo(0, 0);
 		}
-	};
-
-	const handleSubmit = (values, actions) => {
-		submitForm(values, actions);
 	};
 
 	return (
@@ -90,7 +84,7 @@ const ReplyMessageForm = ({ toggleMessageForm }) => {
 
 					return errors;
 				}}
-				onSubmit={handleSubmit}
+				onSubmit={handleSubmitReplyMessage}
 			>
 				{({ isSubmitting, values, errors, handleChange, touched, handleBlur }) => (
 					<Form>

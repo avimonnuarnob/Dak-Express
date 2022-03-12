@@ -80,7 +80,7 @@ const LocationTable = ({ locationData = [] }) => {
 							<StyledTableCell align="left">{location.address}</StyledTableCell>
 							<StyledTableCell align="left">
 								<Box className={classes.table__buttons}>
-									<Link to={`/locations/pickup/${location?.id}`} style={{ textDecoration: 'none' }}>
+									<Link to={`/locations/receiver/${location?.id}`} style={{ textDecoration: 'none' }}>
 										<Button
 											sx={{ width: '100%' }}
 											size="small"
@@ -93,7 +93,7 @@ const LocationTable = ({ locationData = [] }) => {
 									</Link>
 
 									<Link
-										to={`/locations/pickup/${location.id}/edit`}
+										to={`/locations/receiver/${location.id}/edit`}
 										style={{ textDecoration: 'none', color: 'inherit' }}
 									>
 										<Button

@@ -155,7 +155,7 @@ const routes = [
 		path: '/locations/pickup/:id/edit',
 		exact: true,
 		component: EditPickupLocation,
-		name: 'CreatePickupLocation',
+		name: 'EditPickupLocation',
 		protected: true,
 	},
 	{

@@ -350,11 +350,11 @@ const AuthenticatedHeader = ({ toggleDrawer = null, open = true }) => {
 				<BreadcrumbItems />
 
 				<Box className={classes.header__items}>
-					<Box className={classes.header__language}>
-						<Tooltip title="Language">
+					<Tooltip title="Language">
+						<Box className={classes.header__language}>
 							<Language lightText={false} />
-						</Tooltip>
-					</Box>
+						</Box>
+					</Tooltip>
 
 					<Box className={classes.header__notification}>
 						<Tooltip title="Notifications">

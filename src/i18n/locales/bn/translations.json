@@ -262,5 +262,8 @@
 
   "password-changed-successfully" : "পাসওয়ার্ড সফলভাবে পরিবর্তন হয়েছে",
   "password-changed-successfully-description" : "আমরা আপনার পুরানো পাসওয়ার্ড পরিবর্তন করেছি এবং নতুন পাসওয়ার্ড সংরক্ষণ করেছি। আপনি সাইন আউট হতে চলেছেন...",
-  "signout-and-signin" : "লগ-আউট করুন এবং লগ-ইন করুন"
+  "signout-and-signin" : "লগ-আউট করুন এবং লগ-ইন করুন",
+
+  "update": "আপডেট করুন",
+  "updating" : "আপডেটিং হচ্ছে..."
 }

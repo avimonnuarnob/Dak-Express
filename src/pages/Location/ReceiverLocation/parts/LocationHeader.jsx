@@ -1,16 +1,16 @@
+/* eslint-disable arrow-body-style */
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import { Box, Button } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import SearchBar from '../../../../components/atoms/SearchBar';
-import PageTitlebar from '../../../../components/modecules/PageTitlebar';
+import PageTitleBar from '../../../../components/modecules/PageTitlebar';
 
-const ReceiverLocationHeader = () => {
+const LocationHeader = () => {
 	const { t } = useTranslation();
-
 	return (
 		<>
-			<PageTitlebar title={t('receiver-locations')} page={t('back-to-dashboard')} />
+			<PageTitleBar title={t('receiver-locations')} page={t('back-to-dashboard')} />
 
 			<Box
 				sx={{
@@ -25,7 +25,7 @@ const ReceiverLocationHeader = () => {
 				</Box>
 
 				<Link to="/locations/receiver/new" style={{ textDecoration: 'none' }}>
-					<Button variant="outlined" color="secondary" sx={{ px: 2, py: 1, ml: 2 }} startIcon={<AddOutlinedIcon />}>
+					<Button variant="outlined" color="secondary" sx={{ px: 2, py: 1 }} startIcon={<AddOutlinedIcon />}>
 						{t('add-new-receiver-location')}
 					</Button>
 				</Link>
@@ -34,4 +34,4 @@ const ReceiverLocationHeader = () => {
 	);
 };
 
-export default ReceiverLocationHeader;
+export default LocationHeader;
