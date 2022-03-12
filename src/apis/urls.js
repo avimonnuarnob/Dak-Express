@@ -6,6 +6,13 @@ export const methods = {
 	DELETE: 'delete',
 };
 
+export const types = {
+	individual: 'INDIVIDUAL',
+	business: 'BUSINESS',
+	pickup: 'PICKUP',
+	receiver: 'RECEIVER',
+};
+
 export const headers = {};
 
 export const authUrls = {
@@ -19,4 +26,8 @@ export const authUrls = {
 export const issueUrls = {
 	issues: '/issues',
 	issueReply: '/issues/message',
+};
+
+export const locationUrls = {
+	locations: 'locations',
 };

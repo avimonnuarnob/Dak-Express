@@ -5,7 +5,7 @@ const postcodeOrPostalcodeRegex = /(?!([089])\1{4})\d{4}/;
 const phoneRegex =
 	/([0-9\s\-]{7,})(?:\s*(?:#|x\.?|ext\.?|extension)\s*(\d+))?$/;
 
-const validateAddPickupLocation = (values) => {
+const validate = (values) => {
 	const errors = {};
 
 	if (!values?.firstName) {
@@ -34,23 +34,23 @@ const validateAddPickupLocation = (values) => {
 		errors.businessName = 'Business name can be a maximum of 100 characters';
 	}
 
-	if (!values?.districtOrState) {
-		errors.districtOrState = 'District or State is required';
-	} else if (values?.districtOrState?.length <= 3) {
-		errors.districtOrState =
+	if (!values?.district) {
+		errors.district = 'District or State is required';
+	} else if (values?.district?.length <= 3) {
+		errors.district =
 			'District or State must be a minimum of 3 characters';
 	}
 
-	if (!values?.cityOrTown) {
-		errors.cityOrTown = 'City or Town is required';
-	} else if (values?.cityOrTown?.length <= 3) {
-		errors.cityOrTown = 'City or Town must be a minimum of 3 characters';
+	if (!values?.city) {
+		errors.city = 'City or Town is required';
+	} else if (values?.city?.length <= 3) {
+		errors.city = 'City or Town must be a minimum of 3 characters';
 	}
 
-	if (!values?.postcodeOrPostalcode) {
-		errors.postcodeOrPostalcode = 'Post or Postal Code is required';
-	} else if (!postcodeOrPostalcodeRegex.test(values?.postcodeOrPostalcode)) {
-		errors.postcodeOrPostalcode = 'Invalid Post or Postal Code';
+	if (!values?.zipcode) {
+		errors.zipcode = 'Post or Postal Code is required';
+	} else if (!postcodeOrPostalcodeRegex.test(values?.zipcode)) {
+		errors.zipcode = 'Invalid Post or Postal Code';
 	}
 
 	if (!values?.address) {
@@ -64,4 +64,4 @@ const validateAddPickupLocation = (values) => {
 	return errors;
 };
 
-export default validateAddPickupLocation;
+export default validate;

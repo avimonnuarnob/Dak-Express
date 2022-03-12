@@ -263,6 +263,8 @@
 
   "password-changed-successfully" : "Password Changed Successfully",
   "password-changed-successfully-description" : "We have changed your old password and saved new password. You are about to Signing out...",
-  "signout-and-signin" : "Sign Out and Sign In"
+  "signout-and-signin" : "Sign Out and Sign In",
 
+  "update": "Update",
+  "updating" : "Updating..."
 }

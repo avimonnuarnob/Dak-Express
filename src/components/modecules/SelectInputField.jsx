@@ -77,7 +77,7 @@ const SelectInputField = ({
 SelectInputField.propTypes = {
 	items: PropTypes.arrayOf(
 		PropTypes.shape({
-			id: PropTypes.string,
+			id: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
 			label: PropTypes.string,
 			value: PropTypes.string,
 		})

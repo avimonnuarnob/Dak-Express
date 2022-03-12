@@ -33,6 +33,7 @@ export const setAuthToken = (payload = '') => {
 export const removeAuthToken = () => {
 	const lang = localStorage.getItem('language');
 	const sidebar = localStorage.getItem('sidebar');
+	const rowsPerPage = localStorage.getItem('rows_per_page');
 
 	localStorage.clear();
 
@@ -42,6 +43,10 @@ export const removeAuthToken = () => {
 
 	if (sidebar) {
 		localStorage.setItem('sidebar', sidebar);
+	}
+
+	if (rowsPerPage) {
+		localStorage.setItem('rows_per_page', rowsPerPage);
 	}
 
 	return { type: types.REMOVE_AUTH_TOKEN };
