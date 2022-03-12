@@ -2,7 +2,7 @@ import { Box, Button, CircularProgress, FormControlLabel, Paper, Radio, RadioGro
 import { makeStyles } from '@mui/styles';
 import { useReducer, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router';
+import { useNavigate } from 'react-router-dom';
 import { initialState, loadingReducer, startLoading, stopLoading } from '../../../reducers/LoadingReducer';
 import { sleep } from '../../../utils/functions';
 

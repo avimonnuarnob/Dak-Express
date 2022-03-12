@@ -2,13 +2,7 @@ import { TablePagination } from '@mui/material';
 import React, { useState } from 'react';
 import PaginationActions from './PaginationActions';
 
-const Pagination = ({
-	data = [],
-	rowsPerPage = 20,
-	page = 0,
-	handlePageChange = null,
-	handlePageRowsChange = null,
-}) => {
+const Pagination = ({ data = 0, rowsPerPage = 20, page = 0, handlePageChange = null, handlePageRowsChange = null }) => {
 	// eslint-disable-next-line no-unused-vars
 	const [rowsPerPageOptions, setRowsPerPageOptions] = useState([20, 50, 100]);
 
@@ -16,7 +10,7 @@ const Pagination = ({
 		<TablePagination
 			rowsPerPageOptions={rowsPerPageOptions}
 			colSpan={3}
-			count={data?.length}
+			count={data}
 			rowsPerPage={rowsPerPage}
 			page={page}
 			SelectProps={{ inputProps: { 'aria-label': 'rows per page' }, native: true }}

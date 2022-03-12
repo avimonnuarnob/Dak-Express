@@ -8,6 +8,7 @@ import { AuthProvider } from './contexts/AuthContext';
 import { BreadcrumbProvider } from './contexts/BreadcrumbContext';
 import { ErrorProvider } from './contexts/ErrorContext';
 import { LanguageProvider } from './contexts/LanguageContext';
+import { LoadingProvider } from './contexts/LoadingContext';
 import theme from './theme';
 
 const browserHistory = createBrowserHistory();
@@ -24,11 +25,13 @@ const App = () => {
 			<LanguageProvider>
 				<ErrorProvider>
 					<AuthProvider>
-						<BreadcrumbProvider>
-							<HashRouter history={browserHistory}>
-								<BaseLayout />
-							</HashRouter>
-						</BreadcrumbProvider>
+						<LoadingProvider>
+							<BreadcrumbProvider>
+								<HashRouter history={browserHistory}>
+									<BaseLayout />
+								</HashRouter>
+							</BreadcrumbProvider>
+						</LoadingProvider>
 					</AuthProvider>
 				</ErrorProvider>
 			</LanguageProvider>

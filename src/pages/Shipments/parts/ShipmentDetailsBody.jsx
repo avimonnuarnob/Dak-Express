@@ -2,8 +2,7 @@
 import { Button } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import ParcelDetails from './ParcelDetails';
 import PickupDetails from './PickupDetails';
 import ReceiverDetails from './ReceiverDetails';

@@ -1,4 +1,4 @@
-import { Alert, Button, Grid, Paper, Snackbar, Typography } from '@mui/material';
+import { Alert, Button, CircularProgress, Grid, Paper, Snackbar, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Form, Formik } from 'formik';
 import { useState } from 'react';
@@ -149,8 +149,14 @@ const ReplyMessageForm = ({ toggleMessageForm }) => {
 								{t('cancel')}
 							</Button>
 
-							<Button disabled={loading} type="submit" variant="contained" className={classes.issue__button}>
-								{t('submit')}
+							<Button
+								disabled={loading}
+								type="submit"
+								variant="contained"
+								endIcon={loading && <CircularProgress size={20} color="inherit" />}
+								className={classes.issue__button}
+							>
+								{loading ? t('submitting') : t('submit')}
 							</Button>
 						</div>
 					</Form>

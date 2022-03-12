@@ -1,12 +1,15 @@
-import { useCallback, useReducer } from 'react';
+import { useCallback } from 'react';
 import useError from '../hooks/useError';
+import useLoading from '../hooks/useLoading';
 import { removeError } from '../reducers/ErrorReducer';
-import { initialState, loadingReducer, startLoading, stopLoading } from '../reducers/LoadingReducer';
+import { startLoading, stopLoading } from '../reducers/LoadingReducer';
 import { catchAllErrors } from '../utils/serializeErrors';
 import axiosApiInstance from './axiosApiInstance';
 
 const useAxios = () => {
-	const [loading, dispatch] = useReducer(loadingReducer, initialState);
+	// const [loading, dispatch] = useReducer(loadingReducer, initialState);
+
+	const { state: loading, dispatch: loadingDispatcher } = useLoading();
 	const { state: error, dispatch: errorDispatcher } = useError();
 
 	const requestToServerWith = useCallback(
@@ -14,7 +17,7 @@ const useAxios = () => {
 		async (options) => {
 			try {
 				errorDispatcher(removeError());
-				dispatch(startLoading());
+				loadingDispatcher(startLoading());
 
 				const result = await axiosApiInstance.request(options); // https://axios-http.com/docs/req_config
 				return result;
@@ -22,13 +25,15 @@ const useAxios = () => {
 			} catch (error) {
 				catchAllErrors(errorDispatcher, error);
 			} finally {
-				dispatch(stopLoading());
+				loadingDispatcher(stopLoading());
 			}
 		},
-		[errorDispatcher]
+		[errorDispatcher, loadingDispatcher]
 	);
 
 	// const stopLoading = dispatch(stopLoading());
+
+	console.log(loading);
 
 	return { error, loading, requestToServerWith };
 };
